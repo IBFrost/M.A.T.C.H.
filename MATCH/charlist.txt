@@ -1,0 +1,30 @@
+0,Kung Fu Man,chars\kfm\kfm.def
+1,Kung Fu Man,chars\kfm720\kfm720.def
+2,Bowser,chars\bowser\bowser.def
+3,Kung Fu Man,chars\kfm\kfm.def
+4,Kung Fu Man,chars\kfm720\kfm720.def
+5,Bowser,chars\bowser\bowser.def
+6,Kung Fu Man,chars\kfm\kfm.def
+7,Kung Fu Man,chars\kfm720\kfm720.def
+8,Bowser,chars\bowser\bowser.def
+9,Kung Fu Man,chars\kfm\kfm.def
+10,Kung Fu Man,chars\kfm720\kfm720.def
+11,Bowser,chars\bowser\bowser.def
+12,Kung Fu Man,chars\kfm\kfm.def
+13,Kung Fu Man,chars\kfm720\kfm720.def
+14,Bowser,chars\bowser\bowser.def
+15,Kung Fu Man,chars\kfm\kfm.def
+16,Kung Fu Man,chars\kfm720\kfm720.def
+17,Bowser,chars\bowser\bowser.def
+18,Kung Fu Man,chars\kfm\kfm.def
+19,Kung Fu Man,chars\kfm720\kfm720.def
+20,Bowser,chars\bowser\bowser.def
+21,Kung Fu Man,chars\kfm\kfm.def
+22,Kung Fu Man,chars\kfm720\kfm720.def
+23,Bowser,chars\bowser\bowser.def
+24,Kung Fu Man,chars\kfm\kfm.def
+25,Kung Fu Man,chars\kfm720\kfm720.def
+26,Bowser,chars\bowser\bowser.def
+27,Kung Fu Man,chars\kfm\kfm.def
+28,Kung Fu Man,chars\kfm720\kfm720.def
+29,Bowser,chars\bowser\bowser.def

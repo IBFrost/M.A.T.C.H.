@@ -1,11 +1,24 @@
 from twitchio.ext import commands
 import asyncio
+import random
+import requests
 from config import *
 
 DELAY = 30
 MSGNAME = "Miyako-Twitch"
+POW2 = [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
+
+DEFAULTHEADERS = {
+    'Authorization': f'Bearer {TWITCH_IRC_TOKEN}',
+    'Client-Id': TWITCH_CLIENT_ID,
+    'Content-Type': 'application/json'
+}
 
 class MiyakoBotTwitch(commands.Bot):
+    ACTIVEPREDICTION = False
+    PREDICTIONSTRING = ''
+    APEVENWINS = None
+    APODDWINS = None
 
     def __init__(self, matchsys):
         super().__init__(token=TWITCH_IRC_TOKEN,
@@ -15,8 +28,7 @@ class MiyakoBotTwitch(commands.Bot):
             initial_channels=[TWITCH_CHANNEL])   
         self.matchsys = matchsys
         self.message_queue = []
-        
-    
+
     def __consoleprint(self, msg):
         self.matchsys.console_print(MSGNAME, msg)
         
@@ -24,6 +36,91 @@ class MiyakoBotTwitch(commands.Bot):
     def queue_message(self, message):
         self.message_queue.append(str(message))
 
+    def prediction(self, action):
+        active = self.ACTIVEPREDICTION
+        if not active and not (action == 'start' or action == 'lock' or action == 'oddwins' or action == 'evenwins' or action == 'closed'):
+            self.__consoleprint(f"Prediction called with invalid action. '{action}' is not a valid keyword")
+
+        elif action == 'start':
+            # Start a prediction
+            data = {
+                "title": "Will the winner be Even or Odd?",
+                "outcomes": [
+                    {"title": "Even", "color": "blue"},
+                    {"title": "Odd", "color": "red"}
+                ],
+                "broadcaster_id": TWITCH_CLIENT_ID,
+                "prediction_window": 600,
+                "status": "ACTIVE"
+            }
+            response = requests.post('https://api.twitch.tv/helix/predictions', headers=DEFAULTHEADERS, json=data)
+            if response.status_code == 201:
+                self.__consoleprint("Prediction started successfully!")
+                self.ACTIVEPREDICTION = True 
+                self.PREDICTIONSTRING = response.json()['data'][0]['id']  # Return the Prediction ID
+                self.APEVENWINS = response.json()['data'][0]['outcomes'][0][id]
+                self.APODDWINS = response.json()['data'][0]['outcomes'][1][id]
+            else:
+                self.__consoleprint(f'Error starting prediction:{response.json()}')
+
+        elif not active:
+            self.__consoleprint("Prediction modifier called with no active prediction")
+
+        elif action == 'lock':
+            data = {
+                "status": "LOCKED"
+            }
+            response = requests.patch(f'https://api.twitch.tv/helix/predictions?id={self.PREDICTIONSTRING}', headers=DEFAULTHEADERS, json=data)
+            if response.status_code == 204:
+                self.__consoleprint("Prediction locked successfully!")
+            else:
+                self.__consoleprint(f'Error locking prediction:{response.json()}')
+        
+        elif action == 'evenwins':
+            data = {
+                "status": "RESOLVED",
+                "winning_outcome_id": self.APEVENWINS  # Use the ID of the winning outcome
+            }
+            response = requests.patch(f'https://api.twitch.tv/helix/predictions?id={self.PREDICTIONSTRING}', headers=DEFAULTHEADERS, json=data)
+            if response.status_code == 204:
+                self.__consoleprint("Prediction result declared successfully!")
+                self.ACTIVEPREDICTION = False
+                self.PREDICTIONSTRING = ''
+                self.APEVENWINS = None
+                self.APODDWINS = None
+            else:
+                self.__consoleprint(f'Error declaring prediction result:{response.json()}')
+
+        elif action == 'oddwins':
+            data = {
+                "status": "RESOLVED",
+                "winning_outcome_id": self.APODDWINS  # Use the ID of the winning outcome
+            }
+            response = requests.patch(f'https://api.twitch.tv/helix/predictions?id={self.PREDICTIONSTRING}', headers=DEFAULTHEADERS, json=data)
+            if response.status_code == 204:
+                self.__consoleprint("Prediction result declared successfully!")
+                self.ACTIVEPREDICTION = False
+                self.PREDICTIONSTRING = ''
+                self.APEVENWINS = None
+                self.APODDWINS = None
+            else:
+                self.__consoleprint(f'Error declaring prediction result:{response.json()}')
+
+        elif action == 'abort':
+            # Stop a prediction
+            data = {
+                "status": "CANCELLED"
+            }
+            response = requests.patch(f'https://api.twitch.tv/helix/predictions?id={PREDICTIONSTRING}', headers=DEFAULTHEADERS, json=data)
+            if response.status_code == 204:
+                self.__consoleprint("Prediction stopped successfully!")
+                self.ACTIVEPREDICTION = False
+                self.PREDICTIONSTRING = ''
+                self.APEVENWINS = None
+                self.APODDWINS = None
+            else:
+                self.__consoleprint(f'Error stopping prediction:{response.json()}')
+        
 
     # Events don't need decorators when subclassed
     async def event_ready(self):
@@ -43,13 +140,13 @@ class MiyakoBotTwitch(commands.Bot):
 
     async def event_message(self, message):
         """Message/Command handling. Most of the magic happens here"""
-        
-        if not message.author:
+        if not message.author or (not message.author.is_broadcaster and not message.author.is_mod):
             return
         response = ""
-        data = message.content.split(":")
+        data = message.content.split(" ")
         command = data[0].strip().lower()
-        if command == "!new tournament" or command == "!nt":
+
+        if command == "!newtournament" or command == "!nt":
             if len(data) == 2:
                 value = int(data[1])
                 try:
@@ -136,5 +233,31 @@ class MiyakoBotTwitch(commands.Bot):
                 response = "Tournament ended"
             else:
                 response = "Something is wrong"
-            await message.channel.send(response)    
+            await message.channel.send(response)
+
+        elif command == "!newbettournament" or command == "!nbt":
+            if len(data) == 2:
+                value = int(data[1])
+                try:
+                    assert value > 0
+                except AssertionError:
+                    # User gave a silly value for divisions...
+                    response = "Number of divisions must be positive number"
+                else:
+                    if self.matchsys.get_status() == IDLE:
+                        self.__consoleprint("Registering new tournament: " + str(value))
+                        offset_change = self.matchsys.new_tournament(value)
+                        i = 0
+                        while i < POW2[value+1]:
+                            character = random.randint(0, self.matchsys.max_char_ID)
+                            ctable = []
+                            j = 1
+                            while j <= value:
+                                ctable.append(character)
+                                j = j + 1
+                            player = self.matchsys.new_player(f"Player {i}", ctable)
+                            self.matchsys.add_player(player)
+                            i = i + 1
+                        
+            await message.channel.send(response)
         #await self.handle_commands(message)

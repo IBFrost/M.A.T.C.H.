@@ -1,0 +1,40 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Bowser" 
+displayname = "Bowser" 
+versiondate = 09,30,2009    
+mugenversion = 1.0          
+author = "k6666orochi"         
+pal.defaults = 1,2,3,4,5,6,7,8,9,10,11,12      
+
+[Files]
+cmd     = Bowser.cmd
+cns     = Bowser.cns
+st      = Bowser.cns
+st2     = Helpers.cns
+st3     = -2-3.cns
+stcommon = Bowser_common.cns
+sprite  = Bowser.sff
+anim    = Bowser.air
+sound   = Bowser.snd
+
+[Palette Keymap]
+a = 1
+b = 2
+c = 3
+x = 4
+y = 5
+z = 6
+a2 = 7
+b2 = 8
+c2 = 9
+x2 = 10
+y2 = 11
+z2 = 12
+
+[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

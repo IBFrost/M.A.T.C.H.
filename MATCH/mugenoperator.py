@@ -7,6 +7,7 @@ from ReadWriteMemory import ReadWriteMemory
 import os
 import signal
 import math
+import random
 import subprocess
 import win32gui,win32api,win32con
 from config import *
@@ -257,23 +258,29 @@ class MugenOperator():
             if(self.player1_cursor[0] == self.lastrow):  # Move up to a full row
                 self.press(UP,1)
                 self.player1_cursor[0] -= 1
+                sleep(HOLDTIME)
             while(self.player1_cursor != pos):
+                sleep(HOLDTIME)
                 if(pos[1] < self.player1_cursor[1]):
                     self.press(PREV,1)
                     self.player1_cursor[1] -= 1
+                    sleep(HOLDTIME)
                     continue
                 elif(pos[1] > self.player1_cursor[1]):
                     self.press(NEXT,1)
                     self.player1_cursor[1] += 1
+                    sleep(HOLDTIME)
                     continue
-
+                sleep(HOLDTIME)
                 if(pos[0] < self.player1_cursor[0]):
                     self.press(UP,1)
                     self.player1_cursor[0] -= 1
+                    sleep(HOLDTIME)
                     continue
                 elif(pos[0] > self.player1_cursor[0]):
                     self.press(DOWN,1)
                     self.player1_cursor[0] += 1
+                    sleep(HOLDTIME)
                     continue
             self.char1 = charnum
     # Player 2
@@ -281,28 +288,37 @@ class MugenOperator():
             if(self.player2_cursor[0] == self.lastrow):  # Move up to a full row
                 self.press(UP,1)
                 self.player2_cursor[0] -= 1
+                sleep(HOLDTIME)
             while(self.player2_cursor != pos):
+                sleep(HOLDTIME)
                 if(pos[1] < self.player2_cursor[1]):
                     self.press(PREV,1)
                     self.player2_cursor[1] -= 1
+                    sleep(HOLDTIME)
                     continue
                 elif(pos[1] > self.player2_cursor[1]):
                     self.press(NEXT,1)
                     self.player2_cursor[1] += 1
+                    sleep(HOLDTIME)
                     continue
-
+                sleep(HOLDTIME)
                 if(pos[0] < self.player2_cursor[0]):
                     self.press(UP,1)
                     self.player2_cursor[0] -= 1
+                    sleep(HOLDTIME)
                     continue
                 elif(pos[0] > self.player2_cursor[0]):
                     self.press(DOWN,1)
                     self.player2_cursor[0] += 1
+                    sleep(HOLDTIME)
                     continue
+            sleep(HOLDTIME)
             self.char2 = charnum
         else:
             self.debug("Can only select character for player 1 or 2. Check your inputs for typos!")
+        sleep(1)
         self.press(OK,1)    # Select the character
+        sleep(1)
 
     # Calculate the wanted position for the cursor
     def calculate_wanted_point(self, charnum):
@@ -393,15 +409,37 @@ class MugenOperator():
     def scan(self, doublecheck = True):
         self.scanlines(doublecheck)
         if(self.state == MENU_STATE):
+            self.player1_cursor = P1_CURSOR_START.copy()
+            self.player2_cursor = P2_CURSOR_START.copy()
+            self.press(DOWN,1)
+            sleep(.1)
+            self.press(DOWN,1)
+            sleep(.1)
+            self.press(DOWN,1)
+            sleep(.1)
+            self.press(DOWN,1)
+            sleep(.1)
+            self.press(DOWN,1)
+            sleep(.1)
+            self.press(DOWN,1)
+            sleep(.1)
+            self.press(DOWN,1)
+            sleep(.1)
+            self.press(DOWN,1)
+            sleep(.1)
             self.press(OK,1)
             sleep(1)    # Ensures that mugen has time to move to a new state before next scan
             
         elif(self.state == SELECT_STATE):
             if(len(self.player1_chars) > 0 and len(self.player2_chars) > 0):
                 self.press(OK,1) # TEAM MODE for P1 (single)
+                sleep(HOLDTIME)
                 self.select_char(self.player1_chars.pop(0),PLAYER1)
+                sleep(1)
                 self.press(OK,1) # TEAM MODE for P2 (single)
+                sleep(HOLDTIME)
                 self.select_char(self.player2_chars.pop(0),PLAYER2)
+                sleep(1)
                 self.press(OK,1) # STAGE SELECT (random)
                 self.state = VS_STATE
                 

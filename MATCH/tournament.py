@@ -17,6 +17,7 @@ FINISHED = True
 
 
 class Tournament:
+    winner = 999
     def __init__(self, matchsys):
         self.running = 0
         self.tournament_state = {"Div": 0, "Round": 1, "Match": 1, "Fight": [], "Order" : []}
@@ -27,7 +28,8 @@ class Tournament:
     def __consoleprint(self, msg):
         self.matchsys.console_print(MSGNAME, msg)
 
-
+    def get_winner(self):
+        return self.winner
 
     def is_running(self):
         return self.running
@@ -133,7 +135,7 @@ class Tournament:
             # Play division i
             if i != 0:
                 time.sleep(RESULT_TIME_DIVISION)
-            self.play_division(players, i, mugen)
+            ranking = self.play_division(players, i, mugen)
 
         if not self.is_running():
             self.__consoleprint("Tournament aborted")
@@ -261,9 +263,12 @@ class Tournament:
                 if len(order) == 1: 
                     self.__consoleprint(f"Division complete, winner was: {players[order[0]]['Name']}")
                     # We have a winner
+
+                    self.matchsys.define_winner(int(players[order[0]]['Name'].split()[1]))
                     players[order[0]]["Rank"][division] = round + 1
                     ranking.insert(0,order.pop(0))
         
         # Finished, update match division data.
         self.matchsys.division_update(division + 1, FINISHED)
         return ranking
+    

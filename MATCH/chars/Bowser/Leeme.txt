@@ -1,0 +1,99 @@
+Bowser v2.7
+Este es mi primer char la serie de super mario bros 
+
+Version v1.7
+Se cambiaron los tiempos en algunas animaciones.
+Se areglo el combo infinito con el boton A.
+Se cambiaron las cajas de colision de muchas animaciones.
+Se agregaron mas sprites y sonidos.
+Se aumento el tiempo en de la animacion 1500.
+Se cambio el color del Super BG.
+Bowser ahora es mas "pesado" al correr, saltar y en e los dash.
+Se cambio el sonido de correr, caminar y aterrizar en el suelo.
+Ahora la planta piraña solo puede aparecer una vez. 
+Se cambio a Goomba por Chargin Chuck.
+Se agregon sonidos a Fly Guy y la bomba que suelta ahora llega al suelo.
+Planta piraña ahora se da vuelta si el oponente esta del lado opuesto.
+Se agregaron mas paletas.
+Se cambio el portrait 9000.0.
+La defensa del personaje ahora es de 100 en vez de 110.
+Se agrego el codigo Nep's Helper-detection.
+Banzai Bill ahora puede cambiar de direccion si se mantiene apretado atras (back) y se redujo el daño incluso en los combos.
+Se cambio el astral heat de bowser, el nombre del ataque es el mismo comienza igual pero si golpea al oponente se convierte en Megadragonbowser.
+Se agregaron explods en el ataque Charged punch. 
+Ahora Bowser si aterriza correctamente cuando atrapa al oponente en el aire.
+Se agrego una animacion como en el juego M&L Bowser's inside story cada vez que Bowser gane la pelea con Banzai Bill o Fire Breath.   
+Se agrego un intro contra Mario.
+La version Ex del ataque Fireball va en la misma direccion que los la version A y B el daño y el efecto es el mismo que en la version 1.0 pero ahora su velocidad es mas lento. 
+
+Version v2.0
+Actualizado el gameplay a la version 2.0 de los chars estilo "OHMSBY".
+Se agregaron explods al inicio del astral heat.
+Se agrego un explod cuando usa el modo ultimate burst estilo persona 5.
+Se aumento la velocidad del golpe cargado con el boton C.
+Ahora cuando el golpe cargado solo empuja al oponente si esta en el suelo al realizar "OK","GOOD" o "GREAT!".
+Se agrego el estado de aterrizar cuando Bowser usa el ataque Fireball en el aire (excepto en la version EX).
+Ahora el golpe 2B no se puede cancelar con un dash o doble salto si golpea al oponente. 
+
+Version v2.7
+Actualizado el UltraBURST.
+Al activar el UltraBURST Bowser puede usar versiones mas poderosas de sus supers.
+Tratando de imitar el gameplay del Super Smash Bros (Melee/Ultimate) Bowser puede cambiar la direccion en la que esquiva en el aire hacia atras o hacia adelante, se puede realizar en dash aereo o en el doble salto.
+Asi como en el juego Mario & Luigi: Bowser's Inside Story cuando la barra de vida de Bowser se reduzca a 1/4 se activa el modo Furia (Fury) aumentando el daño de sus ataques. 
+Se agregaron nuevas sprites.
+Se quitaron sprites que no eran necesarios. 
+Se agregaron mas sonidos.
+Se agregaron cajas faltantes en el segundo golpe en el aire con AA (anim 601).
+Se corrigio la animacion del player2 en el agarre normal en el suelo ahora tanto del lado izquierdo como en el derecho.
+Ahora Bowser no puede realizar el combo con el golpe B agachado + fire ball cuando esta en el aire. 
+Si cargas mal el golpe con el boton C Bowser tardara mas en levantarse y el daño del golpe fue reducido.
+Banzai Bill/Shy Guy Airtub DX ahora pueden destruir proyectiles.
+Se agrego una cancion en su altral heat cuando tenga 250 de vida o menos.
+Ahora tiene un intro contra Luigi y una nueva animacion contra Mario.
+Banzai Bill ahora no puede golpear al oponente si este permanece acostado en el suelo solo si rebota.
+Se agrego el efecto de polvo al correr.
+Se reemplazaron las paletas 5 y 6 por unas nuevas.
+ 
+Bowser movelist 
+------------------------
+The Grand Finale
+~D, D, a+b
+Double Fire Breath (!)
+~D, DF, F, a+b
+Shy Guy Airtub DX (!)
+~D, DB, B, a+b
+Fire Breath
+~D, DF, F, a+b
+Banzai Bill <
+~D, DB, B, a+b
+------------------
+Bowser bomb
+~F, D, DF, b 
+Fireball(Air) 
+~D, DF, F, c
+Fireball(Air) 
+~D, DF, F, b
+Fireball(Air) 
+~D, DF, F, a
+Piranha plant
+~D, DB, B, c
+Fly Guy
+~D, DB, B, b
+Chargin Chuck
+~D, DB, B, a
+~Charged punch
+hold c
+
+< (si mantienes apretado atras cambia la direccion del ataque)
+(!) (solo se pueden realizar en el modo ultra burst) 
+
+Agradecimientos a: 
+OHMSBY (por dejarme usar sus chars como base para programarlos) 
+Ploaj(sprites del juego mario and luigi bowser's inside story and bowser jr's journey, mario and luigi dream team  superstar saga and bowser's minions, mario and luigi dream team dream team )
+aokmaniac13 (efectos kof XIII)
+fawfulthegreat64 (voice rips mario and luigi bowser's inside story and bowser jr's journey)
+ROUGEShadow (portrait 9000.0)
+CozySquirtle (pelata: Bowser from Super Mario 64)
+PlasmoidThunder, SolidZone 26, Mr. Giang (feedback)
+Chris Parker (sprites para el explod estilo persona 5)
+y a ti por descargarlo 

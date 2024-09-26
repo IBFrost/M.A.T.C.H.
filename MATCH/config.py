@@ -14,12 +14,13 @@ TOURNAMENT_START_PIC = "match-common/miya-happy-sm.png"
 
 #### Twitch bot settings ####
 
-USE_TWITCH = 0 # Enable Twitch bot
-TWITCH_CHANNEL = '------------------------'
-TWITCH_IRC_TOKEN = ''
-TWITCH_CLIENT_ID = ''
-TWITCH_NICK = ''
-TWITCH_PREFIX = '#'
+USE_TWITCH = 1 # Enable Twitch bot
+TWITCH_CHANNEL = 'ibfrost'
+TWITCH_IRC_TOKEN = 
+TWITCH_CLIENT_ID = 
+
+TWITCH_NICK = 'FrozenArenaBot'
+TWITCH_PREFIX = '!'
 
 # Mugenoperator configuration. Use these to adjust the file locations, behaviour and buttons the operator uses.
 
@@ -29,11 +30,11 @@ CHARBEFORE = 0          # The number of objects, ie randomselects, before the be
 
 
 # These numbers should match to what is defined in your system.def for MUGEN
-CHARCOLS = 13           # Columns in the character grid. Should match to "columns" under [Select Info] in your System.def
+CHARCOLS = 7           # Columns in the character grid. Should match to "columns" under [Select Info] in your System.def
 # ALSO: set the row number to high enough in the system.def [Select Info] so that columns * rows is equal or higher than the number of characters you have.
 # Cursor starting positions, [row, column]
 P1_CURSOR_START = [0,0] # Should match to "p1.cursor.startcell" in system.def [Select Info]
-P2_CURSOR_START = [0,1] # Should match to "p2.cursor.startcell" in system.def [Select Info]
+P2_CURSOR_START = [0,0] # Should match to "p2.cursor.startcell" in system.def [Select Info]
 
 
 LOGFILE = "mugen.log"               # Path to log file to monitor
