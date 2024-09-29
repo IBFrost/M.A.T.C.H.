@@ -17,7 +17,6 @@ FINISHED = True
 
 
 class Tournament:
-    winner = 999
     def __init__(self, matchsys):
         self.running = 0
         self.tournament_state = {"Div": 0, "Round": 1, "Match": 1, "Fight": [], "Order" : []}
@@ -27,9 +26,6 @@ class Tournament:
 
     def __consoleprint(self, msg):
         self.matchsys.console_print(MSGNAME, msg)
-
-    def get_winner(self):
-        return self.winner
 
     def is_running(self):
         return self.running
@@ -80,10 +76,13 @@ class Tournament:
 
 
 
-    def final_rankings(self, players, divisions):
+    def final_rankings(self, players, divisions, twitchbot):
         score = []
         score_dict = {}
         self.__consoleprint("Final rankings")
+
+        highest_score = -1  # Initialize to a low number to find the max
+        highest_scoring_player = None  # To store the name of the highest scoring player
         
         for idx, player in enumerate(players):
             score.append(0)
@@ -92,12 +91,23 @@ class Tournament:
             for i in range(divisions):
                 score[idx] += player["Rank"][i]
             score_dict[name] = score[idx]
-                
+            
+            if score[idx] > highest_score:
+                highest_score = score[idx]
+                highest_scoring_player = name
 
         count = 10 * divisions
         position = 1
         message = "FINAL STANDINGS:\n----------------\n"
         
+        self.winningplayer = int(highest_scoring_player.split()[1])
+        if self.winningplayer % 2 == 0:
+            self.__consoleprint('even won')
+            twitchbot.prediction('evenwins')
+        else:
+            twitchbot.prediction('oddwins')
+            self.__consoleprint('odd won')
+
         while(count):
             for i, player in enumerate(players):
                 if score[i] == count:
@@ -112,7 +122,7 @@ class Tournament:
     def player_order(self, order):
         message = "Player order for next round:"
         for i in order:
-            message += players[i]["Name"] + "\n"
+            message += self.players[i]["Name"] + "\n"
         return message
 
 
@@ -263,8 +273,6 @@ class Tournament:
                 if len(order) == 1: 
                     self.__consoleprint(f"Division complete, winner was: {players[order[0]]['Name']}")
                     # We have a winner
-
-                    self.matchsys.define_winner(int(players[order[0]]['Name'].split()[1]))
                     players[order[0]]["Rank"][division] = round + 1
                     ranking.insert(0,order.pop(0))
         

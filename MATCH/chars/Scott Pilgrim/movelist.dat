@@ -1,0 +1,23 @@
+<#f0f000>:General:</>
+^X		Light Attack
+^Y		Hard Attack
+^Z		EX Attacks
+^A		Striker 1
+^B		Striker 2
+^C		Supers
+Grab 		_F_+^Y
+
+<#f0f000>:Special Moves:</>
+Combo 1		^X_^X_^X_
+Combo 2		^Y_^Y_
+Special 1		_D_DF_F^Y_
+Special 2		_D_DB_B^Y_
+Special 3		_B_F^Y_
+EX Special 1	_D_DF_F^Z_
+EX Special 2	_D_DB_B^Z_
+EX Special 3	_B_F^Z_
+
+<#f0f000>:Super Moves:</>
+Super 1		_D_DF_F^C_
+Super 2		_D_DB_B^C_
+Super 3		_B_F^C_

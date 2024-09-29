@@ -1,0 +1,50 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "Freeza Z2"
+displayname = "Golden Freeza"
+versiondate = 03,22,2017
+mugenversion = 1.0
+author = "Team Z2" ;Freeza Z2 by Balthazar, Cybaster, Websta, KoopaKoot, JMorphman and XGargoyle
+;Color Separation by EthanTheHuman
+pal.defaults = 1,2,3,4,6,7
+localcoord = 320,240
+
+[Files]
+sprite = states\Golden\goldie.sff
+anim = files\freeza.air
+sound = files\freeza.snd
+cmd = states\Golden\GoldenFreeza.mfg
+cns = states\Golden\constants.cns
+stcommon = states\Golden\common1.cns
+st = states\normals.cns
+st2 = states\system.cns
+st3 = states\helpers.cns
+st4 = states\state-2-3.cns
+st5 = states\override.cns
+st6 = states\specials.cns
+st7 = states\Golden\config.txt
+st8 = states\supers.cns
+
+;PALETTES
+; Maps character selection buttons to palette numbers.
+[Palette Keymap]
+x = 4 ;Press button X to select palette 1, etc.
+y = 5
+z = 6
+a = 1
+b = 2
+c = 3
+x2 = 10 ;Hold Start and press button X for palette 7, etc.
+y2 = 11
+z2 = 12
+a2 = 7
+b2 = 8
+c2 = 9
+
+[Arcade]
+;intro.storyboard = 
+;ending.storyboard = 

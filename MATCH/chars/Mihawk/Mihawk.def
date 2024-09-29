@@ -1,0 +1,42 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name="Mihawk"
+displayname="Mihawk"
+versiondate=04,14,2002
+mugenversion=04,14,2002
+author=""
+pal.defaults=1,2,3,4,5,6
+
+; Files for the player
+[Files]
+cmd=Mihawk.cmd
+sprite=Mihawk.sff
+anim=Mihawk.air
+sound=Mihawk.snd
+stcommon =common1.cns
+st=Mihawk.cns
+cns=Mihawk.cns
+pal1=Mihawk_01.act
+pal2=Mihawk_02.act
+pal3=Mihawk_03.act
+pal4=Mihawk_04.act
+pal5=Mihawk_05.act
+pal6=Mihawk_06.act
+st1=Mihawk_Specials.cns
+st2=Mihawk_Supers.cns
+st3=Mihawk_IA.cns
+
+; Arcade mode
+;[Arcade]
+;intro.storyboard=intro.def
+;ending.storyboard=ending.def
+
+
+
+
+[Arcade]
+intro.storyboard=
+ending.storyboard=

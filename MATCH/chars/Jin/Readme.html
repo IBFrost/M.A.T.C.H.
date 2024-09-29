@@ -1,0 +1,887 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Jin Kazama - Read Me</title>
+<link rel="stylesheet" href="ReadMe_Src/Jin_Readme_style.css">
+</head>
+<body>
+
+<script type="text/javascript" src="ReadMe_Src/Jin_Readme_script.js"></script>
+
+<div style="position:relative;">
+<!-- Main display, absolute position starting below the top banner and beside the left menu -->
+<div style="position:absolute; top:170px; left:270px; right:80px; text-align: justify;">
+	<!-- Sections separated in divs : -->
+	<!-- Introduction -->
+	<div id="intro" name="section" style="display:block;">
+		<div class="sectionName">INTRODUCTION</div>
+		Character name : Jin Kazama<br />
+		Origin : Tekken series<br />
+		Game of reference : Street Fighter X Tekken<br />
+		First release date : 08/03/2014<br />
+		Version number : 1.0.0<br />
+		Version release date : 08/03/2014<br />
+		<br />
+		This character is mainly based on the SFxTK incarnation of Jin, with pieces of his Tekken incarnation included.<br />
+		The sprites are drawn by Cvsnb, with heavy inspiration from the sprite style of the Capcom vs SNK series ; however, the animations are made from Street Fighter X Tekken, which means a difference in speed and in the number of frames in an animation. I have edited a few sprites myself, from the sprites drawn by Cvsnb.<br />
+		<br />
+		<div class="sectionName">DISCLAIMER</div>
+		Jin Kazama is owned by Namco Bandai.<br />
+		This Mugen character is a non-profit fan work. It can not be used for any commercial purpose.<br />
+		The code and files are open source and entirely written by myself. Just give credit if you use a non-negligible amount of it.<br />
+		The sprites have been released as open source material following a commission from a member of the Mugen community to another. The sprites I edited are also open source.<br />
+		The voices are ripped by SNT and semicharmed. The sound effects are mostly from the iOS edition of the game, plus some from Tekken ripped by Tamez.<br />
+		All visual effects from SFxTK are ripped by Mr. I and are open source. The Devil Beam effect is from King of Fighters XIII and is also open source.<br />
+		<!-- This readme is open source.<br /> If you're reading this, yes it still is, I'm just commenting it out because it looks weird and I only put it for a joke the first time. -->
+		<br />
+		<div class="sectionName">LINKS</div>
+		<div class="links">
+			<a href="http://www.elecbyte.com">Elecbyte</a><br />
+			<a href="http://wiki.shoryuken.com/Street_Fighter_X_Tekken/Jin">Shoryuken Wiki : SFxTK Jin</a><br />
+			<a href="#">Original release site</a>
+		</div>
+	</div>
+	<!-- Backstory -->
+	<div id="story" name="section" style="display:none;">
+		<div class="sectionName">BACKSTORY</div>
+		Jin Kazama.<br />
+		Kazuya Mishima, having taken revenge against his father Heihachi Mishima, met Jun Kazama, an environmental activist, during the second King of Iron Fist Tournament. Jin was born to Jun while she had retired on the island of Yakushima. She kept him away from his lineage during his childhood, but was soon attacked by Ogre and disappeared. Jin went to Heihachi Mishima as per his mother's instructions in case of trouble, and learned the Mishima style of Karate, which he mixed with his mother's fighting style.<br />
+		During the third Iron Fist tournament, Jin awakened the Devil Gene he had inherited from his father, just when Heihachi grew too worried about it and shot him in the head. Under his Devil transformation, Jin survived and escaped. He then trained on his own, un-learning the Mishima style and learning a more traditional style of Karate. Through the 4th and 5th Iron Fist tournaments, Jin met his revived father and a mortal hatred was sparked. As Kazuya and Heihachi were struggling for control of the Mishima Zaibatsu, Jin eventually blew them both out of the way and took over.<br />
+		At the head of the Mishima Zaibatsu, Jin figured out the origin of the Devil Gene, and decided to erase it from the world. But to awaken Azazel, the monster at its source, he had to start a war on the scale of the entire world and nearly put it in ruin. Jin started the sixth Iron Fist tournament to wrap up the extermination of the Devil Gene, including Kazuya.<br />
+		<br />
+		Like Kazuya before him, Jin was designed around the concept of the hero corrupted by power, although he went in a different direction than his father. While Kazuya repeatedly attempted to gain total control over his Devil Gene, Jin made it his mission to erase it, the whole world be damned if needed.
+	</div>
+	<!-- System -->
+	<div id="system" name="section" style="display:none;">
+		<div class="sectionName">SYSTEM</div>
+		Due to a glitch in Mugen 1.0, and because this character uses a lot of visual effects, it is heavily suggested to open your data/mugen.cfg file and edit the value of the ExplodMax parameter to a high number.<br />
+		<br />
+		<div class="moveName">Movements</div>
+		Dash by tapping forward twice. Hold forward while dashing to switch to running.<br />
+		Dash back by tapping back twice.<br />
+		Perform a low jump by tapping up and releasing it quickly.<br />
+		Perform a long jump by jumping while running, or by quickly tapping down and up-forward. Long jumps and low jump can be combined by quickly releasing up.<br />
+		When knocked down, recovery quickly by tapping down twice, or roll forward by tapping forward twice.<br />
+<br />
+		<div class="moveName">Power management</div>
+		3 bars.<br />
+		Some system mechanics consume half a bar.<br />
+		Jin has access to Super moves that consume one, two or three bars at once.<br />
+		Power meter gain is determined as follow :<br />
+		<table>
+			<!-- <tr><th>Attack type</th><th>Performing</th><th>Blocked</th><th>Success</th><th>Give when<br />blocked</th><th>Give on<br />success</th></tr>
+			<tr><td>Light attacks</td><td>0</td><td>10</td><td>20</td><td>5</td><td>10</td></tr>
+			<tr><td>Medium attacks</td><td>5</td><td>15</td><td>35</td><td>7</td><td>15</td></tr>
+			<tr><td>Heavy attacks</td><td>10</td><td>20</td><td>40</td><td>10</td><td>20</td></tr>
+			<tr><td>Special attacks</td><td>15</td><td>-</td><td>-</td><td>10</td><td>20</td></tr>
+			<tr><td>Throw</td><td>-</td><td>-</td><td>40</td><td>-</td><td>20</td></tr> Ratio fix 10 in SFxTK <=> 25 in Mugen -->
+			<tr><th>Attack type</th><th>Performing</th><th>Blocked</th><th>Success</th><th>Give when<br />blocked</th><th>Give on<br />success</th></tr>
+			<tr><td>Light attacks</td><td>0</td><td>25</td><td>50</td><td>12</td><td>25</td></tr>
+			<tr><td>Medium attacks</td><td>12</td><td>37</td><td>87</td><td>17</td><td>37</td></tr>
+			<tr><td>Heavy attacks</td><td>25</td><td>50</td><td>100</td><td>25</td><td>50</td></tr>
+			<tr><td>Special attacks</td><td>37</td><td>-</td><td>-</td><td>25</td><td>50</td></tr>
+			<tr><td>Throw</td><td>-</td><td>-</td><td>100</td><td>-</td><td>50</td></tr>
+		</table>
+		Special attacks have their specific value.<br />
+<br />
+		<div class="moveName">Overhead, Low attacks and guarding</div>
+		Overhead attacks cannot be guarded while crouching.<br />
+		Low attacks cannot be guarded while standing.<br />
+		Aerial attacks cannot be guarded while crouching.<br />
+		There is no air guard.<br />
+<br />
+		<div class="moveName">Counter Hit</div>
+		If you hit an opponent who is in the middle of performing an attack, your attack gains the Counter Hit property. The result is not always obvious, especially not with Basic attacks and String Combos, but some Special move gain unique effects when used as a Counter Hit.<br />
+		Counter Hits deal 25% added damage, and provide an additional 2 frame advantage.<br />
+<br />
+		<div class="moveName">Cross Counter</div>
+		The Cross Counter mechanic is taken from Street Fighter X Tekken (named Cross Cancel there) and the Zero Counter mechanic of the Street Fighter Zero (Alpha) series.<br />
+		While blocking a series of attack, press <!--<img src="ReadMe_Src/dir/r.png" /> --><img src="ReadMe_Src/btn/MP.png" /><img src="ReadMe_Src/btn/MK.png" /> to automatically perform a specific move (the Wind Hook Fist). This consumes half a bar of the Power gauge.<br />
+<br />
+		<div class="moveName">Bound Attack <img src="ReadMe_Src/sys/Bnd.png" /></div>
+		A Bound is a special ground bounce state in which the target is put when you hit an airborne opponent with a move that has this property. This Bound state is common to all attacks with the property, and the velocities are common to all.<br />
+		There can be a maximum of two Bound attacks used in a single combo ; a subsequent Bound attack will not put the opponent in Bound state. This limiter resets when you have no target currently in a hit state.<br />
+		Most attacks have this Bound property only when hitting an airborne foe or on a counter hit ; rare specific cases cause a Bound state no matter what as long as it hits.<br />
+<br />
+		<div class="moveName">Cross Cancel <img src="ReadMe_Src/sys/XC.png" /></div>
+		The Cross Cancel is inspired by Street Fighter X Tekken's tag mechanic and Tekken Tag Tournament 2's Tag Launcher mechanic, except without the tag.<br />
+		During an attack with the Cross Cancel property, you can press <img src="ReadMe_Src/btn/MP.png" /><img src="ReadMe_Src/btn/MK.png" /> on contact (whether it hit or was blocked) ; this consumes half a bar of the Power gauge. Jin instantly cancels his current animation and quickly lands (if he was above the ground) and slides forward a little. The landing animation resembles his Zenshin animation, but is not actually that move ; it does not directly give access to its follow-ups. However, after the Cross Cancel, any action is possible during the short forward sliding step.<br />
+		The Cross Cancel does not reset the damage dampener.<br />
+<br />
+		<div class="moveName">Wall Slam <img src="ReadMe_Src/sys/WlS.png" /></div>
+		The Wall Slam is inspired by the wall bounce mechanic of Street Fighter X Tekken, and the general idea behind Tekken's wall combo mechanic.<br />
+		On a successful hit with an attack that has the Wall Slam property, the opponent is sent flying in an arc and bounces back on the wall in another arc toward Jin. The flying arc toward the wall is independant from the attack or the distance to the wall upon contact. The rebound arc is calculated so that the target will land roughly where they were first hit, assumed to go back close to Jin.<br />
+<br />
+		<div class="moveName">Damage Dampener</div>
+		The damage dampener is mostly based on that from SFxTK, calculated from the combo counter. It incorporates a bit of CvS2, adding a factor calculated from the amount of life and power.<br />
+		First and second hit deal 100% damage.<br />
+		Third hit deals 80% damage.<br />
+		Fourth hit deals 70% damage.<br />
+		Fifth hit deals 60% damage.<br />
+		Sixth hit deals 50% damage.<br />
+		Seventh hit deals 40% damage.<br />
+		Eighth hit deals 30% damage.<br />
+		Ninth hit deals 20% damage.<br />
+		Any hit after that deals 10% damage.<br />
+		All "hits" from a single input are counted as only one hit in this dampener (all versions of Median Line Destruction count as one and not 3 or 5). Inputs from a String Combo are counted as one hit each.<br />
+		On top of that factor, the CvS2-based dampener increases the damage by 1% when you have one power bar, 2% when you have 2, 5% when you have all 3, and 15% when you have below 30% life.<br />
+<br />
+		<div class="moveName">Frame Data</div>
+			The following table is available for all attacks :<br />
+			<table>
+				<tr>
+					<th>Input<br />/ Hit</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+				</tr>
+			</table>
+			The first column tells which hit the line corresponds to.<br />
+			The second column tells if the hit can or not be guarded while standing or crouching : OH for overhead, L for low.<br />
+			The third column tells if the hit can or not be canceled into a Special attack, whether it connected or whiffed (only after a certain point in the animation), marked with an X if it is.<br />
+			The fourth column tells the damage. This does not take scaling into account when scaling applies ; it considers that the previous hits have whiffed.<br />
+			The fifth column tells the number of frames before the attack can hit.<br />
+			The sixth column tells the number of frames the hit stays active.<br />
+			The seventh column tells the number of frames after the hit and until Jin can be controled again. This only applies if the attack is not canceled into another.<br />
+			The eighth column tells the advantage on hit, either as a positive number if Jin recovers faster than the opponent, a negative number if he recovers more slowly, a L if it launches the opponent in the air, K if it knocks them down, WS if it causes a Wall Slam, B if it causes an instant Bound (not just when hitting an airborne foe), C if it causes the opponent to collapse slowly, or S if it causes a very heavy hitstun. An optional additional information (same values) in parenthesis indicates advantage on counter hit.<br />
+			The ninth column tells the advantage when blocked, with the same values as the Hit advantage column.<br />
+			The tenth column gives a quick visual description of the action.<br />
+			Some column may be removed for attacks where they don't apply (such as the Special Cancelable column for all Special attacks and most String Combos). In the case of String Combos that derive from a previously described attack, the repeating lines with identical values are not displayed.
+	</div>
+	<!-- Basics, Command Normals -->
+	<div id="basics" name="section" style="display:none;">
+		<div class="sectionName">BASIC ATTACKS</div>
+		A lot of the Basic attacks are used as the start-up for a String Combo ; because of that, only very few specific Basic attacks are cancelable into another Basic attack outside of the String Combos. However, more Basic attacks can be canceled into any Special move, which String Combos can not.<br />
+<br />
+		<table>
+			<tr>
+				<th>Command</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/btn/LP.png" /></td><td>-</td><td>X</td><td>30</td><td>5</td><td>2</td><td>7</td><td>+8</td><td>+4</td><td>Left high jab. Starter for many combos.</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MP.png" /></td><td>-</td><td>X</td><td>60</td><td>9</td><td>2</td><td>10</td><td>+9</td><td>+5</td><td>Right high jab. Decent stand poke with good follow-ups.</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/HP.png" /></td><td>-</td><td>-</td><td>90</td><td>11</td><td>4</td><td>16</td><td>+5</td><td>0</td><td>Left thrust. Strong and decently ranged.</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/LK.png" /></td><td>-</td><td>-</td><td>30</td><td>6</td><td>4</td><td>8</td><td>+5</td><td>+1</td><td>Left high kick</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MK.png" /></td><td>-</td><td>X</td><td>60</td><td>7</td><td>4</td><td>15</td><td>+2</td><td>-2</td><td>Right side kick</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/HK.png" /></td><td>-</td><td>X</td><td>90</td><td>14</td><td>3</td><td>20</td><td>+2</td><td>-3</td><td>Left reverse turning high kick</td></tr>
+			<tr><td>close <img src="ReadMe_Src/btn/LP.png" /></td><td>-</td><td>X</td><td>30</td><td>4</td><td>3</td><td>8</td><td>+6</td><td>+2</td><td>Right high elbow</td></tr>
+			<tr><td>close <img src="ReadMe_Src/btn/MP.png" /></td><td>-</td><td>X</td><td>60</td><td>6</td><td>2</td><td>15</td><td>+4</td><td>0</td><td>Left gut punch</td></tr>
+			<tr><td>close <img src="ReadMe_Src/btn/HP.png" /></td><td>-</td><td>X</td><td>90</td><td>6</td><td>4</td><td>17</td><td>+4</td><td>-1</td><td>Right uppercut</td></tr>
+			<tr><td>close <img src="ReadMe_Src/btn/LK.png" /></td><td>-</td><td>-</td><td>30</td><td>7</td><td>2</td><td>9</td><td>+6</td><td>+2</td><td>Left low side kick</td></tr>
+			<tr><td>close <img src="ReadMe_Src/btn/MK.png" /></td><td>-</td><td>X</td><td>60</td><td>7</td><td>2</td><td>13</td><td>+6</td><td>+2</td><td>Right low side kick</td></tr>
+			<tr><td>close <img src="ReadMe_Src/btn/HK.png" /></td><td>-</td><td>-</td><td>90</td><td>17</td><td>2</td><td>18</td><td>+5</td><td>0</td><td>Right reverse turning high kick</td></tr>
+			<tr><td>crouch <img src="ReadMe_Src/btn/LP.png" /></td><td>-</td><td>X</td><td>30</td><td>3</td><td>2</td><td>7</td><td>+8</td><td>+4</td><td>Left jab</td></tr>
+			<tr><td>crouch <img src="ReadMe_Src/btn/MP.png" /></td><td>-</td><td>X</td><td>60</td><td>4</td><td>3</td><td>9</td><td>+10</td><td>+5</td><td>Right jab. Decent crouch poke with good follow-ups.</td></tr>
+			<tr><td>crouch <img src="ReadMe_Src/btn/HP.png" /></td><td>-</td><td>X</td><td>90</td><td>5</td><td>5</td><td>21</td><td>+2</td><td>-4</td><td>Left standing uppercut. The go-to anti-air.</td></tr>
+			<tr><td>crouch <img src="ReadMe_Src/btn/LK.png" /></td><td>L</td><td>X</td><td>30</td><td>5</td><td>3</td><td>8</td><td>+6</td><td>+2</td><td>Left low kick. Crouch poke.</td></tr>
+			<tr><td>crouch <img src="ReadMe_Src/btn/MK.png" /></td><td>L</td><td>X</td><td>60</td><td>6</td><td>2</td><td>14</td><td>+5</td><td>+1</td><td>Turning left low kick</td></tr>
+			<tr><td>crouch <img src="ReadMe_Src/btn/HK.png" /></td><td>L</td><td>-</td><td>90</td><td>9</td><td>3</td><td>22</td><td>K</td><td>-5</td><td>Right sweep</td></tr>
+			<tr><td>jump <img src="ReadMe_Src/btn/LP.png" /></td><td>OH</td><td>-</td><td>40</td><td>5</td><td>6</td><td>-</td><td>+12</td><td>+4</td><td>Left downward jab</td></tr>
+			<tr><td>jump <img src="ReadMe_Src/btn/MP.png" /></td><td>OH</td><td>-</td><td>70</td><td>7</td><td>6</td><td>-</td><td>+16</td><td>+5</td><td>Right high jab. Better air-to-air.</td></tr>
+			<tr><td>jump <img src="ReadMe_Src/btn/HP.png" /></td><td>OH</td><td>-</td><td>100</td><td>8</td><td>6</td><td>-</td><td>+20</td><td>+8</td><td>Left downward thrust</td></tr>
+			<tr><td>jump <img src="ReadMe_Src/btn/LK.png" /></td><td>OH</td><td>-</td><td>40</td><td>6</td><td>5</td><td>-</td><td>+12</td><td>+4</td><td>Left turning sokutou</td></tr>
+			<tr><td>jump <img src="ReadMe_Src/btn/MK.png" /></td><td>OH</td><td>-</td><td>70</td><td>6</td><td>6</td><td>-</td><td>+16</td><td>+5</td><td>Right high front kick</td></tr>
+			<tr><td>jump <img src="ReadMe_Src/btn/HK.png" /></td><td>OH</td><td>-</td><td>100</td><td>8</td><td>6</td><td>-</td><td>+20</td><td>+8</td><td>Right downward roundhouse kick</td></tr>
+		</table>
+<br />
+		<div class="sectionName">COMMAND NORMALS</div>
+		<span class="moveName">Demon's Paw</span> <span class="jName">&#33012;&#25244;&#12365; Dou Nuki</span><br />
+		A straight punch that knocks the opponent away. It has a good range and can be delayed and executed at any point of the dash - although the difference is not that significant, the slight delay and the speed of the punch can be used as a surprise attack, or generally to catch a dashing opponent by surprise before they can attack. Its speed and range also make it a good move to get back in after having been pushed back while blocking, before the opponent can start a keep-away strategy. While Shun Masatsu is faster, it has a shorter range, even though its range is already pretty good ; Demon's Paw is safer than the risky Shun Masatsu, for which you need to follow through. Its weak point is the recovery time when blocked, so it does need to be placed at the right time as a punishing attack. Causes crumple on counter hit.<br />
+		<table>
+			<tr>
+				<th>Command</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/MP.png" /><br />/ dash <img src="ReadMe_Src/btn/MP.png" /></td><td>-</td><td>-</td><td>70</td><td>5</td><td>2</td><td>25</td><td>K (C)</td><td>-12</td><td>Dashing right thrust</td></tr>
+		</table>
+<br />
+		<span class="moveName">Shun Masatsu</span> <span class="jName">&#34850;&#39764;&#21049;</span><br />
+		A quick pair of punches with a good range and fast start-up. Good to get in and harass out of the blue, rather than a punishing move like the Demon's Paw. It is however extremely vulnerable when either hit is blocked ; furthermore, the speed and short hittimes actually make it slightly harder to pull in the middle of a combo.<br />
+		A combo that can be linked into from a stand or crouch <img src="ReadMe_Src/btn/LP.png" /> or (far) <img src="ReadMe_Src/btn/MP.png" />, and canceled into a Special move from the second punch. Canceling out of it should be made a habit when blocked to counter a counter. This is a fearsome move when used as a combo starter because it can reach around 230 damage when followed by a special, barely hindered by the damage dampener. Otherwise, it serves as a good combo filler if linked into after a crouch LP, MP combo and then followed by a special move for a total damage around 250.<br />
+		<table>
+			<tr>
+				<th>Command</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/dir/l.png" /> <img src="ReadMe_Src/btn/MP.png" /></td><td>-</td><td>-</td><td>60</td><td>6</td><td>2</td><td>33</td><td>-18</td><td>-20</td><td>Lunging right thrust</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/LP.png" />/<img src="ReadMe_Src/btn/HP.png" /></td><td>-</td><td>X</td><td>70</td><td>7</td><td>2</td><td>27</td><td>0</td><td>-5</td><td>Left rising palm bash</td></tr>
+		</table>
+<br />
+		<span class="moveName">Corpse Thrust</span> <span class="jName">&#39608;&#25171;&#12385; Mukuro Uchi</span><br />
+		The start-up is a bit slow, but it causes an instant knock down. Better recovery than Demon's Paw.<br />
+		<table>
+			<tr>
+				<th>Command</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/HP.png" /></td><td>-</td><td>-</td><td>90</td><td>15</td><td>3</td><td>14</td><td>K</td><td>-4</td><td>Right step left thrust</td></tr>
+		</table>
+<br />
+		<span class="moveName">Left Axe Kick</span> <span class="jName">&#24038;&#36405;&#33853;&#12392;&#12375; Hidari Kakato Otoshi</span> <img src="ReadMe_Src/sys/Bnd.png" /><br />
+		An overhead kick. The start-up is a little slow for a basic attack, but fast enough so that a crouching opponent will not stand up to guard it if they don't expect it. It has Bound property.<br />
+		<table>
+			<tr>
+				<th>Command</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/LK.png" /></td><td>OH</td><td>-</td><td>50</td><td>23</td><td>2</td><td>25</td><td>-4 (B)</td><td>-9</td><td>Step, left heel drop</td></tr>
+		</table>
+<br />
+		<span class="moveName">Left Spinning Jump Kick</span> <span class="jName">&#24460;&#12429;&#22238;&#12375;&#24038;&#39131;&#12403;&#36468;&#12426; Ushiro Mawashi Hidari Tobi Geri</span><br />
+		Early low invulnerability with good range, good to counter a low poke. Knocks down on Counter Hit.<br />
+		<table>
+			<tr>
+				<th>Command</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/MK.png" /></td><td>-</td><td>-</td><td>60</td><td>10</td><td>5</td><td>12</td><td>+4 (K)</td><td>+1</td><td>Turning hop reverse left kick</td></tr>
+		</table>
+<br />
+		<span class="moveName">Amara</span> <span class="jName">&#38463;&#25705;&#32645;</span><br />
+		An attack taken from Devil Jin in the Tekken series. While jumping up or forward, Jin performs a quick diving kick. Knocks down on Counter Hit.<br />
+		<table>
+			<tr>
+				<th>Command</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>(jump up or forward)<br /><img src="ReadMe_Src/dir/d.png" /> <img src="ReadMe_Src/btn/HK.png" /></td><td>OH</td><td>-</td><td>70</td><td>6</td><td>-</td><td>4</td><td>+16 (K)</td><td>+5</td><td>Diving right kick</td></tr>
+		</table>
+<br />
+		<span class="moveName">Tidal Wave</span> <span class="jName">&#32937;&#22266;&#12417;&#21897;&#36650;&#33853;&#12392;&#12375; Katagatame Nodowa Otoshi</span> / <span class="moveName">Over the Shoulder Reverse</span> <span class="jName">&#38647; Ikazuchi</span><br />
+		Jin front and back basic grabs.<br />
+		The normal throws have limitations inspired from KoF standards, as follow :<br />
+		- Normal throws will not connect while the opponent is in hitstun or blockstun from any attack.<br />
+		- Normal throws will not connect if the opponent is starting a jump, in the air, or landing from a jump.
+		<table>
+			<tr>
+				<th>Command</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/btn/LP.png" /><img src="ReadMe_Src/btn/LK.png" /> / <br /><img src="ReadMe_Src/dir/l.png" /> <img src="ReadMe_Src/btn/LP.png" /><img src="ReadMe_Src/btn/LK.png" /></td><td>-</td><td>-</td><td>130</td><td>5</td><td>2</td><td>20</td><td>K</td><td>-</td><td>-</td></tr>
+		</table>
+	</div>
+	<!-- String Combos -->
+	<div id="string" name="section" style="display:none;">
+		<div class="sectionName">STRING COMBOS</div>
+		The String combos are heavily inspired on the Tekken incarnation of Jin, and consist of a series of single-button inputs (occasionally with one direction held).<br />
+		Although some Basic attacks can be canceled into another Basic attack, once a sequence of more than one Basic attack is identified as a String Combo, it is not possible to cancel back into a Basic attack not part of the String Combo.<br />
+		All of the String Combos are available both at close range and from a distance.
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" /> : <span class="moveName">Flash Punch Combo</span> <span class="jName">&#38275;&#20809;&#28872;&#25331; Senkou Rekken</span><br />
+		The second <img src="ReadMe_Src/btn/LP.png" /> is a little slower, but it slides forward, and the third punch gives the whole move a great range for a basic combo. An important tool of the Mishima style. Jin abandonned this style including this move and Street Fighter X Tekken also ignores it, but this edition restores it. The reason for this reintroduction is to bypass a rapid-fire LP and force the player to use String Combos instead of a very low level strategy.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>-</td><td>30</td><td>12</td><td>2</td><td>10</td><td>+4</td><td>+3</td><td>Sliding left high jab</td></tr>
+			<tr><td>3</td><td>-</td><td>50</td><td>8</td><td>2</td><td>20</td><td>+4</td><td>-12</td><td>Right step right thrust</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" /> : <span class="moveName">Left Right combo</span> <span class="jName">&#38918;&#31361;&#12365; Jun Tsuki</span><br />
+		For this and the following String Combos, the second hit prevents an airborne opponent from recovering. The second punch is shorter but faster than the Flash Punch Combo.<br />
+		Because the Boost Combo system was removed in favor of the String Combos, the Left Right Combo (and its follow-ups) is also available with crouch LP to crouch MP in its stead (Jin stands up for the follow-ups).<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>-</td><td>X</td><td>50</td><td>9</td><td>2</td><td>10</td><td>+9</td><td>+3</td><td>Right high jab</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/HP.png" /> : <span class="moveName">Demon Slayer</span> <span class="jName">&#39740;&#21741;&#36899;&#25331; Kikoku Renken</span><br />
+		Another important tool of the Mishima style, also restored for this edition. For obvious graphic-related reasons, the punch is changed from the original backhand to the Corpse Thrust animation. Actually not that efficient, speed-wise ; the reason for this reintroduction is to replace the Boost Combo system from SFxTK that is completely removed, and to allow for the Omen 7 Hit Combo (see below), the real full combo.<br />
+		The third punch does not knock down the opponent, but it heavily stuns them.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>3</td><td>-</td><td>60</td><td>8</td><td>2</td><td>14</td><td>+6</td><td>-3</td><td>Right step left thrust</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/LK.png" /> : <span class="moveName">Left Right Inner Axe</span> <span class="jName">&#38918;&#31361;&#12365;&#65374;&#20869;&#22238;&#12375;&#36405;&#33853;&#12392;&#12375; Jun Tsuki - Uchi Mawashi Kakato Otoshi</span><br />
+		The Left Axe Kick performed after the Left Right Combo will not combo even on counter, juggle or block, but it can surprise opponents who stay in crouch block position often and open up their guard, as it remains an Overhead attack.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>3</td><td>OH</td><td>60</td><td>21</td><td>2</td><td>18</td><td>-4</td><td>-9</td><td>Step left heel drop</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" />/<img src="ReadMe_Src/btn/HK.png" /> : <span class="moveName">Left Right Spinning Hook Kick</span> <span class="jName">&#38918;&#31361;&#12365;&#65374;&#19978;&#27573;&#24460;&#12429;&#22238;&#12375;&#36468;&#12426; Jun Tsuki - Joudan Ushiro Mawashi Geri</span><br />
+		A staple of Jin's basic combo, a very fast option. Doesn't move far, but<!-- the third hit immediately knocks down the opponent. --> sends the opponent flying away.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>3</td><td>-</td><td>60</td><td>8</td><td>2</td><td>18</td><td>K</td><td>-2</td><td>Close <img src="ReadMe_Src/btn/HK.png" /></td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/dir/l.png" /> : <span class="moveName">Ni Rengeki Sen</span> <span class="jName">&#20108;&#36899;&#25731;&#12539;&#28508;</span><br />
+		A feint for the String Combo that follows, where Jin doesn't perform the whole combo but performs a short dash back after the first two hits.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>-</td><td>50</td><td>5</td><td>2</td><td>9</td><td>+4</td><td>+2</td><td>Left high kick</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Kazama Style 5 Hit Combo</span> <span class="jName">&#39080;&#38291;&#27969;&#20116;&#36899;&#25731; Kazama-ryuu Go Rengeki</span><br />
+		Jin practically doesn't move forward for the whole combo, but at short range, this combo is a devastating offense with great pressure. The middle and low attacks prevent the opponent from ducking under the whole String, and the final low attack will actually break through a standing opponent's guard as a Low attack.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>3</td><td>-</td><td>30</td><td>6</td><td>4</td><td>13</td><td>0</td><td>-2</td><td>Right gut punch</td></tr>
+			<tr><td>4</td><td>-</td><td>30</td><td>7</td><td>2</td><td>9</td><td>+6</td><td>+4</td><td>Left gut punch</td></tr>
+			<tr><td>5</td><td>L</td><td>50</td><td>7</td><td>2</td><td>28</td><td>K</td><td>-10</td><td>Right low side kick</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/HK.png" />&rarr;<img src="ReadMe_Src/dir/l.png" /><img src="ReadMe_Src/btn/LK.png" /> : <span class="moveName">Feint Kick Combo</span> <span class="jName">&#30452;&#31361;&#12365;&#65374;&#32294;&#36468;&#12426;&#65374;&#24038;&#36275;&#20992; Choku Tsuki - Tate Geri - Hidari Sokutou</span><br />
+		Slower than the 5 Hit Combo startup, the overhead feint will catch an opponent who expects the LP to follow through with either low hitting String Combos that can come after, and crouches to block right from the start. The overhead kick forces a crouching opponent to stand up. The final kick, like the standalone Left Sidekick, is Special Cancelable.<br />
+		The command has been altered to fit the speed increase compared to Tekken.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>OH</td><td>-</td><td>50</td><td>13</td><td>5</td><td>8</td><td>+12</td><td>+5</td><td>Left high descending roundhouse</td></tr>
+			<tr><td>3</td><td>-</td><td>X</td><td>50</td><td>8</td><td>4</td><td>12</td><td>+9</td><td>+2</td><td>Left sokutou</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/dir/d.png" /> <img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Left Jab to Double Low</span> <span class="jName">&#30452;&#31361;&#12365;&#65374;&#24038;&#19979;&#27573;&#36468;&#12426;&#65374;&#21491;&#19979;&#27573;&#36468;&#12426; Choku Tsuki - Hidari Gedan Geri - Migi Gedan Geri</span><br />
+		The third attack of this String Combo (not the second) hits low and breaks through a standing opponent's guard. The low attack is much more punishable.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>-</td><td>30</td><td>7</td><td>2</td><td>9</td><td>+6</td><td>+2</td><td>Left low side kick</td></tr>
+			<tr><td>3</td><td>L</td><td>50</td><td>12</td><td>2</td><td>28</td><td>+2</td><td>-6</td><td>Right low side kick</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Mid Left Punch to Roundhouse Kick</span> <span class="jName">&#24038;&#20013;&#27573;&#30452;&#31361;&#12365;&#65374;&#20013;&#27573;&#22238;&#12375;&#36468;&#12426; Hidari Chuudan Choku Zuki - Chuudan Mawashi Geri</span><br />
+		Good reach. This causes heavy stun, but has heavy recovery time.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>1</td><td>-</td><td>30</td><td>5</td><td>2</td><td>10</td><td>+4</td><td>+1</td><td>Left lunging punch</td></tr>
+			<tr><td>2</td><td>-</td><td>50</td><td>7</td><td>4</td><td>15</td><td>+2</td><td>-2</td><td>Right side kick</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/HK.png" /> : <span class="moveName">Mid Left Punch to Low Trick Kick</span> <span class="jName">&#24038;&#20013;&#27573;&#30452;&#31361;&#12365;&#65374;&#19979;&#27573;&#21069;&#22238;&#12375;&#36468;&#12426; Hidari Chuudan Choku Zuki - Gedan Mae Mawashi Geri</span><br />
+		A feint variation of the previous String Combo, it slows down a little and perform a sweeping kick instead of the far high kick.<br />
+		The command has been altered to fit the speed increase compared to Tekken.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>L</td><td>-</td><td>19</td><td>2</td><td>40</td><td>K</td><td>-14</td><td>Right low roundhouse</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/dir/r.png" /> : <span class="moveName">Twin Lancer, Zenshin</span> <span class="jName">&#39740;&#20843;&#38272;&#65374;&#21069;&#24515; Oni Hachimon - Zenshin</span> <img src="ReadMe_Src/sys/Bnd.png" /><br />
+		The second punch has Bound property in all cases. The Zenshin follow-up allow you to go further in picking up the opponent from the air.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>OH</td><td>50</td><td>12</td><td>3</td><td>25</td><td>B</td><td>-4</td><td>Right smash hook</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Double Thrust Roundhouse</span> <span class="jName">&#36870;&#31361;&#12365;&#65374;&#20013;&#27573;&#21069;&#22238;&#12375;&#36468;&#12426; Gyaku Tsuki - Chuudan Mae Mawashi Geri</span><br />
+		A little slow, but great range. Identical to a MP into Mid Left Punch to High Roundhouse Kick.<br />
+<br />
+		<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/HK.png" /> : <span class="moveName">Double Thrust Low Trick Kick</span> <span class="jName">&#36870;&#31361;&#12365;&#65374;&#19979;&#27573;&#21069;&#22238;&#12375;&#36468;&#12426; Gyaku Tsuki - Gedan Mae Mawashi Geri</span><br />
+		A feint of the above, slower, performing a low sweep that breaks a standing guard. Identical to a MP into Mid Left Punch to Low Trick Kick (command also altered).<br />
+<br />
+		<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" />/<img src="ReadMe_Src/btn/HK.png" /> : <span class="moveName">Switch Blade</span> <span class="jName">&#27491;&#25331;&#65374;&#19978;&#27573;&#24460;&#12429;&#22238;&#12375;&#36468;&#12426; Seiken - Joudan Ushiro Mawashi Geri</span><br />
+		Good speed and decent range, doesn't move forward much but quick to send the opponent flying away.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>-</td><td>90</td><td>17</td><td>2</td><td>18</td><td>K</td><td>0</td><td>cl<img src="ReadMe_Src/btn/HK.png" /></td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/l.png" /><img src="ReadMe_Src/btn/HP.png" />&rarr;<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" /> : <span class="moveName">Evil Intent</span> <span class="jName">&#32645;&#21897; Ragou</span><br />
+		An easy combo, with a good range but on the slow side. Hits high, especially on the second hit that whiffs on crouching opponents, so it can be crouch-blocked then low-countered on the second hit. On a Counter Hit, the first hit causes a heavy hitstun.<br />
+		Exclusively, this String Combo (and the variation that follows) can be canceled into from the moves that are marked as Special Cancelable.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>1</td><td>-</td><td>60</td><td>12</td><td>2</td><td>25</td><td>-7 (S)</td><td>-10</td><td>Right roundhouse punch</td></tr>
+			<tr><td>2</td><td>-</td><td>30</td><td>5</td><td>2</td><td>20</td><td>-1</td><td>-3</td><td>Left lunging punch</td></tr>
+			<tr><td>3</td><td>-</td><td>40</td><td>12</td><td>2</td><td>36</td><td>K</td><td>-14</td><td>Right thrust</td></tr>
+		</table>
+<br />
+<!--		<img src="ReadMe_Src/dir/l.png" /><img src="ReadMe_Src/btn/HP.png" />&rarr;<img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" /> : <span class="moveName">Laser Breaker</span><br />
+		A variation of the above, with a reach more vertical than horizontal. It has a shorter range overall, but is slightly faster, particularly with less recovery.<br />
+		This sequence of punches is inspired from the variation seen in the 10 Hit Combo.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>-</td><td>30</td><td>8</td><td>4</td><td>17</td><td>+1</td><td>-4</td><td>Left uppercut</td></tr>
+			<tr><td>3</td><td>OH</td><td>50</td><td>7</td><td>2</td><td>17</td><td>-1</td><td>-4</td><td>Right smash hook</td></tr>
+		</table>
+<br />-->
+		<img src="ReadMe_Src/dir/l.png" /><img src="ReadMe_Src/btn/HP.png" />&rarr;<img src="ReadMe_Src/btn/HK.png" />&rarr;<img src="ReadMe_Src/dir/r.png" /> : <span class="moveName">Keito, Zenshin</span> <span class="jName">&#35336;&#37117;&#65374;&#21069;&#24515;</span><br />
+		A variation of the above, it hits high only, but it reaches a long range sooner and hits harder, and can chain into the follow-ups of the Special move Zenshin.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>-</td><td>90</td><td>9</td><td>3</td><td>20</td><td>+2</td><td>-3</td><td>Stand <img src="ReadMe_Src/btn/HK.png" /></td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Kishin Rekkou</span> <span class="jName">&#39740;&#31070;&#28872;&#27960;</span><br />
+		An easy and fairly quick combo at short range.<!--, ending with a low attack breaking standing guard.--><br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>-</td><td>-</td><td>30</td><td>5</td><td>2</td><td>7</td><td>+8</td><td>+4</td><td>Left high jab</td></tr>
+			<tr><td>3</td><td>-</td><td>X</td><td>50</td><td>7</td><td>2</td><td>13</td><td>+6</td><td>+2</td><td>Right low side kick</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Left Axe Kick - Kazama Style 6 Hit Combo</span> <span class="jName">&#39080;&#38291;&#27969;&#20845;&#36899;&#25731; Kazama-ryuu Roku Rengeki</span> <img src="ReadMe_Src/sys/Bnd.png" /><br />
+		The Left Axe Kick at the start has Bound property on counter or when hitting an airborne foe. It also still forces the opponent to stand if it hits them while crouching, making them vulnerable to the rest of the combo. The final hit is still a Low attack.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>2</td><td>-</td><td>20</td><td>5</td><td>2</td><td>7</td><td>+6</td><td>+4</td><td>Left high jab</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/l.png" /> <img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/dir/l.png" />/<img src="ReadMe_Src/dir/r.png" /> : <span class="moveName">Left Sidekick to Stinger Sen/Zenshin</span> <span class="jName">&#24038;&#36275;&#20992;&#65374;&#24038;&#32294;&#36468;&#12426;&#12539;&#28508;/;&#21069;&#24515; Hidari Sokutou - Hidari Tate Geri Sen/Zenshin</span> <img src="ReadMe_Src/sys/Bnd.png" /> <br />
+		The first attack is the best, safest poke, fast enough, with a good range, and a little hard to counter ; it can also be Special Canceled. The second kick slides forward a little and has Bound property. It has the option to either step back, or forward into the Zenshin follow-ups.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Special<br />cancelable</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>1</td><td>-</td><td>X</td><td>50</td><td>6</td><td>4</td><td>8</td><td>+9</td><td>+5</td><td>Left sokutou</td></tr>
+			<tr><td>2</td><td>-</td><td>-</td><td>50</td><td>15</td><td>5</td><td>8</td><td>+12 (B)</td><td>+5</td><td>Left high descending roundhouse</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/MK.png" />&rarr;<img src="ReadMe_Src/btn/HK.png" />&rarr;<img src="ReadMe_Src/dir/r.png" /> : <span class="moveName">Keito (2), Zenshin</span><br />
+		Identical to a MK (close or far) followed by a far HK. A good long poke-ranged tool, the MK is not too fast but it still makes for Jin's better speed/range compromise, safer than the regular Keito. The step at the start of the HK is shorter but faster than the stand-alone HK, which, after the MK, makes for a quite surprising surge forward.<br />
+		A move added from nowhere (in regard to Tekken) to make up for the absence of SFxTK's Boost Combo system, being the only sort of move that made a big loss for Jin.<br />
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/HK.png" />&rarr;<img src="ReadMe_Src/btn/HP.png" />&rarr;<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />/<img src="ReadMe_Src/btn/HP.png" /> : <span class="moveName">10 Hit Combo</span> <span class="jName">&#65297;&#65296;&#36899;&#12467;&#12531;&#12508; Juuren Combo</span><br />
+		Tekken's classic 10 Hit Combo. A challenge to master. Each input must be performed during the previous attack, and not too soon or too late.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>3</td><td>-</td><td>50</td><td>8</td><td>4</td><td>12</td><td>+12</td><td>+5</td><td>Left sokutou</td></tr>
+			<tr><td>4</td><td>-</td><td>90</td><td>15</td><td>3</td><td>18</td><td>+4</td><td>-1</td><td>Stand <img src="ReadMe_Src/btn/HK.png" /></td></tr>
+			<tr><td>5</td><td>-</td><td>60</td><td>12</td><td>2</td><td>36</td><td>-8</td><td>-12</td><td>Right hook</td></tr>
+			<tr><td>6</td><td>-</td><td>30</td><td>3</td><td>2</td><td>17</td><td>+1</td><td>-4</td><td>Left uppercut</td></tr>
+			<tr><td>7</td><td>OH</td><td>50</td><td>12</td><td>3</td><td>25</td><td>-1</td><td>-4</td><td>Right smash hook</td></tr>
+			<tr><td>8</td><td>-</td><td>30</td><td>7</td><td>2</td><td>9</td><td>+4</td><td>+2</td><td>Left low side kick</td></tr>
+			<tr><td>9</td><td>L</td><td>60</td><td>8</td><td>2</td><td>30</td><td>K</td><td>-14</td><td>Right low roundhouse</td></tr>
+			<tr><td>10</td><td>-</td><td>130</td><td>6</td><td>2</td><td>23</td><td>K</td><td>-3</td><td>Right rising hook</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/HP.png" />&rarr;<img src="ReadMe_Src/btn/LK.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />&rarr;<img src="ReadMe_Src/btn/MK.png" />&rarr;<img src="ReadMe_Src/btn/HK.png" /> : <span class="moveName">Omen 7 Hit Combo</span> <span class="jName">&#20806;&#20505;&#65374;7&#36899;&#12467;&#12531;&#12508; Kizashi - Shichiren (Nanaren) Combo</span><br />
+		A unique combo Jin has in his secret "Omen stance" in both Tekken Tag games.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td>4</td><td>-</td><td>30</td><td>7</td><td>2</td><td>9</td><td>+6</td><td>+2</td><td>Left low side kick</td></tr>
+			<tr><td>5</td><td>-</td><td>50</td><td>9</td><td>2</td><td>13</td><td>+2</td><td>+0</td><td>Right high jab</td></tr>
+			<tr><td>6</td><td>-</td><td>30</td><td>7</td><td>2</td><td>13</td><td>+6</td><td>+2</td><td>Right low side kick</td></tr>
+			<tr><td>7</td><td>-</td><td>30</td><td>15</td><td>3</td><td>22</td><td>K</td><td>-2</td><td>Stand <img src="ReadMe_Src/btn/HK.png" /></td></tr>
+		</table>
+	</div>
+	<!-- Special Moves -->
+	<div id="special" name="section" style="display:none;">
+		<div class="sectionName">SPECIAL ATTACKS</div>
+		Special moves marked <img src="ReadMe_Src/sys/EX.png" /> after the command have an EX variation, used by pressing two buttons (two punches or two kicks) at the same time instead of one. EX moves generally have a different hit behavior and added properties, making it a unique version of the move.<br />
+		EX moves consume half a powerbar.<br />
+<br />
+		There is one unique special move marked <img src="ReadMe_Src/sys/SC.png" /> that can be Super Charged by holding the attack button used to perform the move. If you use one button and hold it, Jin will charge up the move and it will turn into the EX version of the move (a flash will indicate that while charging). If you keep holding the button a little longer, it will then automatically turn into the Super move associated to it. The Super Charge itself costs no power, but renders Jin highly vulnerable while charging.<br />
+		It is possible to immediately use the EX version by pressing two buttons, and then hold the buttons to Super Charge into the Super move variation. This still consumes the amount of power needed for the EX move.<br />
+<br />
+		<span class="moveName">Mental Alertness series</span><br />
+		<img src="ReadMe_Src/dir/l.png" /> <img src="ReadMe_Src/btn/LP.png" /> / <img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/LP.png" /> : <span class="moveName">Mental Alertness / Zenshin</span> <span class="jName">&#27531;&#24515;&#12539;&#24336;/&#21069;&#24515; Zanshin Ni/Zenshin</span> <img src="ReadMe_Src/sys/Bnd.png" /><br />
+		Jin goes into a semi-crouching position, taking a short step backward (Mental Alertness) or forward (Zenshin) ; a set-up for several follow-ups. The first 10 frames have full body strike invulnerability (follow-up inputs will be delayed), then the next 26 frames dodge high attack and block one low hit.<br />
+		Although the command looks like a Command Normal (derived from the original command in Tekken replacing the SFxTK command), this move is considered a Special move, allowing Special cancelable move to cancel into it.<br />
+		There are a few specific String Combos that can chain into Zenshin (not Mental Alertness) by just pressing forward, so look into that to chain that into the Zenshin follow-ups and extend your combo. Other basic moves and some String Combos can be Special Canceled, so the Mental Alertness series may be a good go-to setup to practice ground combo extensions.<br />
+<br />
+		<img src="ReadMe_Src/dir/r.png" /> : <span class="moveName">Dash</span><br />
+		A simple forward dash. Can be followed into the dash attack Demon's Paw or changed into a run by holding forward. Note : only available during Mental Alertness, not during Zenshin.<br />
+<br />
+		<img src="ReadMe_Src/dir/dr.png" /> : <span class="moveName">Special Step</span><br />
+		See the follow-ups to Special Step. Note : only available during the standalone Mental Alertness special, not during the Zenshin follow-up of several String Combos.<br />
+<br />
+		<img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />/<img src="ReadMe_Src/btn/HP.png" /> : <span class="moveName">Left Drill Punch - Spine Cracker</span> <span class="jName">&#24038;&#22238;&#12375;&#31361;&#12365;&#65374;&#21491;&#20013;&#27573;&#27491;&#25331;&#31361;&#12365; Hidari Mawashi Zuki - Migi Chuudan Seiken Zuki</span><br />
+		A long surprise step. It doesn't have the invincibility of the Special Step but it has a greater range. It is also faster than the Special Step, but not faster than the Swaying Willow overall. Hitting an airborne opponent with the first punch prevents them from recovering ; the second hit causes a knockdown.<br />
+		The cumulated damage of both hits has been reduced from SFxTK ; although it was compensated by the difficulty to connect and the recovery time, neither the startup nor the recovery were the slowest in Jin's arsenal, and it was still a high reward if it did hit. The cumulated damage has been reduced, but it remains the most damaging Special Move, albeit still difficult to aim with. In exchange, the first attack has gained a one hit armor for physical (non super) attacks, making it easier to actually connect safely. The startup delay of the first hit, and the recovery time and low blockstun of the second part of the move still make it highly vulnerable to a block followed by a counter.<br />
+<br />
+		<img src="ReadMe_Src/btn/MP.png" /> : <span class="moveName">Swaying Willow</span> <span class="jName">&#27969;&#12428;&#26611; Nagare Yanagi</span><br />
+		A fast but short attack - the fastest follow-up to MA / Zenshin. On a Counter Hit, it causes a heavy hitstun.<br />
+		With the invulnerability of Mental Alertness and the speed of Swaying Willow, this is a good move to bait an opponent for an attack at close range, as a Counter Hit will give a big opportunity for a combo. The low range is the only downside of this move.<br />
+<br />
+<!--		<img src="ReadMe_Src/btn/HP.png" /> : <span class="moveName">Joudan Tsukiage Niren</span> <span class="jName">&#19978;&#27573;&#31361;&#12365;&#19978;&#12370;&#20108;&#36899;</span> <img src="ReadMe_Src/sys/XC.png" /><br />
+		A lifting pair of uppercuts. A relatively fast attack, fairly safe against air attacks, starting upclose and with a decent overall range for a close attack, this move makes for a good option to start a juggle combo.<br />
+<br />-->
+		<img src="ReadMe_Src/btn/LK.png" /> : <span class="moveName">Leaping Side Kick</span> <span class="jName">&#30495;&#31354;&#39131;&#12403;&#19978;&#27573;&#36468;&#12426; Shinkuu Tobi Joudan Geri</span><br />
+		A far and fast anti-air attack that prevents the opponent from recovering. Invincible to air attacks, but will easily miss a grounded opponent. The best option to catch an opponent in the air at a distance they thought safe. Almighty against long diving attacks or air projectiles, although the need to start from the Mental Alertness stance forces you to have some degree of prediction, as the move is nearly impossible to pull on reaction to a fast diving attack (due to the un-cancelable 10 frame startup of MA).<br />
+<br />
+		<img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Right Sweep</span> <span class="jName">&#21491;&#19979;&#27573;&#24460;&#12429;&#22238;&#12375;&#36468;&#12426; Migi Gedan Ushiro Mawashi Geri</span><br />
+		A low sweep that causes a knock down.<br />
+<br />
+		<img src="ReadMe_Src/btn/HK.png" /> : <span class="moveName">Stinger</span> <span class="jName">&#24038;&#32294;&#36468;&#12426; Hidari Tate Geri</span><img src="ReadMe_Src/sys/Bnd.png" /><br />
+		An overhead kick. A bit faster than the original move in Tekken, not particularly made as a feint. Has Bound Attack property only on counter or when hitting an airborne foe. Used mostly to crush a crouching opponent, but the hurtboxes and the range make this move deceptively difficult to counter (unless with a long poke or sweep), thus the move is a good bait for counter to make use of the Bound property. The Mental Alertness with its invulnerability can be used to bait a low poke, which will then be countered by the Stinger.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/dir/l.png" />/<img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/LP.png" /></td><td>-</td><td>-</td><td>10</td><td>26</td><td>13</td><td>-</td><td>-</td><td>The "active" frames are cancelable (inputs done during "startup" are delayed)</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/LP.png" /></td><td>-</td><td>90</td><td>14</td><td>2</td><td>25</td><td>+2</td><td>-5</td><td>Long dash, left lunging punch ; one hit armor</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/LP.png" />&rarr;<img src="ReadMe_Src/btn/MP.png" />/<img src="ReadMe_Src/btn/HP.png" /></td><td>-</td><td>70</td><td>7</td><td>2</td><td>34</td><td>K</td><td>-14</td><td>Right thrust</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MP.png" /></td><td>-</td><td>100</td><td>5</td><td>2</td><td>27</td><td>+2 (+30 S)</td><td>-3</td><td>Right thrust</td></tr>
+			<!--<tr><td><img src="ReadMe_Src/btn/HP.png" /></td><td>-</td><td>70, 60</td><td>8</td><td>2 (16) 2</td><td>30</td><td>L</td><td>-</td><td>Left uppercut, right upward thrust</td></tr>-->
+			<tr><td><img src="ReadMe_Src/btn/LK.png" /></td><td>-</td><td>100</td><td>7</td><td>7</td><td>19</td><td>L</td><td>-</td><td>Leaping left side kick</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MK.png" /></td><td>L</td><td>100</td><td>17</td><td>2</td><td>26</td><td>K</td><td>-10</td><td>Turning reverse right sweep</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/HK.png" /></td><td>OH</td><td>100</td><td>18</td><td>5</td><td>10</td><td>+13 (B)</td><td>0</td><td>Left descending roundhouse kick</td></tr>
+		</table>
+<br />
+		<span class="moveName">Special Step series</span><br />
+		<img src="ReadMe_Src/dir/r.png" /><img src="ReadMe_Src/dir/n.png" /><img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dr.png" /> / release <img src="ReadMe_Src/dir/dr.png" />&rarr;<img src="ReadMe_Src/dir/dr.png" /> : <span class="moveName">Special Step</span> <span class="jName">&#29305;&#27530;&#65405;&#65411;&#65391;&#65420;&#65439; Tokushu Step</span><br />
+		Jin performs a long low step, dodging high attacks and high projectiles. A set-up for several follow-ups.<br />
+		The move can be performed by releasing down-forward, then pressing it immediately again, which makes it possible to use a crouch attack and instantly cancel it with the Special Step.<br />
+		It is not possible to perform this move by inputting <img src="ReadMe_Src/dir/r.png" /><img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dr.png" />.<br />
+<br />
+		<img src="ReadMe_Src/dir/l.png" /> : <span class="moveName">Back dash</span><br />
+		Jin dashes back. Jin works around positioning himself properly and judging the right distance, so a back dash during the Special Step makes for a great tool - that is, if you can think and react fast enough.<br />
+<br />
+		<img src="ReadMe_Src/btn/LP.png" /> : <span class="moveName">Thunder Hook Fist</span> <span class="jName">&#24038;&#22238;&#12375;&#31361;&#12365; Hidari Mawashi Zuki</span> <img src="ReadMe_Src/sys/XC.png" /><br />
+		A simple middle left hook. It pushes the opponent back a step without knocking him down. Causes a heavy stun on the opponent on counter hit, which opens up for any punishment you want when catching a ranged fighter, if you can predict their usage of a projectile. Great to keep a high pressure. Fastest follow-up to Special Step.<br />
+<br />
+		<img src="ReadMe_Src/btn/MP.png" /> : <span class="moveName">Wind Hook Fist</span> <span class="jName">&#21491;&#22238;&#12375;&#31361;&#12365; Migi Mawashi Zuki</span> <img src="ReadMe_Src/sys/XC.png" /><br />
+		A rising hook that knocks the opponent down. The most damaging follow-up to Special Step.<br />
+<br />
+		<img src="ReadMe_Src/btn/HP.png" /> : <span class="moveName">Thrusting Uppercut</span> <span class="jName">&#24038;&#31361;&#12365;&#19978; Hidari Tsukiage</span> <img src="ReadMe_Src/sys/XC.png" /><br />
+		A ground-based uppercut that knocks the opponent into the air (they cannot recover). Although it has disadvantage on block, it has enough guardpush to stay safe, and its low hurtbox on the first frames gives it a chance to counter high attacks.<br />
+<br />
+		<img src="ReadMe_Src/btn/P.png" /><img src="ReadMe_Src/btn/P.png" /> <img src="ReadMe_Src/sys/EX.png" /> : <span class="moveName">Thrusting Uppercut (EX)</span> <img src="ReadMe_Src/sys/XC.png" /><br />
+		The EX version can come out instantly at the start of the Special Step, knocks the opponent higher and closer, has full invincibility for a slightly longer time, and deals less damage than the regular Thrusting Uppercut.<br />
+<br />
+		<img src="ReadMe_Src/btn/LK.png" /> : <span class="moveName">Spinning Flare Kick</span> <span class="jName">&#33012;&#22238;&#12375;&#22238;&#36578;&#36468;&#12426; Dou Mawashi Kaiten Geri</span><br />
+		An overhead hit that knocks down. It has a better recovery time than the original move in Tekken, but it's still one of the slower attacks.<br />
+<br />
+		<img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Lunging Low Roundhouse Kick</span> <span class="jName">&#36367;&#12415;&#36796;&#12415;&#19979;&#27573;&#22238;&#12375;&#36468; Fumikomi Gedan Mawashi Geri</span><br />
+		A sweeping kick causing a trip that cannot be recovered out of. Low attack, cannot be guarded while standing, and Jin recovers quickly enough to have a big advantage on the opponent. The fall from being tripped is not instantaneous and leaves time for the Wind Hook Fist to juggle.<br />
+<br />
+		<img src="ReadMe_Src/btn/MK.png" />&rarr;<img src="ReadMe_Src/btn/P.png" /> : <span class="moveName">Wind Hook Fist</span><br />
+		A quick punch following the low sweep. It knocks the opponent away and gives more recovery advantage.<br />
+		This sequence is taken from the end of the 10 Hit Combo.<br />
+<br />
+		<img src="ReadMe_Src/btn/MK.png" />&rarr;<img src="ReadMe_Src/btn/K.png" /> : <span class="moveName">Spinning Flare Kick</span><br />
+		An overhead attack following the low sweep. If the sweep was successful, this simply adds some damage, but Jin won't have nearly as much of an advantage in term of recovery. Deals more damage if the sweep did not hit.<br />
+<br />
+		<img src="ReadMe_Src/btn/HK.png" /> : <span class="moveName">Leaping Slash Kick</span><br />
+		Starts with a quick leap and performs a simple air kick forward. Essentially a dash attack, fast, long ranged, and air based, making him not so vulnerable and a bit of a surprise enhanced dash during the Special Step.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/btn/LP.png" /></td><td>-</td><td>60</td><td>6</td><td>3</td><td>21</td><td>+5 (S)</td><td>-3</td><td>Aerial projectile invincibility on frames 1-4</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MP.png" /></td><td>-</td><td>130</td><td>11</td><td>2</td><td>28</td><td>K</td><td>-20</td><td>Aerial projectile invincibility on frames 1-4</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/HP.png" /></td><td>-</td><td>100</td><td>8</td><td>4</td><td>20</td><td>L</td><td>-14</td><td>Aerial projectile invincibility on frames 1-8</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/P.png" /><img src="ReadMe_Src/btn/P.png" /></td><td>-</td><td>70</td><td>4</td><td>4</td><td>20</td><td>L</td><td>-7</td><td>Aerial projectile invincibility on frames 1-8</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/LK.png" /></td><td>OH</td><td>80</td><td>19</td><td>6</td><td>27</td><td>K</td><td>-8</td><td>Spinning drop heel</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MK.png" /></td><td>L</td><td>50</td><td>8</td><td>2</td><td>30</td><td>K</td><td>-14</td><td>Right low roundhouse</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MK.png" />&rarr;<img src="ReadMe_Src/btn/P.png" /></td><td>-</td><td>80</td><td>6</td><td>2</td><td>23</td><td>K</td><td>-3</td><td>Right rising hook</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MK.png" />&rarr;<img src="ReadMe_Src/btn/K.png" /></td><td>OH</td><td>50</td><td>20</td><td>6</td><td>27</td><td>K</td><td>-8</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/HK.png" /></td><td>-</td><td>90</td><td>-</td><td>7</td><td>19</td><td>K</td><td>-8</td><td>-</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/P.png" /> <img src="ReadMe_Src/sys/EX.png" /> <img src="ReadMe_Src/sys/SC.png" /> : <span class="moveName">Penetrating Fist</span> <span class="jName">&#36879;&#24505;&#25331; Toutetsuken</span><br />
+		Jin charges up and generates a sphere of energy at a distance that causes a knock down. The button pressed determines the distance (<img src="ReadMe_Src/btn/LP.png" /> = close, <img src="ReadMe_Src/btn/MP.png" /> = half a screen away, <img src="ReadMe_Src/btn/HP.png" /> = far), which makes it a powerful zoning tool to control where you want to corner your opponent. The start-up is a little slow (slower than a regular fireball) but the projectile appears instantly at its desired position.<br />
+		The EX version is even more efficient, as it creates two spheres, and they both follow the two buttons pressed : <img src="ReadMe_Src/btn/LP.png" /><img src="ReadMe_Src/btn/MP.png" /> creates a close then middle-ranged sphere, <img src="ReadMe_Src/btn/LP.png" /><img src="ReadMe_Src/btn/HP.png" /> a close then far sphere, and <img src="ReadMe_Src/btn/MP.png" /><img src="ReadMe_Src/btn/HP.png" /> a middle-ranged then a far sphere.<br />
+		From the normal version, hold the button to switch to the EX version on the 51st frame. From the EX version, hold the button to switch to the Super move associated on the 51st frame. The Super Charge can be canceled out of with a dash, back or forward. Canceling the Super Charge after charging from the base version to the EX version grants the Counter Hit property on the next attack.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/btn/P.png" /></td><td>-</td><td>60</td><td>16<!--20--></td><td>33</td><td>K</td><td>-3</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/sys/EX.png" /></td><td>-</td><td>70, 70</td><td>8<!--9--></td><td>41</td><td>+8</td><td>+4</td><td>-</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dl.png" /><img src="ReadMe_Src/dir/l.png" /> <img src="ReadMe_Src/btn/P.png" /> <img src="ReadMe_Src/sys/EX.png" /> : <span class="moveName">Median Line Destruction</span> <span class="jName">&#27491;&#20013;&#32218;&#20081;&#12428;&#31361;&#12365; Sei Chuusen Midare Zuki</span> <img src="ReadMe_Src/sys/WlS.png" /><br />
+		A fast series of punches, the last one taking at least a step forward. The non-EX version is a great combo ender.<br />
+		All versions cause a hard knock down. The EX version causes a wall slam, which means that instead of a combo ender, this move turns into a powerful tool to restart another combo as the opponent bounces back to you.<br />
+		The command was changed from the SFxTK version in an attempt to make it closer to the highly practical, nearly instantaneous version of Tekken, despite the impossibility to re-use the Tekken command if I wanted to keep all versions of SFxTK.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/btn/LP.png" /></td><td>-</td><td>50, 20, 60</td><td>9</td><td>2 (7) 2 (8) 2</td><td>39</td><td>K</td><td>-23</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MP.png" /></td><td>-</td><td>50, 20,<br />20, 60</td><td>10</td><td>2 (7) 2 (7)<br />2 (10) 2</td><td>39</td><td>K</td><td>-23</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/HP.png" /></td><td>-</td><td>50, 20, 20,<br />20, 60</td><td>11</td><td>2 (7) 2 (7) 2<br />(8) 2 (13) 2</td><td>26</td><td>K</td><td>-10</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/sys/EX.png" /></td><td>-</td><td>50, 20, 20, 60</td><td>14</td><td>2 (7) 2 (7)<br />2 (16) 2</td><td>26</td><td>WS</td><td>-8</td><td>-</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/K.png" /> <img src="ReadMe_Src/sys/EX.png" /> : <span class="moveName">Power Stance</span> <span class="jName">&#27531;&#24515; Zanshin</span><br />
+		An autoblock special move that will guard against any number of attacks at any height, and has a very fast start-up. Furthermore, it can be canceled into another Special move at any point of the animation. The button pressed determines the duration of the counter animation, <img src="ReadMe_Src/btn/HK.png" /> having the longest window of block.<br />
+		The EX version has an instantaneous start-up, has a slightly shorter window of block than the <img src="ReadMe_Src/btn/HK.png" /> version, and grants a Counter property to the next attack that connects.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Startup</th><th>Special<br />Cancelable</th><th>Active</th><th>Recovery</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/btn/LK.png" /></td><td>3</td><td>15</td><td>10</td><td>39</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MK.png" /></td><td>3</td><td>19</td><td>15</td><td>44</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/HK.png" /></td><td>3</td><td>34</td><td>30</td><td>55</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/sys/EX.png" /></td><td>0</td><td>31</td><td>29</td><td>48</td><td>-</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dl.png" /><img src="ReadMe_Src/dir/l.png" /> <img src="ReadMe_Src/btn/K.png" /> <img src="ReadMe_Src/sys/EX.png" /> : <span class="moveName">Double Lift Kick</span> <span class="jName">&#39131;&#12403;&#20108;&#27573;&#36468;&#12426; Tobi Nidan Geri</span> <img src="ReadMe_Src/sys/XC.png" /><br />
+		Quick anti-air, the legs cannot get hit, giving this move a high priority (and invincibility against crouching attacks), but the recovery is terrible on most versions, especially if blocked, making it highly punishable. Has Cross Cancel property.<br />
+		The Light version is fast and short. The best defensive version. Neither hit knocks the opponent down.<br />
+		The Medium version has a good forward range. The first hit lifts the opponent, the second hit launches an airborne opponent but only knocks down a grounded opponent. A more aggressive version.<br />
+		The Heavy version goes high. Both hits lift the opponent high, although the recovery time makes it necessary to use a Cross Cancel for juggle.<br />
+		The EX version has the longest startup and delay between both hits. However, it has full body invulnerability, which makes it still usable as an anti-air or as a counter despite its low speed, to blow through an attack you predicted.<br />
+		<table>
+			<tr>
+				<th>Hit</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/btn/LK.png" /></td><td>-</td><td>30, 40</td><td>6</td><td>2 (7) 3</td><td>13</td><td>+1</td><td>-2</td><td>Rising right front hop kick into rising front left kick</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/MK.png" /></td><td>-</td><td>50, 60</td><td>8</td><td>2 (10) 3</td><td>20</td><td>L/K</td><td>-5</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/btn/HK.png" /></td><td>-</td><td>50, 60</td><td>8</td><td>2 (10) 3</td><td>30</td><td>L</td><td>-15</td><td>-</td></tr>
+			<tr><td><img src="ReadMe_Src/sys/EX.png" /></td><td>-</td><td>50, 60</td><td>13</td><td>2 (11) 3</td><td>29</td><td>L</td><td>-21</td><td>-</td></tr>
+		</table>
+<br />
+		<img src="ReadMe_Src/dir/d.png" /> <img src="ReadMe_Src/btn/K.png" /><img src="ReadMe_Src/btn/K.png" /> : <span class="moveName">Shun Ren Dan</span> <span class="jName">&#30636;&#36899;&#26029;</span><br />
+		A grab special. The range of grab is slightly longer than a regular grab, but it is blockable and slower.<br />
+		Compared to the basic throws, the special throw has different limitations :<br />
+		- Special throw will connect with an opponent in hitstun or blockstun from a ground-based basic attack (including String Combos), but not from a jump basic attack.<br />
+		- Special throw will not connect with an opponent in hitstun or blockstun from any other type of attack (special, super).<br />
+		- Special throw will not connect if the opponent is starting a jump, in the air, or landing from a jump.<br />
+		<table>
+			<tr>
+				<th>Input</th><th>Level</th><th>Damage</th><th>Startup</th><th>Active</th><th>Recovery</th><th>Hit adv.</th><th>Block adv.</th><th>Desc.</th>
+			</tr>
+			<tr><td><img src="ReadMe_Src/btn/K.png" /><img src="ReadMe_Src/btn/K.png" /></td><td>-</td><td>150</td><td>7</td><td>1</td><td>-</td><td>K</td><td>-</td><td>-</td></tr>
+		</table>
+	</div>
+	<div style="clear:both; height:3px;">&nbsp;</div>
+	<!-- Super Moves -->
+	<div id="super" name="section" style="display:none;">
+		<div class="sectionName">SUPER ATTACKS</div>
+		Super moves are more powerful, but consume a lot of power. When performed, they execute either a series of attacks or a single powerful attack, without any additional input unless specified.<br />
+		There are different types of super moves.<br />
+<br />
+		<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dl.png" /><img src="ReadMe_Src/dir/l.png" /> <img src="ReadMe_Src/btn/LP.png" /><img src="ReadMe_Src/btn/LK.png" /> : <span class="moveName">Tenstring</span><br />
+		The equivalent to the 10 Hit Combo, in an automatic version - it plays out in full without inputing all the commands and whether it hits or misses, but it consumes one bar of the Power gauge.<br />
+		The first three hits of the combo are fairly short ranged and defensive, and then Jin significantly moves forward for the following moves.<br />
+<br />
+		<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dl.png" /><img src="ReadMe_Src/dir/l.png" /> <img src="ReadMe_Src/btn/MP.png" /><img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Omen Fury</span><br />
+		The equivalent to the Omen 7 Hit Combo, in an automatic version - it plays out in full without inputing all the commands and whether it hits or misses, but it consumes one bar of the Power gauge.<br />
+		Jin starts moving forward early in the combo, but the combo is quick, and it ends well before crossing a full screen.<br />
+<br />
+		<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/LP.png" /><img src="ReadMe_Src/btn/LK.png" /> : <span class="moveName">Devil Spark</span><br />
+		This Lv1 Super move is the power-consuming version of the Super Charge special move. It costs one bar of the Power gauge, and doesn't need any charge time.<br />
+		Instead of a sphere that instantly appears, the Super version shoots a projectile at a very high speed, nearly invisible and instantaneous (although the startup has a slight delay of vulnerability). Once the projectile hits, Jin automatically executes the second part of the Super move, which is a rafale of Penetrating Fists.<br />
+<br />
+		<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/MP.png" /><img src="ReadMe_Src/btn/MK.png" /> : <span class="moveName">Evil Eye</span> <span class="jName">&#20982;&#30524; Kyoume</span><br />
+		This is Jin's Lv2, it costs two bars of the Power gauge.<br />
+		Jin performs a dash that resembles the Special Step, and when close enough (he will not dash at all if already in range), attempts two attacks, the first of which reaching fairly high up and forcing the opponent to stand. If the first attack successfully hits, Jin will automatically perform a combo that can not miss.<br />
+		This move is inspired by the special finisher available as an item move in Tekken Tag Tournament 2 by using the Evil Eye item and performing Shun Ren Dan on an opponent with low life.<br />
+<br />
+		<img src="ReadMe_Src/dir/d.png" /><img src="ReadMe_Src/dir/dr.png" /><img src="ReadMe_Src/dir/r.png" /> <img src="ReadMe_Src/btn/HP.png" /><img src="ReadMe_Src/btn/HK.png" /> : <span class="moveName">Infernal Destruction</span> <span class="jName">&#38647;&#32005;&#27874; Raikouha</span><br />
+		This is Jin's Lv3 Super Move.<br />
+		Jin performs an anti-air leaping kick, then kicks the target back to the ground. On success, Jin momentarily releases the bridle on his Devil Gene, and shoots a powerful beam from mid-air out of his forehead.
+	</div>
+	<!-- Sample combos -->
+	<div id="sample" name="section" style="display:none;">
+		<div class="sectionName">SAMPLE COMBOS</div>
+		The following combos were inspired from Street Fighter X Tekken as well as Tekken Tag Tournament 2. They have been tested with this edition.<br />
+		<br />
+		<div class="moveName">Basic combos</div>
+		<div class="moveName">Sample combos</div>
+		<!-- Authorize Combo, EX Median Line Destruction Wall slam, Double Lift Kick, Cross Cancel, combo ? -->
+		<!-- Prevent EX Median Line Destruction Wall slam loop -->
+		<!-- Prevent Double Lift Kick Cross Cancel loop -->
+		<!-- Prevent Wall slam, Bound, Lift/Launch Cross Cancel loops -->
+		(From SFxTK)<br />
+		<!-- See which links are interesting from Trials - no emphasize on links, but some can be good -->
+		<!-- Possible link : LP, LP - not in Flash Punch Combo but after the first LP has ended, allows special canceling after the second LP which FPC doesn't. 3 frame link. -->
+		<!-- Possible link : LP, cLK - not in Left Jab to Double Low but after the first LP has ended, allows special canceling after the crouch LK which LJtDL doesn't. 3 frame link. -->
+		<!-- Possible link : jLP, clLK, LP-MP-MK/HK/HP (try LP-LP-MP, maybe the LP-LK series...) - close LK allows a one frame link into LP but pushes too far away for a 2 frame link with close LP -->
+		<!-- Possible link-cancel : crMP, link Left Right Combo, cancel Special Step - Thrusting Uppercut, cr/stand MK, MLD -->
+		<!-- Possible cancel : MA, Leaping Sidekick, clHP, Devil Beam -->
+		<!-- Possible link against wall : SS-TU, crMP, clHP, MA-SW -->
+		<!--LP-MP, dpHP, MK, dpHP : Left Right, Thrusting Uppercut, far MK, Thrusting Uppercut (/EX MLD/WHF) : 30 + 50 + 100*80% + 50*70% + 100*60% = 255 dmg<br />-->
+		Jump HP, close HP, dp, HP : Jump HP, close HP, Thrusting Uppercut : 270 dmg<br />
+		Crouch LP-MP, bMP-LP, qcbHP/qcfLP/dpHP : crouch Left Right, Shun Masatsu, Median Line Destruction/Penetrating Fist/Thrusting Uppercut : 254/248/248 dmg<br />
+		(From TTT2)<br />
+		<!--Sample Combo 1 - bLP-HP, bMP-LP, dbMP-MP-HK, (Wall Slam) : Joudan Tsukiage Niren, Shun Masatsu, Savage Sword, Wall Slam follow-up combo : x dmg<br />-->
+		Sample Combo 3 - bLP-LK, ffMP : Leaping Sidekick, Demon's Paw : 170 dmg<br />
+		Sample Combo 4 - (airborne foe) LP, HK, bHP, LP, MP : Feint Kick Combo, Evil Intent : 191 dmg<br />
+		<!--Sample Combo 5 - dpMK, bHP, HK, f, LP, MP : LLRK, Keito, Zenshin, Spine Cracker : x dmg<br />-->
+		<!--Sample Combo 7 - dpHP, dpMP, LP, LK-LK, LK, LP, dpMP : Thrusting Uppercut, Wind Hook Fist, Feint Kick Combo, Kishin Rekkou 1-2, Wind Hook Fist : x dmg<br />-->
+		(Original)<br />
+		<!-- LP-MP, dpHP, MP+MK, MP-LP-MK : Left Right, Thrusting Uppercut, Cross Cancel, Double Thrust Roundhouse : 30+50 + 100*80% + 60*70% + 30*60% + 60*50% = 250 dmg<br /> -->
+		<!-- LP-MP, dpHP, MP+MK, LP-LK-LK ? Look out for Thrusting Uppercut - Cross Cancel - Feint Kick Combo bound loop, but hopefully the Feint Kick Combo should be out of reach - except maybe against wall ? -->
+		<!-- jHK, LP-LK-MP-LP, LP-MP-HP-LK-MP-MK-HK : Jump HK, Kazama Style 4 Hit Combo, Omen 7 Hit Combo : 277 dmg<br /> -->
+		<!-- Link possible : LP-LK-MP-LP (hit : +6f), (5f startup) LP-LP-MP, 1 frame link -->
+		<!-- Link possible : LP-LK-MP-LP (hit : +6f), (5f startup) LP-MP-HP-LK-MP-MK-HK though Left-Right Combo being shorter might push the foe too far for the second hit and Demon Slayer / O7HC would miss, unless in the corner -->
+		<!-- jHK, LP-LK-MP-LP, LP-MP-HP-LK-MP-MK-HK : 100 + 30+50x80%+30*70%+30*60% + 30*50%+50*40%+60*30% + 30*20%+30*10%+30*10%+30*10% = 100+30+40+21+18+15+20+18+6+3+3+3 = 277 -->
+		<!-- dp+HP, MP+MK, bHP, HK, f, LK : Thrusting Uppercut, Cross Cancel, Keito, Zenshin, Leaping Sidekick : 302 damage<br /> REMOVED -->
+		LK-LP-MK, fLP-MP : Kishin Rekko, Mental Alertness - Swaying Willow : 178 dmg<br />
+		MP-LP-MK, fLP-LP-MP : Double Thrust Roundhouse, Mental Alertness - Left Drill Punch - Spine Cracker : 243 dmg<br />
+		LK-LP-MK, qcbHK, MP+MK, dpHP : Kishin Rekko, Double Lift Kick, Cross Cancel, Thrusting Uppercut : 212 dmg<br />
+		LP-LK-MP-LP, qcb+MK/HK, MP+MK, qcfLP+LK : Kazama Style 4 Hit Combo, Double Lift Kick, Cross Cancel, Devil Spark : 246 damage<br />
+		LP-LK-MP-LP, qcb+2P, dfLP-MP, f, LK : Kazama Style 4 Hit Combo, EX Median Line Destruction (Wall Slam), Twin Lancer (Bound), Zenshin, Leaping Sidekick : 213 dmg<br />
+		LP-LK-MP-LP, qcb+2P, bLK-LK, qcf+LP : Kazama Style 4 Hit Combo, EX Median Line Destruction (Wall Slam), Left Sidekick to Stinger (Bound), Penetrating Fist : 217 dmg<br />
+		(near the corner) bMP-LP, dp+2P, dfLP-MP, f, LK, bLK-LK, qcf+LP : Shun Masatsu, EX Thrusting Uppercut, Twin Lancer (Bound), Zenshin, Leaping Sidekick, Left Sidekick to Stinger (Bound), Penetrating Fist : 344 dmg<br />
+		bMP-LP, qcb+2P, dfLP-MP, f, LK : Shun Masatsu, EX Median Line Destruction (Wall Slam), Twin Lancer (Bound), Zenshin, Leaping Sidekick : 274 dmg<br />
+		bMP-LP, qcb+2P, bLK-LK, f, LK : Shun Masatsu, EX Median Line Destruction (Wall Slam), Left Sidekick to Stinger (Bound), Zenshin, Leaping Sidekick : 282 dmg<br />
+		bMP-LP, qcb+2P, qcf+LP+LK : Shun Masatsu, EX Median Line Destruction (Wall Slam), Devil Spark : 322 dmg<br />
+		<!--bMP-LP, qcb+2P, qcf+MP+MK : Shun Masatsu, EX Median Line Destruction (Wall Slam), Evil Eye : 367 dmg<br />-->
+		(opponent on the ground, in the corner) qcf+LP, MP, LP, MK, qcf+LP : Penetrating Fist (hitting near the end as the opponent stands up), Double Thrust Roundhouse, Penetrating Fist : 308 dmg<br />
+		(opponent on the ground, in the corner) qcf+LP, MP, LP, MK, qcb+HK, qcf+LP+LK : Penetrating Fist (hitting near the end as the opponent stands up), Double Thrust Roundhouse, Double Lift Kick, Devil Spark : 429 dmg<br />
+		Replacing the first 4 hits of Kazama Style 5 Hit Combo with Shun Masatsu gives more damage, but 5 Hit Combo makes it much easier to hit confirm before spending the EX move.<br />
+		After a Wall Slam, the Twin Lancer works at a long distance from the wall, but the Left Sidekick to Stinger is easier at a short distance.<br />
+		<!--dp+2P, dp+MP, dp+MK, LK : EX Thrusting Uppercut, Wind Hook Fist, Lunging Low Roundhouse Kick, Spinning Flare Kick : 293 dmg<br />
+		(near the corner) dp+2P, dp+MP, MP-LP-MK, qcf+LP : EX Thrusting Uppercut, Wind Hook Fist, Double Thrust Roundhouse, Penetrating Fist : 375 dmg<br />
+		<!--dp+2P, dp+MP, qcf+LP+LK : EX Thrusting Uppercut, Wind Hook Fist, Double Thrust Roundhouse, Devil Spark : 487 dmg<br />
+		dp+2P, dp+MP, qcf+LP+LK : EX Thrusting Uppercut, Wind Hook Fist, Devil Spark : 429 dmg<br />
+		dp+2P, dp+MP, qcf+MP+MK : EX Thrusting Uppercut, Wind Hook Fist, Evil Eye : 482 dmg<br />-->
+		<!-- Throw in some combos Cross Canceling a dpLP ? Though the damage dampener is brutal on this one... -->
+	</div>
+	<!-- Overview -->
+	<div id="overview" name="section" style="display:none;">
+		<div class="sectionName">OVERVIEW</div>
+		<div class="moveName">Dev notes</div>
+		I felt that despite being a Tekken character with strong attack potential, Jin's incarnation in SFxTK lost a lot of his String Combos, many of which I liked a lot ; while SFxTK still manages to give Jin some tools to fit in, the loss of many of his classic combos took a lot out of his iconic status. What also bothered me in this is that he actually had many of the animations required for a number of his usual combos. For that reason, I ditched the Boost Combo system from SFxTK (especially since there is no more tag system for the Boost Combo to lead into) and replaced it with Tekken's many String Combos.<br />
+		Because the Street Fighter series has kept its 2D gameplay, it has very noticable hitpauses ; however, when applied to the Tekken characters, this completely destroyed the timing of their String Combos, depending on whether you hit or missed. Still in line with the reinstating of Jin's String Combos, I switched everything to the nearly non-existent hitpauses of Tekken.<br />
+		Beside these two points, I stuck to most of the data I could get from SFxTK out of the guides I have, such as frame data.<br />
+		<br />
+		Even though I'm sticking to SFxTK data, I wanted to make sure this character would still fit in Mugen. The priority was working with characters from the classic 2D series from Capcom or SNK, but I didn't want Jin to fall on the low end of the Mugen spectrum. For that reason, I did try to hammer in as much as I could on the gameplay system.<br />
+		<br />
+		Finally, the addition of KoF-inspired long jump, small hop and "hyper hop" (the combination of low and long jump) adds variety and the possibility of faster surprise overhead with a longer range.<br />
+		<br />
+		<div class="moveName">Pros and cons</div>
+		Good dash-in.<br />
+		Powerful close rush game.<br />
+		Powerful mix-up game.<br />
+		Good juggling capabilities, but not a dedicated focus of his gameplay. Beside specific set-ups and the one-size-fit-all projectile super, the spacing may get too screwed up to juggle properly.<br />
+		Weak air game.<br />
+		Limited keep-away game.<br />
+		Weak speed offense/defense.<br />
+		<br />
+		<div class="moveName">Comments</div>
+		The source games (both SFxTK and Tekken) are heavily oriented toward a juggle game, but Jin is exceptionally weak at it in SFxTK, focusing on more zoning traps, and average at best in Tekken, relying on wall slams and specific situations. The Cross Cancel system was added to give him back a few options, but it remains rather limited as it can only be used with specific attacks. As such, the juggling game can be used at times, but should not be relied on.<br />
+		While not all of his chains actually combo, several (such as the String Combos that chain into Zenshin) will give big opportunities for mix-ups, and still have Jin streamline his attacks in what amounts to a single, relentless wave of assaults. This falls in line with Jin's general strategies of not going for big combos, but rather unstopped pressure.<br />
+		<br />
+		His regular basics don't have much comboability in the Street Fighter tradition, but many of them can get you into traditional Tekken String Combos, which regularly include some high-low mix-ups. This requires you to learn his many combos, but the timing is far simpler than the SF tradition, and more like Tekken. The hitpause system is also mostly based on Tekken rather than Street Fighter, which means that the timing for any of his String Combos is not completely thrown off depending on whether you hit or miss. This also makes for a much faster game in general.<br />
+		<br />
+		Jin's greatest strength is in his String Combos. While they don't particularly deal a lot of damage independently and he doesn't have an extraordinary reach, together with Jin's ability to rush into the opponent's face, the damage can stack up very fast if used properly. While the damage dampener to prevent individual combos from getting out of hand, Jin doesn't rely on high hit counter, rather on quick successions of relentless short combos with mix-ups. Longer combos involving juggles will often eat the power bar away. While you might identify a short list of your most regular String Combos, several of the less common ones have a particular use that can get you out of trouble, let you control distance, or leave you in a better position to keep attacking, so you'll want to keep the more unique ones in mind.<br />
+		In addition, as a direct result of his many String Combos, Jin has the capacity to gain meter really fast. Beside the two Lv1 that are an autocombo version of existing String Combos, his base Lv1 and his Lv2 are quite safe to use, although they may be redundant with his Special Moves in regard to the zones they cover. Unless you want immediate damage with a super, your power gauge may be better used for EX moves, which have an immediate reward (in that they don't need to be used several times in a row before showing results).<br />
+		The one strong downside to this strategy in Mugen is that Jin retains frame datas from his original game. In Mugen, many characters may have attacks that are a lot faster, with a lot more mobility, making this game much more risky for Jin : a lot more precision is needed to hit at the right time and at the right distance. Against more excentric Mugen characters, Jin's strength may become a weakness due to lack of range and start-up speed ; in this case, his weaker specials may be life-savers.<br />
+		<br />
+		Jin's greatest weakness is an opponent with high mobility and strong keep-away tactics (opponents with a defense better than SF or Tekken traditions may be difficult to hit but can be pressured and worn out). He still has some tools to close the gap, such as the Leaping Slash Kick (the Special Step dodges high attacks and the Leaping Slash Kick dodges low attacks), and a zoning/trap projectile to restrict the opponent's movements on the ground, although it isn't very fast. As it knocks down, though, it works well against one who only wants to stay away and has few options to move around the screen quickly ; still, it won't be as fast as Jin's normal aggressivity.<br />
+		The ability to go from Mental Alertness to Special Step and from Special Step to a backdash gives him a good mobility from a distance (Special Step being safe from the average airborne projectile), but if trying to use it on reaction to attack, he will end up on the slow side of Mugen. It also becomes a weakness against an opponent that can zone in on a large area. In the context of Mugen, Jin is an easy target to enemies that move fast and freely around the screen, especially with air-to-ground capacities. At best, he has a couple of moves that can counter a diving attack within the limits of Street Fighter, SNK or Tekken traditions.<br />
+		When in need to get some room to breath and think about your next series of attacks, the backdash has been slightly improved from the source game ; this is Jin's only escape tool (along with Ni Rengeki Sen, which is two close attacks and the backdash), as most of his defensive tactics are a setup for a counter-attack. The Power Stance allows you to let the enemy close in, but requires the planning of a good follow-up strategy beforehand. It also requires an EX action for a follow-up combo : a Wall Slam or a Cross Cancelable special after it can work, or the EX Power Stance will net you a free Swaying Willow with enormous hitstun advantage ; other than that, the Power Stance defense will mostly just give you room for a knockdown. Plus, follow-up strategies are still at risk against a fast multi-hitting attack.<br />
+		Against an opponent more in line with Street Fighter or SNK traditions, Jin has a powerful anti-fireball game. Against a less traditional opponent that can spam all sorts of projectiles that may beat the Special Step, Jin's life-saving tool is his EX Double Lift Kick, but he is highly vulnerable if trying to build meter from a distance.<br />
+		<br />
+		<div class="moveName">Conclusion : one-track strategy with preparations</div>
+		Jin is better played with a fast pace, with enough options to pressure the opponent into a high speed rush battle, in which Jin will gain the advantage. Jin's battles should not be dragged out, although he has a couple of tools to save himself a few seconds (mainly his backdash and his trap projectile but it needs to be placed and timed right). However, these seconds should only be used to prepare for the next rush or set up a situation favorable to a super. Even Jin's defensive options give him less opportunities, although they can be useful once or twice.<br />
+		Only watch out for Jin's reach in your assaults, fixing the difference with Jin's dash-in tactics. This requires a disregard for high risk, but encourages a high pressure game, although the game can be quickly lost if the opponent can keep Jin's pressure at a distance. On the other hand, if Jin gets a chance to close in on an opponent that keeps him at a distance, he better go all out to get his money worth of it - and he has all he needs for that. Mastery of Jin's many String Combos and dash-in moves will allow a player to dominate the match, but only if you can plan out a full combo before beginning your attack.<br />
+		<br />
+<!--		<div class="moveName">AI</div>
+		The AI at lowest level will barely be able to use a couple of String Combos, and probably not fully or efficiently, whiffing basics from a distance and being slow to react at close range.<br />
+		The average AI level will be able to use some most popular String Combos, like Flash Punch Combo, Demon Slayer, Double Thrust Roundhouse and Kazama Style 5 Hit Combo. It will also move left and right more frequently, if only for rhythm, and generally trying to stay close, but without being too speedy.<br />
+		The strongest AI level will be very aggressive, closing the gap as often as it can and applying pressure as much as possible, with knowledge of most of the String Combos. It will also switch between high and low attacks at random on whiff or block, and if more than a couple of attacks are blocked low or high, attempt to use an appropriate high-low mix-up. If it has an oppening to use the 10 Hit Combo or Omen 7 Hit Combo, it will not fail, but if it sees that a String Combo is whiffing too much, it will stop wasting movements.<br />
+		<br />-->
+	</div>
+	<!-- Credits -->
+	<div id="credits" name="section" style="display:none;">
+		<div class="sectionName">CREDITS</div>
+		My thanks go to the following :<br /> 
+		<em>Namco Bandai</em> for Tekken and Jin Kazama<br />
+		<em>Capcom</em> for Street Fighter x Tekken<br />
+		<em>Cvsnb</em> for drawing all of Jin's sprites<br />
+		<em>DragonSlayerEX</em> for the commission<br />
+		<em>Mr. I</em> for the effects<br />
+		<em>SNT</em> for the voices<br />
+		<em>Tamez</em> for a few sounds from Tekken<br />
+		<em>C-G-U</em>, <em>Dope</em>, <em>Goodaldo</em>, <em>Gogngos</em>, <em>Kirishima</em>, <em>Koldskool</em> and <em>MugenX000</em> for palettes. <strong>Note :</strong> if you want to use the extra palettes, you will have to import the .act files located in Pal/extra (image examples are given in Pal/PALETTES) and replace the 12 default ones inside the SFF (from 1,1 to 1,12) through Fighter Factory. At the moment, I have decided against using the Palette Selector tool, sorry.<br />
+		<br />
+		This creation would not exist without the work of either of them.
+	</div>
+	<!-- Dialogs -->
+	<div id="dialogs" name="section" style="display:none;">
+		<div class="sectionName">DIALOGS</div>
+		<div class="moveName">Intro</div>
+		Ore wa unmei ni kusshitari shinai : I won't yield to fate<br />
+		Deban ka : Is it my turn ?<br />
+		Tekagen wa dekinai : I can't hold back<br />
+		Kisama ni wa ore wa taosen : You don't stand a chance against me<br />
+		<div class="moveName">In-fight</div>
+		Tatakai wa mou hajimatte iru : The fight's started already<br />
+		Damatte mite iru dake ka : Are you just going to stand there and watch ?<br />
+		Koko de taoreru tsumori wa nai : I don't intend to go down here<br />
+		Kisama no you no yatsu ga ita to wa na : To think that someone like you could exist...<br />
+		Naze ore no jama wo suru : Why do you stand in my way ?<br />
+		Oujougiwa ga warui na : You just don't know when to drop it<br />
+		Akiramero, omae ni wa muri da : Give up, it's out of your league<br />
+		Teikou shite mo muda da : Resist all you want, it's useless<br />
+		Katta tsumori ka : You thought you were going to win ?<br />
+		<div class="moveName">Special / super moves</div>
+		Koko da : There<br />
+		Buttobe : Fly away<br />
+		Mieta : I saw that<br />
+		Yomete ita : I can read you<br />
+		Mi no hodo wo shiru ga ii : You need to know your place<br />
+		Kiete moraou : I'll make you go away<br />
+		Mou, owari da : It's over already<br />
+		Jama suru mono wa kesu made da : I'll keep going until I've erased anyone in my way<br />
+		Kyoufu wo ataete yarou : I'll give you terror<br />
+		Kie userou : Get lost !<br />
+		<div class="moveName">Win pose</div>
+		Jikan wo muda ni shita : That was such a waste of time<br />
+		Kore wa shouri ja nai, tada no kekka da : This isn't a victory, merely a consequence<br />
+		Ore ni wa yaru beki koto ga aru, subete wo ushinatte mo : There's something I have to do, even if I lose everything<br />
+		Kore de jama mono wa kieta you da na : It looks like all nuisance is gone<br />
+		Koroshi wa shinai, hayaku kono ba wo sare : I won't kill you, just leave quickly<br />
+		Ore ni honki wo dasaseru to wa na... Tama ni wa warukunai na : You forced me to take it seriously... Sometimes it's not too bad<br />
+	</div>
+	<!-- to get over the footer -->
+	<br />
+	<br />
+	<br />
+</div>
+<!-- top banner -->
+<div style="position:fixed; top:0px; left:80px; height:160px; right:80px; background-color:black; color:white; border-top-left-radius:12px; border-top-right-radius:12px;">
+	<!-- Jin image and banner text -->
+	<div style="position:absolute; top:25px; left:220px; font-size:32pt; color:white; font-style:italic; vertical-align: middle;">
+		Jin Kazama<br />
+		&#39080;&#38291;&#20161;
+	</div>
+	<div style="position:absolute; top:70px; right:180px; font-size:24pt; color:white; font-style:italic; vertical-align: middle;">
+		"Pitch Black Wings"
+	</div>
+	<div style="position:absolute; right:12px; vertical-align: middle;">
+		<img src="ReadMe_Src/img/Tattoo.png" />
+	</div>
+</div>
+<div style="position:fixed; top:160px; left:80px; height:10px; right:80px; background-color:white; color:white; text-align:center;">&nbsp;</div>
+</div>
+<!-- Bottom -->
+<div style="position:fixed; left:80px; height:7px; bottom:40px; right:80px; background-color:white; color:white; text-align:center;">&nbsp;</div>
+<div style="position:fixed; left:80px; height:28px; bottom:0px; right:80px; background-color:black; color:white; font-weight:bold; text-align:center; border-bottom-left-radius:12px; border-bottom-right-radius:12px; padding:12px; padding-bottom:0px;">&copy; 2013</div>
+<div style="position:fixed; top:170px; left:-50px;">
+	<!-- Jin portrait -->
+	<img src="ReadMe_Src/img/Full_portrait.png" />
+</div>
+<!-- left menu -->
+<div style="position:fixed; top:170px; left:80px; right:80px; width:170px;">
+	<!-- Clickable list of links using the show-hide function for each of the divs below -->
+	<a class="menu" href="#" onclick="divFocus('intro')" style="display:block;">Introduction</a>
+	<a class="menu" href="#" onclick="divFocus('story')" style="display:block;">Backstory</a>
+	<a class="menu" href="#" onclick="divFocus('system')" style="display:block;">System</a>
+	<a class="menu" href="#" onclick="divFocus('basics')" style="display:block;">Basics</a>
+	<a class="menu" href="#" onclick="divFocus('string')" style="display:block;">String Combos</a>
+	<a class="menu" href="#" onclick="divFocus('special')" style="display:block;">Special moves</a>
+	<a class="menu" href="#" onclick="divFocus('super')" style="display:block;">Super moves</a>
+	<a class="menu" href="#" onclick="divFocus('sample')" style="display:block;">Sample combos</a>
+	<a class="menu" href="#" onclick="divFocus('overview')" style="display:block;">Overview</a>
+	<a class="menu" href="#" onclick="divFocus('dialogs')" style="display:block;">Dialogs</a>
+	<a class="menu" href="#" onclick="divFocus('credits')" style="display:block;">Credits</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,228 @@
+;[Statedef -2]関係と、コモンファイル系ＣＮＳ（フロントステップとバックステップ関係）
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;使用した変数一覧
+;Var (7) = ダメージボイスランダム判定
+;Var(13) = （勝利ボイス付近で使っている）ランダムボイス関係
+;Var(14) = （イントロ＆勝利の）ランダム関係
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;---------------------------------------------------------------------------
+;=====================================================
+[Statedef -2]
+;=====================================================
+;声
+;=====================================================
+;-----------------------------------------------------
+
+; Random variable for random sounds
+[State -2, 8];わからないけどたぶんﾀﾞﾒｰｼﾞﾎﾞｲｽ系
+type = VarRandom
+triggerall = Time = 1
+trigger1 = stateno = 5000
+trigger2 = stateno = 5010
+v = 7
+range = 0,24
+
+
+; Play "ouch" sound A when hit light or medium
+[State -2, 9];弱・中攻撃のﾀﾞﾒｰｼﾞﾎﾞｲｽ系A
+
+type = PlaySnd
+triggerall = Var(7) = [0,4]
+triggerall = time = 1
+triggerall = stateno = 5000
+triggerall = alive
+trigger1 = anim = 5000
+trigger2 = anim = 5001
+trigger3 = anim = 5010
+trigger4 = anim = 5011
+value = s0, 8
+
+; Play "ouch" sound B when hit light or medium
+[State -2, 10];弱・中攻撃のﾀﾞﾒｰｼﾞﾎﾞｲｽ系B
+type = PlaySnd
+triggerall = Var(7) = [5,9]
+triggerall = time = 1
+triggerall = stateno = 5000
+triggerall = alive
+trigger1 = anim = 5000
+trigger2 = anim = 5001
+trigger3 = anim = 5010
+trigger4 = anim = 5011
+value = s0, 9
+
+; Play "ouch" sound A when hit light or medium (in the air)
+[State -2, 11];弱・中の空中攻撃のﾀﾞﾒｰｼﾞﾎﾞｲｽ系A
+type = PlaySnd
+triggerall = Var(7) = [0,4]
+triggerall = time = 1
+triggerall = stateno = 5010
+triggerall = alive
+trigger1 = anim = 5020
+trigger2 = anim = 5021
+value = s0, 8
+
+; Play "ouch" sound B when hit light or medium (in the air)
+[State -2, 12];弱・中の空中攻撃のﾀﾞﾒｰｼﾞﾎﾞｲｽ系B
+type = PlaySnd
+triggerall = Var(7) = [5,9]
+triggerall = time = 1
+triggerall = stateno = 5010
+triggerall = alive
+trigger1 = anim = 5020
+trigger2 = anim = 5021
+value = s0, 9
+
+; Play "ouch" sound A when hit hard
+[State -2, 13];強攻撃のﾀﾞﾒｰｼﾞﾎﾞｲｽ系A
+type = PlaySnd
+triggerall = Var(7) = [0,4]
+triggerall = time = 1
+triggerall = stateno = 5000
+triggerall = alive
+trigger1 = anim = 5002
+trigger2 = anim = 5012
+value = s0, 11
+
+; Play "ouch" sound B when hit hard
+[State -2, 14];強攻撃のﾀﾞﾒｰｼﾞﾎﾞｲｽ系B
+type = PlaySnd
+triggerall = Var(7) = [5,9]
+triggerall = time = 1
+triggerall = stateno = 5000
+triggerall = alive
+trigger1 = anim = 5002
+trigger2 = anim = 5012
+value = s0, 10
+
+; Play "ouch" sound A when hit hard (in the air)
+[State -2, 15];強の空中攻撃のﾀﾞﾒｰｼﾞﾎﾞｲｽ系A
+type = PlaySnd
+trigger1 = Var(7) = [0,4]
+trigger1 = time = 1
+trigger1 = stateno = 5010
+trigger1 = alive
+trigger1 = anim = 5022
+value = s0, 10
+
+; Play "ouch" sound B when hit hard (in the air)
+[State -2, 16];強の空中攻撃のﾀﾞﾒｰｼﾞﾎﾞｲｽ系B
+type = PlaySnd
+trigger1 = Var(7) = [5,9]
+trigger1 = time = 1
+trigger1 = stateno = 5010
+trigger1 = alive
+trigger1 = anim = 5022
+value = s0, 11
+
+;※※※※※※※※※※※※※※※※※※※※ハイジャンプ
+;理論は簡単
+;ハイジャンプコマンドを入れた「瞬間」、varスイッチを１にする
+;でハイジャンプのコマンドは最後がU、つまりジャンプする
+;そしてジャンプステート５０の時にvarスイッチが１ならveladdで加速します
+;varスイッチを０にするトリガーは「ステート５０の２フレーム目」です。
+
+[State 821, 1] ;←コマンドを入れたらVarをON
+type = varset
+trigger1 = command = "jump"
+trigger1 = ctrl = 1
+trigger1 = statetype = s
+v = 1
+value = 1
+
+[State 821, 1] ;←varをOFFにするステート
+type = varset
+trigger1 = stateno = 50
+trigger1 = time = 2
+v = 1
+value = 0
+
+[State 821, 1] ;←ジャンプ力にveladdを使って加速
+type = veladd
+trigger1 = var(1) = 1
+trigger1 = stateno = 50
+y = -1.5
+
+[State 821, 1] ;←前にボタンを押してたら前にも加速
+type = veladd
+trigger1 = var(1) = 1
+trigger1 = stateno = 50
+trigger1 = command = "holdfwd"
+x = 1.3
+
+[State 821, 1] ;←後ろなら後ろに加速
+type = veladd
+trigger1 = var(1) = 1
+trigger1 = stateno = 50
+trigger1 = command = "holdback"
+x = -0.5
+
+[State 50, 4];←成功したときの残像
+type = AfterImage
+trigger1 = var(1) = 1
+trigger1 = stateno = 50
+time = 30
+trans = add1
+timegap = 1
+framegap = 2
+length = 8
+palbright = 12,12,12
+palcontrast = 225,225,225
+palpostbright = 0,0,0
+paladd = 0,0,0
+palmul = 1,1,1
+
+;---------------------------------------------------------------------------
+;ランダムボイス
+[State -2, Random Voice]
+type = VarRandom
+trigger1 = TimeMod = 4,0
+v = 13
+range = 1,100
+IgnoreHitPause = 1
+
+;---------------------------------------------------------------------------
+[State -2];補正
+type = AttackMulSet
+trigger1 = 1
+value = 1*fvar(1)
+ignorehitpause = 1
+
+[State -2];補正
+type = Varset
+trigger1 = fvar(1) < 0
+fv = 1
+value = 0
+ignorehitpause = 1
+
+[State -2];補正
+type = Varset
+trigger1 = enemy,movetype != H
+trigger2 = enemy,stateno = [120,155]
+fv = 1
+value = 1
+ignorehitpause = 1
+
+
+
+[State -2, VarSet] 
+Type = VarSet 
+TriggerAll = NumEnemy > 0 
+Trigger1 = FVar(0) != 1.00 
+Trigger1 = !(P2MoveType = H && (P2StateNo != [150,159])) 
+FV = 0 
+Value = 1.00 
+IgnoreHitPause = 1 
+Persistent = 1 
+
+[State -2, VarSet] 
+Type = VarSet 
+Trigger1 = FVar(0) < 0.01 
+FV = 0 
+Value = 0.01 
+IgnoreHitPause = 1 
+Persistent = 1 

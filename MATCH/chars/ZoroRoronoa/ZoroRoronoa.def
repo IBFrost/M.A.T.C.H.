@@ -1,0 +1,28 @@
+[Info]
+name="ZoroRoronoa"
+DisplayName="ZoroRoronoa"
+versiondate = 11,11,2004
+mugenversion = 04,14,2002
+author = "IBUKAH"
+pal.defaults = 1,2
+
+[Files]
+cmd = kfm.cmd
+cns = ZoroRoronoa.cns
+st = ZoroRoronoa.cns
+st1 = ZoroRoronoa_st.cns
+st2 = NA.cns
+st3 = away.cns
+st4 = power.cns
+st5 = tobidougu.cns
+st6 = HA.cns
+st7 = SA.cns
+stcommon = common1.cns
+sprite = ZoroRoronoa.sff
+anim = ZoroRoronoa.air
+sound = ZoroRoronoa.snd
+
+; Arcade mode
+[Arcade]
+;intro.storyboard = Arcade/oping.def
+;ending.storyboard = Arcade/ending.def

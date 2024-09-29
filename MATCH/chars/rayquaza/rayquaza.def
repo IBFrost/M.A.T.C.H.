@@ -1,0 +1,50 @@
+; Definition file for player
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name ="Rayquaza"
+displayname ="Rayquaza"
+versiondate = "4/18/2012"
+mugenversion =Mugen 1.0
+author ="Cyberlizard aka Jetgoshi"
+pal.defaults =1,2,3,4,5,6
+
+; Files for the player
+[Files]
+cmd     =Rayquaza.cmd
+cns     =Rayquaza.cns
+st      =Rayquaza.cns
+stcommon =common1.cns
+sprite  =Rayquaza.sff
+anim    =Rayquaza.air
+sound  =Rayquaza.snd
+pal1=Rayquaza1.act
+pal2=Shiny.act
+pal3=Rayquaza2.act
+pal4=Rayquaza3.act
+pal5=Rayquaza4.act
+pal6=DarkRayquaza.act
+pal7=Groudon.act
+pal8=Kyogre.act
+pal9=Dialga.act
+pal10=Palkia.act
+pal11=Silver.act
+pal12=Gold.act
+st1=Hyper.cns
+st2=Special.cns
+st3=Armor.cns
+;pal2   =
+;pal3   =
+;pal4   =
+;pal5   =
+;pal6   =
+;pal7   =
+;pal8   =
+;pal9   =
+;pal10  =
+;pal11  =
+;pal12  =
+[Arcade]
+intro.storyboard=
+ending.storyboard=

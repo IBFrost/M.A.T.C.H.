@@ -1,0 +1,1127 @@
+;Yoshicmn1.cns edits
+
+;---------------------------------------------------------------------------
+; Stand
+[Statedef 0]
+type = S
+physics = S
+sprpriority = 0
+
+[State 0, 1]
+type = ChangeAnim
+trigger1 = Anim != 0 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0 ;Turn anim over
+value = 0
+
+[State 0, 2]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 0, 3] ;Stop moving if low velocity or 4 ticks pass
+type = VelSet
+trigger1 = abs(vel x) < 2
+trigger2 = Time = 4
+x = 0
+
+[State 0, Stepping Sound]
+type = PlaySnd
+trigger1 = animelem = 15
+trigger2 = animelem = 21
+trigger3 = animelem = 27
+trigger4 = animelem = 33
+trigger5 = animelem = 39
+trigger6 = animelem = 45
+value = 40, 1
+volume = 255
+
+[State 0, CtrlSet]
+type = CtrlSet
+triggerall = roundstate = 2 && prevstateno = 20 && var(59)>=1
+trigger1 =time = 0
+value = 1
+
+[State 0, 4] ;Are you dead?
+type = ChangeState
+trigger1 = !alive
+value = 5050
+;---------------------------------------------------------------------------
+; Stand to Crouch
+[Statedef 10]
+type    = C
+physics = C
+anim = 10
+
+[State 10, 1]
+type = VelMul
+trigger1 = Time = 0
+x = .75
+
+[State 10, 2]
+type = ChangeState
+triggerall = prevstateno = 100
+trigger1 = Time = 0
+value = 101
+
+[State 10, 2]
+type = ChangeState
+triggerall = prevstateno != 100
+trigger1 = AnimTime = 0
+value = 11
+;---------------------------------------------------------------------------
+; Walk
+[Statedef 20]
+type    = S
+physics = S
+sprpriority = 0
+
+[State 20, ChangeState]
+type = ChangeState
+triggerall = var(59) >= 1
+trigger1 = 1
+value = 25
+;anim =
+;ignorehitpause =
+;persistent =
+
+[State 20, 1]
+type = VelSet
+trigger1 = var(59)<=0
+trigger1 = command = "holdfwd"
+trigger2 = var(59)>=1;AI Walk
+trigger2 = enemynear,movetype!=A ;|| (enemynear, vel x<=0 && enemynear,statetype!=L)
+x = const(velocity.walk.fwd.x)
+[State 20, 2]
+type = VelSet
+trigger1 = var(59)<=0
+trigger1 = command = "holdback"
+trigger2 = var(59)>=1;AI Walk
+trigger2 = enemynear,movetype=A ;|| (enemynear, vel x>0 && enemynear,statetype!=L)
+x = const(velocity.walk.back.x)
+
+[State 20, 3]
+type = ChangeAnim
+triggerall = name != "MetalYoshi3"
+triggerall = vel x > 0
+trigger1 = Anim != 20 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0
+value = 20
+[State 20, 4]
+type = ChangeAnim
+triggerall = name != "MetalYoshi3"
+triggerall = vel x < 0
+trigger1 = Anim != 21 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0
+value = 21
+
+[State 20, 3]
+type = ChangeAnim
+triggerall = name = "MetalYoshi3"
+triggerall = vel x > 0
+trigger1 = Anim != 22 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0
+value = 22
+[State 20, 4]
+type = ChangeAnim
+triggerall = name = "MetalYoshi3"
+triggerall = vel x < 0
+trigger1 = Anim != 23 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0
+value = 23
+
+[State 20, PlaySnd]
+type = PlaySnd
+triggerall = name = "GigaYoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+value = 40,1
+volume = 150
+
+[State 100, Shake Screen]
+type = EnvShake
+triggerall = name = "GigaYoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+time = 5     ;Time to shake screen
+ampl = 4     ;Amount to shake
+freq = 180   ;A frequency of 180 shakes the screen rapidly
+
+[State 20, PlaySnd]
+type = PlaySnd
+triggerall = anim = 20
+triggerall = name = "Yoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+value = S40,1
+volume = 150
+
+[State 20, PlaySnd]
+type = PlaySnd
+triggerall = anim = 21
+triggerall = name = "Yoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+value = S40,1
+volume = 150
+
+[State 20, PlaySnd]
+type = PlaySnd
+triggerall = name = "MetalYoshi3" ||  name = "GigaYoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+value = S40,1
+volume = 180
+
+
+;---------------------------------------------------------------------------
+; AI Walk
+[Statedef 25]
+type    = S
+physics = S
+sprpriority = 0
+ctrl = 0
+
+[State 20, CtrlSet]
+type = CtrlSet
+triggerall = var(59) >= 1
+trigger1 = p2bodydist x = [0,60]
+trigger2 = roundstate !=2
+value = 1
+
+[State 20, 1]
+type = VelSet
+trigger1 = var(59)<=0
+trigger1 = command = "holdfwd"
+trigger2 = var(59)>=1;AI Walk
+trigger2 = enemynear,movetype!=A || (enemynear, vel x<=0 && enemynear,statetype!=L)
+x = const(velocity.walk.fwd.x)
+[State 20, 2]
+type = VelSet
+trigger1 = var(59)<=0
+trigger1 = command = "holdback"
+trigger2 = var(59)>=1;AI Walk
+trigger2 = backedgebodydist > 0
+trigger2 = enemynear,movetype=A || (enemynear, vel x>0 && enemynear,statetype!=L)
+x = const(velocity.walk.back.x)
+
+[State 20, 3]
+type = ChangeAnim
+triggerall = name != "MetalYoshi3"
+triggerall = vel x > 0
+trigger1 = Anim != 20 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0
+value = 20
+[State 20, 4]
+type = ChangeAnim
+triggerall = name != "MetalYoshi3"
+triggerall = vel x < 0
+trigger1 = Anim != 21 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0
+value = 21
+
+[State 20, 3]
+type = ChangeAnim
+triggerall = name = "MetalYoshi3"
+triggerall = vel x > 0
+trigger1 = Anim != 22 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0
+value = 22
+[State 20, 4]
+type = ChangeAnim
+triggerall = name = "MetalYoshi3"
+triggerall = vel x < 0
+trigger1 = Anim != 23 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0
+value = 23
+
+[State 20, PlaySnd]
+type = PlaySnd
+triggerall = name = "GigaYoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+value = 40,1
+volume = 150
+
+[State 100, Shake Screen]
+type = EnvShake
+triggerall = name = "GigaYoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+time = 5     ;Time to shake screen
+ampl = 4     ;Amount to shake
+freq = 180   ;A frequency of 180 shakes the screen rapidly
+
+[State 20, PlaySnd]
+type = PlaySnd
+triggerall = anim = 20
+triggerall = name = "Yoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+value = S40,1
+volume = 150
+
+[State 20, PlaySnd]
+type = PlaySnd
+triggerall = anim = 21
+triggerall = name = "Yoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+value = S40,1
+volume = 150
+
+[State 20, PlaySnd]
+type = PlaySnd
+triggerall = name = "MetalYoshi3" ||  name = "GigaYoshi3"
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+value = S40,1
+volume = 180
+
+[State 20, ChangeState]
+type = ChangeState
+triggerall = var(59) >= 1
+trigger1 = time > 50 ||(enemy,movetype=A&&inguarddist)|| (p2bodydist x < 0) || enemy,numproj>0
+value = 0
+ctrl = 1
+;anim =
+;ignorehitpause =
+;persistent =
+
+
+
+
+;---------------------------------------------------------------------------
+; AirJump Start
+[Statedef 45]
+type    = A
+physics = N
+ctrl = 0
+velset = 0,0
+
+[State 45, 1]
+type = ChangeAnim
+trigger1 = SelfAnimExist(44)
+value = 44
+
+[State 1054, Shockwave]
+type = Explod
+trigger1 = time = 1
+persistent = 0
+anim = F60
+postype = p1
+pos =0, 0
+velocity = 0, 0
+accel = 0, 0
+removetime = -2
+
+
+[State 45, 2]
+type = ChangeAnim
+trigger1 = !SelfAnimExist(44)
+value = 41
+
+[State 45, 3]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+
+[State 45, 4]
+type = VarSet
+trigger1 = command = "holdfwd"
+sysvar(1) = 1
+
+[State 45, 5]
+type = VarSet
+trigger1 = command = "holdback"
+sysvar(1) = -1
+
+[State 45, 6]
+type = VelSet
+trigger1 = Time = 2
+x = ifelse(sysvar(1)=0, const(velocity.airjump.neu.x), ifelse(sysvar(1)=1, const(velocity.airjump.fwd.x), const(velocity.airjump.back.x)))
+y = const(velocity.airjump.y)
+
+[State 45, 7]
+type = ChangeState
+trigger1 = Time = 2
+value = 46
+ctrl = 1
+;---------------------------------------------------------------------------
+; AirJump
+[Statedef 46]
+type    = A
+physics = N
+
+[State 46, Sweat drops]
+type = Explod
+triggerall = anim = 48
+trigger1 = animelem = 2
+anim = 49
+postype = p1
+pos = floor(-8*const(size.xscale)), floor(-89*const(size.yscale))
+velocity =0, 0
+accel = 0, 0
+bindtime = 2
+removetime = -2
+
+[State 46, PlaySnd]
+type = PlaySnd
+triggerall = anim = 48
+trigger1 = animelem = 2
+;trigger2 = animelem = 5
+;trigger3 = animelem = 9
+;trigger4 = animelem = 13
+value = 40,3
+;persistent = 1
+volume = 150
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time >= 30
+y = 1*(const(movement.yaccel))
+;ignorehitpause =
+;persistent =
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time < 30
+y = 1*(const(velocity.airjump.y))
+;ignorehitpause =
+;persistent =
+
+[State 0, VelAdd]
+type = VelAdd
+triggerall = vel x < 1*(const(velocity.airjump.fwd.x))
+triggerall = anim = 48
+trigger1 = command = "holdfwd"
+x = 1*(const(movement.yaccel))
+;ignorehitpause =
+;persistent =
+
+[State 0, VelAdd]
+type = VelAdd
+triggerall = vel x > 1*(const(velocity.airjump.back.x))
+triggerall = anim = 48
+trigger1 = command = "holdback"
+x = -1*(const(movement.yaccel))
+;ignorehitpause =
+;persistent =
+
+[State 46, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+
+[State 200, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = 5,7
+volume = 150
+
+[State 46, 2]
+type = ChangeAnim
+trigger1 = Time = 0
+value = ifelse((vel x)=0, 48, ifelse((vel x)>0, 48, 48))
+
+[State 46, 3]
+type = ChangeAnim
+trigger1 = time = 30;Vel y > -2
+trigger1 = SelfAnimExist(45)
+persistent = 0
+value = 45
+
+[State 46, 3]
+type = Changestate
+trigger1 = Vel y > -2
+trigger1 = pos y>=0
+persistent = 0
+value = 52
+;---------------------------------------------------------------------------
+; Jump Start
+[Statedef 40]
+type    = S
+physics = S
+anim = 40
+ctrl = 0
+sprpriority = 1
+
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+
+[State 40, 2]
+type = VarSet
+trigger1 = command = "holdfwd"
+sysvar(1) = 1
+
+[State 40, 3]
+type = VarSet
+trigger1 = command = "holdback"
+sysvar(1) = -1
+
+[State 40, 4]
+type = VelSet
+triggerall = var(59)<=0
+trigger1 = AnimTime = 0
+x = ifelse(sysvar(1)=0, const(velocity.jump.neu.x), ifelse(sysvar(1)=1, const(velocity.jump.fwd.x), const(velocity.jump.back.x)))
+y = const(velocity.jump.y)
+
+[State 40, 4] ;AI Version
+type = VelSet
+triggerall = var(59)>=1
+trigger1 = AnimTime = 0
+x = ifelse(p2bodydist x <=10, const(velocity.jump.neu.x), ifelse(p2bodydist x > 10, const(velocity.jump.fwd.x), const(velocity.jump.back.x)))
+y = const(velocity.jump.y)
+
+[State 40, 5]
+type = VelSet
+trigger1 = AnimTime = 0
+trigger1 = prevstateno = 100 ;RUN_FWD
+trigger1 = sysvar(1) = 1
+x = const(velocity.runjump.fwd.x)
+
+[State 40, 6]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Jump Land
+[Statedef 52]
+type    = S
+physics = S
+ctrl = 0
+anim = 47
+
+[State 52, 1]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 52, 2]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 52, 3]
+type = CtrlSet
+trigger1 = Time = 5
+value = 1
+
+[State 52, 4]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 100, Shake Screen]
+type = EnvShake
+triggerall = name = "MetalYoshi3"
+trigger1 = animelem = 1
+trigger2 = animelem = 3
+time = 5     ;Time to shake screen
+ampl = 4     ;Amount to shake
+freq = 180   ;A frequency of 180 shakes the screen rapidly
+
+[State 100, Shake Screen]
+type = EnvShake
+triggerall = name = "GigaYoshi3"
+trigger1 = animelem = 1
+trigger2 = animelem = 3
+time = 5     ;Time to shake screen
+ampl = 4     ;Amount to shake
+freq = 180   ;A frequency of 180 shakes the screen rapidly
+;---------------------------------------------------------------------------
+; RUN_FWD
+[Statedef 100]
+type    = S
+physics = S
+anim = 100
+sprpriority = 1
+
+[State 100, 1]
+type = VelSet
+trigger1 = 1
+x = const(velocity.run.fwd.x)
+
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+
+[State 100, 3] ;Prevent from turning
+type = AssertSpecial
+trigger1 = 1
+flag = NoAutoTurn
+
+
+[State 100, 4]
+type = ChangeState
+trigger1 = var(59)<=0
+trigger1 = command != "holdfwd"
+trigger2 = var(59)>=1;AI Version
+trigger2 = p2bodydist x <= 40
+value = 102
+
+[State 100, 4]
+type = ChangeState
+trigger1 = var(59)<=0
+trigger1 = command = "holdfwd" && command = "holddown"
+trigger2 = var(59)>=1;AI Version
+trigger2 = p2bodydist x >= 60 && p2bodydist x < 90 && random < 30
+trigger3 = var(59)>=1
+trigger3 = enemynear,movetype = A && p2bodydist x < 90 && enemynear,statetype != C
+value = 101
+
+[State 20, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S40,2
+volume = 250
+
+[State 100, dust]
+type = Explod
+trigger1 = time= 0
+trigger2 = time= 2
+trigger3 = time= 4
+persistent = 1
+id = 2
+anim = F120
+postype = p1
+pos = 0,0;14, 0
+velocity = -2, -.1
+accel = 0, 0
+removetime = -2
+bindtime = 1
+sprpriority = 2
+
+[State 20, PlaySnd]
+type = PlaySnd
+;triggerall = name = "Yoshi3"
+trigger1 = animelem = 4
+trigger2 = animelem = 8
+value = S40,1
+volume = 210
+
+[State 100, dust]
+type = null;Explod
+triggerall = name = "MetalYoshi3"
+;trigger1 = animelem = 1
+trigger1 = animelem = 2
+;trigger3 = animelem = 3
+trigger2 = animelem = 4
+persistent = 1
+id = 2
+anim = F120
+postype = p1
+pos =14, 0
+velocity = -2, -.1
+accel = 0, 0
+removetime = -2
+bindtime = 1
+sprpriority = 2
+
+
+[State 100, Shake Screen]
+type = EnvShake
+triggerall = name = "GigaYoshi3"
+trigger1 = animelem = 3
+trigger2 = animelem = 6
+time = 5     ;Time to shake screen
+ampl = 4     ;Amount to shake
+freq = 180   ;A frequency of 180 shakes the screen rapidly
+;---------------------------------------------------------------------------
+; Dive Roll
+[Statedef 101]
+type    = C
+physics = C
+anim = 101
+sprpriority = 1
+ctrl = 0
+
+[State 100, 1]
+type = VelSet
+trigger1 = 1
+x = const(velocity.run.fwd.x)-2
+y = 0
+
+[State 101, HitBy]
+type = NotHitBy
+trigger1 = 1
+value = ,NP,SP,HP
+time = 1
+;ignorehitpause =
+;persistent =
+
+
+[State 101, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = nostandguard
+flag2 = nocrouchguard
+flag3 = noairguard
+
+[State 100, 4]
+type = ChangeState
+trigger1 = animtime = 0
+value = 11
+ctrl = 1
+;---------------------------------------------------------------------------
+; RUN_STOP
+[Statedef 102]
+type    = S
+physics = S
+ctrl = 1
+anim = 102
+
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+
+[State 100, 3] ;Prevent from turning
+type = AssertSpecial
+trigger1 = 1
+flag = NoAutoTurn
+
+[State 102, ChangeAnim]
+type = ChangeAnim
+trigger1 = vel x > 3
+value = 102
+elem = 1
+[State 102, ChangeAnim]
+type = ChangeAnim
+trigger1 = (vel x <= 3 && vel x > 2)
+value = 102
+elem = 2
+[State 102, ChangeAnim]
+type = ChangeAnim
+trigger1 = vel x <= 2
+value = 102
+elem = 3
+;ignorehitpause =
+;persistent =
+
+[State 106, 3]
+type = MakeDust
+trigger1 = Time = 2
+pos = -5,-2
+spacing = 1
+
+[State 106, 4]
+type = ChangeState
+trigger1 = animelemtime(3) >= 0 && vel x <=0
+value = 0
+ctrl = 1
+;---------------------------------------------------------------------------
+; RUN_BACK
+[Statedef 105]
+type    = A
+physics = A
+ctrl = 0
+anim = 105
+sprpriority = 1
+
+[State 20, PlaySnd]
+type = PlaySnd
+triggerall = name = "Yoshi3" ||  name = "GigaYoshi3" ||  name = "MetalYoshi3"
+trigger1 = time = 0
+value = S40,1
+volume = 210
+
+
+[State 105, 1]
+type = VelSet
+trigger1 = Time = 0
+x = const(velocity.run.back.x)
+y = const(velocity.run.back.y)
+
+[State 105, 2]
+type = CtrlSet
+trigger1 = Time = 2
+value = 1
+
+[State 105, 3]
+type = ChangeState
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= 0
+value = 106
+;---------------------------------------------------------------------------
+; HIT_BOUNCE (hit ground)
+[Statedef 5100]
+type    = L
+movetype= H
+physics = N
+
+[State 5100, 1]
+type = VelSet
+trigger1 = Time = 0
+trigger1 = GetHitVar(fall.yvel) = 0
+trigger1 = vel x > 1
+x = 1
+
+[State 5100, EnvShake]
+type = FallEnvShake
+trigger1 = Time = 0
+
+[State 5100, Var] ;Save fall velocity
+type = VarSet
+trigger1 = Time = 0
+;trigger1 = GetHitVar(fall.yvel) = 0
+sysvar(1) = floor(vel y)
+
+[State 5100, 2] ;Hit ground anim (normal)
+type = ChangeAnim
+triggerall = time = 0
+trigger1 = (anim != [5051,5059]) && (anim != [5061,5069])
+trigger2 = !SelfAnimExist(5100 + (anim % 10))
+value = 5100
+
+[State 5100, 3] ;Hit ground anim (for hit up)
+type = ChangeAnim
+trigger1 = time = 0
+trigger1 = (anim = [5051,5059]) || (anim = [5061,5069])
+trigger1 = SelfAnimExist(5100 + (anim % 10))
+value = 5100 + (anim % 10)
+
+[State 5100, 4]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 5100, 5]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 5100, 6] ;Reduce speed
+type = VelMul
+trigger1 = Time = 0
+x = 0.75
+
+
+[State 5100, 7]
+type = ChangeState
+trigger1 = Time = 0
+trigger1 = GetHitVar(fall.yvel) = 0
+value = 5110 ;HIT_LIEDOWN
+
+[State 5100, 8]
+type = GameMakeAnim
+trigger1 = Time = 1
+;value = 61
+;pos = 0, 0
+;under = 1
+value = 60 + (sysvar(1) > 5) + (sysvar(1) > 14)
+pos = 0, 0
+under = sysvar(1) <= 10
+
+[State 5100, 9]
+type = HitFallDamage
+trigger1 = Time = 3
+
+[State 5100, 10]
+type = PlaySnd
+triggerall = name = "Yoshi3"
+trigger1 = Time = 1
+;value = F7, 0 ;Hit ground
+value = F7, (sysvar(1) > 5) + (sysvar(1) > 14)
+
+[State 5100, 10]
+type = PlaySnd
+triggerall = name = "GigaYoshi3"
+trigger1 = Time = 1
+;value = F7, 0 ;Hit ground
+value = 40, 0
+
+[State 5100, Shake Screen]
+type = EnvShake
+triggerall = name = "GigaYoshi3"
+trigger1 = time = 0
+time = 5     ;Time to shake screen
+ampl = 4     ;Amount to shake
+freq = 180   ;A frequency of 180 shakes the screen rapidly
+
+
+[State 5100, 10]
+type = PlaySnd
+triggerall = name = "MetalYoshi3"
+trigger1 = Time = 1
+;value = F7, 0 ;Hit ground
+value = 40, 0
+
+[State 5100, Shake Screen]
+type = EnvShake
+triggerall = name = "MetalYoshi3"
+trigger1 = time = 0
+time = 5     ;Time to shake screen
+ampl = 4     ;Amount to shake
+freq = 180   ;A frequency of 180 shakes the screen rapidly
+
+
+[State 5100, 11]
+type = PosFreeze
+trigger1 = 1
+
+[State 5100, 12]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 5101
+
+[State 5100, 13]
+type = ForceFeedback
+trigger1 = Time = 0
+waveform = sinesquare
+ampl = 128,-3,-.2,.005
+time = 20
+;---------------------------------------------------------------------------
+; HIT_LIEDOWN
+[Statedef 5110]
+type    = L
+movetype= H
+physics = N
+
+[State 5110, EnvShake]
+type = FallEnvShake
+trigger1 = Time = 0
+
+[State 5110, 1] ;For hit up/up-diag type (from state 5081)
+type = ChangeAnim
+persistent = 0
+trigger1 = SelfAnimExist(5110 + (anim % 10))
+trigger1 = anim = [5081,5089]
+value = 5110 + (anim % 10)
+
+[State 5110, 2] ;Hit ground anim (normal)
+type = ChangeAnim
+triggerall = time = 0
+triggerall = anim != [5110,5119] ;Not already changed anim
+trigger1 = anim != [5161,5169]
+trigger2 = !SelfAnimExist(5170 + (anim % 10))
+value = 5170
+
+[State 5110, 3] ;Hit ground anim (for hit up)
+type = ChangeAnim
+triggerall = time = 0
+triggerall = anim != [5110,5119] ;Not already changed anim
+trigger1 = anim = [5161,5169]
+trigger1 = SelfAnimExist(5170 + (anim % 10))
+value = 5170 + (anim % 10)
+
+[State 5110, 4]
+type = HitFallDamage
+trigger1 = Time = 0
+
+
+
+[State 5110, 5]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 5110, Var] ;Get fall velocity
+type = VarSet
+trigger1 = Time = 0
+trigger1 = GetHitVar(fall.yvel) != 0
+sysvar(1) = floor(vel y)
+
+[State 5110, 6]
+type = PlaySnd
+triggerall = name = "Yoshi3"
+trigger1 = Time = 0
+trigger1 = !SysVar(0)
+;value = F7, 0 ;Hit ground
+value = F7, (sysvar(1) > 5) + (sysvar(1) > 14)
+
+[State 5110, 6]
+type = PlaySnd
+triggerall = name = "GigaYoshi3"
+trigger1 = Time = 0
+trigger1 = !SysVar(0)
+;value = F7, 0 ;Hit ground
+value = 40, 0
+
+[State 100, Shake Screen]
+type = EnvShake
+triggerall = name = "GigaYoshi3"
+trigger1 = time = 0
+time = 5     ;Time to shake screen
+ampl = 4     ;Amount to shake
+freq = 180   ;A frequency of 180 shakes the screen rapidly
+
+
+[State 5100, 10]
+type = PlaySnd
+triggerall = name = "MetalYoshi3"
+trigger1 = Time = 0
+;value = F7, 0 ;Hit ground
+value = 40,0
+
+[State 5100, Shake Screen]
+type = EnvShake
+triggerall = name = "MetalYoshi3"
+trigger1 = time = 0
+time = 5     ;Time to shake screen
+ampl = 4     ;Amount to shake
+freq = 180   ;A frequency of 180 shakes the screen rapidly
+
+[State 5110, 7]
+type = GameMakeAnim
+trigger1 = Time = 0
+trigger1 = !SysVar(0)
+value = 60 + (sysvar(1) > 5) + (sysvar(1) > 14)
+pos = 0, 0
+under = sysvar(1) <= 10
+
+[State 5110, 8]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 5110, 9] ;For hit up type
+type = ChangeAnim
+persistent = 0
+triggerall = anim = [5171,5179]
+triggerall = SelfAnimExist(5110 + (anim % 10))
+trigger1 = AnimTime = 0
+trigger2 = SysVar(0) ;SysVar(0) = 1 avoids hit ground anim
+value = 5110 + (anim % 10)
+
+[State 5110, 10] ;For normal
+type = ChangeAnim
+persistent = 0
+triggerall = Anim != [5111,5119]
+trigger1 = AnimTime = 0
+trigger2 = SysVar(0) ;SysVar(0) = 1 avoids hit ground frame
+value = 5110
+
+[State 5110, 11] ;If just died
+type = ChangeState
+triggerall = !alive
+trigger1 = AnimTime = 0
+trigger2 = SysVar(0) ;SysVar(0) = 1 avoids hit ground frame
+trigger3 = Anim = [5110,5119]
+value = 5150
+
+[State 5110, 12]
+type = VarSet
+trigger1 = SysVar(0)
+trigger1 = Time = 0
+sysvar(0) = 0
+
+[State 5110, 13] ;Friction
+type = VelMul
+trigger1 = 1
+x = 0.85
+
+[State 5110, 14]
+type = ForceFeedback
+trigger1 = alive
+trigger1 = Time = 0
+time = 8
+ampl = 240
+waveform = sine
+
+[State 5110, 15]
+type = ForceFeedback
+trigger1 = !alive
+trigger1 = Time = 0
+ampl = 200, 7, -.467
+time = 30
+waveform = sine
+
+
+;---------------------------------------------------------------------------
+; HIT_GETUP
+[Statedef 5120]
+type    = L
+movetype= I
+physics = N
+
+[State 5120, 1a] ;Get up anim (normal)
+type = ChangeAnim
+triggerall = time = 0
+trigger1 = anim != [5111,5119]
+trigger2 = !SelfAnimExist(5120 + (anim % 10))
+value = 5120
+
+[State 5120, 1b] ;Get up anim (for hit up/diag-up)
+type = ChangeAnim
+triggerall = time = 0
+trigger1 = anim = [5111,5119]
+trigger1 = SelfAnimExist(5120 + (anim % 10))
+value = 5120 + (anim % 10)
+
+[State 5120, 2]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+
+[State 5120, 3]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 5120, 4]
+type = HitFallSet
+trigger1 = AnimTime = 0
+value = 1
+
+[State 5110, 11] ;roll forward
+type = ChangeState
+triggerall = command = "holdfwd"
+trigger1 = time = 1
+;trigger1 = AnimTime = 0
+;trigger1 = Time > 0
+value = 4003
+
+[State 5110, 11] ;roll backward
+type = ChangeState
+triggerall = command = "holdback"
+trigger1 = time = 1
+;trigger1 = AnimTime = 0
+;trigger1 = Time > 0
+value = 4005
+
+[State 5120, 5] ;Can't be thrown right after getting up
+type = NotHitBy
+trigger1 = AnimTime = 0
+value = , NT,ST,HT
+time = 12
+
+[State 5120, 6] ;Can't be hit right after getting up (short time)
+type = NotHitBy
+trigger1 = AnimTime = 0
+value2 = SCA
+time = 3
+
+[State 5120, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+;---------------------------------------------------------------------------
+; Initialize (at the start of the round)
+[Statedef 5900]
+type = S
+
+[State 5900, 1] ;Clear all int variables
+type = VarRangeSet
+trigger1 = roundsexisted = 0
+value = 0
+
+[State 5900, 2] ;Clear all float variables
+type = VarRangeSet
+trigger1 = roundsexisted = 0
+fvalue = 0
+
+[State 5900, 3] ;Intro for round 1
+type = ChangeState
+trigger1 = roundno = 1
+trigger2 = RoundsExisted = 0
+trigger2 = TeamMode = Turns
+trigger2 = RoundNo > 0
+value = 190

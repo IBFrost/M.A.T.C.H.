@@ -1,0 +1,31 @@
+;===========================================================================
+;Super Marvel vs. Capcom - Eternity of Heroes - Definitions Template
+;by Author
+;===========================================================================
+
+[Info] 
+name		="Ramona"
+displayname	="Ramona Flowers"
+versiondate 	=8/8/2017
+mugenversion 	=1.0
+author 		="Jerii Uzimaki, edited by jarbar3000"
+pal.defaults	=1,2,3
+
+[Files]
+cmd		=Ramona Flowers.cmd
+cns		=Ramona Flowers.cns
+stcommon	=common1.cns
+st		=Ramona Flowers.cns
+sprite		=Ramona Flowers.sff
+anim		=Ramona Flowers.air
+sound		=Ramona Flowers.snd
+pal1 = Ramona Flowers.act
+pal2 = Brittany Byrd.act
+pal3 = Volume5.act
+pal4 = Shinobu.act
+pal5 = Dr.Naomi.act
+pal6 = Volume3.act
+ 
+[Arcade]
+intro.storyboard	=intro.def
+ending.storyboard	=ending.def

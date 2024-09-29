@@ -1,0 +1,19 @@
+11/01/14
+--------
+Shun Masatsu positioning fixed, spacing improved
+some infinite loops fixed (Flash Punch Combo, Demon Slayer, Shun Masatsu-Thunder Hook Fist)
+MK-HK-Zenshin String Combo added
+Added a minimum altitude for Amara (the dive kick).
+Mugen 1.1 compatibility improved (full screen Devil Spark, lightning hitsparks parent-related debug messages)
+EX Thrusting Uppercut damage decreased (90>70)
+Wind Hook Fist juggling slashed (air y hitvel halved)
+Devil Spark rebalanced : startup (after the superpause, before shooting) slowed down by 6 ticks, projectile spawning point moved forward a few steps (can still hit at close range), Jin invincibility unchanged (invincible during superpause and until shooting, vulnerable while the projectile is moving forward, invulnerable on success), projectile invulnerability (ability to eat any other projectile and carry on) removed, except on the spawn frame (to make up for the invulnerable long step forward in SFxTK not included here)
+Infernal Destruction (1.1 compatible)
+Damage from supers rebalanced. Devil Spark = 240, Tenstring = 242, Omen Fury = 224, Evil Eye = 340, Infernal Destruction = 400
+
+08/03/14
+--------
+Double Lift Kick velocities retouched, juggling restricted
+Gethit voices added
+Finished the animation for the Stinger
+Collapse animation added

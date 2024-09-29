@@ -1,0 +1,55 @@
+; Definition file for Vegeta Z2
+
+;====================================================================
+; PLAYER INFORMATION
+
+[Info]
+name = "Vegeta Z2"
+displayname = "Vegeta Z2"
+versiondate = 07,14,2013
+mugenversion = 04,11,2002
+author = "Balthazar & Cybaster"
+pal.defaults = 1,2,5
+
+;====================================================================
+;FILES FOR THE PLAYER
+
+[Files]
+sprite  = files/vegeta.sff
+anim    = files/vegeta.air
+sound   = files/vegeta.snd
+cmd     = files/vegeta.cmd
+cns     = states/constants.cns
+st	= states/system.cns
+st2	= states/helpers.cns
+st3	= states/state-2-3.cns
+st4	= states/override.cns
+st5	= config.txt
+st6      = states/normals.cns
+st7	= states/specials.cns
+st8	= states/supers.cns
+;st9	= states/trial.cns
+stcommon = common1.cns
+
+;====================================================================
+;PALETTES
+
+pal1 = palettes/Balthazar-Bukuu_Ressen2.act
+pal2 = palettes/Balthazar-SF3.act
+pal3 = palettes/Maladingdong-Kazuya.act
+pal4 = palettes/Balthazar-Buu_Saga.act
+pal5 = palettes/Bomberman-BluestreakALT.act
+pal6 = palettes/Kiri-NavyBlue.act
+
+pal7 = palettes/Maladingdong-Oni.act
+pal8 = palettes/Balthazar-Violent_Ken.act
+pal9 = palettes/Girard-SuperBaby2.act
+pal10 = palettes/Cyan_Paul-Lion_O.act
+pal11 = palettes/Maladingdong-Master_of_Fist.act
+pal12 = palettes/Goodaldo-True_Evil.act
+
+
+; Arcade mode
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

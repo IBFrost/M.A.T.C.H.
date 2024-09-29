@@ -1,0 +1,94 @@
+
+   /--------------------------------/
+  /  Another Yoshi v1.2+1          /
+ /             -Update Log-       /
+/--------------------------------/
+-------------------------------------------------
+Version 1.2+1 Update                 01/14/11
+-------------------------------------------------
+[SYS]Added Negative Edge. For those who don't know,
+this basically means you can use special moves by either pushing
+or releasing a button. For example, a hadoken can be
+used by either doing a down->forward motion then pressing
+a punch button, or doing a down->forward motion and
+releasing a punch button.
+[SYS]Added a new Dive Roll mechanic. A full explanation
+is in the readme.
+[SYS]Added damage reduction.
+[SYS]Decided to go the SVC route and changed it so that his
+forward throw is LP+LK, and his backward throw is SP+SK.
+[BUFF]AI!!! >:D (Well a start anyway lol. Seriously
+though I'm pretty lost as far as AI goes, so any
+feedback/pointers will be greatly appreciated.)
+[BUFF]Standing Strong Punch has a longer hitpause, and
+a slightly increased damage output.
+[BUFF]Egg throw comes out slightly faster.
+[BUFF]Chained SK has a slightly longer hitstun, making it possible to combo
+from (if you're fast enough :P).
+[BUFF]Fire Breath has a higher damage output.
+[BUFF]Added a couple new air command moves, Tail Slash, and Double Kick.
+[BUFF]Changed the way the start-up for Yoshi Stampede
+connects. Instead of running into the enemy and then
+uppercutting them, now he'll throw an uppercut once
+he gets to a certain distance from the enemy. Basically
+it's a bit harder to avoid now.
+[BUFF]Ranged grab has gained a small amount of blockstun.
+[NERF]Lowered his walking speed.
+[NERF]Ground Pound falls a little slower, and it is a little more noticable.
+[NERF]Low Tail Strike is a little slower.
+[NERF]Yoshi Stampede has a slightly lower
+damage output.
+[NERF]Egg Roll and EX Egg Roll have a longer
+recover time.
+[BUFF/NERF]LP Egg throw flies slightly lower, but also
+goes a little further.
+[BUFF/NERF]Lowered the priority on the attack at
+the start of Yoshi Bomb, but I also extended the
+attack window, both reach wise and time wise.
+[BUFF/NERF]Made Metal Yoshi more boss-ish. A full 
+explanation on the changes is in the readme.
+[FIX]Backwards ranged grab didn't hit aerial opponents like it was 
+supposed to.
+[FIX]Made the Fire Breath command stricter, there were
+times where it would activate at random.
+[FIX]Fixed Metal Yoshi's gravity modifier, so
+he won't go through the floor during grabs.
+[FIX]Created a custom state for when the enemy is
+being trampled during Yoshi Stampede, there were
+times where the enemy would get up too early and
+the attack wouldn't finish correctly.
+[MISC]Made a lot of subtle changes to the stampede
+itself. I reduced the amount of screen shaking,
+the Yoshis run a little slower, and I balanced out
+the amount of stepping sounds, since before too many
+would play at once causing other sounds to not play
+at all. I also added a low tremor sound in the
+background. All in all I think it looks more...
+presentable :D
+[MISC]New sprites and animations in some spots, but
+I'll leave you to figure those out :P
+[MISC]Re-organized the readme a bit.
+-------------------------------------------------
+Version 1.1 Update                  08/09/10
+-------------------------------------------------
+[BUFF]Fire Breath comes out a little faster now.
+[BUFF]Low Tail Strike can now hit downed opponents.
+[BUFF]Super Fire Breath's damage is increased.
+[FIX]Removed the infinite priority in the Yoshi
+Stampede start-up movement.
+[FIX]Smash Headbutt's auto-block feature only
+guards 1 hit, as opposed to before where it makes
+him invincible.
+[FIX]Adjusted the throw hitbox, as there were times
+where the throw would miss if the enemy was too
+close.
+[FIX]Adjusted the clsn's of several animations
+[MISC]Changed the Large Portrait, but I included the
+old one (portrait2.pcx) in the graphics folder in 
+case you wanted to switch back.  
+[MISC]Made it so you could cancel into a jump after
+hitting an enemy with a launcher. This makes it easier
+to start an air-combo.
+[MISC]As requested, Yoshi Stampede has multi-colored
+Yoshis. Unlike before where they only matched your 
+palette.

@@ -1,0 +1,117 @@
+;#####################################################################################################################
+;## PERSONALIZATION FILE FOR VEGETA BY BALTHAZAR & CYBASTER										    		        ##
+;## DON'T modify the values if there isn't any comment explaining what to do just above. This could mess the char.  ##
+;## If you're not sure, make a copy of the file before changing any value.					    					##
+;#####################################################################################################################
+
+[Statedef 5900]
+type = S
+
+[State 5900, varreset]
+type = varrangeset
+trigger1 = !roundsexisted
+value = 0
+
+[State 5900, varreset]
+type = varrangeset
+trigger1 = !roundsexisted
+fvalue = 0
+
+
+
+; ENGLISH (Mick Lauer, Chris Sabbat) OR JAPANESE VOICE
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 55
+;#####################################################################################################################
+;## Choose which voice you want to use. Set the value to 0 to use the English voice by Mike Lauer, set the value to 1
+;## to use the Japanese voice, set the value to 2 to use the English voice by Chris Sabbat.
+;## Default value is 0.
+value = 0
+
+
+; TRANSPARENT OR SOLID FX
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 2
+;#####################################################################################################################
+;## Choose how you want the effects to be slightly transparent, or if you want them to be completely solid, old school
+;## style. Set the value to 1 for transparent FX, and to 0 for solid FX.
+;## Default value is 0.
+value = 0
+
+
+; REPEL PROJECTILE FX
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 44
+;#####################################################################################################################
+;## Choose which repel projectile you want to use. Set the value to 0 if you want to use the new yellow/blue one. Set
+;## the value to 1 to use the old purple one.
+;## Default value is 0.
+value = 0
+
+
+; SUPER BACKGROUND CHOICE
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 13
+;#####################################################################################################################
+;## Choose which super background you want to use when Vegeta kills the opponent with a Super or Ultra move. Set the
+;## value to 0 to use the Street Fighter 3 Super BG, set the value to 1 to use the Jojo's Bizarre Adventure Super BG.
+;## Set the value to 2 to use the Super Dragon Ball Z Super BG. Set the value to any number greater than 2 to disable
+;## Super Background.
+;## Default value is 2.
+value = 2
+
+
+; RAGE GAUGE - X AXIS
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 45
+;#####################################################################################################################
+;## Set the value to move the Rage Gauge to a position that suits you (X Axis in this case). A positive value means
+;## forward (to the middle of the screen), a negative value means backward (to the border of the screen).
+;## Default value is 0.
+value = 0
+
+
+; RAGE GAUGE - Y AXIS
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 46
+;#####################################################################################################################
+;## Set the value to move the Rage Gauge to a position that suits you (Y Axis in this case). A positive value means
+;## upward, a negative value means downward.
+;## Default value is 0.
+value = 0
+
+
+; HOW OLD ARE YOU ???
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 39
+;#####################################################################################################################
+;## Vegeta is a violent fellow, and some of his stuff may be too gory for little kids. Set this variable to your real
+;## age (tell the truth, or else Mugen will notice and dangerous stuff may happen !!! o_o). If you're old enough, you
+;## will access to new "stuff".
+;## Default value is 10.
+value = 10
+
+
+
+
+;=================================================
+; DO NOT CHANGE ANYTHING BELOW THIS LINE !!!
+
+[State 5900, End]
+type = changestate
+trigger1 = !time
+value = ifelse(roundno = 1, 190, 0)

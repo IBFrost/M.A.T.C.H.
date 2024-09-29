@@ -19,6 +19,7 @@ class MiyakoBotTwitch(commands.Bot):
     PREDICTIONSTRING = ''
     APEVENWINS = None
     APODDWINS = None
+    LOOP = False
 
     def __init__(self, matchsys):
         super().__init__(token=TWITCH_IRC_TOKEN,
@@ -38,21 +39,24 @@ class MiyakoBotTwitch(commands.Bot):
 
     def prediction(self, action):
         active = self.ACTIVEPREDICTION
-        if not active and not (action == 'start' or action == 'lock' or action == 'oddwins' or action == 'evenwins' or action == 'closed'):
+        if not active and not (action == 'start' or action == 'lock' or action == 'oddwins' or action == 'evenwins' or action == 'abort'):
             self.__consoleprint(f"Prediction called with invalid action. '{action}' is not a valid keyword")
 
         elif action == 'start':
             # Start a prediction
+        
+            
             data = {
                 "title": "Will the winner be Even or Odd?",
                 "outcomes": [
                     {"title": "Even", "color": "blue"},
                     {"title": "Odd", "color": "red"}
                 ],
-                "broadcaster_id": TWITCH_CLIENT_ID,
+                "broadcaster_id": 1151683346,
                 "prediction_window": 600,
                 "status": "ACTIVE"
             }
+
             response = requests.post('https://api.twitch.tv/helix/predictions', headers=DEFAULTHEADERS, json=data)
             if response.status_code == 201:
                 self.__consoleprint("Prediction started successfully!")
@@ -64,7 +68,7 @@ class MiyakoBotTwitch(commands.Bot):
                 self.__consoleprint(f'Error starting prediction:{response.json()}')
 
         elif not active:
-            self.__consoleprint("Prediction modifier called with no active prediction")
+            self.__consoleprint(f"Prediction modifier, '{action}', called with no active prediction")
 
         elif action == 'lock':
             data = {
@@ -111,7 +115,7 @@ class MiyakoBotTwitch(commands.Bot):
             data = {
                 "status": "CANCELLED"
             }
-            response = requests.patch(f'https://api.twitch.tv/helix/predictions?id={PREDICTIONSTRING}', headers=DEFAULTHEADERS, json=data)
+            response = requests.patch(f'https://api.twitch.tv/helix/predictions?id={self.PREDICTIONSTRING}', headers=DEFAULTHEADERS, json=data)
             if response.status_code == 204:
                 self.__consoleprint("Prediction stopped successfully!")
                 self.ACTIVEPREDICTION = False
@@ -121,6 +125,21 @@ class MiyakoBotTwitch(commands.Bot):
             else:
                 self.__consoleprint(f'Error stopping prediction:{response.json()}')
         
+    def looping_tourney(self, divs):
+        if self.matchsys.get_status() == IDLE:
+            self.__consoleprint("Registering new tournament: " + str(divs))
+            offset_change = self.matchsys.new_tournament(divs)
+            i = 0
+            while i < POW2[divs+1]:
+                character = random.randint(0, self.matchsys.max_char_ID)
+                ctable = []
+                j = 1
+                while j <= divs:
+                    ctable.append(character)
+                    j = j + 1
+                player = self.matchsys.new_player(f"Player {i}", ctable)
+                self.matchsys.add_player(player)
+                i = i + 1  
 
     # Events don't need decorators when subclassed
     async def event_ready(self):
@@ -257,7 +276,37 @@ class MiyakoBotTwitch(commands.Bot):
                                 j = j + 1
                             player = self.matchsys.new_player(f"Player {i}", ctable)
                             self.matchsys.add_player(player)
-                            i = i + 1
+                            i = i + 1   
+            elif len(data) == 3:
+                value = int(data[1])
+                loop = data[2]
+                try:
+                    assert value > 0
+                except AssertionError:
+                    # User gave a silly value for divisions...
+                    response = "Number of divisions must be positive number"
+                else:
+                    try:
+                        assert loop.lower() == 'true'
+                    except:
+                        response = "Second argument given was not 'true' | Remove the argument to start a single tournament or ensure it is 'true' to begin a looped one"
+                    else:
+                        if self.matchsys.get_status() == IDLE:
+                            self.matchsys.begin_loop(value)
+                            self.__consoleprint("Registering new tournament: " + str(value))
+                            offset_change = self.matchsys.new_tournament(value)
+                            i = 0
+                            while i < POW2[value+1]:
+                                character = random.randint(0, self.matchsys.max_char_ID)
+                                ctable = []
+                                j = 1
+                                while j <= value:
+                                    ctable.append(character)
+                                    j = j + 1
+                                player = self.matchsys.new_player(f"Player {i}", ctable)
+                                self.matchsys.add_player(player)
+                                i = i + 1
+
                         
             await message.channel.send(response)
         #await self.handle_commands(message)

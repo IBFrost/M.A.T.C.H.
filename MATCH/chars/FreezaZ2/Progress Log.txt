@@ -1,0 +1,878 @@
+Beta 23c (20210207) - Unfolded edition
+- Fixed JP usage on Dash kick
+- Fixed Focus Attack glitch introduced in version 23a
+- Fixed power charge glitch in B mode
+- Added extra failsafe to B Mode combo breaker
+
+Beta 23b (20210201) - Stupid bot edition
+- Fixed proximity check on throws due to coder's memory loss
+- Added FX twist sound to Aerial Zetto Kick Counter
+- Fixed bug in AI performing EX Head Charge without required power
+- [HDBZ] Updated wakeup turn code
+
+
+Beta 23a (20210117) - Dungeons And Dragons edition
+- Finished coding on Classic B alt idle pose
+- Fixed infinites bug accidentally introduced in version 23
+- Tweaked AI routines
+- Added button mash display in Forward Throw
+- Fixed Freeza clone appearing on Team Co-op if partner is SSJ Goku and if enemy is killed with Chou Kamehameha Lv 2 (diagonal version)
+- [HDBZ] Added KD properties to Focus Attack
+- [HDBZ] Added body proximity check to throws
+- [HDBZ] Updated movelist
+
+Beta 23 (20201231) - Farewell 2020 edition
+- Fixed sprite order in twist animation
+- Tweaked JP usage in some moves
+- Fixed bug with infinite ground bounces on j.HK
+- Fixed Head Charge limiter
+- Air Head Charge will not launch enemies on OTG
+- Removed NotHitBy from Death Saw
+- [HDBZ] Fixed animation check in state 651
+- [HDBZ] Added Focus Attack Limiter
+- [HDBZ] Fixed Focus Attack bug allowing cancel on whiff from P2 side
+- [HDBZ] Added NHB safeguard to helpers without clsn2 boxes
+- [HDBZ] Zetto Counter followups will now result in minimal damage
+
+
+Beta 22o (20201223) - Crispy Crunch edition - 5.0
+- Changed B portrait and pal
+- Fixed JP usage after j.SK groundbounce 
+- Improved Dash Kick>Death Wave comboability
+- Fixed bug in Air Block code
+- [HDBZ] Updated movelist
+
+Beta 22n (20201221) - Cap'n Crunch edition
+- Added new pals
+- Remapped some palettes
+- Added new B portrait
+- Changed Juggle Points usage in some moves
+- Fixed j.MK not hitting twice while holding MK button
+- Increased hitstun time in Dash kick
+- Fixed Negative Edge input issue on Dancing Elbow
+- Increased limiter for Head Charge
+- Fixed EMO bar sound played during B mode if intro was interrupted
+- Lowered damage in EX Dancing Elbow
+- Boosted up damage in Death Beam Lv2
+- [HDBZ] Updated Lv2 Super sparks
+- [HDBZ] Added Chicken Block special Projectile
+
+
+Beta 22m (20201213) - Crunchyroll edition
+- Prevented Zetto Counters from being activated on first tick
+- Fixed EMO bar sound played during B mode at round restart
+- Added BGM to Finisher 3
+- [HDBZ] Fixed dizzy stars inheriting char's PalFX effects
+- [HDBZ] Tweaked Focus Attack performance on time=0
+- [HDBZ] Fixed Cheap KO detection system
+
+Beta 22l (20200309) - Jones Bones edition
+- Updated Death Charge sprite (again)
+- Added D+2P Emo Dash shortcut
+- Updated Twist KO and Air Recovery sounds
+- Fixed Dash Cancel behavior in Focus Attack
+- Fixed input command for Death saw
+- Fixed Hyper KO Background FX on Finisher 1 and 2
+- Added ground sparks to P2 at the end of Finisher 3
+- Added Lilith's Gloomy Puppet Show special gethits
+- [HDBZ] Cleaned up unused commands
+- [HDBZ] Updated guard code
+
+Beta 22k (20200724) - 24/7 Service edition
+- Updated Death Charge sprites
+- Reduced JP usage in c.HK
+- Removed duplicated teleport sounds in some states
+- Fixed bug in enemies going underground, caused by faulty code from POTS
+- EMO activation power is now only removed after succesful activation
+- Fixed limiter in EMO dash/TP during combos
+- Added limiter to EMO back dash, equaling cooldown time to non-EMO backward dash
+- Corrected AI emo run/dash state numbers
+- Fixed EMO bar sound played during B mode
+- Fixed Freeza's facing after Finisher 3 fatality
+- Added cinematic explod for special fatality winpose on Finisher 3
+
+Beta 22j (20200715) - Elbow grease edition
+- Fixed Hard Punch hit sound
+- Removed duplicated teleport sound in EMO Dash
+- Fixed bug in attack basics disabled during EMO dash
+- Fixed distance of EMO back teleport when performed near the edge of the stage
+- Dancing Elbow can be performed again during EMO Mode
+- Removed P2 autofacing on Torture Gun
+- Adjusted hitvels to minimize whiffing on Tail Press Nightmare Lv3
+
+Beta 22i (20200714) - Stand: Gold Experience edition
+- Fixed Dancing elbow moving backwards on whiff, if P2 change sides
+- Added ground spark FX to Air EX Death Wave
+- Fixed explod not being removed in Death Beam Lv1
+- Fixed Death Beam Lv2 cancelling EMO by mistake
+- Reverted back to normal Power usage for Hypers in EMO, making it no longer possible to sacrifice EMO if not having enough power
+- Fixed time out bugs on Finishers
+- Added Dizzy stars for non-compatible chars in Finisher 3
+- Fixed intros and winposes during B mode
+- Small coding optimizations in B mode
+
+Beta 22h (20200709) - Er ist wieder da! edition 
+- Added missing negative edge button detection in some states
+- Damage reduction to a.SP
+- Fixed performance of Dancing elbow on whiff/block as well as push behavior in corner
+- EX Dancing Elbow will now teleport behind the enemy
+- Fixed Air Headbutt not adding points to combo dampener
+- Revamped EMO Mode:
+	- Supers will no longer cancel EMO mode after performing them
+	- Supers will consume same power as in non-EMO (exception Lv3 Tail Press Nightmare that still costs 2000 power in EMO)
+	- If Supers are performed without the required power, the attack will still come out at the expense of cancelling EMO
+- Added Classic B mode
+- [HDBZ] Fixed Piccolo's leftover charge commands in CMD
+- [HDBZ] Added 4.5 preview code
+
+Beta 22g (20200707) - Popeye Elbow edition
+- Slight tweaks in JP usage for some moves
+- Fixed timing in a few cursed animations
+- Fixed a.SP causing enemies to go below ground under certain conditions
+- Fixed hitsound in c.HP
+- Fixed Dash kick>Deathwave not chaining
+- Tweaked speed in Dancing Elbow
+- Dancing Elbow is now +5 on contact
+- Dancing Elbow will now get through enemies after hit
+- Small clsn2 tweaks on After You/Counterport
+- Fixed JP usage during Head Charge and EX Head Charge
+- Fixed Air Head Charge still hitting the enemy while being frozen
+- Fixed Emo Dash Forward Teleport to be on hit only
+- Fixed JP usage during Tail Press Nightmare
+- Fixed Freeza's facing during Finishers under certain conditions
+- Changed boulder's impact sound in Finisher 2
+
+Beta 22f (20200702) - Dude, Where's my pal? edition
+- Updated character to SFFv2. Say goodbye to easy pal management, and welcome to the worst system Elecbyte could ever create
+- Updated Freeza's portraits
+- c.MK is now -1 on block
+- Fixed timing on Transformation intro
+- Fixed timing on Egg intro
+- Updated Perfect winpose
+- Fixed Dive Kick causing enemies to go below ground under certain conditions
+- Decreased startup time in ground Death Wave
+- Increased startup time in Air Death Wave
+- Increased hitbox in After You/Counterport
+- Increased landing recovery by 3 ticks on every Head Charge version
+- Slight damage reduction in EX Air Head Charge
+- Changed limit of Head Charge and EX Head Charge so they can be performed only once per type during combo
+- Emo Dash Forward Teleport can now be cancelled from any previous ground-based basic
+- Fixed bug introduced in version 22e due to incorrect explod's ID in Finisher 1
+- Fixed foreground stage elements still being displayed in Finisher 3
+- Small tweaks to Freeza's Boast AI mode
+
+
+Beta 22e (20200629) - New Throne edition
+- Fixed SFF file and reordered sprites 
+- Updated Cliff Portrait
+- Updated radio sprites
+- Added radio explosion to Dancing soldiers intro
+- Tweaked Egg intro
+- Fixed hitcount in Forward Throw
+- Shortened flying time in EX headbutt
+- Fixed bug when doing Chip KO in Finishers
+- Prevented Finisher 2 from locking up the match.
+- Fixed crater position in Finisher 2 when performed by P2
+- Fixed debug flood during game ending scene
+- Fixed super jump bug introduced after adding Explodsive buffer
+- Updated Charge code in Explodsive buffer
+- Added missing negative edge in some commands
+- Added Freeza's Boast AI mode (config.txt)
+- Added a few AI tweaks
+- [HDBZ] Updated Air Dash code
+- [HDBZ] Fixed jump start invulnerability frames
+- [HDBZ] Updated buffer guard system
+- [HDBZ] Added Gotenks scribble gethits
+- [HDBZ] Added Dizzy stars code
+- [HDBZ] Added Wall Spark sprites
+- [HDBZ] New anim standard 5252
+- [HDBZ] Updated anti-fuzzy code
+- [HDBZ] Added Tenshinhan's Birdview gethit
+- [HDBZ] Updated Focus Attack and Wall break
+- [HDBZ] Added Satan's Megaton Punch gethits
+- [HDBZ] Added Satan's Champ's Delight gethits
+- [HDBZ] Removed power gain in some Zetto Counters
+- [HDBZ] Fixed bug in guarding states causing first attack notification fail after blocking heavies and holding back after the block
+- [HDBZ] Changed basics limiter helper into an explod as well as fixing the hitpause delay application of the limiter
+
+
+
+Beta 22d (20190410) - Invisible Hit edition
+- Updated Freeza.snd file
+- Fixed Aerial Headbutt placing characters underground if hit as OTG
+- Fixed moves that accidentally broke after the Explodsive buffer update
+- Changed command for Death Saw from HCB,F+punch to QCB,F+punch
+- Fixed conflict in variables between Explodsive buffer and Torture Gun
+- [HDBZ] Changed when power charge actually begins
+- [HDBZ] Fixed Grab Anim on Throws
+- [HDBZ] Made jump start state not hittable by throws
+- [HDBZ] Removed extended throw invincibility from get up
+- [HDBZ] Added Fireball Projectile Helper Standard
+- [HDBZ] Fixed low get hit animation while in the air
+- [HDBZ] Removed redundant Flip KO code
+- [HDBZ] Fixed ground sparks against clones
+- [HDBZ] Added "Hold to recover" feature
+
+
+Beta 22c (20190217) - AWZ Education edition
+- Fixed typo in winquote
+- Dash SK now will ground bounce the enemy
+- Fixed Forward Throw not killing enemy on last hit
+- Reduced guarding time for Death Wave
+- All Head Charge variants can now only be performed once per combo
+- Fixed Emo's Death Charge automatically whiffing when performed near the edge of the stage
+- [HDBZ] Updated small portrait
+- [HDBZ] Set getup animation to 30 ticks
+- [HDBZ] Fixed power charge filling at time=0
+- [HDBZ] Added AlexSin's fixes in throw states
+- [HDBZ] Added EXPLODSive buffer
+- [HDBZ] Added Visual Level Indicators to EMO gauge
+
+Beta 22b (20180507) - Have gun, Will travel edition
+- Decreased recovery to Forward/Backward teleport
+- Teleport to Ground can now be performed during air dash in Emo mode
+- Mash feature in Torture Gun has been removed. Torture Gun will keep hitting the enemy while you hold the punch button. Releasing the button will cancel the move
+- Slight hitpause adjustments to Torture Gun
+
+Beta 22 (20180506) - #MakeHeadbuttGreatAgain edition
+- Head Charge can now be performed in Emo Mode
+- Torture Gun is now performed as RDP
+- Gameplay tweaks on Torture Gun, dealing now half damage
+- Fixed sound effect in A.HK custom state
+
+Beta 21 (20180206) - JNP edition
+- Tweaked CLSNs
+- [HDBZ] Added IAD delay attack code
+- Fixed exit emo command
+
+Beta 20 (20180202) - Frank Underwood edition
+- Hopefully fixed bug in Power Charge being performed non-stop just before winposes
+- Fixed fatality animation triggering while enemy was alive in Finisher Lv3
+- [HDBZ] Added Neutral Throw
+- [HDBZ] Fix in Dash Collision facing bug
+- [HDBZ] Added OTG fix
+- [HDBZ] Removed PowerAdd from basics
+- [HDBZ] Updated Chicken Block code
+- [HDBZ] Added Air Basics Knockdown effect
+- [HDBZ] Added AttackDist at the end of active hit
+- [HDBZ] Fixed old WinMugen state 5200
+- [HDBZ] Fixed old WinMugen state 5050
+- [HDBZ] Added Tech throw code
+- [HDBZ] Added Ethan The Human Color Separated SFF and pals
+- [HDBZ] Fixed animation 5170 glitch
+
+Fix patch:
+- Fixed bug in enemies sometimes frozen after being hit by j.SK
+;- Enabled Head Charge to be used under Sadism mode
+;- Changed command activation for Torture Gun from QCF+P to DP+P
+- Increased hitbox size in Finisher 2 Beam Barrage
+- Fixed damage values in Supers and Finishers
+- Disabled EMO mode against Saibamen
+- Fixed Lv2 cinematics against Satan
+
+
+Champ Build release (20170407):
+- Fixed Finishers being disabled by mistake
+- Adjusted damage to Flaming Headbutt
+- Adjusted damage to finishers
+- Small tweaks to damage dampener system
+- Fixed hitsparks on Death Beam
+- Fixed Dancing Soldiers' intro where Freeza would regain control earlier
+- [HDBZ] Fixed formula in new damage dampener
+- Fixed issues within Reverse Commands' code, affecting Air Headbutt
+- [HDBZ] Removed Vans/JNP Gravity fix
+- [HDBZ] Removed Text notification in Dash Collision
+- Removed FX blur from Focus Attack
+- Disabled tail sounds in idle and crouch stances
+- Added hit ground sound
+- Increased damage in Death Ball Lv2 and Lv3
+- Added Juggle limiter to EX Head Charge
+- [HDBZ] Tweaked code in Reverse Commands' fix
+- [HDBZ] Changed Command Buffer Time from 1 to 3
+
+
+BETA 18 (20170119) - Back to work edition
+- Fixed some sounds not stopping after skipping intros
+- Fixed Power Charge Mouth explod not being removed under certain conditions
+- Fixed Basics limiter helper
+- Added new Head Charge impact sound
+- Changed command activation for Emo Mode to D,D,y+b
+- Changed command activation for Sadistic Dance from QCFx2+2K to QCFx2+K
+- Forward throw damage has been increased 20% and it will deal an additional 50% more damage from the 5th hit
+- Counterport will now play slightly faster
+- Slightly reduced startup time on EX Dancing Elbow
+- Death Ball will now stay a little longer on the ground
+- Reduced power gain in Torture Gun
+- Reduced the amount of Sadism bar gained from hitting with basic attacks
+- Adjusted Dizzy Stars' position against Piccolo
+- [HDBZ] Updated small portrait
+- [HDBZ] Updated Hyper KO Finish BG
+- [HDBZ] Removed Blue explosion sprites in Dash Collision
+- [HDBZ] Updated battle messages
+- [HDBZ] Applied Vans/JNP Gravity fix
+- [HDBZ] Added new damage dampener
+- [HDBZ] Added Reverse Commands' fix
+- [HDBZ] Added Piccolo's Compatibility against clones
+
+BETA 17 (20160630)
+- Added 20 ticks limiter to EX Wave>Super Jump followup
+- Fixed timing in Golden Freeza winpose
+- Freeza will not have his EMO mode disabled if his sadism bar is depleted from being hit
+- Sounds will stop playing after interrupting Freeza's Transformation intro
+- Fixed Hyper KO snd bug introduced since Alpha 1
+
+BETA 16 (20160623)
+- Fixed Finisher 2 not working 100% of the times against smaller enemies
+- [HDBZ] Updated sounds to SP (5,2), SK (5,5) and Strong Hit sound (5,6)
+- Added POTS' style AI ramp
+- Increased 30% of recovery time to Dancing Elbow
+- Changed attack sounds for Forward Throw
+- Changed sounds for EX Dancing Elbow's last hit
+- Changed sounds for Sadistic Dance's last hit
+- Changed sounds for Death Wave and EX Death Wave
+- Changed sounds for Death Beam
+- Changed sounds for Death Ball
+- Changed sounds for some attacks in Japanese voice pack
+- Increased hitbox size in Death Barrage Beam finisher in order to hit smaller enemies
+- Prevented recovery on Sadistic Dance Lv3
+- Adjusted power gained on blocking Torture Gun 
+- Hitting Freeza while in Sadism mode, will now decrease his Sadism bar. 
+- Lv2 and L3 can now be performed with reduced Power levels and will disable Sadism mode
+
+BETA 15 (20160529)
+- Fixed AI being able to perform EX moves with less than 500 power
+- Fixed AI being able to go to State 0 during a SuperPause after the intro was skipped
+- Fixed AI on Death Wave/Death Saw bug
+- Fixed AI ignoring hitstun times after the intro was skipped
+- [HDBZ] Fixed Dash Collision bug locking P1 in state 0
+
+BETA 14 (20160518)
+- Tweaked AI
+- Fixed Vaccum behavior on Death Ball when enemy located between Freeza and DB
+
+BETA 13 (20160423) - XG's on duty now
+- Disabled Emo Mode for Team battles
+- Fixed broken intros against Z2 characters introduced in Majin build
+- Fixed EX Head Charge aura not being removed under certain conditions
+- Fixed c.SK infinite
+- Fixed infinites in jump normal attacks
+- Fixed Death Ball Lv3 being able to activate with only 2000 power
+- [HDBZ] Updated author's name to HDBZ standard
+- Added AI
+
+BETA 12 :
+- Finisher 3 :
+	+ Changed the placement of killed voice for scared Blue Soldier.
+	+ New Super Nova charge sprite.
+	+ Added new Super Nova growing and thrown SFX.
+	+ P2 shakes when held by the pack of soldiers. Also added punching sounds.
+	+ No neck cracking animation before charging Super Nova.
+	+ When soldier gets killed, grilled bacon sound is displayed.
+	+ Added "Here boy, catch!" voice before throwing Super Nova.
+	+ The 3 first Soldiers run into P2 without any camera cut, leading to the multiple soldiers hitting P2 (still without any cut).
+
+
+BETA 11 (sent 18/08/15) :
+- Fixed this bug : when his Emo Sadistic Dance is blocked, after he lands he will be standing still and be uncontrollable! Until he is hit by the enemy.
+- During Finisher 1, removed finger sparks.
+- For the King Cold winpose, before King Cold shows up, Freeza first walks to the center of the screen.
+- Finisher 3 : coded the most part of it, all the way to super nova burning the soldier. Now looking for feedback to fine tune it.
+
+BETA 10 (sent 26/07/15) :
+- Updated sounds for "army of soldiers blown away" intro.
+- New intro : army of soldiers blown away, with Freeza in his car/pod.
+- New intro : single soldier explodes, Freeza lands.
+- New winpose : Golden Frieza as you win with a perfect.
+- New winpose : 100% power (hold A to select this winpose).
+- New winpose : King Cold (with two speeches).
+
+BETA 9 (sent 19/07/2015) :
+- Made EX Dancing Elbow a bit safer (P2 could sometimes air recover from the launching knee part).
+- Fixed spriteno that made Freeza VS SSJ Goku intro display an incorrect sprite.
+- Added a back dash to finisher 1 in case Freeza is too close from the border of the stage when performing Death Beam Barrage.
+- Lv3 Death Ball has longer hitpause to give it more power visually.
+- Added red hue to Lv2 death ball and made Lv3's even stronger.
+- In Sadism mode, pressing FF will make Freeza run if he's far from P2, and teleport behind him if he's close to him. (good ? unplayable ? thoughts ?)
+- Cleaned the SFF a little.
+- Fixed Super KO BG for Finisher 1 by having only the last hits of the barrage kill P2.
+- Lv2 and Lv3 Death Ball have a different voice activation.
+- Freeza destroys the boombox with a death wave during the "dancing soldiers" intro.
+- Small fixes for both the Air Death Wave and Invisible Death Cut 2nd frame in the 'charging' pose (he had some pretty big shading changes going on).
+- New floating down anim for Freeza, with tail animation, during Army of Sliders intro.
+- Added screams to Dancing Soldiers intro, and maximized all voices, because MEEEEHHH !!!
+- Dancing soldiers now have an horizontal flip in their animation, for more variety.
+- Vertically flipped Torture Gun FX at random, for more variety.
+- Finisher 2 :
+	+ Added voice to startup
+	+ Removed black BG + supersound to not treat it as a supermove.
+	+ Added laugh and crack neck state, just as finisher 1.
+	+ Added cut-in-half animation (works on Freeza only for now, as a test).
+	+ Added pink slash animation.
+- Added Wine Soldier Winpose
+- Added winpose selection with button press.
+- Finished "Army of Soldiers" intro. Now includes 31 randomized soldiers.
+- Added new intro : Freeza in form 1 in front of Army of soldiers. He transforms, and all soldiers get killed.
+
+BETA 8 (taken back from little progress by Quickfist) - sent 11/07/2015 :
+- Death Charge now does some block damage.
+- Fixed damage for finisher 1.
+- Finished coding Lv3 Death Ball : 
+	+ improved damage.
+	+ Fixed lightning and vaccuum helper.
+	+ Coded Lv3 Air Death Ball.
+	+ Added lightning to charge state.
+	+ Gave it a red hue so it's closer to Super Nova, visually.
+	+ Added small explosions around the ball on the ground.
+- Added Soldiers dancing intro (missing screams).
+- Added Army of Soldiers teleporting out intro (missing a few soldiers, but coded for all of them).
+- Coded Finisher 2 (Daichiretsuzan).
+
+BETA 7 :
+- Put back superpause SFX to Death Charge startup.
+- Ground EX Head Charge has the same woosh sound as the Air version.
+- Added "Head Charge Nova" SFX as Death Charge woosh.
+- Sadistic Dance only costs 2000 power (instead of 3000) during Sadism mode.
+- Added a superjump sound effect to the last part of his QCFx2+K Sadistic Dance.
+
+BETA 6 (sent 22/02/2015) :
+- Removed super FX and super SFX during Death Charge startup. Sounds too empty now though.
+- Super KO BG appears when killing P2 with Death Charge. ^_^
+- Torture Gun :
+	+ Added hitsparks (was done on purpose not to have them at the beginning)
+	+ Realigned guard sparks for Torture Gun.
+	+ New Torture Gun Hitsounds.
+	+ Sadism bar gets charged during Torture Gun even if you don't connect, and fills in even faster when you connect.
+	+ Added slightly more range to Torture Gun.
+	+ EX version and visual aid (in form of a 1 black/white pixel) are not needed IMO.
+- Updated woosh for Strong Punch (it's because you sent me the Medium Punch sound, it was even labelled "medium"...)
+- Added strong kick woosh to jumping SK.
+- The last kick of his forward throw has the strong kick woosh.
+- Changed Sadism teleport from state 130 to 2690, because it interfered with the blocking states.
+- Added Sadism Counter move. Using the EX Dancing Elbow Knee/teleport/tail flip part to end the move.
+- Darkened background during Sadism mode activation, added a laugh anim at the end and added a "Dreadful Realization" sound.
+- In Sadism Mode, Freeza now teleports back instead of dashing back.
+- Added comboability to f+SK Axe Kick (same comboability as normal s.SK).
+- Removed camera shaking during superpause of Death Beam Lv1/Lv2.
+- Torture Gun can be combo'd into Supers/Hypers, just as other ground specials.
+- Sadism bar changes color and flickers as it gets filled, and has a "full power" sound when it's full.
+
+BETA 5 (sent 15/02/2015) :
+- Fixed cloak intro displaying wrong sounds.
+- Added width during Death Ball so that Freeza stays on the screen when on the edge.
+- Using Gethitvar(damage) to calculate how much the sadism bar should be filled when hitting P2.
+- Death Charge :
+	+ Added Vega's Psycho Crusher command (charge B,F,B,F+p) as alternate command for the move.
+	+ Added Fire Effect to P2.
+	+ Lowered damage.
+	+ Last hit sends P2 up.
+- Freeza teleports forward when pressing F,F in Sadism Mode.
++ Coded Torture Gun (can be combo'd into, what should combo from it ?)
+- Replaced woosh and hitsound for strong punch, as well as woosh for weak kick.
+- During Sadism mode, press D,D during the apex of a jump to teleport to the ground.
+
+BETA 4 (sent 10/11/2014) :
+- Updated crouch sprites so tail hits the ground correctly, shadow-wise.
+- Charging Death Ball Lv1/Lv2 now works correctly (thanks XG for looking into the code). Also changed the length during which you can charge the move.
+- Intros are played randomly again.
+- SADISM MODE :
+	+ Coded Sadism activation state (D,D,D+y+b)
+	+ Disactivated Head Charge (all EX/normal, ground/air versions), Dancing Elbow and counter attack moves.
+	+ Coded special gauge for P1 and P2 sides. Code to fill Sadism Bar is based on movehit/moveguarded, and is a little clunky for now.
+	+ Lv1 moves are free but disable Sadism Mode.
+	+ Coded Death Charge - D,D,D+y+b (still needs to set P2 on fire and send him up in the air).
+
+BETA 3.2 (sent 07/11/14) :
+- Transformation intro :
+	+ Changed glass shattering sound.
+	+ Made the last cracks sprite display correctly.
+	+ Made red pal FX fade in.
+	+ No music is played during the intro.
+	+ Added dust.
+
+BETA 3.1 (sent 06/11/14) :
+- Death Saw can now hit lying opponents. Let's see if this is not unbalanced.
+- Freeza throws Death Saw A (light version) directly in front of him, so that the move doesn't whiff at times in the corner, particularly on short opponents.
+- Transformation intro :
+	+ Updated sounds.
+	+ Changed glass shattering code.
+	+ Added some red full screen FX.
+
+BETA 3 (sent 02/11/2014) :
+- Transformation intro :
+	+ Displayed him in his 'raised and crossed arms' pose in his 1st Form a little more, just to give it a little more 'oomph' when he does start powering-up.
+	+ Corrected the looping on the spikes.
+	+ Added the new sounds and 2nd roaring voice.
+	+ Updated cracks anim with new sprite.
+	+ Removed the "kneel" part from "your new god has arrived" speech.
+	+ Fixed bug where armour wouldn't be shown on the body during his 1st power-up charge.
+	+ Added lightning and BGPalFX to the intro.
+
+BETA 2 (sent 24/10/2014) :
+- Corrected close s.SP sound effect.
++ Very first version of Henshin intro.
+
+BETA 1 - Just because Cybaster is back in control (LOL !!!), but he's slow as fuck (BOOO !!!) - sent 03/10/2014 :
+- Close medium punch now has CLSNs for his legs from AnimElem 4 to AnimElem 6.
+- Removed test sprite added by Websta in the stance.
+- Fixed the intros (cloak and egg) having bugs when using Japanese voices.
+- Changed crouch block CLSNs.
+- Slightly more projectile invincibility time during Dashing Elbow.
+- Realigned c.SP by 2 pixels Y-wise.
+- Corrected typos in the winquotes.
+- Made Head Charge less safe on block by changing P2's and Freeza's vels when the move is guarded.
+- Removed Beam Collision code.
+- Ground Head Charge builds supermeter on it's own (even when it doesn't make contact).
+- Added a strong punch whoosh sound to all his Death Wave animations.
+- Added a footstep sound to his (far) s.MP, the Cammy elbow (not very audible).
+- Made Sadistic Dance a Lv3 move (it only needed 2000 power before).
+- Should have fixed the cancelling supers into each other when performing Death Wave first (https://www.youtube.com/watch?v=N7BFAIjNxVY) :
+	+ The Death Wave hits the enemy;
+	+ perform a Death Beam...
+	+ but in the same moment (super pause) repeat the Death Beam motion (once or twice) or do the Death Ball one, or the Death Saw or the Tail Press Nightmare (second level); 
+	+ doing so will not remove the Death Beam explod (it disappears if you do the Death Ball or another Death Beam but it won't go away if you do Tail Press Nightmare) and you will be able to waste all of your power.
+- Close s.SP > s.MP is not possible anymore (gave more recovery time to close s.SP).
+- Gave Sadistic Dance slightly more startup invincibility and more anti-air CLSNs.
+- Added the Palette Showcase to the folder.
+- Updated readme with the one sent by Balthazar
+- Made f.SK a command move performable with F+sk (named Axe Kick).
+- Counter move :
+	+ Removed 10 ticks of startup to the move.
+	+ Made the command a real RDP (again!).
+	+ Has slightly less active frames.
+	+ Added a slow-motion pause to make countering easier and avoid some punishes.
+- Frieza can't combo off his high counter if he tries to OTG in the corner (ofrced P2 into a custom state reproducing state 5100+, with a NotHitBy).
+- Fixed Dancing Elbow infinite (Dash Elbow Infinite : https://www.youtube.com/watch?v=AgZpbl8yw6w OR https://www.youtube.com/watch?v=DOjxtcy1csg) by putting a combo limiter. Performing it twice in a combo will make P2 fall.
+
+
+
+ALPHA 21 (sent 26/08):
++ Added sprites for transformation intro to .sff (HE LIED !)
+- Aligned transformation sprites (HE LIED !)
+- Changed the default template in .sff to palette template
+
+ALPHA 20 (sent 07/07):
+-Increased counter startup time
+-Added 2 more active frames to Death Saw
+
+ALPHA 19 (sent 07/07):
++Added counter special move
++Added Tail Press Nightmare
+-Changed the landing sound for the egg intro
+-Changed the sinking Death Ball to explode on contact instead of expiring first
+
+ALPHA 18 (sent 15/06):
++Added dialouge to cape intro
++Added fx to cape intro
++Added mouth flaps to intros
++Added mouth flaps to winposes
++Added Lv2 Death Ball
+-Changed up Death Ball voices
+-Fixed egg intro (?)
+-Made cape intro share palettes
+
+ALPHA 17 (sent 01/06):
++Added underground juggles prevention code
++Added sounds to intros, winposes, taunt
++Added sounds to Death Saw
+-Removed air blocking on jumping forward and airdashing
+-Removed juggle limitations on air normals
+-Removed juggle limit on crouch C
+-Changed air block animation
+-Changed Death Ball sinking FX
+-Changed the fading in EX Elbow to teleports
+-Fixed the cost issue and block issues with EX Head Charge
+-Fixed Elbows infinte problem
+-Limited teleport from crouch C to 1
+
+ALPHA 16 (sent 17/05):
+-Made all supers face opponent when they activate
++Added Death Saw
++Added Death Ball ground sinking (may need some work)
++Added 1 win pose
++Added 2 intros
++Added taunt
++Added mouth closing during power charge
+
+ALPHA 15 (sent : not yet):
+- Added smoke FX to ground head charge.
+- EX Head Charge juggles falling opponents.
+- Added spinning rebound sound at the end of Ground Headbutt.
+- Reduced damage of EX Head Charge (the combo "EX Head Charge > Air EX Head Charge > repeat" is INSANE!!!)
+- Added a fix for positionning vs Freeza intro, on faulty stages.
+
+ALPHA 14 (sent : 27/09):
+- New Lv1 Superspark and new Lv1+Lv2 supersound.
+- New falling sounds.
+- During getup, replaced woosh sound by jump sound.
++ Dizzy animation.
+- Idle anim tail sound.
++ Ground Head Charge.
++ EX Ground Head Charge.
+
+ALPHA 13 (sent 16/07):
++ Focus Boomerang
+- Super KO BG for Death Ball :P
+- Added CLSNs to Death Ball state.
+- Fixed wrong eye color on a 2 Death Ball sprites.
++ Midnight Bliss.
+- Can't cancel any super with a teleport when EX Death Wave connects.
++ Air Death Ball 25%
+- CHanged palette position.
+
+ALPHA 12 :
+- 14 new palettes (2 Dope, 4 SoldierSunday, 8 Quickfist)
+- New EX Head Charge sound.
+- Added width to Freeza during Death Wave.
+- Longer recovery time for Death Beam Lv1&2, hopefully avoiding chaining into each other (1>1 or 2>1).
+- Fixed winpose alignment.
+- Fixed tail pounce sound during crouch turn.
+- Changed Jap Death KO voice (using GethitSuper004).
+- Can chain f,f+SK > (EX) Death Wave.
+- Slightly realigned f,f+SK (a.SK) sprites.
++ Death Ball 25% on ground
+
+ALPHA 11:
+- Realigned Death Wave beam closer to finger.
++ Death Beam Lv2
+
+ALPHA 10 :
+- 5 new palettes (1 Aldo, 4 SoldierSunday)
+- Corrected grab miss voice in English voice.
+- Added tail pounce at end of c.SP.
++ s.MP animation.
+- Replaced Fwd throw hitsounds by LK hitsounds.
+- Less air vels and more recovery time for Death Wave, to avoid infinites with LP Death Wave after a corner ground bounce.
+- Fixed dash collision voice (for Eng version).
+- Fixed Dash collision alignment.
+- Updated a.MP animation (removed a blur sprite).
+- Fixed air dash forward ctrl time.
+- Fixed shock animation.
+- Updated crouch sprites (tail touching ground).
+- Can teleport by holding up after air EX Death Wave.
+- Power Up voice gets cut at the right moment (Eng version).
+- Headcharge send P2 a little higher and is less safe on block.
++ EX Headcharge.
++ Death Beam.
+
+ALPHA 9 :
+- c.SP: no graphical glitch if you hold down at the end of move
+- 27 new palettes (1 Also, 2 Dope, 24 SoldierSunday)
+- Corrected Dive Kick woosh sound.
+- Voices (Jap and Eng) : basic attacks, gethits, death wave, head charge, power charge, KO voice, cheap KO voice (English only)
+
+ALPHA 8 :
+- Repel projectile is correct vs Z2 chars.
++ Walking animation!!!!
+- Fixed width.
++ c.SP
+
+ALPHA 7 :
++ 49 new palettes (4 gogngos, 25 SoldierSunday, 10 Dope, 2 StormEx, 1 Shadow0X3, 1 Cybaster, 5 Girard, 1 Balthazar)
+- Reordered palettes in DEF file.
+- Added tail woosh to superior dash.
+- Fixed backward super jump animation.
+- Teleport after c.SK doesn't set Freeza as high
+- Air Head Charge sends P2 higher and has a new sound effect.
+- Updated sounds in reverse kick throw.
++ Cheap KO.
+
+ALPHA 6 :
+- The air bullet from Air Death Wave loops correctly.
+- Fixed crouching tail thing (pause on right frame).
+- Aerial DW hits P2 before reaching the ground. EX version bounces an aerial opponent.
+- Super Jump replaced by teleport after c.SK.
+- Teleport pursuit by holding Up after a successful EX Death Wave.
++ Aerial Headbutt (qcf+P in the air).
+- 2 new palettes by Girard & Kirishima.
+- Updated the readme quite a bit (still far from finished, obviously).
+
+ALPHA 5 :
++ Reverse Throw 
++ Ground Death Wave
++ EX Ground Death Wave
+- 10 new palettes (5 Chazzanova, 4 Gogngos, 1 Girard)
++ Air Death Wave (normal and EX)
+
+ALPHA 4 :
+- Removed control from back dash.
+- Changed back dash animation and gave it some invincibility at the begining.
+- Added delay to tail pouce during crouch.
+- Added tail pounce sound at the end of the move to c.MP, c.MK and c.SK.
+- Coded quick ground recovery using backdash anim.
+- Fixed Knee Throw bugging vs chars with no Flip KO anim.
+- Using SSW2 colors for small portrait on select screen.
++ Aerial Punch Zero Counter (a.SP)
++ Standing Kick Zero Counter (c.LK as sliding kick)
++ Intro VS SSJ Goku Z2.
+
+ALPHA 3 :
++ Grab attempt.
++ Aerial Kick Zero Counter.
++ Standing Punch Zero Counter.
+- Speed back up bow winpose.
+- Right frames for descending loop after air attack (tail goes up)
+- Bigger hitboxes on f,f+SK.
+- Added some range and vels to c.SK
+- Added landing SFX and FX to c.SK.
+- Added more epic woosh to c.SK.
+- Updated big portrait.
++ c.MK (2 hits)
++ Intro VS SSJ Goku Z2 (very WIP)
+- Fixed Broken Back "arms+legs" bug.
++ Knee Grab (tap buttons to go up to 5 knee attacks before the final attack).
++ c.LP
+
+ALPHA 2 :
+- Realigned last sprites of s.SP.
+- a.SK has a tail woosh SFX.
+- Fixed Beam fade fatality state.
+- Bow winpose is slower.
+- Fixed jumping back anim after an aerial attack with negative X vels.
+- Speed up a.SP a little.
+- Added woosh sound to getup animation.
+- Fixed glitch when landing from Flip KO.
+- Fixed f,f+SK : can't combo into normal attacks, added the ironman pose at the end.
+- Added Delayed Elbow (hold X during a.LP to stay in the attack position).
+- Fixed s.LP sprite n°2 with transparent pixel.
+- Fixed sprite of stance with wrong toe nail color.
+- Added landing sound to s.SP, added landing effect to superior dash.
+- Superior dash doesn't go as far anymore.
+- c.LK
+- c.MP
+- Saucer Kick (hold MK during a.MK)
+- Flipped small portrait.
+- c.SK
+
+ALPHA 1 (started 04/05/2013) :
+- All sprites indexed
+- Portraits
+- Stance
+- walk back
+- run
+- Crouch
+- Turn
+- Ironman (WIP)
+- Guard
+- Jump (up, back, fwd)
+- Air Dash (Fwd, Back)
+- Dash Collision
+- Power Charge
+- Bow Winpose
+- Gethit : High, mid, crouch, trip, flip, twist, getup, thrown, shock, etc.
+- Cleaned up AIR and SFF from FX and Misc. sprites that won't be used.
+- s.LP
+- s.LK
+- s.MK
+- s.MK close
+- s.MP close
+- s.SP
+- s.SK
+- s.SK close
+- Added sounds : tail pounce crouch, tail woosh, foot step
+- Cleaned up SND file of all SSJ Goku voices.
+- a.LP
+- a.LK
+- Skull Crush Intro
+- Run Stop animation
+- a.MP
+- a.MK
+- a.SP
+- a.SK
+- Running SK (Superior Dash)
+- Dive Kick (D+b during fwd jump)
+- Cursed state
+- My Toes gethit.
+- Cleaned up all CLSNs for GetHit animations.
+
+
+----------------------------------------------------------------------
+MEH & WHAT !!?
+- Any reason why the first loop of the a.MK hits just once, but the second spin can hit twice? I'm not asking you to change it, because I like it.
+? Once I was KO'd when running at someone, and it kept me frozen in the air! He MIGHT've hit me in the first frames of the f,f+SK. 
+? after a launch, Death Wave > [medium punch, Death Wave] might be an infinite.
+- Deathsaw keeps coming out when I try to use Deathbeam. I don't know if it's a coding thing, because I'm pretty good with my execution, but it's about 50/50 when I'm trying to use deathbeam, and I get the saw.
+? Frieza's voice seems a bit low in comparison to the other characters. Especially on his counter command "After You" and Charging Elbow Attack.
+? Counter could use some use such as countering a projectile (Like Wesker's counter from UMvC3)? It's an alright move, but leaves something to be desired.
+? whenever you use Aerial Head Charge after his mid-air HP, when the enemy hits the ground they'll kind of be slightly inside of the floor, so to speak.
+? Maybe another voice file for his air version of Death Wave? I have the feeling you'll be hearing it too often if it's for both air and ground versions...
+? LVL 1 death beam does horrible damage. I understand it to be the weaker but faster of the LVL1 supers but just seems pointless with the current damage output. 
+? (shouldn't be possible anymore to chain the 3) Three level 1 death beams do better damage than one level 2 + one level 1 death beam.
+- Transformation sounds during the intro are not stopped if the intro is skipped! :P
+- When you do his aerial head charge (even EX version) and switch side, when I try to follow up with a head charge or any move of that sort, the game registers it as I am still on the same side making me do a death wave, meaning I have to do the death wave motion (QCB) so the game registers it as a Head Charge (QCF) when I am switching side, after a few seconds (like 2) the game register freeza to have switched sides. Was is it meant to be like that or you're doing something about it?
+- Death Saw can be beaten out by a single Ki shot? IDK just seemed wrong (Vegeta destroys it but not the other chars... WTF !!!!)
+? (NAH, it's fine as is) Torture Gun doesn't give any superbar, only Sadism Bar. But, should it give some? Well, maybe not, his power charge isn't even disabled for Sadism Mode (not that it should, I'm just pointing it out).
+? I do think we should rework the Z2 chars' intro's a little, everyone should have one 'silent' intro where they just stand or pose. Then when a character has a more 'talky' intro (our later Z2 characters have a lot of those),
+it will automatically play the 'silent' intro for the other player. I assume it can be randomized if Player 1 or Player 2 has the talky intro. I like our intros but you can't make out anything when both have talky intros at the same time, and that's a bit of a shame. What do you think?
+? Skipping his Transformation intro at certain parts will have sound effects (and really long ones too) playing over the start of the fight, please make sure ALL sounds playing during the transformation are instantly stopped as soon as the player presses Start to skip the intro.
+
+
+
+NEW MOVES TO CODE :
+- Finisher 3
+
+
+FEEDBACK :
+
+??? Quad EX Death Wave Combo! Ex Death Wave (launches), up to teleport), a.LP, a.MP, air EX Death Wave (bounce-juggles...but not always?), EX Death Wave (bounces/launches! again!), up to teleport, air EX Death Wave ! Somehow p2 won't bounce up from the 3rd EX Death Wave in the combo described above, if you put another LP Death Wave at the very beginning...weird! Must be some math stuff or something.
+
+? On certain characters, Frieza can followup his j.HK even after he uses his groundbounce with st.LP (intentional?) (j.HK causes a hard knockdown due to the groundbounce limit. You can land and do st.LP before they hit the ground. And the infinite is very practical and can be used in a real match. The timing isn't hard once you get used to it.)
+
+- The Frieza j.HK infinite has to do with whiffing any aerial special BEFORE the opponent lands. If it hits it obviously ends the infinite, but if it whiffs, he gets his groundbounce back on j.HK. Death Wave needs to be done right as the character is landing so that the groundbouncing animation makes them avoid the hit, while Head Charge needs to be done right when you use j.HK, though later into the loop you need to delay the j.HK, which is why using Death Wave is more optimal. Head Charge will only make it a loop. 
+
+- EX Headbutt Corner Loop : https://www.youtube.com/watch?v=9HP2iWhHiE0
+
+- COMBO (In corner) : Launcher > J.LP > C.LP >Launcher > J.LP > C.LP > Launcher > J.LP > Launcher > J.HK > wait for bounce >Launcher >J.LP > AIR EX DEATH WAVE > DEATH BALL
+	+ Alt. finishers! Scrap everything the last J.LP and do :
+		S.LP > Standing EX. Death Wave > DEATH BEAM/DBB
+		S.LP > Death Saw > J. Head Charge.
+	+ Adding attacks (i.e. C.MK) before the first launcher is possible but affects the opponent juggle time greatly making the combo harder to perform.
+
+- Elbow infinite at the end : https://www.youtube.com/watch?v=hIxlTn5FEGg
+- Corner infinite - based on smurfy's input : https://www.youtube.com/watch?v=860s5aiO9rg
+
+
+- Lv3 Death Ball : when p2 jumps over the Death Ball and it sinks into the ground, they will be 'sucked' to the wrong direction (the direction should change after they jump over/switch sides with the Ball)--> FIXED by XG
+
+??? Pretty often, when performing the Emo Sadistic Dance, Freeza won't follow up with his Finisher! p2 will just be in his dizzy animation, and Freeza is fully controllable.  And it's not because he lacks a Lv3 Finisher, both times it happened the Emo bar wasn't filled up all the way.
+- When transitioning from Round 1 to Round 2 when you have a full Emo bar, it will play the 'full power/bar is full' sound effect again, for no reason.
+- Death Ball Lv3 with the slower hitpauses feels better, maybe add about 3 more hits to it? I feel it's not powerful (in terms of damage) enough for a Lv3.
+- add a "oh my" variant to the soldier intro. voice is already used on his sadism activation
+- Add sounds by Daeron ?
+
+
+- Freeza soldier dancing intro: Would it be too much trouble to cut the boombox sprite into a few pieces, and apply your debries bouncing code to it and then after a short while have the pieces fade out, rather then the entire boombox lamely fading away in it's entiredy?
+
+- Hmmmmmmrrrm honestly, the 100% Power winpose came out looking a bit weird, I'm not sure we should keep it, personally I could do without it.
+
+- I feel all his non-EX Dancing Elbows need to come out a little faster. Even though it's not REALLY ment to be a combo move, comboing with the LK/MK versions is appreciated, and it doesn't work that well now unless you're standing (very) close. Having at least the LK version come out faster will make it a bit more useful.
+- Move the muscled winpose to failure state (  for time over and continue screen!)
+- Have the scream in the 1soldier death intro play a bit later and a red flash all over the screen just before they explode, to better transition, right now their legs kinda vanish without the explosion covering it.
+- Add "not my final form" voice to golden freea winpose.
+
+
+ICED IDEAS :
+- Add rocks in the space for nova
+- Earthquake sound for advancing : https://www.youtube.com/watch?v=QaJNCxN9rXg
+
+
+BALTHAZAR FEEDBACK :
+
+4) When Frieza throws the Supernova, instead of the screen cutting to the next shot (with the sphere traveling), have the camera follow the Supernova from the beginning, right after Frieza throws it. This means you'll have to make the sphere drop down a little right after he throws it, so it's more centered in the screen before it starts hitting the soldiers.
+
+6) Instead of the first soldier going black and then simply fading, is it possible to give him the Beam Death fading effect?
+
+7)....it plays out with the black background VERY LONG, making it look pretty dull, anything we can think of to add to the background to make it a bit more interesting?
+
+
+------------------------------------------------------------------
+LV3 DEATH BALL IDEAS
+
+? I think maybe a different superpause start-up frame will look better for Lv3. I'll need to see about that.
++ I wouldn't make the Lv3 ball even bigger, and I would keep Lv2 as it is as well.
++ hmmm maybe instead of one big explosion, a couple of explosions all around the ball can happen? So explosions would start to happen when the ball is still sinking. bam bam bam bam BAAAMM. Those smaller explosions leading up to the big final one might even pull p2 towards the ball if they hit.
++ Lightning during the charging sounds fine to me (i suppose you're talking about that chou khm lightning).
++ One last suggestion is to perhaps give the Lv3 death ball a red hue, so it's visably one step closer to the Super Nova.
+
+Ok so most of these changes will only occur when the ball whiffs p2 and it's sinking into the ground.
+For when the ball actually hits p2, how about instead of the hits dealing when they are standing, have the ball push p2 to the ground, then deal all the remaining hits on the ground, as if p2 is being squashed by the ball. P2 would display their falling impact sprite to act as 'on the ground' gethits.
+

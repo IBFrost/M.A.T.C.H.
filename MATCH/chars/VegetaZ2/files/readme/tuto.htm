@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<style>
+<!--
+.codmug      { font-family: Courier; font-size: 12pt; text-align: left; padding-left: 4; 
+               padding-right: 4; padding-top: 1; padding-bottom: 1; 
+               background-color: #C0C0C0 }
+-->
+</style>
+
+  <title>Vegeta Z2 by Balthazar & Cybaster - Tutorials</title>
+  <link href="css.css" type="text/css" rel="stylesheet">
+</head>
+<body leftmargin="0" topmargin="0" alink="#ff9933" bgcolor="#fdfdfd" link="#006699" marginheight="0" marginwidth="0" text="#000000" vlink="#5584aa">
+<a name="top"></a>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+  <tbody>
+
+
+
+    <tr>
+      <td>
+
+	
+	
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+
+
+		<td align="center" background="images/typhoon-cr.jpg" height="24" width="100%">&nbsp; </td>
+
+
+	</tr>
+        </tbody>
+      </table>
+
+
+
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+
+
+	
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+
+
+		<td align="center" background="images/typhoon-lr.jpg" height="24" width="100%"><basefont face="Verdana,serif" size="-1">
+		<b>Tutorials for compatibility with Vegeta Z2</b></td>
+
+
+	</tr>
+        </tbody>
+      </table>
+
+
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<br>
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="85%">
+  <tbody>
+
+    <tr>
+
+
+	<td><basefont face="Verdana,serif" size="2">
+</font>
+	
+      <p><font face="Verdana" size="2">
+
+	In this section, you will just find a short tutorial to add compatibility during the intro with POTS Vega, available <a href="http://network.mugenguild.com/pots/">here</a>, or Warusaki3's Vega. You will also learn what parameters to use in your stages if Galactic Gunfire doesn't look good in them. For other compatibility tutorials with Z2 characters, please read the tutorials in Goku Z2's readme.
+
+<br><br>
+	
+	
+	<b><i><font face="Arial" size="3">Introduction with Vega by POTS</font></i></b><br><br>
+	
+	This is pretty straight-forward. When fighting Vega by POTS, Vegeta will always use the same intro to mimic him, with perfect synchronisation. However, at this point, Vega will not necessarily use the correct intro. To fix this, all you need to do is open the file States/System.st in Vega's folder (its size is about 54kb), and search for the following code :<br>
+	<table border="1" cellspacing="1" width="80%" id="AutoNumber1">
+	<tr>
+    <td width="100%">
+    <p class="codmug"><b><font color="#FF0000">
+    </font></b>
+;==========< INITIALIZE >==========<br>
+[Statedef 5900]<br>
+type = S<br>
+[State 5900, varreset]<br>
+type = varrangeset<br>
+trigger1 = !roundsexisted<br>
+value = 0<br>
+[State 5900, varreset]<br>
+type = varrangeset<br>
+trigger1 = !roundsexisted<br>
+fvalue = 0<br>
+
+[State 5900, Palette]<br>
+type = remappal<br>
+trigger1 = 1<br>
+source = 1, 1<br>
+dest = 1, palno<br>
+	</td>
+  </tr>
+</table>
+	Once you've found it, just add the following code afterwards, and you're done:<br>
+	<table border="1" cellspacing="1" width="80%" id="AutoNumber1">
+	<tr>
+    <td width="100%">
+    <p class="codmug"><b><font color="#FF0000">
+    </font></b>
+[State 5900, intro vs Vegeta Z2]<br>
+type = changestate<br>
+trigger1 = !Time && roundno = 1<br>
+trigger1 = enemy,authorname = "Balthazar & Cybaster" && enemy,name = "Vegeta Z2"<br>
+value = 193<br>
+	</td>
+	</tr>
+	</table>
+	
+	
+	<br><br><br>
+	
+	
+	
+	
+		<b><i><font face="Arial" size="3">Introduction with Vega by Warusaki3</font></i></b><br><br>
+	
+	This is pretty straight-forward. When fighting Vega by Warusaki3, Vegeta will always use the same intro to mimic him, with perfect synchronisation. However, at this point, Vega will not necessarily use the correct intro. To fix this, all you need to do is open the file cvsvega.cns in Vega's folder (its size is about 281kb), and search for the following code :<br>
+	<table border="1" cellspacing="1" width="80%" id="AutoNumber1">
+	<tr>
+    <td width="100%">
+    <p class="codmug"><b><font color="#FF0000">
+    </font></b>
+[Statedef 190]<br>
+type = S<br>
+ctrl = 0<br>
+anim = 0<br>
+velset = 0,0<br>
+<br>
+[State -2, 3]<br>
+type = ChangeState<br>
+triggerall = !var(12)<br>
+trigger1 = (P2Name = "cvsgeese" || P4Name = "cvsgeese") && (EnemyNear,PalNo = [1,6]) && EnemyNear,AuthorName = "warusaki3"<br>
+trigger2 = (p2name = "cvsgeese_normal" || p4name = "cvsgeese_normal") && EnemyNear,AuthorName = "warusaki3"<br>
+value = 192<br>
+<br>
+[State -2, 3]<br>
+type = ChangeState<br>
+trigger1 = (P2Name = "cvsiori" || P4Name = "cvsiori") && (EnemyNear,PalNo = [1,6]) && EnemyNear,AuthorName = "HÅh"<br>
+trigger2 = (P2Name = "cvsiori_normal" || P4Name = "cvsiori_normal") && EnemyNear,AuthorName = "HÅh"<br>
+trigger3 = (P2Name = "Iori_WLS" || P4Name = "Iori_WLS") && (EnemyNear,PalNo = [1,6]) && EnemyNear,AuthorName = "Vans"<br>
+trigger4 = (P2Name = "N.Iori_WLS" || P4Name = "N.Iori_WLS") && enemynear, authorname = "Vans"<br>
+value = 194<br>
+	</td>
+  </tr>
+</table>
+	Once you've found it, just add the following code afterwards, and you're done:<br>
+	<table border="1" cellspacing="1" width="80%" id="AutoNumber1">
+	<tr>
+    <td width="100%">
+    <p class="codmug"><b><font color="#FF0000">
+    </font></b>
+[State 190, VS Vegeta Z2]<br>
+type = ChangeState<br>
+triggerall = var(12)<br>
+trigger1 = !Time && roundno = 1<br>
+trigger1 = enemy,authorname = "Balthazar & Cybaster" && enemy,name = "Vegeta Z2"<br>
+value = 197<br>
+	</td>
+	</tr>
+	</table>
+
+
+
+
+
+	<br><br><br>
+	
+	
+
+
+
+
+
+
+		<b><i><font face="Arial" size="3">Introduction with Skullo by DivineWolf & SeanAltly</font></i></b><br><br>
+	
+	This is pretty straight-forward. When fighting Skullo by DivineWolf & SeanAltly, Vegeta will always use the same intro to mimic him, with perfect synchronisation. However, at this point, Skullo will not necessarily use the correct intro. To fix this, all you need to do is open the file System.cns in the Coding folder (its size is about 67kb), and search for the following piece of code in StateDef 5900 :<br>
+	<table border="1" cellspacing="1" width="80%" id="AutoNumber1">
+	<tr>
+    <td width="100%">
+    <p class="codmug"><b><font color="#FF0000">
+    </font></b>
+;[State 5900, Intro vs ???]<br>
+;type = ChangeState<br>
+;triggerAll = NumEnemy<br>
+;triggerAll = RoundNo = 1 || (!(Enemy, RoundsExisted) && !(TeamMode = Simul) && !(Enemy, TeamMode = Simul))<br>
+;trigger1 = Enemy, Name = "" && enemy,authorname = "" || Enemy, Name = ""<br>
+;value = <br>
+	</td>
+  </tr>
+</table>
+	Once you've found it, just add the following code afterwards, and you're done:<br>
+	<table border="1" cellspacing="1" width="80%" id="AutoNumber1">
+	<tr>
+    <td width="100%">
+    <p class="codmug"><b><font color="#FF0000">
+    </font></b>
+[State 5900, Intro vs Vegeta Z2]<br>
+type = ChangeState<br>
+triggerAll = NumEnemy<br>
+triggerAll = RoundNo = 1 || (!(Enemy, RoundsExisted) && !(TeamMode = Simul) && !(Enemy, TeamMode = Simul))<br>
+trigger1 = Enemy, Name = "Vegeta Z2"<br>
+value = 192<br>
+	</td>
+	</tr>
+	</table>
+
+
+
+
+
+	<br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		<b><i><font face="Arial" size="3">Making stages compatible with Galactic Gunfire</font></i></b><br><br>
+	
+	You will probably notice that in some of your Mugen stages, Galactic Gunfire doesn't look fantastic. Vegeta appears too low during the button smashing sequence and the camera is badly placed on the opponent when he receives the Ki barrage on his face. This is due to the stage more than to Vegeta. If you want to fix this, you just need to open your stage's DEF file and look into the [camera] section. In this section, replace or add the following parameters :<br>
+	<table border="1" cellspacing="1" width="80%" id="AutoNumber1">
+	<tr>
+    <td width="100%">
+    <p class="codmug"><b><font color="#FF0000">
+    </font></b>
+tension 	= 50<br>
+verticalfollow 	= .75<br>
+floortension 	= 90<br>
+	</td>
+  </tr>
+</table>
+This alone should ensure the stage is compatible with Galactic Gunfire.
+	
+
+	
+&nbsp;</font></p>
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+	
+      <hr>
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+
+	
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="650">
+        <tbody>
+          <tr>
+
+
+		<td align="center"><basefont face="Verdana,serif" size="-1">
+            <div class="techlinks">		<br>
+
+		created by
+        <strong>Balthazar & Cybaster</strong><br>
+        
+            <p>        
+        <br>
+
+	<br>
+
+            </p>
+            </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

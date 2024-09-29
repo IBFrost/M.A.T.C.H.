@@ -1,0 +1,28 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name ="CC'Brook'MN"
+displayname ="Brook"
+versiondate =03.06.2012
+mugenversion =04,14,2001
+author ="MidNight"
+pal.defaults =1,2,3,4,
+
+[Files]
+sprite =sprite.sff
+anim =animation.air
+sound =sound.snd
+cmd =command.cmd
+cns =constant.cns
+stcommon =common1.cns
+st =state.cns
+pal1=pallet1.act
+pal2=
+
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 

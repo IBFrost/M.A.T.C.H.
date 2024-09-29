@@ -1,0 +1,53 @@
+[Info]
+name		= "Chrom"
+displayname	= "Chrom"
+versiondate	= 07/05/2020
+mugenversion	= 1.0
+author		= "diegosonic81"
+pal.defaults	= 1
+
+[Files]
+sprite	= chrom.sff
+sound	= chrom.snd
+anim	= chrom.air
+cmd	= chrom.cmd
+cns	= chrom.cns
+st	= chrom.cns
+stcommon	= common1.cns
+pal1	= ACT\chrom.act
+pal2	= ACT\chromred.act
+pal3	= ACT\chromyellow.act
+pal4	= ACT\chromgreen.act
+pal5	= ACT\chromwhite.act
+pal6	= ACT\chromblack.act
+pal7	= ACT\chrom.act
+pal8	= ACT\chromred.act
+pal9	= ACT\chromyellow.act
+pal10	= ACT\chromgreen.act
+pal11	= ACT\chromwhite.act
+pal12	= ACT\chromblack.act
+
+[ja.Files]
+sprite	= chrom.sff
+sound	= chromJP.snd
+anim	= chrom.air
+cmd	= chrom.cmd
+cns	= chrom.cns
+st	= chrom.cns
+stcommon	= common1.cns
+pal1 	= ACT\chrom.act
+pal2 	= ACT\chromred.act
+pal3	= ACT\chromyellow.act
+pal4	= ACT\chromgreen.act
+pal5	= ACT\chromwhite.act
+pal6	= ACT\chromblack.act
+pal7	= ACT\chrom.act
+pal8	= ACT\chromred.act
+pal9	= ACT\chromyellow.act
+pal10	= ACT\chromgreen.act
+pal11	= ACT\chromwhite.act
+pal12	= ACT\chromblack.act
+
+[Arcade]
+intro.storyboard =
+ending.storyboard =

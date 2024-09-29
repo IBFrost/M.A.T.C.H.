@@ -1,0 +1,297 @@
+;-------------------------------------------------------------------------------
+;Special
+;---------------------------------------------------------------------------
+; Flamethower
+[Statedef 230]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+poweradd= 22
+ctrl = 0
+velset = 0,0
+anim = 230
+
+[State 220, 1]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 3000, 4
+
+[State 230, raio]
+type = Projectile
+trigger1 = AnimElem = 2
+projanim = 231
+projhits = 15 ;Proj Hits refers to how many times the projectile deals damage
+projmisstime = 1
+projpriority = 6
+projremovetime = 50
+projid = 3001
+;velocity = 0.001,0.001
+offset = 42,-85
+attr = S, HP
+damage   = 7,1
+animtype = heavy
+guardflag = MA
+hitflag = MAFP
+pausetime = 0,3
+hitsound   = S3100,0
+sparkno = S7930
+sparkxy = -1000,1000
+guardsound = S6,0
+guard.sparkno = s7911
+ground.type = Low
+ground.slidetime = 15
+ground.hittime  = 15
+ground.velocity = -5
+fall = 1
+;PalFX
+palfx.time = 23
+palfx.add = 255,160,0
+
+[State 230, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+;-------------------------------------------------------------------------------
+
+;twister
+ [StateDef 1000]
+type = S
+movetype= A
+physics = S
+juggle  = 1
+velset = 0,0
+ctrl = 0
+anim = 1000
+poweradd = 20
+
+
+[State 1000, raio]
+type = Projectile
+trigger1 = AnimElem = 2
+projanim = 1010
+projhits = 15 ;Proj Hits refers to how many times the projectile deals damage
+projmisstime = 1
+projpriority = 6
+projremovetime = 70
+projid = 3001
+projscale = 2,2
+velocity = 3,0
+offset = 88,16
+attr = S, HP
+damage   = 7,1
+animtype = heavy
+guardflag = MA
+hitflag = MAFP
+pausetime = 0,3
+hitsound   = S2000,1
+sparkno = S7930
+sparkxy = -1000,1000
+guardsound = S6,0
+guard.sparkno = s7911
+ground.type = Low
+ground.slidetime = 15
+ground.hittime  = 15
+ground.velocity = -5
+fall = 1
+air.animtype = Back
+air.velocity = -5,-8
+air.juggle = 1
+down.velocity = -10
+down.hittime = 30
+down.bounce = 0
+
+[State 1100, 1]
+type = PlaySnd
+trigger1 = Time = 2
+value = 3000, 3
+
+
+[State 1000, end]
+type = ChangeState
+trigger1 = Time = 30
+value = 0
+ctrl = 1
+
+
+;-----------------------------------------------------------------------------
+;Dragon Rage (Not Dragonballz)
+
+; Special 1
+[StateDef 1100]
+type = S
+movetype= A
+physics = S
+juggle  = 1
+velset = 0,0
+ctrl = 0
+anim = 1100
+poweradd = 20
+
+[State 1100, 1]
+type = Projectile
+trigger1 = AnimElem = 5
+projanim = 1110
+projhitanim = 1120
+projpriority = 1
+projheightbound = -240, 100
+projedgebound = 100
+projscreenbound = 100
+projshadow = -1
+offset = 59,-85
+velocity = 6
+attr = S, SP
+damage    = 105,1
+getpower= 20,5
+priority  = 6
+guardflag = MA
+pausetime = 10,30
+guard.pausetime=5,30
+sparkno=-1
+sparkxy = -10,-20
+hitsound   = S3000, 2
+guardsound = S1,16
+ground.type = Low
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -4,-7.5
+air.type = Low
+air.slidetime = 12
+air.hittime  = 15
+air.velocity = -4,-7.5
+fall = 1
+palfx.time = 76
+palfx.mul = 100,0,8
+palfx.sinadd = 32,128,220,16
+palfx.add = 120,0,8
+can.recover=0
+fall.recover=0
+
+
+
+[State 1100, 1]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = 1000, 0
+
+[State 1100, end]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Thunberbolt
+[Statedef 1300]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+poweradd= 22
+ctrl = 0
+velset = 0,0
+anim = 1300
+
+[State 1300, raio]
+type = Projectile
+trigger1 = AnimElem = 3
+projanim = 1310
+projhits = 15 ;Proj Hits refers to how many times the projectile deals damage
+projmisstime = 1
+projpriority = 1
+projremovetime = 15
+projid = 3001
+;velocity = 0.001,0.001
+offset = 53,-80
+attr = S, HP
+damage   = 7,1
+animtype = heavy
+guardflag = MA
+hitflag = MAFP
+pausetime = 0,3
+hitsound   = S1400,1
+sparkno = S7930
+sparkxy = -1000,1000
+guardsound = S6,0
+guard.sparkno = s7911
+ground.type = high
+air.type = high
+ground.slidetime = 15
+ground.hittime = 30
+air.hittime = 30
+ground.velocity = -5, -10
+air.velocity = -5, -10
+palfx.time = 50
+palfx.add = 128, 128, 0
+
+[State 1100, 1]
+type = PlaySnd
+trigger1 = AnimElem = 3
+value = 1400, 0
+
+
+[State 1300, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Ice Beam
+[Statedef 1400]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+poweradd= 22
+ctrl = 0
+velset = 0,0
+anim = 1400
+
+[State 1400, raio]
+type = Projectile
+trigger1 = AnimElem = 6
+projanim = 1410
+projhits = 15 ;Proj Hits refers to how many times the projectile deals damage
+projmisstime = 1
+projpriority = 1
+projremovetime = 20
+projid = 3001
+;velocity = 0.001,0.001
+offset = 48,-75
+attr = S, HP
+damage   = 7,1
+animtype = heavy
+guardflag = MA
+hitflag = MAFP
+pausetime = 0,3
+hitsound   = s3000,1
+sparkno = S7930
+sparkxy = -1000,1000
+guardsound = S6,0
+guard.sparkno = s7911
+ground.type = Low
+ground.slidetime = 15
+ground.hittime  = 15
+ground.velocity = -5
+fall = 1
+palfx.time = 23
+palfx.add = 0,156,198
+
+
+[State 1100, 1]
+type = PlaySnd
+trigger1 = AnimElem = 3
+value = 1500, 0
+
+
+[State 1400, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+
+

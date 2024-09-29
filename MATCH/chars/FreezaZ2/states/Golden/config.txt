@@ -1,0 +1,267 @@
+;#####################################################################################################################
+;## PERSONALIZATION FILE FOR Freeza Z2 by Balthazar, Cybaster, Websta, KoopaKoot, JMorphman and XGargoyle										    		        ##
+;## DON'T modify the values if there isn't any comment explaining what to do just above. This could mess the char.  ##
+;## If you're not sure, make a copy of the file before changing any value.					    					##
+;#####################################################################################################################
+
+[Statedef 5900]
+type = S
+
+[State 5900, varreset]
+type = varrangeset
+trigger1 = !roundsexisted
+value = 0
+
+[State 5900, varreset]
+type = varrangeset
+trigger1 = !roundsexisted
+fvalue = 0
+
+; Throw Tech?
+[State 5900, 3]
+type = VarSet
+trigger1 = RoundState = 0
+v = 0
+;#####################################################################################################################
+;## Choose if and how you want throw teching
+;## 0 = none
+;## 1 = Using Dash Collision
+;## 2 = Normal
+;## Default value is 2
+value = 2
+
+; ENGLISH OR JAPANESE VOICE
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 55
+;#####################################################################################################################
+;## Choose which voice you want to use. Set the value to 0 to use the Japanese voice, set the value to 1 to use the 
+;## English voice.
+;## Default value is 1.
+value = 1
+
+
+; TRANSPARENT OR SOLID FX
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 2
+;#####################################################################################################################
+;## Choose how you want the effects to be slightly transparent, or if you want them to be completely solid, old school
+;## style. Set the value to 1 for transparent FX, and to 0 for solid FX.
+;## Default value is 0.
+value = 0
+
+
+; REPEL PROJECTILE FX
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 44
+;#####################################################################################################################
+;## Choose which repel projectile you want to use. Set the value to 0 if you want to use the new yellow/blue one. Set
+;## the value to 1 to use the old purple one.
+;## Default value is 0.
+value = 0
+
+
+; SUPER BACKGROUND CHOICE
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 13
+;#####################################################################################################################
+;## Choose which super background you want to use when Goku kills the opponent with a Super or Ultra move. Set the
+;## value to 0 to use the Street Fighter 3 Super BG, set the value to 1 to use the Jojo's Bizarre Adventure Super BG.
+;## Set the value to 2 to use the Super Dragon Ball Z Super BG. Set the value to any number greater than 2 to disable
+;## Super Background.
+;## Default value is 2.
+value = 2
+
+
+; SADISM BAR - X AXIS
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 45
+;#####################################################################################################################
+;## Set the value to move the Sadism Bar to a position that suits you (X Axis in this case). A positive value means
+;## forward (to the middle of the screen), a negative value means backward (to the border of the screen).
+;## Default value is 0.
+value = 0
+
+
+; SADISM BAR - Y AXIS
+[State 5900, 3]
+type = VarSet
+trigger1 = 1
+v = 46
+;#####################################################################################################################
+;## Set the value to move the Sadism Bar to a position that suits you (Y Axis in this case). A positive value means
+;## upward, a negative value means downward.
+;## Default value is 0.
+value = -500
+
+
+;FREEZA's BOAST (AI only)
+[State 5900, VarSet]
+type = VarSet
+trigger1 = !time && roundno = 1
+v = 59
+;#####################################################################################################################
+;## While controlled by the AI, Freeza's confidence is really high that he will not use his hands during the match.
+;## As long as he keeps winning, he will not use any move requiring his hands, but things could change if he finds
+;## himself in a disadvantage...
+;## Default value is 1. Set the value to disable this feature and have a normal AI routine.
+value = 0 ;1
+
+;Change palette for button "a"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=1
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 1
+
+;Change palette for button "b"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=2
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 2
+
+;Change palette for button "c"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=3
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 3
+
+;Change palette for button "x"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=4
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 4
+
+;Change palette for button "y"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=5
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 5
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=6
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 6
+
+;Change palette for button "start" + "a"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=7
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 7
+
+;Change palette for button "start" + "b"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=8
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 8
+
+;Change palette for button "start" + "c"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=9
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 9
+
+;Change palette for button "start" + "x"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=10
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 10
+
+;Change palette for button "start" + "y"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=11
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 11
+
+;Change palette for button "start" + "z"
+[State 0, VarSet]
+type = VarSet
+trigger1 = RoundsExisted = 0
+trigger1 = palno=12
+v = 58   
+ ;#####################################################################################################################
+;## Change to the palette number you wish to add found in the palette folder. 
+;## Example to change this to 0042jango - peregrine mendicant.png would be value = 42
+value = 12
+
+;=================================================
+; DO NOT CHANGE ANYTHING BELOW THIS LINE !!!
+
+;Palette Code
+[State 5900, Apply Pal]
+type = RemapPal
+trigger1 = 1 
+source = 1,1
+dest = 1,99 
+
+[State 5900, End]
+type = changestate
+trigger1 = !time
+value = ifelse(roundno = 1, 190, 0)
+
+
+
+

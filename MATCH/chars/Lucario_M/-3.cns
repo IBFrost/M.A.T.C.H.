@@ -1,0 +1,424 @@
+
+;===========================================================================
+;---------------------------------------------------------------------------
+
+[Statedef -3]
+
+;===========================================================================
+
+
+
+
+;==============================================================================
+; スーパーアーツ
+;==============================================================================
+;------------------------------------------------------------------------------
+
+[State -1, インファイト]
+type = ChangeState
+value = 2500
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = (Power > 2999)
+triggerall = (StateType != A) && time > 12
+triggerall = p2statetype != L && P2BodyDist X = [0,60]
+trigger1 = ctrl && p2movetype != A
+trigger2 = (stateno = 200) || (stateno = 220) || (stateno = 250) || (stateno = 440) || (stateno = 1220 ) 
+trigger2 = MoveHit
+
+[State -1, はどうのあらし]
+type = ChangeState
+value = 2100
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = (Power > 999)
+triggerall = (StateType != A) && time > 12
+triggerall = p2statetype != L && P2BodyDist X = [0,60]
+trigger1 = ctrl && p2movetype != A
+trigger2 = (stateno = 220) || (stateno = 440) || (stateno = 1220 ) || (stateno = 1300 ) || (stateno = 1310 ) || (stateno = 1320 )
+trigger2 = MoveHit && p2movetype != A && (random <=800)
+
+[State -1, しんくうはどうだん]
+type = ChangeState
+value = 2000
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = (Power > 999)
+triggerall = (StateType != A) && time > 12
+triggerall = p2statetype != L && P2BodyDist X = [0,60]
+trigger1 = ctrl && p2movetype != A
+trigger2 = (stateno = 220) || (stateno = 440) || (stateno = 1220 ) 
+trigger2 = MoveHit
+
+
+;==============================================================================
+; 必殺技
+;==============================================================================
+;------------------------------------------------------------------------------
+
+[State -1, かげぶんしん-000]
+type = ChangeState
+value = 1100
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = (Ctrl)
+trigger1 = (StateType != A) && (MoveType = I)
+trigger1 = (BackEdgeBodyDist < 10) && (P2BodyDist X < 40) && (EnemyNear,MoveType = A)
+trigger2 = (StateType != A) && (ctrl) && (random <=100) && (p2bodydist X >130)
+
+[State -1, かげぶんしん-001]
+type = ChangeState
+value = 1110
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = (Ctrl)
+trigger1 = (StateType != A) && (MoveType = I)
+trigger1 = (BackEdgeBodyDist < 10) && (P2BodyDist X < 40) && (EnemyNear,MoveType = A)
+trigger2 = (StateType != A) && (ctrl) && (random <=100) && (p2bodydist X >130)
+
+[State -1, 空中しんそく（弱）]
+type = ChangeState
+value = 1500
+triggerall = var(0) = 0
+triggerall = (command = "空中しんそく-000")
+trigger1 = (Ctrl) && (StateType = A)
+
+[State -1, 空中しんそく（中）]
+type = ChangeState
+value = 1510
+triggerall = var(0) = 0
+triggerall = (command = "空中しんそく-001")
+trigger1 = (Ctrl) && (StateType = A)
+
+[State -1, 空中しんそく（強）]
+type = ChangeState
+value = 1520
+triggerall = var(0) = 0
+triggerall = (command = "空中しんそく-002")
+trigger1 = (Ctrl) && (StateType = A)
+
+[State -1, しんそく（弱）]
+type = ChangeState
+value = 1400
+triggerall = var(0) = 0
+triggerall = (command = "しんそく-000")
+trigger1 = (Ctrl) && (StateType != A)
+trigger2 = (StateNo = [200,499]) && (MoveContact)
+
+[State -1, しんそく（中）]
+type = ChangeState
+value = 1410
+triggerall = var(0) = 0
+triggerall = (command = "しんそく-001")
+trigger1 = (Ctrl) && (StateType != A)
+trigger2 = (StateNo = [200,499]) && (MoveContact)
+
+[State -1, しんそく（強）]
+type = ChangeState
+value = 1420
+triggerall = var(0) = 0
+triggerall = (command = "しんそく-002")
+trigger1 = (Ctrl) && (StateType != A)
+trigger2 = (StateNo = [200,499]) && (MoveContact)
+
+
+[State -1, スカイアッパー（強）]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A 
+triggerall = p2bodydist X <=30
+trigger1 = statetype != A && p2statetype = A 
+trigger1 = ctrl && p2movetype = A && random <= 700
+trigger2 = (stateno = 220) || (stateno = 420 ) 
+trigger2 = MoveHit && (time > 12) && random <= 400
+value = 1220
+
+[State -1, はどうだん（強）]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && random <=200
+trigger1 = ctrl && p2movetype = H && p2statetype = A && enemynear,vel Y >= 0 
+trigger2 = ctrl && (P2BodyDist X >= 130) && time >= 80
+trigger3 = (stateno = 220) && p2statetype != L|| (stateno = 250) && p2statetype != L|| (stateno = 440 && p2statetype != L) 
+trigger3 = movecontact 
+trigger4 = ctrl && p2movetype = A && enemynear,vel Y >= 0 && enemynear,time >=10
+value = 1020
+
+[State -1, ブレイズキック（強）]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A 
+triggerall = p2statetype != L && P2BodyDist X = [60,100]
+trigger1 = ctrl && p2movetype != A && (p2statetype = S || p2statetype = A) 
+trigger1 = (time > 12) && (random <=200)
+value = 1320
+
+[State -1, ブレイズキック（中）]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A 
+triggerall = p2statetype != L && P2BodyDist X = [60,90]
+trigger1 = ctrl && p2movetype != A && (p2statetype = S || p2statetype = A) 
+trigger1 = (ctrl) && (time > 12) && (random <=200)
+value = 1310
+
+[State -1, ブレイズキック（弱）]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A 
+triggerall = p2statetype != L && P2BodyDist X = [60,80]
+trigger1 = ctrl && p2movetype != A && (p2statetype = S || p2statetype = A) 
+trigger1 = (ctrl) && (time > 12) && (random <=300)
+value = 1300
+
+
+[State -1, スカイアッパー（中）]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A 
+triggerall = p2bodydist X <=30
+trigger1 = statetype != A && p2statetype = A 
+trigger1 = ctrl && p2movetype = A && random <= 400
+value = 1210
+
+[State -1, スカイアッパー（弱）]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A 
+triggerall = p2bodydist X <=30
+trigger1 = statetype != A && p2statetype = A 
+trigger1 = ctrl && p2movetype = A && random <= 600
+trigger2 = (stateno = 2000) && p2bodydist X <=20
+trigger2 = ctrl && MoveHit && (time > 6)
+value = 1200
+
+
+[State -1, はどうだん（中）]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && random <=300
+triggerall = ctrl && p2bodydist X >=130 && (time > 80)
+trigger1 = p2movetype != A && p2statetype = S
+trigger1 = (time > 80) && (random <=200)
+value = 1010
+
+[State -1, はどうだん（弱）]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && random <=400
+triggerall = ctrl && p2bodydist X >=130 && (time > 80)
+trigger1 =  p2movetype != A && p2statetype = S
+trigger1 = (time > 120) && (random <=200)
+value = 1000
+
+
+
+;==============================================================================
+; 移動関連
+;==============================================================================
+;------------------------------------------------------------------------------
+
+[State -1, 走る]
+type = ChangeState
+value = 100
+triggerall = var(0) = 1 && RoundState = 2
+trigger1 = command = "FF"
+trigger1 = statetype = S
+trigger1 = ctrl
+
+[State -1, バックステップ]
+type = ChangeState
+value = 105
+triggerall = var(0) = 1 && RoundState = 2
+trigger1 = command = "BB"
+trigger1 = statetype = S
+trigger1 = ctrl
+;==========================================================================================
+
+[State -1, 前投げ]
+type = ChangeState
+value = 800
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A 
+triggerall = P2BodyDist X <= 5 && P2Dist Y = 0
+triggerall = ctrl && p2movetype != A && (p2statetype = S || p2statetype = A)
+trigger1 =  p2statetype != L
+trigger1 = p2movetype != A
+
+;==========================================================================================
+
+[State -1, 後投げ]
+type = ChangeState
+value = 801
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A 
+triggerall = P2BodyDist X <= 5 && P2Dist Y = 0
+triggerall = ctrl && p2movetype != A && (p2statetype = S || p2statetype = A)
+trigger1 =  p2statetype != L
+trigger1 = p2movetype != A
+
+[State -1, スーパージャンプ]
+type = ChangeState
+triggerall = var(0) = 1 && RoundState = 2
+trigger1 = (command = "super_jump") && (StateType != A) && (Ctrl)
+value = 10003
+
+;==============================================================================
+; 通常攻撃技
+;==============================================================================
+;------------------------------------------------------------------------------
+
+[State -1, しゃがみ弱キック]
+type = ChangeState
+value = 430
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && (p2statetype = S || p2statetype = C) 
+triggerall = ctrl && (P2BodyDist X = [0,10]) && random <=700 
+trigger1 = p2movetype != A 
+
+
+[State -1, 立ち弱キック]
+type = ChangeState
+value = 230
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && (p2statetype = A || p2statetype = S) && p2movetype != A && P2BodyDist X = [21,30]
+trigger1 = ctrl && random <= 800 
+trigger2 = (stateno = 200) && p2statetype = S
+trigger2 = (movecontact && time > 12) 
+
+
+[State -1, しゃがみ弱パンチ]
+type = ChangeState
+value = 400
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && (p2statetype = S || p2statetype = C) 
+triggerall = ctrl && (P2BodyDist X = [11,20]) && random <=300 
+trigger1 = p2movetype != A 
+trigger1 = stateno != 430 
+
+[State -1, 立ち弱パンチ]
+type = ChangeState
+value = 200
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && (p2statetype = A || p2statetype = S) && p2movetype != A && P2BodyDist X = [11,20] 
+trigger1 = ctrl && random <= 800 
+trigger2 = stateno = 200 
+trigger2 = time > 12
+
+
+[State -1, 立ち中キック]
+type = ChangeState
+value = 240
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && p2movetype != A 
+trigger1 = ctrl && random <= 700 && p2statetype = S && P2BodyDist X = [21,30] 
+
+[State -1, 立ち中パンチ]
+type = ChangeState
+value = 210
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && p2movetype != A 
+trigger1 = ctrl && random <= 700 && p2statetype = S && P2BodyDist X = [31,40] 
+trigger2 = (stateno = 230) && p2statetype = S
+trigger2 = (movecontact && time > 12) 
+
+[State -1, しゃがみ中パンチ]
+type = ChangeState
+value = 410
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && p2movetype != A 
+trigger1 = ctrl && P2BodyDist X = [21,30]
+
+[State -1, しゃがみ中キック]
+type = ChangeState
+value = 440
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && p2movetype != A 
+trigger1 = ctrl && p2movetype != A && (p2statetype = S || p2statetype = A)
+trigger1 = (stateno = 430) && time > 12 && movecontact && random <=800 
+
+[State -1, 立ち強キック]
+type = ChangeState
+value = 250
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && p2movetype != A 
+trigger1 = (ctrl) && (p2statetype = S) && (P2BodyDist X = [41,50])  && (random <= 400)
+
+[State -1, 立ち強パンチ]
+type = ChangeState
+value = 220
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && p2movetype != A 
+trigger1 = ctrl && random <= 500 && p2statetype = S && P2BodyDist X = [41,50] 
+trigger2 = (stateno = 240) && p2statetype = S
+trigger2 = (movecontact && time > 12) 
+
+[State -1, しゃがみ強キック]
+type = ChangeState
+value = 450
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A && p2movetype != A 
+trigger1 = ctrl && random <= 900 && p2statetype = S && P2BodyDist X = [41,60] 
+
+[State -1, しゃがみ強パンチ]
+type = ChangeState
+value = 420
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype != A 
+triggerall = P2BodyDist X= [0,20]
+trigger1 = ctrl && p2statetype = A && p2statetype = A && random <= 900
+trigger2 = (stateno = 410) && time > 12 && MoveHit && random <=800 
+trigger3 = (stateno = 410) && time > 12 && !MoveHit && random <=200 
+
+
+
+;------------------------------------------------------------------------------
+
+
+
+;------------------------------------------------------------------------------
+
+[State -1, ジャンプ弱パンチ]
+type = ChangeState
+value = 600
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype = A 
+triggerall = p2bodydist X <=30
+trigger1 = ctrl && random <=100 
+
+[State -1, ジャンプ中パンチ]
+type = ChangeState
+value = 610
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype = A 
+triggerall = p2bodydist X <=30
+triggerall = p2bodydist Y <=-30
+trigger1 = ctrl && random <=500 
+
+[State -1, ジャンプ強パンチ]
+type = ChangeState
+value = 620
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype = A 
+triggerall = p2bodydist X <=30
+trigger1 = ctrl && random <=700 
+
+[State -1, ジャンプ弱キック]
+type = ChangeState
+value = 630
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype = A 
+triggerall = p2bodydist X <=30
+trigger1 = ctrl && random <=200 
+
+[State -1, ジャンプ中キック]
+type = ChangeState
+value = 640
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype = A 
+triggerall = p2bodydist X <=30
+trigger1 = ctrl && random <=500 
+
+[State -1, ジャンプ強キック]
+type = ChangeState
+value = 650
+triggerall = var(0) = 1 && RoundState = 2
+triggerall = statetype = A 
+triggerall = p2bodydist X <=30
+trigger1 = ctrl && random <=700 
+

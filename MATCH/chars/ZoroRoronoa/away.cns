@@ -1,0 +1,220 @@
+
+;※※※※※※※※※※※※※※※※※※※※前避け
+;理論説明
+;今回は避けなので当たり判定もいらない移動のみのステートです。
+;しかし世の中、前のみではない、「後ろ避け」もあります。
+;というわけで効率化を目指してみよう・・・安易？(-_-;)
+;まずスプライトを分割すると開始、回転、終了になります。
+;なぜ分割するかというと「後ろ避け」を作るから。
+;前のスプライト順を１，２，３とするなら後ろは３，２，１とすればオッケーになるというわけだ。
+;この時点でステート６個、ＡＩＲが３個・・・・効率化成功してる・・・か？（文句は言わないで(-_-;)
+
+;※※※※※※※※※※※※※※※※※※※※前避けの開始
+[Statedef 900]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+poweradd= 0
+ctrl = 0
+velset = 3,0
+anim = 900
+sprpriority = 2
+
+[State 0]
+type = NotHitBy
+trigger1 = Prevstateno = [140,155]
+trigger1 = time = 0
+value = SCA
+
+[State 0]
+type = Poweradd
+trigger1 = Prevstateno = [140,155]
+trigger1 = time = 0
+value = -500
+
+[State 210, 4]
+type = Explod
+trigger1 = Prevstateno = [140,155]
+trigger1 = time = 0
+anim = 10000
+scale = 0.5,0.5
+postype = p1
+pos = 0,10
+sprpriority = 3
+;supermove = 1
+ownpal = 1
+bindtime = 1
+removeongethit = 1
+
+[State -1, Kung Fu Throw]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 910
+ctrl = 0
+
+;※※※※※※※※※※※※※※※※※※※※前避けの回転
+[Statedef 910]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+poweradd= 0
+ctrl = 0
+velset = 10,0
+anim = 910
+sprpriority = 2
+
+[State 0]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 0]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 50, 4];←成功したときの残像
+type = AfterImage
+trigger1 = Time = 0
+time = 15
+trans = add1
+timegap = 1
+framegap = 2
+length = 8
+palbright = 12,12,12
+palcontrast = 225,225,225
+palpostbright = 0,0,0
+paladd = 0,0,0
+palmul = 1,1,1
+
+[State -1, Kung Fu Throw]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 920
+ctrl = 0
+
+;※※※※※※※※※※※※※※※※※※※※前避けの終了
+[Statedef 920]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+poweradd= 0
+ctrl = 0
+velset = 0,0
+anim = 920
+sprpriority = 2
+
+[State -1, Kung Fu Throw]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+;※※※※※※※※※※※※※※※※※※※※後避けの開始
+[Statedef 950]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+poweradd= 0
+ctrl = 0
+velset = -3,0
+anim = 950;←前避けの３にあたるスプライト
+sprpriority = 2
+
+[State 0]
+type = NotHitBy
+trigger1 = Prevstateno = [140,155]
+trigger1 = time = 0
+value = SCA
+
+[State 0]
+type = Poweradd
+triggerall = power >= 1000
+trigger1 = Prevstateno = [140,155]
+trigger1 = time = 0
+value = -500
+
+[State 210, 4]
+type = Explod
+trigger1 = Prevstateno = [140,155]
+trigger1 = time = 0
+anim = 10000
+scale = 0.5,0.5
+postype = p1
+pos = 0,10
+sprpriority = 3
+;supermove = 1
+ownpal = 1
+bindtime = 1
+removeongethit = 1
+
+[State -1, Kung Fu Throw]
+type = ChangeState
+trigger1 = animtime = 0
+value = 960
+ctrl = 0
+
+;※※※※※※※※※※※※※※※※※※※※後避けの回転
+[Statedef 960]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+poweradd= 0
+ctrl = 0
+velset = -10,0
+anim = 960;←前避けの２にあたるスプライト
+sprpriority = 2
+
+[State 0]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 0]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 50, 4];←成功したときの残像
+type = AfterImage
+trigger1 = Time = 0
+time = 15
+trans = add1
+timegap = 1
+framegap = 2
+length = 8
+palbright = 12,12,12
+palcontrast = 225,225,225
+palpostbright = 0,0,0
+paladd = 0,0,0
+palmul = 1,1,1
+
+[State -1, Kung Fu Throw]
+type = ChangeState
+trigger1 = animtime = 0
+value = 970
+ctrl = 0
+
+;※※※※※※※※※※※※※※※※※※※※後避けの終了
+[Statedef 970]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+poweradd= 0
+ctrl = 0
+velset = 0,0
+anim = 970;←前避けの１にあたるスプライト
+sprpriority = 2
+
+[State -1, Kung Fu Throw]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+

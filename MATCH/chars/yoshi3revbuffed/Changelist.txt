@@ -1,0 +1,12 @@
+Patch made by Mifaro
+
+damage : + 40%
+speed : + 20%
+velocity : Yoshi slides more with every move that makes him move forward or backward
+light punch : now comes out frame 4 and hits more below
+strong punch : now comes out frame 8 hits more below
+strong kick : moves more forward outside of the velocity change
+crouch light attack : now comes out frame 4
+launcher : now moves forward
+
+also includes a move list for Ikemen Go

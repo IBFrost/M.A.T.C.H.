@@ -1,0 +1,34 @@
+[Info]
+name = "Hanzo"
+displayname = "Hanzo"
+versiondate = 08,0,201?
+author = "±×·¥½¼"
+mugenversion = 1.1
+pal.defaults = 6,3,4,2 
+
+localcoord = 320,240    
+
+[Files]
+Cmd      = 1920.cmd       
+Cns      = 1920.cns 
+st       = 1920.cns  
+st2      = 1921.cns
+stcommon = common1.cns
+Sprite   = 1920.sff      
+Anim     = 1920.air        
+Sound    = 1920.snd    
+Pal1     = Hanzo.act
+Pal2     = 10.act
+Pal3     = 20.act
+Pal4     = 30.act
+Pal5     = 40.act
+Pal6     = 50.act
+
+
+[Palette Keymap]
+x = 4 
+y = 5
+z = 6
+a = 1
+b = 2
+c = 3

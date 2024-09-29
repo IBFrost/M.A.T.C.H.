@@ -70,36 +70,35 @@
  ;
  ;Insert your characters below.
 
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
+ ;kfm, stages/kfm.def
+ ;kfm720, stages/kfm.def
+ 
+cc'brook'mn
 bowser
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
-bowser
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
-bowser
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
-bowser
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
-bowser
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
-bowser
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
-bowser
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
-bowser
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
-bowser
-kfm, stages/kfm.def
-kfm720, stages/kfm.def
-bowser
+genji
+toy_chica
+sylvanas
+pinkie pie
+lucario_m
+gokuz2
+renamondv2
+luffy
+rainbow dash
+vegetaz2
+scott pilgrim
+yoshi3revbuffed
+4550
+lucina
+freezaz2
+chrom
+mihawk
+dio
+old_foxy
+zorororonoa
+jotaro
+donald
+naruto-kun
+jin
 
 ;-----------------------
 [ExtraStages]

@@ -1,0 +1,135 @@
+;-------------------------------------------------------------------------------
+[Statedef 1000]
+type    = S
+movetype= I
+physics = S
+juggle  = 1
+poweradd= 80
+ctrl = 0
+velset = 0,0
+anim = 1000
+
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = animelem = 8
+statetype = S      ;S,A,C,L
+movetype = A       ;I,A,H
+physics = S         ;A,C,S,N
+;ignorehitpause =
+;persistent =
+
+
+[State 0: 	AfterImage]
+type 		= AfterImage
+trigger1 	= (!Time)
+time 		= 40
+framegap 	= 1
+length 		= 5
+paladd 		= 8,32,256
+palmul 		= .90, .90, .90
+palcontrast 	= 256, 256,256
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 1
+value = S0,7
+volume = 255
+channel = -1
+
+[State 0, NotHitBy]
+type = HitBy
+trigger1 = time > 0 && time < 24
+value = SCA,AT;,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time > 0 && time < 24
+x = 8
+y = 0
+
+[State 240, 1]
+type = HitDef
+trigger1 = time = 0
+attr = S, SA
+damage = 25,0
+animtype = Heavy
+guardflag = MA
+hitflag = MAF
+priority = 3, Hit
+pausetime = 9,30
+sparkno = S222
+guard.sparkno = S444
+sparkxy = -10,-30
+hitsound = S0,24
+guardsound = S0,30
+ground.type = High
+ground.slidetime = 11
+ground.hittime  = 12
+ground.velocity = -10-1
+guard.velocity = -8
+airguard.velocity = -8
+air.type = High
+air.velocity = -6,0
+air.hittime = 11
+envshake.time = 20
+envshake.freq = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = animelem = 9
+value = S0,15
+volume = 255
+channel = -1
+
+[State 1000, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+;------------------------------------------------------------------------------
+[Statedef 1001]
+type    = S
+movetype= I
+physics = S
+juggle  = 1
+poweradd= 80
+ctrl = 0
+velset = 0,0
+anim = 1000
+
+[State 0: 	AfterImage]
+type 		= AfterImage
+trigger1 	= (!Time)
+time 		= 40
+framegap 	= 1
+length 		= 5
+paladd 		= 8,32,256
+palmul 		= .90, .90, .90
+palcontrast 	= 256, 256,256
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 1
+value = S0,7
+volume = 255
+channel = -1
+
+[State 0, NotHitBy]
+type = HitBy
+trigger1 = time > 0 && time < 24
+value = SCA,AT;,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time > 0 && time < 24
+x = -8
+y = 0
+
+[State 1001, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1

@@ -1,0 +1,39 @@
+[Info]
+Name            = "Rainbow Dash"
+DisplayName     = "Rainbow Dash"
+VersionDate     = 04,14,2009
+MugenVersion    = 04,14,2002
+Author          = "Moku"
+Pal.Defaults    = 1,2,3,4,5,6
+
+[Files]
+Sprite          = Sprite.sff
+Anim            = Anim.air
+Sound           = Sound.snd
+Cmd             = Data/Command.txt
+Cns             = Data/Constants.cns
+StCommon        = Data/Common1.st
+St              = Data/-2.st
+St0             = Data/-3.st
+St1             = Data/AI_Helpers.cns
+St2             = Option.txt
+St3             = Data/NormalMoves.st
+St4             = Data/SuperMoves.st
+St5             = Data/HyperMoves.st
+St6             = Data/System.st
+Pal1            = Palettes/Original.act ;デフォルトカラー
+Pal2            = Palettes/Firefly.act
+Pal3            = Palettes/Daring_Do.act
+Pal4            = Palettes/Spitfire.act
+Pal5            = Palettes/Feathermay.act
+Pal6            = Palettes/Lightning_Dust.act
+Pal7            = Palettes/Original.act
+Pal8            = Palettes/Daring_Do.act
+Pal9            = Palettes/Original.act
+Pal10           = Palettes/Firefly.act
+Pal11           = Palettes/Original.act
+Pal12           = Palettes/Original.act
+
+[Arcade]
+Intro.StoryBoard = 
+Ending.StoryBoard = 

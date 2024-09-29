@@ -1,0 +1,22 @@
+<#f0f000>:Throws:</>
+Forward Throw                                               		^X_+^A
+Backward Throw                                              		^B_+^Y
+
+<#f0f000>:Command Normals:</>
+Rising Headbutt                                             		_DF^Y
+Low Tail Strike                                             		_DF^B
+Head Stomp                                                  		_AIR_D^A
+Double Kick								_AIR^A^A
+Jump Tail Slash                                             		_AIR_F^B
+
+<#f0f000>:Special Moves:</>
+GroundPound_EX                                                 		_AIR_D_D^B
+Egg Toss                                           			_QDF^P
+Fire Breath_EX                                           		[~B]_F^K
+Yoshi Bomb_EX                                              		[~D]_U^B
+Egg Roll_EX                                              		_XFF^K
+Smash Headbutt_EX                                        		_QDB^P
+
+<#f0f000>:Hyper Moves:</>
+Super Fire Breath <#bebebe>(1000)</>                        		_QDB_QDB^K
+Egg Launcher <#bebebe>(1000)</>                             		_F_QBD_QDF^P

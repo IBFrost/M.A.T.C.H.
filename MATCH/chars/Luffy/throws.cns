@@ -1,0 +1,218 @@
+;---------------------------------------------------------------------------
+[Statedef 2000]
+type = S
+movetype = A
+physics = S
+anim = 2000
+velset = 0,0
+ctrl = 0
+
+[State 2000, 1]
+type = HitDef
+trigger1 = time = 0
+attr = S, NT
+damage = 0,0
+animtype = Light
+hitflag = MAF
+priority = 2,Miss
+pausetime = 0,0
+sparkno = -1
+sparkxy = 0,0
+hitsound = S0,38
+ground.type = High
+ground.slidetime = 5
+ground.hittime  = 12
+ground.velocity = -0.5
+airguard.velocity = -1.9,-.8
+air.type = High
+air.velocity = -0.5
+air.hittime = 12
+p1stateno = 2001
+p2stateno = 2002
+snap = 136,-98
+getpower = 0
+
+[State 0, 2]
+type = ScreenBound
+Trigger1 = Time >= 0
+value = 0
+movecamera = 0,0
+
+[State 2000, 2]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+;---------------------------------------------------------------------------
+; Aerial drop (success)
+[Statedef 2001]
+type = S
+movetype = A
+physics = S
+anim = 2001
+
+[State 0, 5]
+type = sprpriority
+trigger1 = time > 0
+value = 6
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time > 0 && time < 22
+x =  4
+y = -2
+
+[State 0, 5]
+type = TargetBind
+trigger1 = AnimElem = 1, >= 0
+trigger1 = AnimElem = 2, < 0
+pos = 32,0
+
+[State 0, 6]
+type = TargetBind
+trigger1 = AnimElem = 2, >= 0
+trigger1 = AnimElem = 3, < 0
+pos = 102,40
+
+[State 0, 7]
+type = TargetBind
+trigger1 = AnimElem = 3, >= 0
+trigger1 = AnimElem = 4, < 0
+pos = 123,-40
+
+[State 0, 8]
+type = TargetBind
+trigger1 = AnimElem = 4, >= 0
+trigger1 = AnimElem = 5, < 0
+pos = 110,-79
+
+[State 0, 9]
+type = TargetBind
+trigger1 = AnimElem = 5, >= 0
+trigger1 = AnimElem = 6, < 0
+pos = 83,-109
+
+[State 0, 10]
+type = TargetBind
+trigger1 = AnimElem = 6, >= 0
+trigger1 = AnimElem = 7, < 0
+pos = 4,-178
+
+[State 0, 5]
+type = TargetBind
+trigger1 = AnimElem = 7, = 0
+pos = -68,-8
+
+[State 0, 12]
+type = TargetState
+trigger1 = AnimElem = 7, = 1
+value = 2003
+
+[State 0, 2]
+type = ScreenBound
+Trigger1 = Time > 0
+value = 0
+movecamera = 0,0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S1,38
+volume = 255
+channel = -1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = animelem = 1
+value = S0,32
+volume = 255
+channel = -1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = animelem = 2
+value = S0,21
+volume = 255
+channel = -1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = animelem = 8
+value = S0,22
+volume = 255
+channel = -1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = animelem = 10
+value = S0,31
+volume = 255
+channel = -1
+
+
+[State 2001, 15]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+;---------------------------------------------------------------------------
+; Thrown by Aerial drop
+[Statedef 2002]
+type = S
+movetype = H
+physics = S
+velset = 0,0
+ctrl = 0
+
+[State 0, 1]
+type = ChangeAnim2
+trigger1 = Time = 0
+value = 2002
+
+[State 0, 2]
+type = ScreenBound
+Trigger1 = Time > 0
+value = 0
+movecamera = 0,0
+
+[State 2002, 3]
+type = SprPriority
+trigger1 = time < 0
+value = 1
+;-----------------------------------------------------------------------------
+[Statedef 2003]
+type    = A
+movetype= H
+physics = N
+
+[State 0, 3]
+type = LifeAdd
+trigger1 = Time = 0
+value = -150
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = time = 0
+time = 10
+freq = 300
+ampl = -4
+phase = 90
+
+
+[State 0, Gravity]
+type = VelAdd
+trigger1 = 1
+x = 2
+y = 50
+
+[State 0,FLY]
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = !SelfAnimExist(5052)
+value = 5050
+
+[State 2003, Hit ground]
+type = SelfState
+trigger1 = (Vel y > 0) && (Pos y >= 0)
+value = 5100
+;-------------------------------------------------------------------------------

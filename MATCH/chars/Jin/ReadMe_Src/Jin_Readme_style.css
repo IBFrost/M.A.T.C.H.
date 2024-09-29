@@ -1,0 +1,55 @@
+body {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 14px;
+}
+.menu {
+	color: white;
+	font-weight: bold;
+	text-decoration:none;
+	text-align: center;
+	border-radius: 18px;
+	background-color: red;
+	margin: 2px;
+	padding: 6px;
+}
+a:hover {
+	background-color: #F55;
+}
+table {
+	border: 1px solid rgb(124, 124, 124);
+	border-radius: 5px;
+	clear: both;
+}
+.links a{
+	color: blue;
+	font-weight: bold;
+	text-decoration:none;
+	padding: 2px;
+}
+.links a:hover{
+	background-color: #CCC;
+}
+.sectionName {
+	font-style: italic;
+	font-weight: bold;
+}
+.moveName {
+	font-weight: bold;
+}
+th {
+	background-color: #CCC;
+	padding: 3px;
+	margin: 0px;
+	border-radius: 5px;
+}
+td {
+	vertical-align: top;
+	padding: 3px;
+}
+.moveImage {
+	position: relative;
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	clear: both;
+}

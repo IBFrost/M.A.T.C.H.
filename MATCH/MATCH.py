@@ -61,7 +61,8 @@ class match_system():
         self.scoreboard = self.__read_scorefile(SCOREFILE)
         self.ds_client = ""
         self.twch_client = ""
-        self.winner = 999
+        self.loop = False
+        self.loopnum = -1
         
         
         
@@ -487,14 +488,14 @@ class match_system():
                     self.division_complete = False
                     
                     results, results_dict = self.toursys.rankings(self.players, self.last_division)
-                    
+                    self.finalresult = self.toursys.winningplayer
+                    self.console_print(MSGNAME, f'CURRENT WINNER IS {self.finalresult}. Will the others catch up?')
                     text = f"Division {self.last_division}"
                     if (USE_DISCORD):
                         # Send update to Discord
                         self.ds_client.queue_message(f"{text} finished." )
                     
                     # Show division results HTML
-                    self.finalresult = self.toursys.get_winner()
                     self.output_results(results_dict, f"{text} results.", RESULT_TIME_DIVISION)
                         
                 # Timer reset
@@ -731,12 +732,7 @@ class match_system():
                 self.__reset_timers()
                 
                 # Run tournament
-                winner = self.run_tournament()
-                self.console_print(MSGNAME, winner)
-                if winner % 2 == 0:
-                    self.twch_client.prediction('evenwins')
-                else:
-                    self.twch_client.prediction('oddwins')
+                self.run_tournament()
                 # Check if the toursys was killed by operator. Specifically that state is still RUNNING
                 if self.state == RUNNING:
                 
@@ -765,16 +761,13 @@ class match_system():
                     title = f"Division {self.last_division} results."
                     self.output_results(results_dict, title, RESULT_TIME_DIVISION)
                     
-                    
-                    self.console_print(MSGNAME,"Showing results")
-                    
                     # Send tournament end messages
                     if (USE_TWITCH):
                         self.twch_client.queue_message("Tournament finished.")
                     #if (USE_DISCORD):
                         #self.ds_client.queue_pic(PICS[random.randint(0,len(PICS) - 1)], "Ah that was nice.")
                     # Create results
-                    results, results_dict = self.toursys.final_rankings(self.players, self.divisions)
+                    results, results_dict = self.toursys.final_rankings(self.players, self.divisions, self.twch_client)
                     
                     #if (USE_DISCORD):
                         #self.ds_client.queue_message(results)
@@ -800,6 +793,8 @@ class match_system():
                     
                     # Reset the previous state, in case someone tries to register before idle loop executes 
                     previous_state = ""
+                    if self.loop == True:
+                        self.twch_client.looping_tourney(self.loopnum)
                 
 
             # Watchdog system                    
@@ -911,9 +906,15 @@ class match_system():
         else:
             print("Action cancelled")
             return False
+        
+    def begin_loop(self, divs):
+        self.loop = True
+        self.loopnum = divs
 
-    def define_winner(self, number):
-        self.winner = number
+    def end_loop(self):
+        self.loop = False
+        self.loopnum = -1
+
 
 def main():   
     matchsys = match_system()

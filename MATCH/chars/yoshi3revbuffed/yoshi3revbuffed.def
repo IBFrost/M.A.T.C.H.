@@ -1,0 +1,41 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "Yoshi3"
+displayname = "Yoshi"
+versiondate = 04,14,2002
+mugenversion = 04,14,2002
+author = "MikeS.Densky,  patch and movelist by Mifaro"
+pal.defaults = 1,2,3,4
+
+[Files]
+sprite = graphics\yoshi.sff
+anim = graphics\yoshi.air
+sound = yoshi2.snd
+cmd = coding\yoshi.cmd
+cns = coding\yoshiconstants.cns
+stcommon = common1.cns
+st = coding\yoshi.cns
+st1 = coding\yoshihelpers.cns
+st2 = coding\yoshicmn1edits.cns
+st3 = -2.txt
+pal1 = 2ndPalette\yoshi-green.act
+pal2 = 2ndPalette\yoshi-red.act
+pal3 = 2ndPalette\yoshi-blue.act
+pal4 = 2ndPalette\yoshi-yellow.act
+pal5 = 2ndPalette\yoshi-Lblue.act
+pal6 = 2ndPalette\yoshi-orange.act
+pal7 = 2ndPalette\yoshi-Dgreen.act
+pal8 = 2ndPalette\yoshi-brown.act
+pal9 = 2ndPalette\yoshi-black.act
+pal10 = 2ndPalette\yoshi-white.act
+pal11 = 2ndPalette\yoshi-purple.act
+pal12 = 2ndPalette\boshi.act
+movelist = movelist.dat
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 

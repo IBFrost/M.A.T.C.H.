@@ -1,0 +1,1639 @@
+;---------------------------------------------------------------------------
+; AI用画面端検知ヘルパー
+;---------------------------------------------------------------------------
+[Statedef 60000]
+Physics = N
+Ctrl = 0
+Anim = 10000
+VelSet = 0, 0
+
+;Var(0)  = 本体と相手のStateTypeとMoveTypeの記憶
+;Var(1)  = 自分と相手のStateNo記憶
+;Var(2)  = 自分のライフ変動を監視
+;Var(3)  = 相手との間合いを監視
+;Var(4)  = 相手の攻撃のガード不能判定
+;Var(5)  = 相手のけぞり時間
+;Var(6)  = 相手ヘルパー射出数監視
+;Var(7)  = 相手暗転感知
+;Var(8)  = 
+;Var(9)  = 
+
+;Var(10)  = 本体のガード崩れ学習(Part1)
+;Var(11)  = 本体のガード崩れ学習(Part2)
+;Var(12)  = 本体のガード崩れ学習(Part3)
+;Var(13)  = 相手の危険行動学習(Part1)
+;Var(14)  = 相手の危険行動学習(Part2)
+;Var(15)  = 相手の危険行動学習(Part3)
+;Var(16)  = 相手の反応学習(Part1)
+;Var(17)  = 相手の反応学習(Part2)
+;Var(18)  = 相手の反応学習(Part3)
+;Var(19)  = 
+;Var(20)  = 
+;Var(21)  = 
+;Var(22)  = 
+;Var(23)  = 
+;Var(24)  = 
+
+;Var(54) = 前方端の座標
+;Var(55) = 後方端の座標
+;Var(56) = 相手画面端の座標
+;Var(57) = 画面右端の検出位置
+;Var(58) = 画面左端の検出位置
+
+[State 60000, 間違いで本体が来たら立ちへ復帰]
+Type = SelfState
+Trigger1 = !IsHelper
+Value = 0
+Ctrl = 1
+
+[State 60000, 無敵]
+Type = NotHitBy
+Trigger1 = IsHelper
+Value = SCA,AA,AP,AT
+Time = 1
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60000, 不可視化]
+Type = AssertSpecial
+Trigger1 = IsHelper
+Flag = NoShadow
+Flag2 = Invisible
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60000, 画面にとらわれない]
+Type = ScreenBound
+Trigger1 = IsHelper
+Value = 0
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60000, 飛び道具射出位置へ座標固定]
+Type = PosSet
+Trigger1 = 1
+X = 0
+
+[State 60000, 検知用飛び道具射出(右端)]
+Type = Projectile
+TriggerAll = IsHelper
+TriggerAll = Root,NumProjID(60000) = 0
+Trigger1 = Facing = 1
+ProjID = 60000
+ProjAnim = Anim
+Velocity = 10, 0
+ProjStageBound = 0
+ProjEdgeBound = 99999999
+ProjHeightBound = -99999999,99999999
+OffSet = 0, 0
+PosType = P1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+ProjReMoveTime = -1
+
+[State 60000, 検知用飛び道具射出(左端)]
+Type = Projectile
+TriggerAll = IsHelper
+TriggerAll = Root,NumProjID(60005) = 0
+Trigger1 = Facing = -1
+ProjID = 60005
+ProjAnim = Anim
+Velocity = 10, 0
+ProjStageBound = 0
+ProjEdgeBound = 99999999
+ProjHeightBound = -99999999,99999999
+OffSet = 0, 0
+PosType = P1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+ProjReMoveTime = -1
+
+[State 60000, 方向転換]
+Type = Turn
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60000) = 0
+Trigger2 = Root,NumProjID(60005) = 0
+Trigger3 = Facing != 1
+
+;Type = Turn
+;TriggerAll = 自分がヘルパー
+;Trigger1 = 右端用飛び道具が未射出かつ右を向いていない
+;Trigger2 = 左端用飛び道具が未射出かつ左を向いていない
+;Trigger3 = 検知用飛び道具は両端用共に射出済みだが右を向いていない
+
+[State 60000, 計測開始]
+Type = ChangeState
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60000)
+Trigger1 = Root,NumProjID(60005)
+Trigger1 = Facing = 1
+Value = 60010
+
+[State 60000, 検知用飛び道具準備ループ]
+Type = ChangeState
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60000) = 0
+Trigger2 = Root,NumProjID(60005) = 0
+Trigger3 = Facing != 1
+Value = 60000
+
+;---------------------------------------------------------------------------
+;計測中
+[Statedef 60010]
+Physics = N
+VelSet = 10, 0
+
+[State 60010, 無敵]
+Type = NotHitBy
+Trigger1 = IsHelper
+Value = SCA,AA,AP,AT
+Time = 1
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60010, 不可視化]
+Type = AssertSpecial
+Trigger1 = IsHelper
+Flag = NoShadow
+Flag2 = Invisible
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60010, 画面にとらわれない]
+Type = ScreenBound
+Trigger1 = IsHelper
+Value = 0
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60010, 画面右端の座標]
+Type = VarAdd
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60000)
+V = 57
+Value = Floor(Vel X)
+
+[State 60010, 画面左端の座標]
+Type = VarAdd
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60005)
+V = 58
+Value = Floor(Vel X)
+
+[State 60010, 計測中は座標固定]
+Type = PosSet
+Trigger1 = 1
+X = 0
+
+[State 60010, 検知用飛び道具準備ループ]
+Type = ChangeState
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60000) = 0
+Trigger1 = Root,NumProjID(60005) = 0
+Value = 60011
+
+;---------------------------------------------------------------------------
+;誤差補正用飛び道具準備
+[Statedef 60011]
+Physics = N
+VelSet = 0, 0
+
+[State 60011, 無敵]
+Type = NotHitBy
+Trigger1 = IsHelper
+Value = SCA,AA,AP,AT
+Time = 1
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60011, 不可視化]
+Type = AssertSpecial
+Trigger1 = IsHelper
+Flag = NoShadow
+Flag2 = Invisible
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60011, 画面にとらわれない]
+Type = ScreenBound
+Trigger1 = IsHelper
+Value = 0
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60011, 飛び道具射出位置へ座標固定]
+Type = PosSet
+Trigger1 = 1
+X = 0
+
+[State 60011, 誤差補正用飛び道具射出(右端)]
+Type = Projectile
+TriggerAll = IsHelper
+TriggerAll = Root,NumProjID(60001) = 0
+TriggerAll = Facing = 1
+Trigger1 = Var(57) := Var(57) - 10 || 1
+ProjID = 60001
+ProjAnim = Anim
+Velocity = 1, 0
+ProjStageBound = 0
+ProjEdgeBound = 99999999
+ProjHeightBound = -99999999,99999999
+OffSet = Var(57), 0
+PosType = P1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+ProjReMoveTime = -1
+
+[State 60011, 誤差補正用飛び道具射出(左端)]
+Type = Projectile
+TriggerAll = IsHelper
+TriggerAll = Root,NumProjID(60006) = 0
+TriggerAll = Facing = -1
+Trigger1 = Var(58) := Var(58) - 10 || 1
+ProjID = 60006
+ProjAnim = Anim
+Velocity = 1, 0
+ProjStageBound = 0
+ProjEdgeBound = 99999999
+ProjHeightBound = -99999999,99999999
+OffSet = Var(58), 0
+PosType = P1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+ProjReMoveTime = -1
+
+[State 60011, 方向転換]
+Type = Turn
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60001) = 0
+Trigger2 = Root,NumProjID(60006) = 0
+Trigger3 = Facing != 1
+
+;Type = Turn
+;TriggerAll = 自分がヘルパー
+;Trigger1 = 右端用の誤差補正飛び道具が未射出かつ右を向いていない
+;Trigger2 = 左端用の誤差補正飛び道具が未射出かつ左を向いていない
+;Trigger3 = 誤差補正用飛び道具は両端用共に射出済みだが右を向いていない
+
+[State 60011, 計測開始]
+Type = ChangeState
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60001)
+Trigger1 = Root,NumProjID(60006)
+Trigger1 = Facing = 1
+Value = 60012
+
+[State 60011, 検知用飛び道具準備ループ]
+Type = ChangeState
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60001) = 0
+Trigger2 = Root,NumProjID(60006) = 0
+Trigger3 = Facing != 1
+Value = 60011
+
+;---------------------------------------------------------------------------
+;誤差補正中
+[Statedef 60012]
+Physics = N
+VelSet = 1, 0
+
+[State 60012, 無敵]
+Type = NotHitBy
+Trigger1 = IsHelper
+Value = SCA,AA,AP,AT
+Time = 1
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60012, 不可視化]
+Type = AssertSpecial
+Trigger1 = IsHelper
+Flag = NoShadow
+Flag2 = Invisible
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60012, 画面にとらわれない]
+Type = ScreenBound
+Trigger1 = IsHelper
+Value = 0
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60012, 画面右端の誤差補正]
+Type = VarAdd
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60001)
+V = 57
+Value = Floor(Vel X)
+
+[State 60012, 画面左端の誤差補正]
+Type = VarAdd
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60006)
+V = 58
+Value = Floor(Vel X)
+
+[State 60012, 計測中は座標固定]
+Type = PosSet
+Trigger1 = 1
+X = 0
+
+[State 60012, 検知用飛び道具準備ループ]
+Type = ChangeState
+TriggerAll = IsHelper
+Trigger1 = Root,NumProjID(60001) = 0
+Trigger1 = Root,NumProjID(60006) = 0
+Value = 60013
+
+;---------------------------------------------------------------------------
+;検知完了
+[Statedef 60013]
+Physics = N
+VelSet = 0, 0
+
+[State 60013, 無敵]
+Type = NotHitBy
+Trigger1 = IsHelper
+Value = SCA,AA,AP,AT
+Time = 1
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 不可視化]
+Type = AssertSpecial
+Trigger1 = IsHelper
+Flag = NoShadow
+Flag2 = Invisible
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 画面にとらわれない]
+Type = ScreenBound
+Trigger1 = IsHelper
+Value = 0
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 方向転換]
+Type = Turn
+TriggerAll = IsHelper
+Trigger1 = Facing != Root,Facing
+
+;Type = Turn
+;TriggerAll = 自分がヘルパー
+;Trigger1 = 検知完了時には親の向きと同期
+
+[State 60013, 算出]
+Type = Null
+TriggerAll = IsHelper
+Trigger1 = Root,Facing = 1
+Trigger1 = Var(54) := Var(57)
+Trigger1 = Var(55) := Var(58)
+Trigger1 = Var(56) := Var(58)
+Trigger2 = Root,Facing = -1
+Trigger2 = Var(54) := Var(58)
+Trigger2 = Var(55) := Var(57)
+Trigger2 = Var(56) := Var(57)
+
+[State 60013, 算出]
+Type = Null
+TriggerAll = IsHelper
+Trigger1 = Root,StateType != A
+Trigger1 = Var(54) := Var(54) - Floor(RootDist X + Root,Const(Size.Ground.Front))
+Trigger1 = Var(55) := Var(55) + Floor(RootDist X - Root,Const(Size.Ground.Back))
+Trigger2 = Root,StateType = A
+Trigger2 = Var(54) := Var(54) - Floor(RootDist X + Root,Const(Size.Air.Front))
+Trigger2 = Var(55) := Var(55) + Floor(RootDist X - Root,Const(Size.Air.Back))
+
+[State 60013, 算出]
+Type = Null
+TriggerAll = IsHelper
+Trigger1 = EnemyNear(Root,Var(57)),Facing = 1
+Trigger1 = EnemyNear(Root,Var(57)),StateType != A
+Trigger1 = Var(56) := Var(56) - Floor(EnemyNear(Root,Var(57)),Pos X - Pos X + EnemyNear(Root,Var(57)),Const(Size.Ground.Back)) * Root,Facing
+Trigger2 = EnemyNear(Root,Var(57)),Facing = -1
+Trigger2 = EnemyNear(Root,Var(57)),StateType != A
+Trigger2 = Var(56) := Var(56) - Floor(EnemyNear(Root,Var(57)),Pos X - Pos X + EnemyNear(Root,Var(57)),Const(Size.Ground.Front)) * Root,Facing
+Trigger3 = EnemyNear(Root,Var(57)),Facing = 1
+Trigger3 = EnemyNear(Root,Var(57)),StateType = A
+Trigger3 = Var(56) := Var(56) - Floor(EnemyNear(Root,Var(57)),Pos X - Pos X + EnemyNear(Root,Var(57)),Const(Size.Air.Back)) * Root,Facing
+Trigger4 = EnemyNear(Root,Var(57)),Facing = -1
+Trigger4 = EnemyNear(Root,Var(57)),StateType = A
+Trigger4 = Var(56) := Var(56) - Floor(EnemyNear(Root,Var(57)),Pos X - Pos X + EnemyNear(Root,Var(57)),Const(Size.Air.Front)) * Root,Facing
+
+;-| 相手学習 |--------------------------------------------------------------
+
+[State 60013, 直前の本体の状態を記憶]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,Time = 1
+Trigger1 = Var(0) := Var(0) - Var(0) / 10 % 10 * 10 && 0;本体のStateType(S=0,C=1,A=2,L=3)
+Trigger2 = Var(0) := Var(0) - Var(0) / 1000 % 10 * 1000 && 0;本体のMoveType(I=0,A=1,H=2)
+Trigger3 = Var(0) := Var(0) - Var(0) / 100000 % 10 * 100000 && 0;相手のStateType(S=0,C=1,A=2,L=3)
+Trigger4 = Var(0) := Var(0) - Var(0) / 10000000 % 10 * 10000000 && 0;相手のMoveType(I=0,A=1,H=2)
+Trigger5 = 1
+V = 0
+Value = Var(0) * 10
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 現在の本体のStateType(S=0,C=1,A=2,L=3)]
+Type = VarAdd
+TriggerAll = IsHelper
+TriggerAll = Root,Time = 1
+Trigger1 = Var(0) % 10 = 0
+V = 0
+Value = IfElse(Root,StateType = S,0,IfElse(Root,StateType = C,1,IfElse(Root,StateType = A,2,3)))
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 現在の本体のMoveType(I=0,A=1,H=2)]
+Type = VarAdd
+TriggerAll = IsHelper
+TriggerAll = Root,Time = 1
+Trigger1 = Var(0) / 100 % 10 = 0
+V = 0
+Value = IfElse(Root,MoveType = I,0,IfElse(Root,MoveType = A,1,2)) * 100
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 現在の相手のStateType(S=0,C=1,A=2,L=3)]
+Type = VarAdd
+TriggerAll = IsHelper
+TriggerAll = Root,Time = 1
+Trigger1 = Var(0) / 10000 % 10 = 0
+V = 0
+Value = IfElse(EnemyNear(Root,Var(57)),StateType = S,0,IfElse(EnemyNear(Root,Var(57)),StateType = C,1,IfElse(EnemyNear(Root,Var(57)),StateType = A,2,3))) * 10000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 現在の相手のMoveType(I=0,A=1,H=2)]
+Type = VarAdd
+TriggerAll = IsHelper
+TriggerAll = Root,Time = 1
+Trigger1 = Var(0) / 1000000 % 10 = 0
+V = 0
+Value = IfElse(EnemyNear(Root,Var(57)),MoveType = I,0,IfElse(EnemyNear(Root,Var(57)),MoveType = A,1,2)) * 1000000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+;---------------------------------------------------------------------------
+
+;*****xxxxx = xxxxx = 立ちガード崩れ(下段喰らい)
+;yyyyy***** = yyyyy = しゃがみガード崩れ(中段喰らい)
+;Var(a) - Var(a) / 100000 * 100000 = *****xxxxx
+;Var(a) / 100000 = yyyyy*****
+
+;---------------------------------------------------------------------------
+
+[State 60013, 自分と相手のステート記憶]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType != H
+TriggerAll = Root,StateNo < 200
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+Trigger1 = 1
+V = 1
+Value = Root,StateNo + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 自分のライフ変動を監視]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType != H
+Trigger1 = 1
+V = 2
+Value = Root,Life
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手との間合いを監視]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType != H
+Trigger1 = 1
+V = 3
+Value = Floor(Root,P2BodyDist X)
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード不能フラグOFF]
+Type = VarSet
+Trigger1 = IsHelper
+V = 4
+Value = 0
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手の攻撃をガード不能認定]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,Var(51) - Root,Var(51) / 100000 * 100000 != 0
+TriggerAll = Root,Var(51) - Root,Var(51) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(51) / 100000 != 0
+Trigger1 = Root,Var(51) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger2 = Root,Var(52) / 100000 != 0
+Trigger2 = Root,Var(52) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger3 = Var(10) / 100000 != 0
+Trigger3 = Var(10) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger4 = Var(11) / 100000 != 0
+Trigger4 = Var(11) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger5 = Var(12) / 100000 != 0
+Trigger5 = Var(12) / 100000 = EnemyNear(Root,Var(57)),StateNo
+V = 4
+Value = 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手の攻撃をガード不能認定]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,Var(51) / 100000 != 0
+TriggerAll = Root,Var(51) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) - Root,Var(52) / 100000 * 100000 != 0
+Trigger1 = Root,Var(52) - Root,Var(52) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger2 = Var(10) - Var(10) / 100000 * 100000 != 0
+Trigger2 = Var(10) - Var(10) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger3 = Var(11) - Var(11) / 100000 * 100000 != 0
+Trigger3 = Var(11) - Var(11) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger4 = Var(12) - Var(12) / 100000 * 100000 != 0
+Trigger4 = Var(12) - Var(12) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+V = 4
+Value = 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手の攻撃をガード不能認定]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,Var(52) - Root,Var(52) / 100000 * 100000 != 0
+TriggerAll = Root,Var(52) - Root,Var(52) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) / 100000 != 0
+Trigger1 = Root,Var(52) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger2 = Var(10) / 100000 != 0
+Trigger2 = Var(10) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger3 = Var(11) / 100000 != 0
+Trigger3 = Var(11) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger4 = Var(12) / 100000 != 0
+Trigger4 = Var(12) / 100000 = EnemyNear(Root,Var(57)),StateNo
+V = 4
+Value = 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手の攻撃をガード不能認定]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,Var(52) / 100000 != 0
+TriggerAll = Root,Var(52) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(10) - Var(10) / 100000 * 100000 != 0
+Trigger1 = Var(10) - Var(10) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger2 = Var(11) - Var(11) / 100000 * 100000 != 0
+Trigger2 = Var(11) - Var(11) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger3 = Var(12) - Var(12) / 100000 * 100000 != 0
+Trigger3 = Var(12) - Var(12) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+V = 4
+Value = 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手の攻撃をガード不能認定]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Var(10) - Var(10) / 100000 * 100000 != 0
+TriggerAll = Var(10) - Var(10) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(10) / 100000 != 0
+Trigger1 = Var(10) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger2 = Var(11) / 100000 != 0
+Trigger2 = Var(11) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger3 = Var(12) / 100000 != 0
+Trigger3 = Var(12) / 100000 = EnemyNear(Root,Var(57)),StateNo
+V = 4
+Value = 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手の攻撃をガード不能認定]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Var(10) / 100000 != 0
+TriggerAll = Var(10) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(11) - Var(11) / 100000 * 100000 != 0
+Trigger1 = Var(11) - Var(11) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger2 = Var(12) - Var(12) / 100000 * 100000 != 0
+Trigger2 = Var(12) - Var(12) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+V = 4
+Value = 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手の攻撃をガード不能認定]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Var(11) - Var(11) / 100000 * 100000 != 0
+TriggerAll = Var(11) - Var(11) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(11) / 100000 != 0
+Trigger1 = Var(11) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger2 = Var(12) / 100000 != 0
+Trigger2 = Var(12) / 100000 = EnemyNear(Root,Var(57)),StateNo
+V = 4
+Value = 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手の攻撃をガード不能認定]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Var(11) / 100000 != 0
+TriggerAll = Var(11) / 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(12) - Var(12) / 100000 * 100000 != 0
+Trigger1 = Var(12) - Var(12) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+V = 4
+Value = 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手の攻撃をガード不能認定]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Var(12) - Var(12) / 100000 * 100000 != 0
+TriggerAll = Var(12) - Var(12) / 100000 * 100000 = EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(12) / 100000 != 0
+Trigger1 = Var(12) / 100000 = EnemyNear(Root,Var(57)),StateNo
+V = 4
+Value = 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手のけぞり時間消費]
+Type = VarAdd
+TriggerAll = IsHelper
+Trigger1 = Var(5) > 0
+V = 5
+Value = -1
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手のけぞり時間初期化]
+Type = VarSet
+TriggerAll = IsHelper
+Trigger1 = Var(5) > 0
+Trigger1 = EnemyNear(Root,Var(57)),MoveType != H
+V = 5
+Value = 0
+
+[State 60013, 相手空中ガード時間]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = EnemyNear(Root,Var(57)),MoveType = H
+TriggerAll = EnemyNear(Root,Var(57)),StateType = A
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 200
+Trigger1 = EnemyNear(Root,Var(57)),HitFall = 0
+Trigger1 = EnemyNear(Root,Var(57)),HitShakeOver = 0
+V = 5
+Value = EnemyNear(Root,Var(57)),GetHitVar(HitTime) + EnemyNear(Root,Var(57)),GetHitVar(HitShakeTime) + 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手地上ガード時間]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = EnemyNear(Root,Var(57)),MoveType = H
+TriggerAll = EnemyNear(Root,Var(57)),StateType != A
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 200
+Trigger1 = EnemyNear(Root,Var(57)),HitFall = 0
+Trigger1 = EnemyNear(Root,Var(57)),HitShakeOver = 0
+V = 5
+Value = IfElse(EnemyNear(Root,Var(57)),GetHitVar(HitTime) > EnemyNear(Root,Var(57)),GetHitVar(CtrlTime),EnemyNear(Root,Var(57)),GetHitVar(HitTime),EnemyNear(Root,Var(57)),GetHitVar(CtrlTime)) + EnemyNear(Root,Var(57)),GetHitVar(HitShakeTime) + 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手のけぞり時間]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = EnemyNear(Root,Var(57)),MoveType = H
+TriggerAll = EnemyNear(Root,Var(57)),StateNo >= 200
+Trigger1 = EnemyNear(Root,Var(57)),HitFall = 0
+Trigger1 = EnemyNear(Root,Var(57)),HitShakeOver = 0
+V = 5
+Value = EnemyNear(Root,Var(57)),GetHitVar(HitTime) + EnemyNear(Root,Var(57)),GetHitVar(HitShakeTime) + 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手受身不能時間]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = EnemyNear(Root,Var(57)),MoveType = H
+TriggerAll = EnemyNear(Root,Var(57)),StateType != L
+TriggerAll = EnemyNear(Root,Var(57)),StateNo >= 200
+Trigger1 = EnemyNear(Root,Var(57)),HitFall
+Trigger1 = EnemyNear(Root,Var(57)),HitShakeOver = 0
+V = 5
+Value = EnemyNear(Root,Var(57)),GetHitVar(Fall.RecoverTime) - 1
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手受身不能確信]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = EnemyNear(Root,Var(57)),MoveType = H
+TriggerAll = EnemyNear(Root,Var(57)),StateType != L
+TriggerAll = EnemyNear(Root,Var(57)),StateNo >= 200
+Trigger1 = EnemyNear(Root,Var(57)),HitFall
+Trigger1 = EnemyNear(Root,Var(57)),GetHitVar(Fall.Recover) = 0
+Trigger2 = EnemyNear(Root,Var(57)),StateNo = 5070
+V = 5
+Value = 9999
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手ヘルパー数初期化]
+Type = VarSet
+TriggerAll = IsHelper
+Trigger1 = RoundState != 2
+V = 6
+Value = 0
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手ヘルパー数格納]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = RoundState = 2
+Trigger1 = EnemyNear(Root,Var(57)),StateNo < 200
+Trigger2 = EnemyNear(Root,Var(57)),Ctrl
+V = 6
+Value = EnemyNear(Root,Var(57)),NumHelper
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手暗転感知]
+Type = VarAdd
+TriggerAll = IsHelper
+Trigger1 = EnemyNear(Root,Var(57)),StateType != L
+Trigger1 = EnemyNear(Root,Var(57)),MoveType != H
+Trigger1 = EnemyNear(Root,Var(57)),MoveType = A || EnemyNear(Root,Var(57)),StateNo >= 200
+Trigger1 = EnemyNear(Root,Var(57)),Time
+Trigger2 = Var(7) := 0
+V = 7
+Value = 1
+Persistent = 1
+IgNoreHitPause = 1
+
+;---------------------[]
+
+[State 60013, ガード崩れ学習(本体格納 : 下段Part1)]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 0
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) - Root,Var(51) / 100000 * 100000 = 0
+V = 51
+Value = Root,Var(51) + EnemyNear(Root,Var(57)),StateNo
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード崩れ学習(本体格納 : 中段Part1)]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 1
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) / 100000 = 0
+V = 51
+Value = Root,Var(51) + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード崩れ学習(本体格納 : 下段Part2)]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 0
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) - Root,Var(51) / 100000 * 100000 != 0
+Trigger1 = Root,Var(51) - Root,Var(51) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) - Root,Var(52) / 100000 * 100000 = 0
+V = 52
+Value = Root,Var(52) + EnemyNear(Root,Var(57)),StateNo
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード崩れ学習(本体格納 : 中段Part2)]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 1
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) / 100000 != 0
+Trigger1 = Root,Var(51) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) / 100000 = 0
+V = 52
+Value = Root,Var(52) + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 危険行動学習(本体格納 : Part1)]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 >= 200
+TriggerAll = Root,Time
+Trigger1 = Root,Var(53) = 0
+V = 53
+Value = Root,PrevStateNo + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 危険行動学習(本体格納 : Part2)]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 >= 200
+TriggerAll = Root,Time
+Trigger1 = Root,Var(53) != 0
+Trigger1 = Root,Var(53) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(54) = 0
+V = 54
+Value = Root,PrevStateNo + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手反応学習(本体格納 : Part1)]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 < 200
+TriggerAll = Root,Time
+Trigger1 = Var(55) = 0
+V = 55
+Value = Root,PrevStateNo + Var(1) / 100000 * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手反応学習(本体格納 : Part2)]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 < 200
+TriggerAll = Root,Time
+Trigger1 = Root,Var(55) != 0
+Trigger1 = Root,Var(55) / 100000 != Var(1) / 100000
+Trigger1 = Root,Var(56) = 0
+V = 56
+Value = Root,PrevStateNo + Var(1) / 100000 * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード崩れ学習(下段Part1)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 0
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) - Root,Var(51) / 100000 * 100000 != 0
+Trigger1 = Root,Var(51) - Root,Var(51) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) - Root,Var(52) / 100000 * 100000 != 0
+Trigger1 = Root,Var(52) - Root,Var(52) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(10) - Var(10) / 100000 * 100000 = 0
+V = 10
+Value = Var(10) + EnemyNear(Root,Var(57)),StateNo
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード崩れ学習(中段Part1)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 1
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) / 100000 != 0
+Trigger1 = Root,Var(51) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) / 100000 != 0
+Trigger1 = Root,Var(52) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(10) / 100000 = 0
+V = 10
+Value = Var(10) + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード崩れ学習(下段Part2)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 0
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) - Root,Var(51) / 100000 * 100000 != 0
+Trigger1 = Root,Var(51) - Root,Var(51) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) - Root,Var(52) / 100000 * 100000 != 0
+Trigger1 = Root,Var(52) - Root,Var(52) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(10) - Var(10) / 100000 * 100000 != 0
+Trigger1 = Var(10) - Var(10) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(11) - Var(11) / 100000 * 100000 = 0
+V = 11
+Value = Var(11) + EnemyNear(Root,Var(57)),StateNo
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード崩れ学習(中段Part2)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 1
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) / 100000 != 0
+Trigger1 = Root,Var(51) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) / 100000 != 0
+Trigger1 = Root,Var(52) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(10) / 100000 != 0
+Trigger1 = Var(10) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(11) / 100000 = 0
+V = 11
+Value = Var(11) + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード崩れ学習(下段Part3)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 0
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) - Root,Var(51) / 100000 * 100000 != 0
+Trigger1 = Root,Var(51) - Root,Var(51) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) - Root,Var(52) / 100000 * 100000 != 0
+Trigger1 = Root,Var(52) - Root,Var(52) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(10) - Var(10) / 100000 * 100000 != 0
+Trigger1 = Var(10) - Var(10) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(11) - Var(11) / 100000 * 100000 != 0
+Trigger1 = Var(11) - Var(11) / 100000 * 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(12) - Var(12) / 100000 * 100000 = 0
+V = 12
+Value = Var(12) + EnemyNear(Root,Var(57)),StateNo
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, ガード崩れ学習(中段Part3)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo = [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Root,HitShakeOver = 0
+TriggerAll = Var(0) / 10 % 10 = 1
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Root,Time
+Trigger1 = Root,Var(51) / 100000 != 0
+Trigger1 = Root,Var(51) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(52) / 100000 != 0
+Trigger1 = Root,Var(52) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(10) / 100000 != 0
+Trigger1 = Var(10) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(11) / 100000 != 0
+Trigger1 = Var(11) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(12) / 100000 = 0
+V = 12
+Value = Var(12) + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+;---------------------[]
+
+[State 60013, 危険行動学習(Part1)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 >= 200
+TriggerAll = Root,Time
+Trigger1 = Root,Var(53) != 0
+Trigger1 = Root,Var(53) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(54) != 0
+Trigger1 = Root,Var(54) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(13) = 0
+V = 13
+Value = Root,PrevStateNo + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 危険行動学習(Part2)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 >= 200
+TriggerAll = Root,Time
+Trigger1 = Root,Var(53) != 0
+Trigger1 = Root,Var(53) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(54) != 0
+Trigger1 = Root,Var(54) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(13) != 0
+Trigger1 = Var(13) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(14) = 0
+V = 14
+Value = Root,PrevStateNo + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 危険行動学習(Part3)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 >= 200
+TriggerAll = Root,Time
+Trigger1 = Root,Var(53) != 0
+Trigger1 = Root,Var(53) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Root,Var(54) != 0
+Trigger1 = Root,Var(54) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(13) != 0
+Trigger1 = Var(13) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(14) != 0
+Trigger1 = Var(14) / 100000 != EnemyNear(Root,Var(57)),StateNo
+Trigger1 = Var(15) = 0
+V = 15
+Value = Root,PrevStateNo + EnemyNear(Root,Var(57)),StateNo * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+;---------------------[]
+
+[State 60013, 相手反応学習(Part1)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 < 200
+TriggerAll = Root,Time
+Trigger1 = Root,Var(55) != 0
+Trigger1 = Root,Var(55) / 100000 != Var(1) / 100000
+Trigger1 = Root,Var(56) != 0
+Trigger1 = Root,Var(56) / 100000 != Var(1) / 100000
+Trigger1 = Var(16) = 0
+V = 16
+Value = Root,PrevStateNo + Var(1) / 100000 * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手反応学習(Part2)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 < 200
+TriggerAll = Root,Time
+Trigger1 = Root,Var(55) != 0
+Trigger1 = Root,Var(55) / 100000 != Var(1) / 100000
+Trigger1 = Root,Var(56) != 0
+Trigger1 = Root,Var(56) / 100000 != Var(1) / 100000
+Trigger1 = Var(16) != 0
+Trigger1 = Var(16) / 100000 != Var(1) / 100000
+Trigger1 = Var(17) = 0
+V = 17
+Value = Root,PrevStateNo + Var(1) / 100000 * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, 相手反応学習(Part3)]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = Root,MoveType = H
+TriggerAll = Root,PrevStateNo != [120,159]
+TriggerAll = Root,StateNo != [120,159]
+TriggerAll = Var(0) / 1000 % 10 != 2
+TriggerAll = EnemyNear(Root,Var(57)),StateNo < 100000
+TriggerAll = EnemyNear(Root,Var(57)),StateNo != [120,159]
+TriggerAll = EnemyNear(Root,Var(57)),MoveType != H
+TriggerAll = Var(1) / 100000 < 200
+TriggerAll = Root,Time
+Trigger1 = Root,Var(55) != 0
+Trigger1 = Root,Var(55) / 100000 != Var(1) / 100000
+Trigger1 = Root,Var(56) != 0
+Trigger1 = Root,Var(56) / 100000 != Var(1) / 100000
+Trigger1 = Var(16) != 0
+Trigger1 = Var(16) / 100000 != Var(1) / 100000
+Trigger1 = Var(17) != 0
+Trigger1 = Var(17) / 100000 != Var(1) / 100000
+Trigger1 = Var(18) = 0
+V = 18
+Value = Root,PrevStateNo + Var(1) / 100000 * 100000
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, デバッグ]
+Type = DisplayToClipboard
+Trigger1 = 1
+Text = "Var(0)=%d,Var(10)=%d,Var(11)=%d,Var(12)=%d,Var(-)=%d \n"
+Params = Var(0),Var(10),Var(11),Var(12),0
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 60013, デバッグ]
+Type = AppendToClipboard
+Trigger1 = 1
+Text = "Var(13)=%d,Var(14)=%d,Var(15)=%d,Var(-)=%d,%d"
+Params = Var(13),Var(14),Var(15),0,0
+Persistent = 1
+IgNoreHitPause = 1
+
+;---------------------------------------------------------------------------
+; AI用飛び道具探知ヘルパー
+;---------------------------------------------------------------------------
+[Statedef 66666]
+Ctrl = 0
+Anim = 10000
+
+;Var(0)~Var(50) = ヘルパーリダイレクト用
+;Var(54) = ガード補助用
+;Var(55) = StateNo = 66666と66690ループカウント用
+;Var(56) = StateNo = 66667ループカウント用
+;Var(57) = リダイレクト変数のうちの暫定最高値
+;Var(58) = 相手の飛び道具PlayerID
+
+[State 66666, 間違いで本体が来たら立ちへ復帰]
+Type = SelfState
+Trigger1 = !IsHelper
+Value = 0
+Ctrl = 1
+
+[State 66666, 1フレーム進行して探索再開]
+Type = ChangeState
+Trigger1 = Time
+Value = 66666
+
+[State 66666, 無敵]
+Type = NotHitBy
+Trigger1 = IsHelper
+Value = SCA,AA,AP,AT
+Time = 1
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 66666, 不可視化]
+Type = AssertSpecial
+Trigger1 = IsHelper
+Flag = NoShadow
+Flag2 = Invisible
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 66666, 本体と同じ向き]
+Type = Turn
+TriggerAll = IsHelper
+TriggerAll = Root,Facing != EnemyNear(Root,Var(57)),Facing
+Trigger1 = Facing != Root,Facing
+
+[State 66666, 本体の後ろを向く]
+Type = Turn
+TriggerAll = IsHelper
+TriggerAll = Root,Facing = EnemyNear(Root,Var(57)),Facing
+Trigger1 = Facing = Root,Facing
+
+[State 66666, 本体と相手の中間に配置]
+Type = BindToRoot
+TriggerAll = IsHelper
+TriggerAll = Root,Facing != EnemyNear(Root,Var(57)),Facing
+Trigger1 = Root,Facing * (EnemyNear(Root,Var(57)),Pos X - Root,Pos X) > 0
+Pos = (EnemyNear(Root,Var(57)),Pos X + Root,Pos X) / 2.0,9999
+
+[State 66666, 本体の背後に配置]
+Type = BindToRoot
+TriggerAll = IsHelper
+TriggerAll = Root,Facing != EnemyNear(Root,Var(57)),Facing
+Trigger1 = Root,Facing * (EnemyNear(Root,Var(57)),Pos X - Root,Pos X) <= 0
+Pos = -80 - Root,Const(Size.Ground.Back),9999
+
+[State 66666, 本体の前方に配置]
+Type = BindToRoot
+TriggerAll = IsHelper
+TriggerAll = Root,Facing = EnemyNear(Root,Var(57)),Facing
+Trigger1 = Root,Facing * (EnemyNear(Root,Var(57)),Pos X - Root,Pos X) > 0
+Pos = 80 + Root,Const(Size.Ground.Front),9999
+
+[State 66666, 本体と相手の中間に配置]
+Type = BindToRoot
+TriggerAll = IsHelper
+TriggerAll = Root,Facing = EnemyNear(Root,Var(57)),Facing
+Trigger1 = Root,Facing * (EnemyNear(Root,Var(57)),Pos X - Root,Pos X) <= 0
+Pos = (EnemyNear(Root,Var(57)),Pos X + Root,Pos X) / 2.0,9999
+
+[State 66666, InGuardDist検出]
+Type = VarSet
+TriggerAll = IsHelper
+Trigger1 = InGuardDist
+Trigger2 = Root,InGuardDist
+Trigger3 = EnemyNear(Root,Var(57)),MoveType = A
+Trigger3 = P2Dist X > EnemyNear(Root,Var(57)),Const(Size.Attack.Dist)
+Trigger3 = EnemyNear(Root,Var(57)),StateNo >= 200
+Trigger3 = EnemyNear(Root,Var(57)),Ctrl = 0
+Trigger4 = Var(54) := 0
+V = 54
+Value = 1
+
+[State 66666, ID用変数の最高値記録]
+Type = VarSet
+TriggerAll = NumHelper(66699)
+Trigger1 = Var(57) < Var(Var(55))
+V = 57
+Value = Var(Var(55))
+
+[State 66666, 開始値を最高値に合わせる]
+Type = VarSet
+TriggerAll = Var(51) = 0
+Trigger1 = Var(56) = 0
+V = Var(55)
+Value = Var(57) + 1
+
+[State 66666, 飛び道具検出]
+Type = ChangeState
+TriggerAll = PlayerIDExist(Var(Var(55)))
+Trigger1 = PlayerID(Var(Var(55))),IsHelper
+Trigger1 = TeamSide != PlayerID(Var(Var(55))),TeamSide
+Trigger1 = Abs(PlayerID(Var(Var(55))),ScreenPos X) < 320
+Trigger1 = Abs(PlayerID(Var(Var(55))),ScreenPos Y) < 240
+Trigger1 = PlayerID(Var(Var(55))),MoveType = A
+Trigger1 = PlayerID(Var(Var(55))),HitDefAttr = SCA,AA,AP,AT
+Value = 66667
+
+[State 66666, 10回繰り返して当たりがこなかったら予測用ヘルパー呼ぶ]
+Type = Helper
+TriggerAll = Var(51) = 0
+TriggerAll = Var(56) > 10
+Trigger1 = Var(56) := -1 || 1
+Trigger1 = NumHelper(66699) = 0
+Name = "ID_Check"
+ID = 66699
+Pos = 9999,9999
+StateNo = 66699
+SuperMoveTime = 2147483647
+PauseMoveTime = 2147483647
+
+[State 66666, 変数に予測用ヘルパーのIDを代入]
+Type = VarSet
+TriggerAll = NumHelper(66699)
+Trigger1 = Var(56) = -1
+V = Var(55)
+Value = Helper(66699),ID
+
+[State 66666, 飛び道具巡回探索]
+Type = ChangeState
+TriggerAll = Var(51) = 0
+Trigger1 = Var(56) != -1
+Trigger1 = Var(Var(55)) := Var(Var(55)) + 1 || 1
+Trigger1 = Var(56) := Var(56) + 1 || 1
+Trigger2 = Var(56) = -1
+Trigger2 = Var(55) < 50
+Trigger2 = Var(55) := Var(55) + 1 || 1
+Value = 66666
+
+[State 66666, 格納Varシフトカウンタ初期化]
+Type = VarSet
+Trigger1 = 1
+V = 55
+Value = 0
+
+[State 66666, ループカウンタ初期化]
+Type = VarSet
+Trigger1 = 1
+V = 56
+Value = 0
+
+;---------------------------------------------------------------------------
+[Statedef 66667]
+Ctrl = 0
+
+[State 66667, 無敵]
+Type = NotHitBy
+Trigger1 = IsHelper
+Value = SCA,AA,AP,AT
+Time = 1
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 66667, 不可視化]
+Type = AssertSpecial
+Trigger1 = IsHelper
+Flag = NoShadow
+Flag2 = Invisible
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 66667, 本体と同じ向き]
+Type = Turn
+TriggerAll = IsHelper
+TriggerAll = PlayerIDExist(Var(Var(55)))
+TriggerAll = Root,Facing != PlayerID(Var(Var(55))),Facing
+Trigger1 = Facing != Root,Facing
+
+[State 66667, 本体の後ろを向く]
+Type = Turn
+TriggerAll = IsHelper
+TriggerAll = PlayerIDExist(Var(Var(55)))
+TriggerAll = Root,Facing = PlayerID(Var(Var(55))),Facing
+Trigger1 = Facing = Root,Facing
+
+[State 66667, 本体と相手の中間に配置]
+Type = BindToRoot
+TriggerAll = IsHelper
+TriggerAll = PlayerIDExist(Var(Var(55)))
+TriggerAll = Root,Facing != PlayerID(Var(Var(55))),Facing
+Trigger1 = Root,Facing * (PlayerID(Var(Var(55))),Pos X - Root,Pos X) > Root,Const(Size.Ground.Front)
+Pos = (PlayerID(Var(Var(55))),Pos X + Root,Pos X) / 2.0,9999
+
+[State 66667, 本体の背後に配置]
+Type = BindToRoot
+TriggerAll = IsHelper
+TriggerAll = PlayerIDExist(Var(Var(55)))
+TriggerAll = Root,Facing != PlayerID(Var(Var(55))),Facing
+Trigger1 = Root,Facing * (PlayerID(Var(Var(55))),Pos X - Root,Pos X) <= Root,Const(Size.Ground.Front)
+Pos = -80 - Root,Const(Size.Ground.Back),9999
+
+[State 66667, 本体の前方に配置]
+Type = BindToRoot
+TriggerAll = IsHelper
+TriggerAll = PlayerIDExist(Var(Var(55)))
+TriggerAll = Root,Facing = PlayerID(Var(Var(55))),Facing
+Trigger1 = Root,Facing * (PlayerID(Var(Var(55))),Pos X - Root,Pos X) > Root,Const(Size.Ground.Front)
+Pos = 80 + Root,Const(Size.Ground.Front),9999
+
+[State 66667, 本体と相手の中間に配置]
+Type = BindToRoot
+TriggerAll = IsHelper
+TriggerAll = PlayerIDExist(Var(Var(55)))
+TriggerAll = Root,Facing = PlayerID(Var(Var(55))),Facing
+Trigger1 = Root,Facing * (PlayerID(Var(Var(55))),Pos X - Root,Pos X) <= Root,Const(Size.Ground.Front)
+Pos = (PlayerID(Var(Var(55))),Pos X + Root,Pos X) / 2.0,9999
+
+[State 66667, InGuardDist検出]
+Type = VarSet
+TriggerAll = IsHelper
+Trigger1 = InGuardDist
+Trigger2 = Root,InGuardDist
+Trigger3 = EnemyNear(Root,Var(57)),MoveType = A
+Trigger3 = P2Dist X > EnemyNear(Root,Var(57)),Const(Size.Attack.Dist)
+Trigger3 = EnemyNear(Root,Var(57)),StateNo >= 200
+Trigger3 = EnemyNear(Root,Var(57)),Ctrl = 0
+Trigger4 = PlayerIDExist(Var(Var(55)))
+Trigger4 = EnemyNear(Root,Var(57)),StateNo >= 200
+Trigger4 = EnemyNear(Root,Var(57)),Ctrl = 0
+Trigger5 = Var(54) := 0
+V = 54
+Value = 1
+
+[State 66667, デバッグ]
+Type = DisplayToClipboard
+Trigger1 = 1
+Text = "Var(55) = %d,Var(56) = %d,Var(57) = %d,Var(58) = %d \n"
+Params = Var(55),Var(56),Var(57),Var(58)
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 66667, デバッグ]
+Type = AppendToClipboard
+Trigger1 = 1
+Text = "Var(0) = %d,Var(1) = %d,Var(2) = %d,Var(3) = %d,Var(4) = %d"
+Params = Var(0),Var(1),Var(2),Var(3),Var(4)
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 66667, 該当する飛び道具が無い場合は常に初期化]
+Type = VarSet
+Trigger1 = 1
+V = 58
+Value = 0
+
+[State 66667, 飛び道具検出]
+Type = VarSet
+Trigger1 = PlayerIDExist(Var(Var(55)))
+Trigger1 = PlayerID(Var(Var(55))),IsHelper
+Trigger1 = TeamSide != PlayerID(Var(Var(55))),TeamSide
+Trigger1 = Abs(PlayerID(Var(Var(55))),ScreenPos X) < 320
+Trigger1 = Abs(PlayerID(Var(Var(55))),ScreenPos Y) < 240
+Trigger1 = PlayerID(Var(Var(55))),MoveType = A
+Trigger1 = PlayerID(Var(Var(55))),HitDefAttr = SCA,AA,AP,AT
+V = 58
+Value = PlayerID(Var(Var(55))),ID
+
+[State 66667, 飛び道具が無くなったので探索再開]
+Type = ChangeState
+Trigger1 = Var(58) = 0
+Value = 66666
+
+;---------------------------------------------------------------------------
+[Statedef 66699]
+Ctrl = 0
+
+[State 66699]
+Type = DestroySelf
+Trigger1 = IsHelper

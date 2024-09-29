@@ -1,0 +1,34 @@
+;Street Fighter
+[Info]
+name 		= "Scott Pilgrim"
+displayname 	= "Scott Pilgrim"
+versiondate 	= 05,19,2022
+mugenversion 	= 1.0
+author 		= "Ultra Fatality"
+pal.defaults 	= 1,2,3,4,5,6
+localcoord 	= 320,240
+
+[Files]
+cmd     		= scott.cmd
+cns     		= scott.cns
+st      		= scott.cns
+stcommon 	= common1.cns
+sprite  		= scott.sff
+anim    		= scott.air
+sound   		= scott.snd
+movelist = movelist.dat
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+
+[Arcade]
+intro.storyboard 	= intro.def
+ending.storyboard 	= ending.def
+
+;To do List 
+;Negative Install

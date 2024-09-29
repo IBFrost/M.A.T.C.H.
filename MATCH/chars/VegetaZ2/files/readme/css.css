@@ -1,0 +1,48 @@
+
+body {
+	background-color: #E5E5E5;
+	scrollbar-face-color: #DEE3E7;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1;
+	FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: Verdana, serif; BACKGROUND-COLOR: #fdfdfd; TEXT-ALIGN: left
+}
+P {
+	FONT-SIZE: 13px; COLOR: black; LINE-HEIGHT: 150%; FONT-FAMILY: Verdana, serif
+}
+HR {
+	COLOR: #e5e5e5; HEIGHT: 2px; TEXT-ALIGN: center
+}
+TABLE {
+	COLOR: black; FONT-FAMILY: Verdana, serif
+}
+TH {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; BACKGROUND-IMAGE: url(../images/widgets/cellpic3.gif); COLOR: #ffbb63; BACKGROUND-REPEAT: repeat-x; FONT-FAMILY: Verdana, serif; BACKGROUND-COLOR: #006699
+}
+TR {
+	FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: Verdana,serif
+}
+TD {
+	FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: Verdana,serif
+}
+A:link {
+	FONT-WEIGHT: bold; COLOR: #0e587e; TEXT-DECORATION: none
+}
+A:visited {
+	FONT-WEIGHT: bold; COLOR: #7c94a6; TEXT-DECORATION: none
+}
+A:active {
+	FONT-WEIGHT: bold; COLOR: #f93; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-WEIGHT: bold; COLOR: #c23030; TEXT-DECORATION: underline
+}
+A.links {
+	FONT-SIZE: 8pt
+}
+A.nav {
+	COLOR: #0e587e; TEXT-DECORATION: none
+}

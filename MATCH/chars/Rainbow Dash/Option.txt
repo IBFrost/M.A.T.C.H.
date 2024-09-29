@@ -1,0 +1,608 @@
+;＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/
+
+; オプション設定
+
+;＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/＿/
+;-------------------------------------------------------------------------
+;-------------------------------------------------------------------------
+[Statedef 99999]
+Ctrl = 0
+Anim = 10000
+;-------------------------------------------------------------------------
+;-------------------------------------------------------------------------
+;---------------------[AILevel]
+;※AILvの設定方法
+
+;次の"Value = ○"という記述の○の値を1から8の間で変更してください
+
+[State AILv設定]
+Type = ParentVarSet
+TriggerAll = IsHelper
+Trigger1 = IsHelper(99999 + Root,ID)
+V = 58
+
+Value = 8;(←ココを1~8の間で変更 ※Default = 8)
+
+;1 = Beginner(ぬるぬる)
+;2 = Easy(ぬるめ)
+;3 = Normal(ふつう)
+;4 = Advanced(つよめ)
+;5 = Hard(つよい)
+;6 = Expert(すごい)
+;7 = Watch Mode Like(対AI用接待AI)
+;8 = Watch Mode Mania(対AI用AI)
+
+;-------------------------------------------------------------------------
+;-------------------------------------------------------------------------
+;---------------------[AI startup constantly]
+;※AI常時起動スイッチの設定方法
+
+;次の"Value = ○"という記述の○の値を-1から2の間で変更してください
+
+[State AI常時起動スイッチ]
+Type = VarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(94444 + Root,ID)
+Trigger1 = Parent,ID = Root,ID
+V = 59
+
+Value = 0;(←ココを-1~2の間で変更 ※Default = 0)
+
+;-1= OFF(AIが起動しなくなります)
+;0 = OFF(プレイヤー操作可能)
+;1 = ON(常時AI起動)
+;2 = 一部ON(7P～12Pのみ常時起動)
+
+;-------------------------------------------------------------------------
+;-------------------------------------------------------------------------
+;---------------------[Character Voice]
+;※ボイス言語 (Language)の設定方法
+
+;次の"Value = ○"という記述の○の値を下記に指定された値の間で変更してください
+
+[State ボイス言語 : 1P～6P]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Parent,ID = Root,ID
+Trigger1 = Root,PalNo = [1,6]
+V = 33
+
+Value = 1;(←ココを変更 ※Default = 1)
+
+;↑通常カラー(1P～6P)のボイス設定
+
+[State ボイス言語 : 7P～12P]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Parent,ID = Root,ID
+Trigger1 = Root,PalNo = [7,12]
+V = 33
+
+Value = 2;(←ココを変更 ※Default = 2)
+
+;↑特殊カラー(7P～12P)のボイス設定
+
+;1 = English - by Friendship is Magic (VA - Ashleigh Ball)
+;2 = Japanese - by Tomodachi wa Maho (VA - Izumi Kitta)
+
+;-------------------------------------------------------------------------
+;-------------------------------------------------------------------------
+;---------------------[Victory Music]
+;※勝利BGMを流すかの設定方法
+
+;次の"Value = ○"という記述の○の値を0から1の間で変更してください
+
+[State 勝利BGM]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Parent,ID = Root,ID
+V = 36
+
+Value = 0;(←ココを変更 ※Default = 0)
+
+;0 = OFF(BGM流さない)
+;1 = ON(BGM流す)
+
+;※勝利BGMは最終ラウンド時に超必殺技で相手をKOすると流れます
+
+;-------------------------------------------------------------------------
+;-------------------------------------------------------------------------
+;---------------------[P7 to P12 Power up]
+;特殊カラー強化オプション
+
+;※パワーゲージ上昇量の設定方法
+
+;次の"Value = ○"という記述の○の4桁の独立した値をそれぞれ0から9の間で変更してください
+
+[State 常時ゲージ上昇]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Parent,ID = Root,ID
+V = 30
+
+Value = 1112;(←ココを変更 ※Default = 1112)
+
+;※7P～12Pカラーを選択した時のみ適用されます
+;1の位は12Pカラー
+;10の位は11Pカラー
+;100の位は9～10Pカラー
+;1000の位は7～8Pカラーにそれぞれ適用されます
+
+;指定した値だけ毎フレームパワーゲージ量が上昇します
+;0でゲージ上昇無し、9で常時ゲージMaxです
+;ゲジマユ(常時ゲージMax)にしたい場合はこの項目を9にしてください
+;1～4ほどあれば戦力として十分です
+
+;・例1
+;Value = 1112は
+;7～8P常時パワーゲージ1増加
+;9～10P常時パワーゲージ1増加
+;11P常時パワーゲージ1増加
+;12P常時パワーゲージ2増加
+
+;・例2
+;Value = 3908は
+;7～8P常時パワーゲージ3増加
+;9～10P常時ゲージMax
+;11P増加無し
+;12P常時パワーゲージ8増加
+
+;と言った具合です
+;設定を飛ばす場合でも1～100の位は飛ばさないで0を代入してください
+
+;-------------------------------------------------------------------------
+;※コンボ中以外常時ゲージ保有量の設定方法
+
+;次の"Value = ○"という記述の○の4桁の独立した値をそれぞれ0から9の間で変更してください
+
+[State 常時ゲージ保有量]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Parent,ID = Root,ID
+V = 34
+
+Value = 0111;(←ココを変更 ※Default = 0111)
+
+;※7P～12Pカラーを選択した時のみ適用されます
+;1の位は12Pカラー
+;10の位は11Pカラー
+;100の位は9～10Pカラー
+;1000の位は7～8Pカラーにそれぞれ適用されます
+
+;指定した値の本数だけコンボ中以外パワーゲージが保持されます
+;1なら1ゲージ、3なら3ゲージと言った具合です
+;0で設定OFF、9で最大ゲージ保有です
+;コンボ中はゲージの保持が停止する事に注意してください
+;ゲジマユ(常時ゲージMax)にしたい場合はこの項目でなく上記のパワーゲージ上昇量を9にするといいでしょう
+
+;・例1
+;Value = 0111は
+;7～8P保有無し
+;9～10Pゲージ1本保有
+;11Pゲージ1本保有
+;12Pゲージ1本保有
+
+;・例2
+;Value = 1794は
+;7～8Pゲージ1本保有
+;9～10Pゲージ7本保有
+;11P最大ゲージ保有
+;12Pゲージ4本保有
+
+;と言った具合です
+;設定を飛ばす場合でも1～100の位は飛ばさないで0を代入してください
+
+;-------------------------------------------------------------------------
+;※開幕ゲージ量の設定方法
+
+;次の"Value = ○"という記述の○の4桁の独立した値をそれぞれ0から9の間で変更してください
+
+[State 開幕ゲージ量]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Parent,ID = Root,ID
+V = 31
+
+Value = 1111;(←ココを変更 ※Default = 1111)
+
+;※7P～12Pカラーを選択した時のみ適用されます
+;1の位は12Pカラー
+;10の位は11Pカラー
+;100の位は9～10Pカラー
+;1000の位は7～8Pカラーにそれぞれ適用されます
+
+;指定した値の本数だけ1ラウンド目にパワーゲージが付与されます
+;1なら1ゲージ、3なら3ゲージと言った具合です
+;0でゲージ増加無し、9でゲージMaxです
+
+;・例1
+;Value = 1111は
+;7～8P開幕ゲージ1本付与
+;9～10P開幕ゲージ1本付与
+;11P開幕ゲージ1本付与
+;12P開幕ゲージ1本付与
+
+;・例2
+;Value = 0259は
+;7～8Pゲージ増加無し
+;9～10P開幕ゲージ2本付与
+;11P開幕ゲージ5本付与
+;12P開幕最大ゲージ付与
+
+;と言った具合です
+;設定を飛ばす場合でも1～100の位は飛ばさないで0を代入してください
+
+;-------------------------------------------------------------------------
+;※コンボ補正の設定方法
+
+;次の"Value = ○"という記述の○の4桁の独立した値をそれぞれ0から4の間で変更してください
+
+[State コンボ補正]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Parent,ID = Root,ID
+V = 32
+
+Value = 1223;(←ココを変更 ※Default = 1223)
+
+;※7P～12Pカラーを選択した時のみ適用されます
+;1の位は12Pカラー
+;10の位は11Pカラー
+;100の位は9～10Pカラー
+;1000の位は7～8Pカラーにそれぞれ適用されます
+
+;0 = 通常のコンボ補正(最低保証ダメージ0.1倍)
+;1 = コンボ補正緩和Lv1(最低保証ダメージ0.2倍)
+;2 = コンボ補正緩和Lv2(最低保証ダメージ0.35倍)
+;3 = コンボ補正緩和Lv3(最低保証ダメージ0.5倍)
+;4 = コンボ補正OFF(コンボ補正が掛かりません)
+
+;・例1
+;Value = 1223は
+;7～8Pコンボ補正緩和Lv1
+;9～10Pコンボ補正緩和Lv2
+;11Pコンボ補正緩和Lv2
+;12Pコンボ補正緩和Lv3
+
+;・例2
+;Value = 4103は
+;7～8Pコンボ補正が掛かりません
+;9～10Pコンボ補正緩和Lv1
+;11P通常のコンボ補正
+;12Pコンボ補正緩和Lv3
+
+;と言った具合です
+;設定を飛ばす場合でも1～100の位は飛ばさないで0を代入してください
+
+;-------------------------------------------------------------------------
+;※超必殺技ヒット時の相手挙動の設定方法
+
+;次の"Value = ○"という記述の○の4桁の独立した値をそれぞれ0から1の間で変更してください
+
+[State 超必殺技でコンボ可否]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Parent,ID = Root,ID
+V = 37
+
+Value = 0000;(←ココを変更 ※Default = 0000)
+
+;※7P～12Pカラーを選択した時のみ適用されます
+;1の位は12Pカラー
+;10の位は11Pカラー
+;100の位は9～10Pカラー
+;1000の位は7～8Pカラーにそれぞれ適用されます
+
+;0 = OFF(超必殺技ヒット後は追撃できません)
+;1 = ON(超必殺技ヒット後に追撃できるようになります)
+
+;ONにすると殆どの超必殺技が追撃可能になるので
+;10割コンボする割合が高くなります、永久コンボとかさせたい場合にどうぞ
+;低カラーでも容易に10割してしまうので
+;ワンチャン10割大会などよっぽど特殊なコンセプトがない限りはOFFでいいでしょう
+;狂中位までならOFFでもそれなりに戦えます
+
+;・例1
+;Value = 0000は
+;7～8P超必殺技コンボOFF
+;9～10P超必殺技コンボOFF
+;11P超必殺技コンボOFF
+;12P超必殺技コンボOFF
+
+;・例2
+;Value = 1101は
+;7～8Pコ超必殺技コンボON
+;9～10P超必殺技コンボON
+;11P超必殺技コンボOFF
+;12P超必殺技コンボON
+
+;と言った具合です
+;設定を飛ばす場合でも1～100の位は飛ばさないで0を代入してください
+
+;-------------------------------------------------------------------------
+; ↑↑↑オプション設定ここまで↑↑↑
+;-------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;Helper(94444 + Root,ID) = AI起動ヘルパー
+;Helper(99999 + Root,ID) = AI環境設定ヘルパー
+
+[State 99999, 間違いで本体が来たら立ちへ復帰]
+Type = SelfState
+Trigger1 = !IsHelper
+Value = 0
+Ctrl = 1
+
+[State 99999, 無敵]
+Type = NotHitBy
+Trigger1 = IsHelper
+Value = SCA,AA,AP,AT
+Time = 1
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 99999, 不可視化]
+Type = AssertSpecial
+Trigger1 = IsHelper
+Flag = NoShadow
+Flag2 = Invisible
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 99999, 本体に追従]
+Type = BindToRoot
+Trigger1 = IsHelper
+Time = 1
+Facing = 1
+Pos = 0, 9999
+Persistent = 1
+IgNoreHitPause = 1
+
+[State 99999, 振り返る]
+Type = Turn
+TriggerAll = IsHelper
+Trigger1 = Facing != Root,Facing
+
+[State 99999, AILvの下限]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Root,Var(58) < 1
+V = 58
+Value = 1
+
+[State 99999, AILvの上限]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(99999 + Root,ID)
+Trigger1 = Root,Var(58) > 8
+V = 58
+Value = 8
+
+[State プレイヤー操作]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(94444 + Root,ID)
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) = 0
+Trigger1 = Var(59) <= -1
+V = 59
+Value = -1
+
+[State AI常時起動]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(94444 + Root,ID)
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) = 0
+Trigger1 = Var(59) = 1
+Trigger2 = Var(59) >= 2
+Trigger2 = Root,PalNo = [7,12]
+V = 59
+Value = 1
+
+[State 99999, プレイヤー判定]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(94444 + Root,ID)
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) = 0
+Trigger1 = Command = "up" && Root,Command = "up"
+Trigger2 = Command = "down" && Root,Command = "down"
+Trigger3 = Command = "back" && Root,Command = "back"
+Trigger4 = Command = "fwd" && Root,Command = "fwd"
+Trigger5 = Command = "a" && Root,Command = "a"
+Trigger6 = Command = "b" && Root,Command = "b"
+Trigger7 = Command = "c" && Root,Command = "c"
+Trigger8 = Command = "x" && Root,Command = "x"
+Trigger9 = Command = "y" && Root,Command = "y"
+Trigger10 = Command = "z" && Root,Command = "z"
+Trigger11 = Command = "start" && Root,Command = "start"
+V = 59
+Value = -1
+
+[State 99999, AI判定]
+Type = ParentVarSet
+TriggerAll = IsHelper
+TriggerAll = IsHelper(94444 + Root,ID)
+TriggerAll = Parent,ID = Root,ID
+TriggerAll = Root,Var(59) = 0
+Trigger1 = Command != "up" && Root,Command = "up" && (RoundState = 2 && Root,Ctrl)
+Trigger2 = Command != "down" && Root,Command = "down" && (RoundState = 2 && Root,Ctrl)
+Trigger3 = Command != "back" && Root,Command = "back" && (RoundState = 2 && Root,Ctrl)
+Trigger4 = Command != "fwd" && Root,Command = "fwd" && (RoundState = 2 && Root,Ctrl)
+Trigger5 = Command != "a" && Root,Command = "a"
+Trigger6 = Command != "b" && Root,Command = "b"
+Trigger7 = Command != "c" && Root,Command = "c"
+Trigger8 = Command != "x" && Root,Command = "x"
+Trigger9 = Command != "y" && Root,Command = "y"
+Trigger10 = Command != "z" && Root,Command = "z"
+Trigger11 = Command != "start" && Root,Command = "start"
+V = 59
+Value = 1
+
+[State 99999, 立ったら消失]
+Type = DestroySelf
+TriggerAll = IsHelper
+TriggerAll = IsHelper(94444 + Root,ID)
+Trigger1 = Root,Var(59)
+
+[State 99999, 消滅]
+Type = DestroySelf
+TriggerAll = IsHelper
+TriggerAll = IsHelper(94444 + Root,ID) = 0
+Trigger1 = Root,StateNo != 5900

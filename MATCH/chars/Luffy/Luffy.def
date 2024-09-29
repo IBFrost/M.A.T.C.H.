@@ -1,0 +1,31 @@
+[Info]
+name="Monkey D Luffy by Xasor";Edited and Resprited by Japter Dark
+displayname="Luffy"
+versiondate=2/1/14
+mugenversion=1.0
+author="Xasor"
+pal.defaults=1
+[Files]
+sprite=Luffy.sff
+sound=Luffy-eng.snd
+;sound=Luffy-jap.snd
+anim=Luffy.air
+cmd=Luffy.cmd
+cns=Luffy.cns
+st=Luffy.cns
+stcommon=common1.cns
+pal1=Normal.act
+pal2=Roger.act
+pal3=Yellow.act
+pal4=Blue.act
+pal5=Black.act
+pal6=Red.act
+pal7=
+pal8=
+st1=specials.cns
+st2=throws.cns
+st3=hypers.cns
+
+[Arcade]
+intro.storyboard = story.def
+ending.storyboard = ending.def

@@ -15,11 +15,11 @@ TOURNAMENT_START_PIC = "match-common/miya-happy-sm.png"
 #### Twitch bot settings ####
 
 USE_TWITCH = 1 # Enable Twitch bot
-TWITCH_CHANNEL = 'ibfrost'
-TWITCH_IRC_TOKEN = 
-TWITCH_CLIENT_ID = 
+TWITCH_CHANNEL = '' # <--- YOUR CHANNEL NAME HERE
+TWITCH_IRC_TOKEN = '' # <--- YOUR GENERATED TOKEN HERE
+TWITCH_CLIENT_ID = '' # <--- YOUR CLIENT ID HERE
 
-TWITCH_NICK = 'FrozenArenaBot'
+TWITCH_NICK = '' # <--- Doesn't seem to do anything but just change to the name of your bot acct
 TWITCH_PREFIX = '!'
 
 # Mugenoperator configuration. Use these to adjust the file locations, behaviour and buttons the operator uses.
@@ -86,7 +86,7 @@ NO_DUPLICATES = 0
 # Intervals will be used in order from highest to lowest, values higher than the initial time will be ignored.
 # A message is sent on every interval, any number of intervals can be used.
 
-TIMER_INTERVALS = [6,2]
+TIMER_INTERVALS = [45,15]
 
 
 ###

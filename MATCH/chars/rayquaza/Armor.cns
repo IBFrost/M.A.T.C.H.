@@ -1,0 +1,95 @@
+;------------------------------------------------------------------------
+;Bosses Armor code by Demons and Roses
+;----------------------------------------------------------------------
+
+[StateDef 44304]
+ctrl = 0
+physics = N
+velset = 0
+sprpriority = -5
+
+[State 44304, Follow]
+type = BindToRoot
+trigger1 = 1
+time = -1
+facing = 1
+pos = 0,0
+
+[State 44304, Mimic]
+type = ChangeAnim
+trigger1 = SelfAnimExist(Root,Anim)
+value = Root,Anim
+elem = Root,AnimElemNo(0)
+
+[State 44304, STSS]
+type = StateTypeSet
+trigger1 = Root,StateType = S
+StateType = S
+
+[State 44304, STSC]
+type = StateTypeSet
+trigger1 = Root,StateType = C
+StateType = C
+
+[State 44304, STSA]
+type = StateTypeSet
+trigger1 = Root,StateType = A
+StateType = A
+
+[State 44304, STSL]
+type = StateTypeSet
+trigger1 = Root,StateType = L
+StateType = L
+
+[State 44304, MTSA]
+type = StateTypeSet
+trigger1 = Root,MoveType = A
+MoveType = A
+
+[State 44304, MTSI]
+type = StateTypeSet
+trigger1 = Root,MoveType = I
+MoveType = I
+
+[State 44304, MTSH]
+type = StateTypeSet
+trigger1 = Root,MoveType = H
+MoveType = H
+
+[State 44304, Hide]
+type = AssertSpecial
+trigger1 = 1
+flag = invisible
+flag2 = NoShadow
+
+[State 44304, NHB]
+type = NotHitBy
+trigger1 = 1
+value = , AT
+time = -1
+
+[State 44304, HO]
+type = HitOverride
+trigger1 = 1
+attr = SCA, AA,AP,AT
+time = -1
+stateno = 44305
+
+
+[StateDef 44305]
+ctrl = 0
+physics = N
+velset = 0
+sprpriority = -5
+
+[State 44305, PVS]
+type = ParentVarSet
+trigger1 = 1
+var(20) = GetHitVar(damage)
+
+[State 44305, Revert]
+type = ChangeState
+trigger1 = 1
+value = 44304
+
+

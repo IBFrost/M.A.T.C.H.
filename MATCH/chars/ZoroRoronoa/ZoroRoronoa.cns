@@ -1,0 +1,149 @@
+;===================================
+;　基本設定・基本動作・通常技 の設定
+;  ===================================
+[Data]
+life = 1000          ;スタート時の体力総計
+attack = 100         ;攻撃力パーセンテージ （多いほど強くなります Def:100%）
+defence = 100        ;防御力パーセンテージ （多いほど強くなります Def:100%）
+fall.defence_up = 50 ;ダウン時に攻撃された時に一時的に上がる防御力のパーセンテージ
+liedown.time = 60    ;ダウンしてから起き上がるまでの時間
+airjuggle = 30       ;ジャグルポイント数
+sparkno = 2        ;ディフォルトのスパーク番号
+guard.sparkno = 40 ;ガード時のディフォルトスパーク番
+KO.echo = 0          ;1にするとKOされた時に声にエコーがかかります
+volume = 0           ;ボリュームオフセット (negative for softer)
+
+[Size]
+xscale = 1.5          ;水平方向の縮尺
+yscale = 1.5           ;垂直方向の縮尺
+ground.back = 15     ;キャラクターの幅（後方、地上）
+ground.front = 15     ;キャラクターの幅（前方、地上）
+air.back = 15        ;キャラクターの幅（後方、空中）
+air.front = 15       ;キャラクターの幅（前方、空中）
+z.width = 3          ;Player width (into and out)（現在使用されていないと思われます）
+height = 60	     ;キャラクターの高さ
+attack.width = 4,4   ;Default attack width: back, front（現在使用されていないと思われます）
+attack.dist = 160    ;攻撃時に相手がガード体勢に入る最低距離（最大320）
+proj.attack.dist = 90 ;相手がガード体勢に入る発射物との最低距離（最大320）
+proj.doscale = 0     ;xscale, yscaleの設定が発射物にも適用するかどうか（1で有効）
+head.pos = -5, -90   ;頭の大体の座標（BindToTarget使用時に必要です。）
+mid.pos = -5, -60    ;体中心の大体の座標（BindToTarget使用時に必要です。）
+shadowoffset = 0     ;影の垂直方向オフセット
+
+[Movement]
+airjump.num = 0      ;空中ジャンプの回数 （オプション）
+airjump.height = 35  ;空中ジャンプに必要な最低限の高さ （オプション）
+yaccel = .43         ;垂直方向にかかる加速度（重力）
+stand.friction = .85  ;立ち状態での摩擦係数
+crouch.friction = .82 ;しゃがみ状態での摩擦係数
+
+[Velocity]
+walk.fwd  = 2.4      ;前に歩く時の速度
+walk.back = -2.4     ;後ろに歩く時の速度
+run.fwd  =  4.5,-4 ;前に走る時の速度 (x, y) ホップさせる時はyを0以下にします
+run.back = -4.5,-4 ;後ろに走る時の速度 (x, y) 走らせる時はyを0にします
+jump.neu = 0,-8.5    ;ジャンプ時の垂直移動速度 (x, y)
+jump.back = -3.0    ;後ろにジャンプした時の水平移動速度
+jump.fwd = 3.0       ;前にジャンプした時の水平移動速度
+runjump.back = -2.55,-8.1 ;後ろに走りながらのジャンプ時の速度指定 (オプション)
+runjump.fwd = 4,-8.1      ;前に走りながらのジャンプ時の速度指定 (オプション)
+airjump.neu = 0,-6.7      ;空中ジャンプ時の垂直移動速度  (オプション)
+airjump.back = -4.0,-6.8 ;空中で後ろにジャンプした時の水平移動速度
+airjump.fwd = 4.0,-6.8    ;空中で前にジャンプした時の水平移動速度
+
+;---------------------------------------------------------------------------
+;タイムオーバー（負けた時）
+[Statedef 170]
+type = S
+ctrl = 0
+anim = 170
+velset = 0,0
+
+[State 1010, 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S170, 0
+Volume = 0
+
+[State 170, 無敵]
+type = NotHitBy
+trigger1 = 1 ;トリガーを何も書かず「1」にする事により、『無条件で常に実行させる命令』になる。
+value = SCA
+time = 1
+
+;---------------------------------------------------------------------------
+;勝利ポーズ分岐（common1.cnsには無いけど、これもコモンステート）
+[Statedef 180]
+type = S
+
+[State 180, ステート変更]
+type = ChangeState
+trigger1 = Time = 0
+value = 181
+
+;---------------------------------------------------------------------------
+;勝利ポーズ（礼をする）
+[Statedef 181]
+type = S
+ctrl = 0
+anim = 181
+velset = 0,0
+
+[State 181, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+;---------------------------------------------------------------------------
+;イントロ（試合開始前の登場演出アクション）
+[Statedef 191]
+type = S
+ctrl = 0
+anim = 190
+velset = 0,0
+
+[State 1010, 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S190, 0
+Volume = 0
+
+[State 191, アニメ変更];バトル画面に切り替わった瞬間のフェードインの時、アニメを固定している
+type = ChangeAnim
+trigger1 = RoundState = 0
+value = 190
+
+[State 191, 特殊効果];試合が開始するまではこのコントローラを使おう（※２）
+type = AssertSpecial
+trigger1 = 1
+flag = Intro ;イントロの状態
+
+[State 191, ステート変更];アニメーションが終われば「通常立ち」のステートに変更する
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+
+;---------------------------------------------------------------------------
+;挑発
+[Statedef 195]
+type = S
+movetype = I
+physics = S
+ctrl = 0
+anim = 195
+velset = 0,0
+sprpriority = 2
+
+[State 195, コントロール]
+type = CtrlSet
+trigger1 = Time = 40 ;このステートが４０フレームになったら
+value = 1            ;キーコントロールが可能になる。
+
+[State 195, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------

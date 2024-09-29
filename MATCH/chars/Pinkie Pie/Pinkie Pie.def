@@ -1,0 +1,39 @@
+[Info]
+Name            = "Pinkie Pie"
+DisplayName     = "Pinkie Pie"
+VersionDate     = 04,14,2009
+MugenVersion    = 04,14,2002
+Author          = "Moku"
+Pal.Defaults    = 1,2,3,4,5,6
+
+[Files]
+Sprite          = Sprite.sff
+Anim            = Anim.air
+Sound           = Sound.snd
+Cmd             = Data/Command.txt
+Cns             = Data/Constants.cns
+StCommon        = Data/Common1.st
+St              = Data/-2.st
+St0             = Data/-3.st
+St1             = Data/AI_Helpers.cns
+St2             = Option.txt
+St3             = Data/NormalMoves.st
+St4             = Data/SuperMoves.st
+St5             = Data/HyperMoves.st
+St6             = Data/System.st
+Pal1            = Palettes/Original.act ;デフォルトカラー
+Pal2            = Palettes/Surprise.act
+Pal3            = Palettes/Blue.act
+Pal4            = Palettes/Limestone_Pie.act
+Pal5            = Palettes/Marble_Pie.act
+Pal6            = Palettes/Cheese_Sandwich.act
+Pal7            = Palettes/Original.act
+Pal8            = Palettes/G3_Pinkie_Pie.act
+Pal9            = Palettes/Original.act
+Pal10           = Palettes/Surprise.act
+Pal11           = Palettes/Original.act
+Pal12           = Palettes/Original.act
+
+[Arcade]
+Intro.StoryBoard = 
+Ending.StoryBoard = 

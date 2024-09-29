@@ -1,0 +1,73 @@
+;=============================================
+; CNS File for Vegeta Z2 by Balthazar & Cybaster
+; Constants file
+;=============================================
+
+[Data]
+life = 1000
+power = 3000
+attack = 100
+defence = 95
+fall.defence_up = 50
+liedown.time = 15
+airjuggle = 15
+sparkno = 2	
+guard.sparkno = -1
+KO.echo = 0	
+volume = 150
+IntPersistIndex = 50
+FloatPersistIndex = 20
+
+[Size]
+xscale = 1				;Horizontal scaling factor.
+yscale = 1				;Vertical scaling factor.
+ground.back = 30		;Player width (back, ground)
+ground.front = 25		;Player width (front, ground)
+air.back = 12			;Player width (back, air)
+air.front = 12			;Player width (front, air)
+height = 60				;Height of player (for opponent to jump over)
+attack.dist = 160		;Default attack distance
+proj.attack.dist = 90	;Default attack distance for projectiles
+proj.doscale = 0		;Set to 1 to scale projectiles too   
+head.pos = 12,-65   ;-5, -90		;Approximate position of head
+mid.pos = -1,-41   ;-5, -60		;Approximate position of midsection
+shadowoffset = 0		;Number of pixels to vertically offset the shadow
+draw.offset = 0,0		;Player drawing offset in pixels (x, y)
+
+[Velocity]
+walk.fwd  = 2.4			;Walk forward
+walk.back = -2.2		;Walk backward
+run.fwd  = 6.5, 0			;Run forward (x, y)
+run.back = -4.3,-3.8	;Hop backward (x, y)
+jump.neu = 0,-10		;Neutral jumping velocity (x, y)
+jump.back = -3.25		;Jump back Speed (x, y)
+jump.fwd = 3.25			;Jump forward Speed (x, y)
+runjump.back = -7.5,-8.5		;Running jump speeds (opt)
+runjump.fwd = 6,-8.5	;.
+airjump.neu = 0,-8.1	;.
+airjump.back = -2.55	;Air jump speeds (opt)
+airjump.fwd = 2.5		;.
+
+[Movement]
+airjump.num = 0			;Number of air jumps allowed (opt)
+airjump.height = 35		;Minimum distance from ground before you can air jump (opt)
+yaccel = .51        	;Vertical acceleration
+stand.friction = .85	;Friction coefficient when standing
+crouch.friction = .82	;Friction coefficient when crouching
+
+[Quotes]
+
+victory78 = "All the weaklings just keep lining up."
+victory79 = "Fool! You face royal blood here!"
+victory80 = "You lack the drive to become an elite!"
+victory81 = "It was my priviledge."
+victory82 = "A true saiyajin fears nothing. NOTHING!"
+victory83 = "Shut your food holes!"
+victory84 = "Still think you can take me on, low-level trash!?"
+victory85 = "Hail to the prince!"
+victory86 = "Fools and weaklings!"
+victory87 = "Hmph."
+victory88 = "Why are you staring at? Scram!"
+victory89 = "This is the mark of the true elite!"
+victory90 = "Huh... Not bad, but not good enough. "
+victory91 = "My way or no way at all."

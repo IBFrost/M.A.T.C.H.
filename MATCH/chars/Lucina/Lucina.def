@@ -1,0 +1,34 @@
+[Info]
+name 		= "Lucina"
+displayname 	= "Lucina"
+versiondate 	= 04/09/2021
+mugenversion 	= 1.0
+author 		= "diegosonic81"
+pal.defaults 	= 1
+
+[Files]
+sprite 	= lucina.sff
+sound 	= lucina.snd
+anim 	= lucina.air
+cmd 	= lucina.cmd
+cns 	= lucina.cns
+st 	= lucina.cns
+stcommon 	= common1.cns
+pal1	= ACT\lucina.act
+pal2	= ACT\red.act
+pal3	= ACT\yellow.act
+
+[ja.Files]
+sprite 	= lucina.sff
+sound 	= lucinaJP.snd
+anim 	= lucina.air
+cmd 	= lucina.cmd
+cns 	= lucina.cns
+st 	= lucina.cns
+stcommon 	= common1.cns
+pal1	= ACT\lucina.act
+pal2	= ACT\red.act
+
+[Arcade]
+intro.storyboard =
+ending.storyboard =

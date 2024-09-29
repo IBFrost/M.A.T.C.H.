@@ -1,0 +1,374 @@
+[Statedef -2]
+;-------------------------------------------------------------------------------
+;AI Controllers (Original Coding by Winane)
+[State -2, StopAI]
+type = VarSet
+triggerall = (var(59) > 0)
+trigger1 = (RoundState != 2)
+trigger2 = !Alive
+var(59) = -2
+IgnoreHitPause = 1
+[State -2, Simplifier]
+type = VarSet
+trigger1 = (var(59) = 1)
+trigger2 = (var(51):=0)
+var(51) = 1
+IgnoreHitPause = 1
+
+;End of Winane AI Coding
+;-------------------------------------------------------------------------------
+;Super Armor (Original Coding by Winane)
+[State -2, HandsOff]
+type = NotHitBy
+triggerall = alive
+triggerall = movetype!=H
+triggerall = stateno != [4000,4005]
+triggerall = numhelper(44304) > 0
+trigger1 = 1
+value = ,NA,SA,NP,SP
+time = -1
+IgnoreHitPause = 1
+
+
+
+;Super Armor(My own edits)
+[State -2, PosFreeze]
+type = PosFreeze
+triggerall = movetype != H
+triggerall = stateno != [1050,1073]
+triggerall = alive
+triggerall = numhelper(44304) > 0
+trigger1 = helper(44304),stateno = 44305
+value = 1
+;ignorehitpause =
+;persistent =
+
+[State -2, ChangeAnim]
+type = ChangeAnim
+triggerall = movetype != H
+triggerall = stateno != [1050,1073]
+triggerall = alive
+triggerall = numhelper(44304) > 0
+trigger1 = helper(44304),stateno = 44305
+value = var(9)
+elem = animelemno(0)
+
+[State -2, PalFX];Flash red when hit
+type = PalFX
+triggerall = movetype != H
+triggerall = alive
+triggerall = numhelper(44304) > 0
+trigger1 = helper(44304),stateno = 44305
+trigger1 = helper(44304),time = 0
+time = 5
+add = 200,60,60
+mul = 200,60,60
+sinadd = 120,60,60,10
+invertall = 0
+color = 256;120
+ignorehitpause = 1
+
+[State -2, HitBy]
+type = HitBy
+triggerall = alive
+triggerall = numhelper(44304) > 0
+trigger1 = (stateno = [120,155])
+trigger2 = enemy,hitcount >=5
+trigger3 = (stateno = 1000&&time>=16) || (stateno = 1010&&time>=22) || (stateno = 1020&&time>=40)
+trigger4 = (stateno = 1030&&time>=18) || (stateno = 1040&&time>=18)
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+;value2 = S,NA
+time = 1
+;ignorehitpause =
+;persistent =
+
+;End of Armor Coding
+;-------------------------------------------------------------------------------
+;---Metal Yoshi Throw Damage Increase-------------------------------------------
+[State -2, DefenceMulSet]
+type = DefenceMulSet
+triggerall = name = "MetalYoshi3"
+trigger1 = gethitvar(isbound)
+value = 2
+ignorehitpause = 1
+;----------------------------------------------
+
+[State -2, VarSet];Stampede
+type = VarSet
+trigger1 = stateno != [3051,3053]
+v = 31   ;fv = 10
+value = 0
+ignorehitpause = 1
+;persistent =
+
+[State -2, VarSet];Enemy in Egg
+type = VarSet
+triggerall = numtarget > 0
+trigger1 = target,stateno != [1121,1122]
+trigger1 = numhelper(1121) != 0
+trigger2 = numhelper(1121) = 0
+v = 6    ;fv = 10
+value = 0
+ignorehitpause = 1
+;persistent =
+
+[State -2, VarSet];Enemy in Egg
+type = VarSet
+triggerall = numtarget > 0
+trigger1 = target,stateno = [1121,1122]
+trigger1 = numhelper(1121) != 0
+v = 6    ;fv = 10
+value = 1
+ignorehitpause = 1
+;persistent =
+
+[State -2, VarSet]
+type = VarSet
+triggerall = numtarget > 0
+trigger1 = target,stateno != 3039
+trigger1 = numhelper(3035) != 0
+trigger2 = numhelper(3035) = 0
+v = 14    ;fv = 10
+value = 0
+ignorehitpause = 1
+;persistent =
+
+[State -2, VarSet]
+type = VarSet
+triggerall = numtarget > 0
+trigger1 = target,stateno = 3039
+trigger1 = numhelper(3035) != 0
+v = 14    ;fv = 10
+value = 1
+ignorehitpause = 1
+;persistent =
+
+
+[State -2, VarSet]
+type = VarSet
+trigger1 = stateno !=[631,632]
+v = 7    ;fv = 10
+value = 0
+ignorehitpause = 1
+;persistent =
+
+[State -2, VarSet] ;1-Up var
+type = VarSet
+trigger1 = var(11) >= 11
+;trigger2 = movehit && stateno != [631,633]
+v = 11    ;fv = 10
+value = 0
+ignorehitpause = 1
+;persistent =
+
+[State 1000, Helper]
+type = Helper
+triggerall = var(13) > 0
+triggerall = numhelper(3023) < 1
+trigger1 = prevstateno = 3020
+trigger1 = gethitvar(hittime) > 0
+helpertype = normal
+ID = 3023
+name = "LargeEgg"
+stateno = 3023
+pos = 20,-17
+postype = p1
+facing = 1
+keyctrl = 0
+ownpal = 0
+
+;--------------------------------------------------------------------------
+;-MetalYoshiStuff
+[State -2, VelAdd]
+type = Veladd
+triggerall = name = "MetalYoshi3"
+triggerall = HitShakeOver
+triggerall = stateno != [1050,1075]
+trigger1 = statetype = A
+trigger1 = vel y >= 0
+trigger1 = pos y < 0
+y = .3
+;ignorehitpause =
+persistent = 1
+
+[State -2, VelMul]
+type = Veladd
+triggerall = name = "MetalYoshi3"
+triggerall = HitShakeOver
+triggerall = stateno != [1050,1075]
+trigger1 = pos y < 0
+trigger1 = statetype = A
+trigger1 = vel y < 0
+y = .3
+;ignorehitpause =
+persistent = 1
+
+[State -2, PalFX];Makes the Gold & Silver & Bronze palettes shiny and look more valuable. I was bored :P
+type = PalFX
+triggerall = name = "MetalYoshi3"
+triggerall = palno = 3 || palno = 4 || palno = 6
+trigger1 = (gametime%100)=0
+time = 10
+add = 200,200,200
+mul = 200,200,200
+sinadd = 120,120,120,10
+invertall = 0
+color = 120
+ignorehitpause = 1
+;persistent =
+
+;Armor HitPause Decrease
+[State -2, VarAdd]
+type = VarAdd
+triggerall = name = "MetalYoshi3"
+trigger1 = enemynear,movehit = 1 ;&& enemynear, movetype = A
+v = 22    ;fv =
+value = 1
+;ignorehitpause =
+;persistent =
+[State -2, VarAdd]
+type = VarSet
+triggerall = name = "MetalYoshi3"
+trigger1 = enemynear, movetype != A
+v = 22    ;fv =
+value = 1
+ignorehitpause = 1
+;persistent =
+
+;--------------------------------------------------------------------------
+;--------------------------------------------------------------------------
+
+[State 1000, Helper]
+type = Helper
+trigger1 = stateno = [150,155]
+trigger1 = numhelper(150) < 1
+helpertype = normal
+ID = 150
+name = "GuardEgg"
+stateno = 8000
+pos = 0,0
+postype = p1
+facing = 1
+keyctrl = 0
+ownpal = 0
+
+;Misc. System Junk
+[State -2, AssertSpecial] ;LifeBarDisplay
+type = null;AssertSpecial
+trigger1 = roundstate !=2 && roundstate != 3
+trigger2 = roundstate = 3 && gametime%2=0
+flag = nobardisplay
+ignorehitpause = 1
+persistent = 1
+
+
+
+
+
+;Get Hit Sounds
+[State -2, PlaySnd]
+type = PlaySnd
+triggerall = time = 1
+triggerall = alive = 1
+triggerall = Random <= 500
+triggerall = StateNo = 5000 || StateNo = 5010 || StateNo = 5020
+trigger1 = anim = 5000 || anim = 5010 || anim = 5020
+value = 5,9
+volume = 150
+;channel = 0
+
+[State -2, PlaySnd]
+type = PlaySnd
+triggerall = time = 1
+triggerall = alive = 1
+triggerall = Random <= 500
+triggerall = StateNo = 5000 || StateNo = 5010 || StateNo = 5020
+trigger1 = anim = 5001 || anim = 5011 || anim = 5021
+value = 5,10
+volume = 250
+;channel = 0
+
+[State -2, PlaySnd]
+type = PlaySnd
+triggerall = time = 1
+triggerall = alive = 1
+triggerall = Random <= 500
+triggerall = StateNo = 5000 || StateNo = 5010 || StateNo = 5020
+trigger1 = anim = 5002 || anim = 5012 || anim = 5022
+value = 5,11
+volume = 250
+;channel = 0
+;------------------------------------------------------------------------------
+;Stampede SFX
+[State -2, PlaySnd];StampedeQuakeSFX
+type = PlaySnd
+trigger1 = numhelper(3054) = 1
+value = 3050,0
+volume = 1000
+channel = 2
+freqmul = 1.0
+loop = 1
+pan = 0
+ignorehitpause = 1
+;persistent =
+[State -2, PlaySnd];StampedeQuakeSFX
+type = PlaySnd
+trigger1 = numhelper(3054) >0
+trigger1 = gametime%4=0
+value = 40,1
+volume = 1000
+channel = 1
+freqmul = 1.0
+ignorehitpause = 1
+[State -2, StopSnd];Quake Over
+type = StopSnd
+trigger1 = numhelper(3054) <= 0
+channel = 2
+ignorehitpause = 1
+;persistent =
+;--------------------------------------------------------------------------
+;--------------------------------------------------------------------------
+[State -2, DisplayToClipboard]
+type = null;DisplayToClipboard
+trigger1 = 1
+text = "var(5) = %d var(2) = %d Enemy in Egg = %d var(4) = %d A->G = %d"
+params = var(5),var(2),var(6),var(4), var(3)
+;ignorehitpause =
+;persistent =
+[State -2, DisplayToClipboard]
+type =null;DisplayToClipboard
+trigger1 = 1
+text = "pos y = %f p2bodydist x = %f Animelem = %d 1-Up = %d AI = %d"
+params = pos y,p2bodydist x,var(10),var(11),var(59)
+ignorehitpause = 1
+;persistent =
+[State -2, DisplayToClipboard]
+type = null;DisplayToClipboard
+trigger1 = 1
+text = "backedgebodydist=%f Anim=%f Animelem=%d 1-Up=%d AI=%d"
+params = backedgebodydist , var(9), var(10), var(11), var(59)
+ignorehitpause = 1
+;persistent =
+[State -2, DisplayToClipboard]
+type =DisplayToClipboard
+trigger1 = 1
+text = "Combo = %d EnemyCombo = %d 1-Up = %d AI = %d"
+params = var(30),var(22),var(11),var(59)
+ignorehitpause = 1
+;persistent =
+
+[State -2, AppendToClipboard]
+type = AppendToClipboard
+trigger1 = 1
+text = "\nMike S. Densky"
+ignorehitpause = 1
+
+[State -2, DisplayToClipboard]
+type = null;DisplayToClipboard
+trigger1 = 1
+text = "\nStateno = %d Anim = %d Animelem = %d 1-Up = %d 14 = %d"
+params = var(8),var(9),var(10),var(11),var(14)
+;ignorehitpause =
+;persistent =
+
+

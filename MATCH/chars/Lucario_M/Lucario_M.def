@@ -1,0 +1,37 @@
+[Info]
+Name         = "Lucario"
+DisplayName  = "Lucario"
+VersionDate  = 04,16,2009
+MugenVersion = 04,14,2002
+Author       = "Moku"
+Pal.Defaults = 1,2,3,4
+
+[Files]
+Cmd     = Lucario_M.cmd
+Cns     = Lucario_M.cns
+St      = Lucario_M.cns
+St0	= Common.cns
+St1	= Helper.cns
+St2	= Lucario_M-S.cns
+St3	= Lucario_M-H.cns
+St4 = -2.cns
+St5 = -3.cns
+
+StCommon = common1.cns
+Sprite  = Lucario_M.sff
+Anim    = Lucario_M.air
+Sound   = Lucario_M.snd
+
+Pal1 = Act/Lucario_M001.act  ;デフォルトカラー
+Pal2 = Act/Lucario_M002.act
+Pal3 = Act/Lucario_M003.act
+Pal4 = Act/Lucario_M004.act
+Pal5 = Act/Lucario_M005.act
+Pal6 = Act/Lucario_M006.act
+
+Pal7 = Act/Lucario_M007.act
+Pal8 = Act/Lucario_M008.act
+Pal9 = Act/Lucario_M009.act
+Pal10 = Act/Lucario_M010.act
+Pal11 = Act/Lucario_M011.act  ;黒ルカリオ
+Pal12 = Act/Lucario_M012.act  ;金ルカリオ

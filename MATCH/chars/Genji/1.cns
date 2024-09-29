@@ -1,0 +1,776 @@
+
+
+
+
+;------    ------
+[Statedef 5421]
+type = A
+movetype = H
+physics = N
+velset = 0
+
+[State 805, Anim2]
+type = ChangeAnim2
+triggerall = Time = 0
+trigger1 = Anim != 5450
+value = 5450
+
+
+
+[State 1000, 0]
+type = Angleadd
+trigger1 = anim = 5450
+trigger1 = time >= 0
+trigger1 = time < 10
+value = 35
+
+[State 1000, 0]
+type = Angleadd
+trigger1 = anim = 5450
+trigger1 = time >= 10
+trigger1 = time < 20
+value = 30
+
+[State 1000, 0]
+type = Angleadd
+trigger1 = anim = 5450
+trigger1 = time >= 20
+trigger1 = time < 30
+value = 25
+
+[State 1000, 0]
+type = Angleadd
+trigger1 = anim = 5450
+trigger1 = time >= 30
+value = 20
+
+[State 1000, 0]
+type = AngleDraw
+trigger1 = 1
+
+
+[State 200, 1]
+type = HitDef
+trigger1 = TimeMod = 15,1
+Attr = S, SP
+affectteam = F
+damage = 95, 0
+animtype = Up
+hitflag = MAFLD
+guardflag = MAFLD
+priority = 2, Hit 
+pausetime = 20, 20
+sparkno = 2
+sparkxy = -10, -0 
+hitsound = 5, 0
+ground.type = High
+ground.slidetime = 5
+ground.hittime  = 10
+ground.velocity = 2,-8
+airguard.velocity = 2,-8
+guard.velocity = -2
+air.type = High
+air.velocity = 2,-8
+air.hittime = 12
+yaccel  = 0.5
+fall = 1
+fall.recover = 0
+kill = 0
+
+[State 210, 3]
+type = PosAdd
+trigger1 = time = 0
+y = -10
+
+[State 1420, Velocity]
+type = VelSet
+trigger1 = time = 0
+
+y = -3
+x = 0
+
+[State 1525, 4]
+type = VelAdd
+trigger1 = Time > 0
+y = .5
+
+[State 1370, Sprite2]
+type = SprPriority
+trigger1 = 1
+value = 1
+
+[State 1320, State]
+type = Selfstate
+trigger1 = time = 100
+value = 5100
+ctrl = 0
+
+[State 1420, State]
+type = SelfState
+trigger1 = time > 10
+trigger1 = Pos Y >= -10 && Vel Y > -10
+value = 5100
+
+;--------------------------------------------------------------------------
+; Opponent Grabbed
+[Statedef 832]
+type = A
+movetype = H
+physics = S
+sprpriority = 0
+
+[State 700,]
+type = palfx
+trigger1 = time = 0
+time = 10
+add = 150, 0, -100
+sinadd = 50, 50, 0, 10
+color = 0
+invertall = 1
+
+[State -2,a]
+type = Explod
+trigger1 = Time < 40
+trigger1 = Pos Y > 0
+persistent = 500
+anim = F627
+pos = 0,0
+postype = P1
+Vel = -2,-2.8
+Accel = 0,.18
+sprpriority = 9
+removetime = 75
+bindtime = 1
+random = 25,0
+ownpal = 0
+supermove = 1
+scale = 1.5,1.5
+
+
+[State -2,a]
+type = Explod
+trigger1 = Time < 40
+trigger1 = Pos Y > 0
+persistent = 500
+anim = F628
+pos = 0,0
+postype = P1
+Vel = 2,-2.3
+Accel = 0,.18
+sprpriority = 9
+removetime = 75
+bindtime = 1
+random = 25,0
+ownpal = 0
+supermove = 1
+scale = 1.5,1.5
+
+
+[State -2,a]
+type = Explod
+trigger1 = Time < 40
+trigger1 = Pos Y > 0
+persistent = 500
+anim = F626
+pos = 0,0
+postype = P1
+Vel = -1,-2.6
+Accel = 0,.19
+sprpriority = 9
+removetime = 75
+bindtime = 1
+random = 25,0
+ownpal = 0
+supermove = 1
+scale = 1.5,1.5
+
+[State -2,a]
+type = Explod
+trigger1 = Time < 40
+trigger1 = Pos Y > 0
+persistent = 500
+anim = F629
+pos = 0,0
+postype = P1
+Vel = 0,-3.3
+Accel = 0,.20
+sprpriority = 9
+removetime = 75
+bindtime = 1
+random = 25,0
+ownpal = 0
+supermove = 1
+scale = 1.5,1.5
+
+[State 700, EnvShake]
+type = EnvShake
+trigger1 = Time < 40
+trigger1 = Pos Y > 0
+persistent = 500
+time = 10
+freq = 100
+ampl = -6
+phase = 10
+
+[State -2,a]
+type = Explod
+trigger1 = Time < 40
+trigger1 = Pos Y > 0
+persistent = 500
+anim = F625
+pos = 0,0
+postype = p1
+sprpriority = -55
+bindtime = 1
+ownpal = 1
+supermove = 0
+scale = 1.0,1.0
+
+[State 5100, 8]
+type = GameMakeAnim
+trigger1 = Time < 40
+trigger1 = Pos Y > 0
+value = 60
+pos = 0, 0
+
+[State 5100, 10]
+type = PlaySnd
+trigger1 = Time < 40
+trigger1 = Pos Y > 0
+persistent = 500
+value = F6, 5
+
+
+
+[State 440, 4]
+type = DestroySelf
+trigger1 = IsHelper = 1
+trigger1 = IsHelper (4444) = 0
+trigger1 = IsHelper (3000) = 0
+
+[State 1312, 2]
+type = VelAdd
+trigger1 = Pos Y < 0
+trigger1 = Time > 0
+y = .3
+
+[State 30, 6]
+type = VelSet
+trigger1 = Pos Y > 0
+y = 0
+
+[State 30, 6]
+type = PosSet
+trigger1 = Pos Y > 0
+y = 0
+
+[State 200, 2]
+type = PlaySnd
+trigger1 = Time = 0
+value = 0,5013
+channel = 0
+
+[State 805, Anim2]
+type = ChangeAnim2
+triggerall = Time = 0
+trigger1 = Anim != 834
+value = 834
+
+[State 0, Die when win]
+type = SelfState
+trigger1 = Time > 70
+trigger1 = Command = "z"
+value = 105
+
+[State 300, 2]
+type = Turn
+trigger1 = time = 20
+
+[state 100,0]
+type = HitVelSet
+trigger1 = time = 0
+x = 1
+y = 1
+
+[State 805, Push]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 1320, State]
+type = Changestate
+trigger1 = time = 20
+value = 5421
+ctrl = 0
+
+
+
+
+
+
+
+
+
+;----------------------------------------------- 
+[Statedef 5428]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+facep2 = 1
+
+[State 700,]
+type = palfx
+trigger1 = time = 0
+time = 10
+add = 150, 0, -100
+sinadd = 50, 50, 0, 10
+color = 0
+invertall = 1
+
+[State 820, 1]
+type = ChangeAnim2
+Trigger1 = Time = 0
+value = 5402
+
+[State 0, 0]
+type = ScreenBound
+trigger1 = 1
+value = 1
+movecamera = 0,0
+
+
+[State 440, 4]
+type = DestroySelf
+trigger1 = IsHelper = 1
+trigger1 = IsHelper (4444) = 0
+trigger1 = IsHelper (3000) = 0
+
+[State 1320, State]
+type = Selfstate
+trigger1 = time = 70
+value = 5100
+ctrl = 0
+
+[State 20100, 0]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 5429
+
+
+;------    ------
+[Statedef 5429]
+type = A
+movetype = H
+physics = N
+velset = 0
+
+
+[State 1026, Hit wall]
+type = ChangeState
+triggerall = Roundstate = 2
+triggerall = MoveType = H
+triggerall = statetype != L
+triggerall = HitShakeOver
+triggerall = Time > 5
+triggerall = Vel X > 2
+trigger1 = ScreenPos X < 30
+trigger2 = ScreenPos X > 299
+value = 5491
+
+[State 1026, Hit wall]
+type = ChangeState
+triggerall = Roundstate = 2
+triggerall = MoveType = H
+triggerall = statetype != L
+triggerall = HitShakeOver
+triggerall = Time > 1
+triggerall = Vel X > 2
+trigger1 = ScreenPos X < 30
+trigger2 = ScreenPos X > 299
+value = 5490
+
+[State 440, 4]
+type = DestroySelf
+trigger1 = IsHelper = 1
+trigger1 = IsHelper (4444) = 0
+trigger1 = IsHelper (3000) = 0
+
+[State 1000, 0]
+type = Angleadd
+trigger1 = time >= 0
+value = 25
+
+[State 1000, 0]
+type = AngleDraw
+trigger1 = 1
+
+[state 100,0]
+type = HitVelSet
+Trigger1 = Time = 0
+x = 1
+y = 1
+
+[State 200, 1]
+type = HitDef
+trigger1 = TimeMod = 15,1
+Attr = S, SP
+affectteam = F
+damage = 95, 0
+animtype = Up
+hitflag = MAFLD
+guardflag = MAFLD
+priority = 2, Miss
+pausetime = 20, 20
+sparkno = 2
+sparkxy = -10, -0 
+hitsound = 5, 0
+ground.type = High
+ground.slidetime = 5
+ground.hittime  = 10
+ground.velocity = 2,-8
+airguard.velocity = 2,-8
+guard.velocity = -2
+air.type = High
+air.velocity = 2,-8
+air.hittime = 12
+yaccel  = 0.5
+fall = 1
+fall.recover = 0
+kill = 0
+
+[State 210, 3]
+type = PosAdd
+trigger1 = time = 0
+y = -0
+
+[State 1370, Anim]
+type = ChangeAnim2
+trigger1 = time = 0
+value = 5450
+
+[State 1525, 4]
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State 1370, Sprite2]
+type = SprPriority
+trigger1 = 1
+value = 1
+
+[State 1320, State]
+type = Selfstate
+trigger1 = time = 100
+value = 5100
+ctrl = 0
+
+[State 1420, State]
+type = SelfState
+trigger1 = time > 10
+trigger1 = Pos Y >= -10 && Vel Y > -10
+value = 5100
+
+;------    ------
+[Statedef 5426]
+type = A
+movetype = H
+physics = N
+velset = 0
+
+[State 700,]
+type = palfx
+trigger1 = time = 0
+time = 10
+add = 150, 0, -100
+sinadd = 50, 50, 0, 10
+color = 0
+invertall = 1
+
+[State 1026, Hit wall]
+type = ChangeState
+triggerall = Roundstate = 2
+triggerall = MoveType = H
+triggerall = statetype != L
+triggerall = HitShakeOver
+triggerall = Time > 5
+triggerall = Vel X > 2
+trigger1 = ScreenPos X < 30
+trigger2 = ScreenPos X > 299
+value = 5491
+
+[State 1026, Hit wall]
+type = ChangeState
+triggerall = Roundstate = 2
+triggerall = MoveType = H
+triggerall = statetype != L
+triggerall = HitShakeOver
+triggerall = Time > 1
+triggerall = Vel X > 2
+trigger1 = ScreenPos X < 30
+trigger2 = ScreenPos X > 299
+value = 5490
+
+[State 440, 4]
+type = DestroySelf
+trigger1 = IsHelper = 1
+trigger1 = IsHelper (4444) = 0
+trigger1 = IsHelper (3000) = 0
+
+[State 1000, 0]
+type = AngleSet
+trigger1 = anim = 5426
+trigger1 = time >= 0
+value = 240
+
+[State 1000, 0]
+type = AngleDraw
+trigger1 = 1
+
+[State 200, 1]
+type = HitDef
+trigger1 = TimeMod = 15,1
+Attr = S, SP
+affectteam = F
+damage = 95, 0
+animtype = Up
+hitflag = MAFLD
+guardflag = MAFLD
+priority = 2, Miss
+pausetime = 20, 20
+sparkno = 2
+sparkxy = -10, -0 
+hitsound = 5, 0
+ground.type = High
+ground.slidetime = 5
+ground.hittime  = 10
+ground.velocity = 2,-8
+airguard.velocity = 2,-8
+guard.velocity = -2
+air.type = High
+air.velocity = 2,-8
+air.hittime = 12
+yaccel  = 0.5
+fall = 1
+fall.recover = 0
+kill = 0
+
+[State 210, 3]
+type = PosAdd
+trigger1 = time = 0
+y = -0
+
+[State 1370, Anim]
+type = ChangeAnim2
+trigger1 = time = 0
+trigger1 = HitShakeOver = 0
+value = 5426
+
+[state 100,0]
+type = HitVelSet
+trigger1 = time = 0
+;trigger1 = HitPauseTime = 0
+trigger1 = HitShakeOver = 0
+x = 1
+y = 1
+
+[State 1525, 4]
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State 1370, Sprite2]
+type = SprPriority
+trigger1 = 1
+value = 1
+
+[State 1320, State]
+type = Selfstate
+trigger1 = time = 100
+value = 5100
+ctrl = 0
+
+[State 1420, State]
+type = SelfState
+trigger1 = time > 10
+trigger1 = Pos Y >= -10 && Vel Y > -10
+value = 5100
+
+;------    ------
+[Statedef 5425]
+type = A
+movetype = H
+physics = N
+velset = 0
+
+[State 700,]
+type = palfx
+trigger1 = time = 0
+time = 10
+add = 150, 0, -100
+sinadd = 50, 50, 0, 10
+color = 0
+invertall = 1
+
+[State 440, 4]
+type = DestroySelf
+trigger1 = IsHelper = 1
+trigger1 = IsHelper (4444) = 0
+trigger1 = IsHelper (3000) = 0
+
+[State 1000, 0]
+type = Angleadd
+trigger1 = anim = 5450
+trigger1 = time >= 0
+trigger1 = time < 10
+value = 35
+
+[State 1000, 0]
+type = Angleadd
+trigger1 = anim = 5450
+trigger1 = time >= 10
+trigger1 = time < 20
+value = 30
+
+[State 1000, 0]
+type = Angleadd
+trigger1 = anim = 5450
+trigger1 = time >= 20
+trigger1 = time < 30
+value = 25
+
+[State 1000, 0]
+type = Angleadd
+trigger1 = anim = 5450
+trigger1 = time >= 30
+value = 20
+
+[State 1000, 0]
+type = AngleDraw
+trigger1 = 1
+
+[State 200, 1]
+type = HitDef
+trigger1 = TimeMod = 15,1
+Attr = S, SP
+affectteam = F
+damage = 95, 0
+animtype = Up
+hitflag = MAFLD
+guardflag = MAFLD
+priority = 2, Miss
+pausetime = 20, 20
+sparkno = 2
+sparkxy = -10, -0 
+hitsound = 5, 0
+ground.type = High
+ground.slidetime = 5
+ground.hittime  = 10
+ground.velocity = 2,-8
+airguard.velocity = 2,-8
+guard.velocity = -2
+air.type = High
+air.velocity = 2,-8
+air.hittime = 12
+yaccel  = 0.5
+fall = 1
+fall.recover = 0
+kill = 0
+
+;[State 210, 3]
+;type = PosAdd
+;trigger1 = time = 0
+;y = -0
+
+[State 1370, Anim]
+type = ChangeAnim2
+trigger1 = time = 0
+trigger1 = HitShakeOver = 0
+value = 5450
+
+[state 100,0]
+type = HitVelSet
+trigger1 = time = 0
+;trigger1 = HitPauseTime = 0
+trigger1 = HitShakeOver = 0
+x = 1
+y = 1
+
+[State 1525, 4]
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State 1370, Sprite2]
+type = SprPriority
+trigger1 = 1
+value = 1
+
+[State 1420, State]
+type = SelfState
+trigger1 = time > 10
+trigger1 = Pos Y >= -10 && Vel Y > -10
+value = 5100
+
+;----------------------------------------------- ;앞으로 날리기
+[Statedef 5450]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+velset = 0,0
+facep2 = 1
+
+[State 700,]
+type = palfx
+trigger1 = time = 0
+time = 10
+add = 150, 0, -100
+sinadd = 50, 50, 0, 10
+color = 0
+invertall = 1
+
+[State 440, 4]
+type = DestroySelf
+trigger1 = IsHelper = 1
+trigger1 = IsHelper (4444) = 0
+trigger1 = IsHelper (3000) = 0
+
+[State 200, 2]
+type = PlaySnd
+Trigger1 = Time = 0
+value = F40,IfElse(random < 500, 5, 4)
+channel = 7
+volume = 250
+
+[State 820, 1]
+type = ChangeAnim2
+Trigger1 = Time = 0
+value = 5402
+
+[State 0, 0]
+type = ScreenBound
+trigger1 = 1
+value = 1
+movecamera = 0,0
+
+[State 1320, State]
+type = Selfstate
+trigger1 = time = 70
+value = 5100
+ctrl = 0
+
+[State 20100, 0]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 5426
+
+
+
+
+
+
+
+
+
+

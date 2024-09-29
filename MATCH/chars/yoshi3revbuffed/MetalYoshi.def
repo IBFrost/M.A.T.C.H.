@@ -1,0 +1,35 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "MetalYoshi3"
+displayname = "Metal Yoshi"
+versiondate = 04,14,2002
+mugenversion = 04,14,2002
+author = "Mike S.Densky, patch and movelist by Mifaro"
+pal.defaults = 1,3,2,4
+
+[Files]
+sprite = graphics\yoshi.sff
+anim = graphics\yoshi.air
+sound = metal.snd
+cmd = coding\yoshi.cmd
+cns = coding\myoshiconstants.cns
+stcommon = common1.cns
+st = coding\yoshi.cns
+st1 = coding\yoshihelpers.cns
+st2 = coding\yoshicmn1edits.cns
+st3 = -2.txt
+pal1 = 2ndPalette\metal.act
+pal2 = 2ndPalette\Rusty.act
+pal3 = 2ndPalette\Gold.act
+pal4 = 2ndPalette\Silver.act
+pal5 = 2ndPalette\Polygon.act
+pal6 = 2ndPalette\Bronze.act
+movelist=movelist Metal Yoshi.dat
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 

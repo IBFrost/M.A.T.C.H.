@@ -1,0 +1,2115 @@
+;===============================================================================
+; Sekai Ichi no Zangeki
+;===============================================================================
+;Sekai Ichi no Zangeki
+[Statedef 3000]
+type = S
+physics = S
+velset = 0,0
+ctrl = 0
+anim = 3000
+
+
+
+[State 3250: portrait: Sekai Ichi no Zangeki]
+type		= Helper
+trigger1	= time = 30
+helpertype	= Normal
+name		= "portrait: Sekai Ichi no Zangeki"
+id		= 3070
+pos             = 300,-150
+postype         = back
+facing		= 1
+stateno		= 3070
+keyctrl		= 0
+ownpal		= 1
+supermovetime 	= 999
+ignorehitpause  = 1
+size.xscale     = 0.25
+size.yscale     = 0.25
+
+[State 3000, SuperPause]
+type = SuperPause
+trigger1 = time = 30
+time = 30
+movetime = 30
+anim = -1
+sound = -1
+pos = 32,-80
+darken = 0
+unhittable = 1
+
+
+[State 3000, VarSet]
+type = Varset
+trigger1 = time = 30
+v = 12
+value = -200
+
+[State 3000, VarAdd]
+type = VarAdd
+trigger1 = time >= 30 && Var(12) < 0
+v = 12
+value = 6
+
+[State 3000, BGColorFX]
+type = BGPalFX
+trigger1 = Time > 30
+time = 1
+add = Var(12),Var(12),Var(12)
+
+[State 3000, Cámara lenta]
+type = Pause
+trigger1 = time = [60, 75]
+time = 1
+movetime = 0
+
+[State 3000:	EnvShake]
+type			= EnvShake
+trigger1 		= (AnimElem = 1, > 0)
+time			= 60
+freq			= 120
+ampl			= -2
+phase			= 50
+
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1 = Time = 30
+value = -1000
+
+
+[State 3000, Super Charge]
+type = Explod
+trigger1 = Time = 30
+anim = 7400
+ID = 7400
+pos = -23,-35
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = -1
+ownpal = 1
+scale = .5,.5
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+[State 3000, PlaySnd - Super Charge]
+type = PlaySnd
+triggerall = numhelper(3148) = 1
+trigger1 = Time = 30
+value = S3,1
+volume = 50
+channel = 1
+
+
+[State 3000, PlaySnd - Super Charge]
+type = PlaySnd
+triggerall = numhelper(3148) = 0
+trigger1 = Time = 30
+value = S3,0
+volume = 50
+channel = 1
+
+
+
+[State 60, Explod atras]
+type = Explod
+triggerall = time > 60
+trigger1 = time%5 = 0
+anim = 7077
+ID =  7077
+pos = 15-(random%30),10-(random%5)
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+supermove = 1
+pausemove =1
+scale = 0.65, 0.65
+sprpriority = 1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
+
+[State 3001, End]
+type = ChangeState
+triggerall = time > 60
+trigger1 = command != "hold_c"
+trigger2 = time = 120
+value	= ifelse(numhelper(3148) = 1,3002,3001)
+ctrl = 0
+
+;----------------------------------------
+;Sekai Ichi no Zangeki - lanzamiento
+[Statedef 3001]
+type = S
+physics = S
+velset = 0,0
+ctrl = 0
+anim = 3001
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 0
+value = S0,14
+
+
+[State 60, Explod atras]
+type = Explod
+trigger1 = Time = 0
+anim = 7076
+ID =  7076
+pos = -20,10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+supermove = 1
+pausemove =1
+scale = 0.85, 0.85
+sprpriority = 1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
+[State 200, Corte NEGRO]
+type = Explod
+triggerall = Numexplod(7056) = 0
+trigger1 = Time = 0
+anim = 7056
+ID = 7056
+postype = P1
+pos = 50,-25
+facing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.65,0.65
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+
+[State 900: Helper]
+type		= Helper
+triggerall = numhelper(3148) = 0
+triggerall = numhelper(3050) = 0
+trigger1 = time = 0
+helpertype	= Normal
+name		= "Sekai Ichi no Zangeki - projetile"
+id		= 3050
+pos		= 20,5
+postype		= p1
+facing		= 1
+stateno		= 3050
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 0.8
+size.yscale     = 0.8
+
+[State 900: Helper]
+type		= Helper
+triggerall = numhelper(3148) = 1
+triggerall = numhelper(3052) = 0
+trigger1 = time = 0
+helpertype	= Normal
+name		= "Sekai Ichi no Zangeki - projetile Bost"
+id		= 3052
+pos		= 20,5
+postype		= p1
+facing		= 1
+stateno		= 3052
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 1.5
+size.yscale     = 1.5
+
+
+
+[State 3001, ScreenBound]
+type = ScreenBound
+triggerall = numhelper(3148) = 1
+trigger1 = p2movetype = H || (BackEdgeBodydist < -1 && BackEdgeBodydist > -30)
+movecamera = 0,0
+value	= 0
+
+[State 3001, End]
+type = ChangeState
+triggerall = numhelper(3148) = 1
+trigger1 = animtime = 0
+value	= IfElse(BackEdgeBodydist >= 0, 0, 100)
+ctrl = 1
+
+
+[State 3001, End]
+type = ChangeState
+triggerall = numhelper(3148) = 0
+trigger1 = animtime = 0
+value	= 0
+ctrl = 1
+
+
+;----------------------------------------
+;Sekai Ichi no Zangeki - lanzamiento  BOST
+[Statedef 3002]
+type = S
+physics = S
+velset = 0,0
+ctrl = 0
+anim = 3002
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 0
+value = S0,14
+
+
+[State 60, Explod atras]
+type = Explod
+trigger1 = Time = 0
+anim = 7076
+ID =  7076
+pos = -20,10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+supermove = 1
+pausemove =1
+scale = 0.85, 0.85
+sprpriority = 1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
+[State 200, Corte NEGRO]
+type = Explod
+triggerall = Numexplod(7056) = 0
+trigger1 = Time = 0
+anim = 7056
+ID = 7056
+postype = P1
+pos = 50,-25
+facing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.65,0.65
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+
+[State 900: Helper]
+type		= Helper
+triggerall = numhelper(3052) = 0
+trigger1 = time = 0
+helpertype	= Normal
+name		= "Sekai Ichi no Zangeki - projetile Bost"
+id		= 3052
+pos		= 20,5
+postype		= p1
+facing		= 1
+stateno		= 3052
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 1.5
+size.yscale     = 1.5
+
+
+
+[State 3001, ScreenBound]
+type = ScreenBound
+trigger1 = p2movetype = H || (BackEdgeBodydist < -1 && BackEdgeBodydist > -30)
+movecamera = 0,0
+value	= 0
+
+[State 3001, End]
+type = ChangeState
+trigger1 = animtime = 0
+value	= IfElse(BackEdgeBodydist >= 0, 0, 100)
+ctrl = 1
+
+
+
+
+
+;--------------------------------
+; Sekai Ichi no Zangeki - Projetile
+[Statedef 3050]
+movetype	= A
+anim		= 7070
+;velset		= 0,0
+ctrl		= 0
+poweradd	= 0
+juggle		= 0
+facep2		= 0
+hitdefpersist	= 0
+movehitpersist	= 0
+hitcountpersist	= 0
+sprpriority	= 2
+
+
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = time = 0
+trigger2 = var(3)= 5
+v = 3    ;fv = 10
+value = 0
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = Time%3 = 0
+v = 3    ;fv =
+value = 1
+
+
+
+[State 200, afterimage]
+type = Explod
+trigger1 = Time%2 = 0
+anim = 7070+(var(3))
+ID = 7070
+postype = P1
+pos = -10,0
+facing = 1
+vfacing = 1
+sprpriority = 0
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.8,0.8
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+
+[State 60, Explod atras]
+type = Explod
+trigger1 = time%2 = 0
+anim = 7077
+ID =  7077
+pos = -10,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+supermove = 1
+pausemove =1
+scale = 1, 0.7
+sprpriority = 1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time >= 0
+x = 13
+y = 0
+
+[State 210, 1]
+type = HitDef
+trigger1 = animelem = 2
+trigger2 = animelem = 4
+trigger3 = animelem = 6
+attr = S, NA
+animtype  = high
+damage    = ifelse(hitcount > 0, 20,175),10
+guardflag = MA
+pausetime = 10,10
+sparkno = -1
+guard.sparkno = s7000
+sparkxy = 0,0
+hitsound   = S0,7
+guardsound = S0,8
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -7,-6
+air.velocity = -7,-2
+fall = -1
+
+[State 3250: Spadas]
+type		= Helper
+triggerall = Numhelper(3090)=0
+trigger1 = movehit = 1
+helpertype	= Normal
+name		= "Auxiliar de cámara lenta"
+id		= 3090
+pos		= 0,0
+postype		= p1
+facing		= 1
+stateno		= 3090
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 1
+size.yscale     = 1
+
+
+
+[State 1100, Spark]
+type = Explod
+triggerall = NumExplod(7045) = 0
+triggerall = hitcount = 1 || hitcount = 3 || hitcount = 5
+trigger1 = movehit = 1
+anim = 7045
+ID = 7045
+postype = p2
+pos = 0,-35
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.4,0.4
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+[State 1100, Spark]
+type = Explod
+triggerall = NumExplod(7046) = 0
+triggerall = hitcount = 2 || hitcount = 4 || hitcount = 6
+trigger1 = movehit = 1
+anim = 7046
+ID = 7046
+postype = p2
+pos = 0,-40
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.4,0.4
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time = 50
+value = 3051
+ctrl = 0
+
+;-----------------------------------
+; Nigazam - Projetile terminación
+[Statedef 3051]
+type = S
+movetype = A
+physics = S
+velset = 0,0
+ctrl = 0
+anim = 1092
+sprpriority = 2
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = add
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = add
+
+
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = animtime = 0
+
+
+;------------------------------------------------
+; Sekai Ichi no Zangeki - Projetile  Bost
+[Statedef 3052]
+movetype	= A
+anim		= 7069
+;velset		= 0,0
+ctrl		= 0
+poweradd	= 0
+juggle		= 0
+facep2		= 0
+hitdefpersist	= 0
+movehitpersist	= 0
+hitcountpersist	= 0
+sprpriority	= 2
+
+
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = time = 0
+trigger2 = var(3)= 5
+v = 3    ;fv = 10
+value = 0
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = Time%3 = 0
+v = 3    ;fv =
+value = 1
+
+
+
+[State 200, afterimage]
+type = Explod
+trigger1 = Time%2 = 0
+anim = 7070+(var(3))
+ID = 7070
+postype = P1
+pos = -10,0
+facing = 1
+vfacing = 1
+sprpriority = 0
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.8,0.8
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+
+[State 60, Explod atras]
+type = Explod
+trigger1 = time%2 = 0
+anim = 7077
+ID =  7077
+pos = -10,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+supermove = 1
+pausemove =1
+scale = 1, 0.7
+sprpriority = 1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time >= 0
+x = 13
+y = 0
+
+[State 210, 1]
+type = HitDef
+trigger1 = animelem = 2
+trigger2 = animelem = 4
+trigger3 = animelem = 6
+attr = S, NA
+animtype  = high
+damage    = ifelse(hitcount > 0, 20,275),10
+guardflag = MA
+pausetime = 10,8
+sparkno = -1
+guard.sparkno = s7000
+sparkxy = 0,0
+hitsound   = S0,7
+guardsound = S0,8
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -8,-6
+air.velocity = -8,-2.5
+fall = -1
+
+[State 3250: Spadas]
+type		= Helper
+triggerall = Numhelper(3090)=0
+trigger1 = movehit = 1
+helpertype	= Normal
+name		= "Auxiliar de cámara lenta"
+id		= 3090
+pos		= 0,0
+postype		= p1
+facing		= 1
+stateno		= 3090
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 1
+size.yscale     = 1
+
+
+
+[State 1100, Spark]
+type = Explod
+triggerall = NumExplod(7045) = 0
+triggerall = hitcount = 1 || hitcount = 3 || hitcount = 5
+trigger1 = movehit = 1
+anim = 7045
+ID = 7045
+postype = p2
+pos = 0,-35
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.4,0.4
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+[State 1100, Spark]
+type = Explod
+triggerall = NumExplod(7046) = 0
+triggerall = hitcount = 2 || hitcount = 4 || hitcount = 6
+trigger1 = movehit = 1
+anim = 7046
+ID = 7046
+postype = p2
+pos = 0,-40
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.4,0.4
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time = 50
+value = 3051
+ctrl = 0
+
+
+;-------------------------------------------------------------------------
+;Sekai Ichi no Zangeki  - Portrait
+[Statedef 3070]
+type    = A
+physics = N
+velset = 0,0
+anim = 3070
+ctrl = 0
+sprpriority = 3
+
+
+
+[State 200, Portrait Hyou Kin Dama -  Banda Negra]
+type = Explod
+trigger1 = time = 0
+anim = 9005
+ID = 9005
+pos= -300,0
+postype= p1
+bindtime= 1
+removetime = -2
+supermovetime= 99999999
+pausemovetime= 99999999
+scale= 1,0.5
+sprpriority= -1
+ontop= 0
+ownpal= 1
+
+[State 191, 2]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = -20
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = time = 5
+x = 0.04
+
+[State 0, VelMul]
+type = Velset
+trigger1 = time = 25
+x = -20
+
+
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = time = 70
+
+
+;-------------------------------------------------------------------------
+;Auxiliar de cámara lenta
+[Statedef 3090]
+type    = A
+physics = N
+velset = 0,0
+anim = 3090
+ctrl = 0
+sprpriority = 3
+
+[State 3290, Cámara lenta]
+type = Pause
+trigger1 = time = [0, 15]
+time = 1
+movetime = 0
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = time = 16
+
+
+
+;===============================================================================
+; Kokuto Bost
+;===============================================================================
+; Kokuto Bost - Start
+[Statedef 3100]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+ctrl = 0
+velset = 0,0
+anim = 3100
+poweradd = -1000
+
+
+[State 0, Turn]
+type = Turn
+trigger1 = p2bodydist x < -18
+
+[State 3250: portrait: Kokuto Bost]
+type		= Helper
+trigger1	= time = 0
+helpertype	= Normal
+name		= "portrait: Kokuto Bost"
+id		= 3170
+pos             = -100,-200
+postype         = front ;p2,front,back,left,right
+facing		= 1
+stateno		= 3170
+keyctrl		= 0
+ownpal		= 1
+supermovetime 	= 999
+ignorehitpause  = 1
+size.xscale     = 0.25
+size.yscale     = 0.25
+
+
+
+[State 3000, SuperPause]
+type = SuperPause
+trigger1 = time = 0
+time = 50
+movetime = 50
+anim = -1
+sound = -1
+pos = 32,-80
+darken = 0
+unhittable = 1
+
+
+[State 3000, VarSet]
+type = Varset
+trigger1 = time = 0
+v = 12
+value = -100
+
+[State 3000, VarAdd]
+type = VarAdd
+trigger1 = time >= 70 && Var(12) < 0
+v = 12
+value = 6
+
+[State 3000, BGColorFX]
+type = BGPalFX
+trigger1 = Time > 0
+time = 1
+add = Var(12),Var(12),Var(12)
+
+[State 3000, Cámara lenta]
+type = Pause
+trigger1 = time = [70, 85]
+time = 1
+movetime = 0
+
+[State 3000:	EnvShake]
+type			= EnvShake
+trigger1 		= (AnimElem = 1)
+time			= 20
+freq			= 120
+ampl			= -2
+phase			= 50
+
+
+[State 3000, Super Charge]
+type = Explod
+trigger1 = Time = 0
+anim = 7400
+ID = 7400
+pos = 0,-40
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = -1
+ownpal = 1
+scale = .5,.5
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+[State 3000, PlaySnd - Super Charge]
+type = PlaySnd
+trigger1 = Time = 0
+value = S3,0
+volume = 50
+channel = 1
+
+[State 200, Corte 3]
+type = Explod
+trigger1 = Time = 0
+anim = 3150
+ID = 3150
+postype = P1
+pos = 0,-0
+facing = 1
+vfacing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = -1
+ownpal = 1
+scale = 1,1
+removeongethit = 1
+ontop = 0
+supermovetime 	= 999
+ignorehitpause  = 0
+
+
+
+[State 200, Ground]
+type = Explod
+trigger1 = time = 30
+anim = 7060
+ID = 7060
+postype = P1
+pos = 0,0
+facing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.4,0.4
+removeongethit = 1
+ontop = 0
+supermovetime 	= 999
+ignorehitpause  = 0
+
+[State 3000, PlaySnd - Super Charge]
+type = PlaySnd
+trigger1 = Time = 30
+value = S3,11
+volume = 50
+
+
+[State 3000, PlaySnd - Super Charge]
+type = PlaySnd
+trigger1 = Time = 30
+value = S2,11
+volume = 50
+
+
+[State 3000, PlaySnd - Super Charge]
+type = PlaySnd
+trigger1 = Time = 40
+value = S3,3
+volume = 50
+
+
+
+[State 3000:	EnvShake]
+type			= EnvShake
+trigger1 		=  time = 30
+time			= 20
+freq			= 150
+ampl			= -4
+phase			= 50
+
+[State 3250: Auxiliar de Activación del Bost]
+type		= Helper
+trigger1 = time = 30
+helpertype	= Normal
+name		= "AAuxiliar de Activación del Bost"
+id		= 3148
+pos		= 0,0
+postype		= p1
+facing		= 1
+stateno		= 3148
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 1
+size.yscale     = 1
+
+
+[State 3001, End]
+type = ChangeState
+trigger1 = animtime = 0
+value	= 0
+ctrl = 1
+
+;-------------------------------------------------------------------------
+;Auxiliar de Activación del Bost
+[Statedef 3148]
+type    = A
+physics = N
+velset = 0,0
+anim = 3148
+ctrl = 0
+sprpriority = 3
+
+
+[State 3250: Auxiliar de DESActivación del Bost]
+type		= Helper
+trigger1 = time = 750
+trigger2 = numhelper(3052) = 1
+helpertype	= Normal
+name		= "Auxiliar de DESActivación del Bost"
+id		= 3149
+pos		= 0,0
+postype		= p1
+facing		= 1
+stateno		= 3149
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 1
+size.yscale     = 1
+
+
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = time = 750
+trigger2 = numhelper(3052) = 1
+
+;-------------------------------------------------------------------------
+;Auxiliar de DESActivación del Bost
+[Statedef 3149]
+type    = A
+physics = N
+velset = 0,0
+anim = 3148
+ctrl = 0
+sprpriority = 3
+
+
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = time = 1
+
+
+
+
+;-------------------------------------------------------------------------
+; Kokuto Bost - portrait
+[Statedef 3170]
+type    = A
+physics = N
+velset = 0,0
+anim = 3170
+ctrl = 0
+sprpriority = 3
+
+
+
+[State 3250: portrait Banda negra]
+type		= Helper
+trigger1	= time = 0
+helpertype	= Normal
+name		= "Banda negra"
+id		= 3171
+pos             = -20,200
+postype         = P1 ;p2,front,back,left,right
+facing		= 1
+stateno		= 3171
+keyctrl		= 0
+ownpal		= 1
+supermovetime 	= 999
+ignorehitpause  = 1
+size.xscale     = 1
+size.yscale     = 0.5
+
+[State 191, 2]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+Y = 20
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = time = 6
+Y = 0.04
+
+[State 0, VelMul]
+type = Velset
+trigger1 = time = 25
+Y = 20
+
+
+
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = time = 70
+
+
+;-------------------------------------------------------------------------
+;Kokuto Bost - portrait Banda negra
+[Statedef 3171]
+type    = A
+physics = N
+velset = 0,0
+anim = 9005
+ctrl = 0
+sprpriority = 3
+
+[State 0, AngleDraw]
+type = AngleDraw
+trigger1 = time >= 0
+value = 90
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = animtime = 0
+
+
+
+;-------------------------------------------------------------------------
+;Auxiliar de cámara lenta - Bost Sword
+[Statedef 3190]
+type    = A
+physics = N
+velset = 0,0
+anim = 3090
+ctrl = 0
+sprpriority = 3
+
+[State 3290, Cámara lenta]
+type = Pause
+trigger1 = time = [0, 5]
+time = 1
+movetime = 0
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = time = 6
+
+
+;===============================================================================
+; Kokuto Issen
+;===============================================================================
+; Kokuto Issen - Start
+[Statedef 3300]
+type = S
+physics = N
+Velset = 0,0
+ctrl = 0
+anim = 3300
+poweradd = -2000
+
+
+
+[State 3250: portrait: Kokuto Issen]
+type		= Helper
+trigger1	= time = 0
+helpertype	= Normal
+name		= "portrait: Kokuto Issen"
+id		= 3370
+pos             = 300,-170
+postype         = back
+facing		= 1
+stateno		= 3370
+keyctrl		= 0
+ownpal		= 1
+supermovetime 	= 999
+ignorehitpause  = 1
+size.xscale     = 0.5
+size.yscale     = 0.5
+
+
+[State 3000, SuperPause]
+type = SuperPause
+trigger1 = time = 0
+time = 70
+movetime = 70
+anim = -1
+sound = -1
+pos = 32,-80
+darken = 0
+unhittable = 1
+
+
+[State 3000, VarSet]
+type = Varset
+trigger1 = time = 0
+v = 12
+value = -200
+
+[State 3000, VarAdd]
+type = VarAdd
+trigger1 = time >= 70 && Var(12) < 0
+v = 12
+value = 6
+
+[State 3000, BGColorFX]
+type = BGPalFX
+trigger1 = Time > 0
+time = 1
+add = Var(12),Var(12),Var(12)
+
+[State 3000, Cámara lenta]
+type = Pause
+trigger1 = time = [70, 90]
+time = 1
+movetime = 0
+
+[State 3000:	EnvShake]
+type			= EnvShake
+trigger1 		= (AnimElem = 3, > 0)
+time			= 20
+freq			= 120
+ampl			= -2
+phase			= 50
+
+
+[State 3000, Super Charge]
+type = Explod
+trigger1 = Time = 0
+anim = 7400
+ID = 7400
+pos = -15,-50
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = -1
+ownpal = 1
+scale = .5,.5
+removeongethit = 1
+ontop = 0
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+[State 3000, PlaySnd - Super Charge]
+type = PlaySnd
+trigger1 = Time = 0
+value = S3,1
+volume = 50
+channel = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 70
+value = S4,21
+
+
+[State 200, Sword FX]
+type = Explod
+trigger1 = Time = 0
+anim = 3350
+ID = 3350
+postype = P1
+pos = -5,-5
+facing = 1
+vfacing = 1
+sprpriority = 2
+supermove = 1
+removetime = -1
+bindtime = -1
+ownpal = 1
+scale = 1,1
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 0
+
+
+
+[State 200, End]
+type = ChangeState
+triggerall = time > 70
+trigger1 = command != "hold_b"
+trigger1 = command != "hold_c"
+trigger2 = time = 100
+value = 3301
+ctrl = 0
+
+
+;--------------------------------------------
+; Kokuto Issen - Run
+[Statedef 3301]
+type = S
+physics = N
+ctrl = 0
+anim = 3301
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time = 0
+id = 3350
+
+
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time < 8
+x = 0
+y = 0
+
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 8
+x = 8
+y = 0
+
+[State 100, 3] ;Prevent from turning
+type = AssertSpecial
+trigger1 = 1
+flag = NoAutoTurn
+
+[State 60, Arena Grande atras]
+type = Explod
+trigger1 = time = 8
+anim = 7100
+ID =  7100
+pos = 0,10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+supermove = 1
+pausemove =1
+scale = 0.4, 0.4
+sprpriority = 1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
+[State 60, Explod atras]
+type = Explod
+triggerall = time > 8
+trigger1 = time%2 = 0
+anim = 7102
+ID =  7102
+pos = 0,5
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+supermove = 1
+pausemove =1
+scale = 0.4, 0.4
+sprpriority = 1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 8
+value = S1,4
+
+
+
+[State 3001, End]
+type = ChangeState
+triggerall = time > 8
+trigger1 = P2bodydist x < 50
+value	= 3310
+ctrl = 0
+
+
+
+
+;--------------------------------------------------------------
+; Kokuto Issen - Corte A
+[Statedef 3310]
+type    = S
+movetype= A
+physics = N
+juggle  = 1
+ctrl = 0
+anim = 3310
+sprpriority = 2
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time = 0
+x = 5
+
+[State 101, VelMul]
+type = VelMul
+trigger1 = 1
+x = .75
+
+
+[State 200, 2]
+type = PlaySnd
+trigger1 = Time = 1
+value = 1, 0
+volume = 10
+
+[State 200, Sword FX]
+type = Explod
+trigger1 = Time = 10
+anim = 3351
+ID = 3351
+postype = P1
+pos = 0,0
+facing = 1
+vfacing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = -1
+ownpal = 1
+scale = 1,1
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 0
+
+
+
+[State 200, Corte]
+type = Explod
+triggerall = Numexplod(7087) = 0
+trigger1 = Time = 10
+anim = 7087
+ID = 7087
+postype = P1
+pos = 35,-10
+facing = -1
+vfacing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.5,0.5
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = movehit = 1
+time = 5
+id = -1
+pos = 40,0
+
+
+[State 210, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = animelem = 7
+trigger2 = animelem = 8
+trigger3 = animelem = 9
+attr = S, NA
+animtype  = High
+damage    = 150,20
+guardflag = MA
+pausetime = 10,1
+sparkno = -1;s6000
+guard.sparkno = s7000
+sparkxy = -8,-25
+hitsound   = S0,10
+guardsound = S0,8
+ground.type = High
+ground.slidetime = 50
+ground.hittime  = 50
+ground.velocity = -3,0
+air.velocity = -2.5,-4
+p2stateno = 3360
+
+[State 200, Spark CVS]
+type = Explod
+triggerall = Numexplod(7040) = 0
+trigger1 = Movehit = 1
+anim = 7040
+ID = 7040
+postype = P2
+pos = 0,-30
+facing = -1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.5,0.5
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+[State 3250: Spadas]
+type		= Helper
+triggerall = Numhelper(3391)=0
+trigger1 = movehit = 1
+helpertype	= Normal
+name		= "Auxiliar de impacto"
+id		= 3391
+pos		= 0,0
+postype		= p1
+facing		= 1
+stateno		= 3391
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 1
+size.yscale     = 1
+
+
+[State 200, End]
+type = ChangeState
+triggerall = Numhelper(3391)=1
+trigger1 = AnimTime = 0
+value = 3320
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;--------------------------------------------------------------
+; Kokuto Issen - Corte B
+[Statedef 3320]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+ctrl = 0
+anim = 3320
+sprpriority = 2
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time = 5
+x = 4
+
+[State 200, 2]
+type = PlaySnd
+trigger1 = Time = 1
+value = 0, 11
+volume = 10
+
+[State 200, Sword FX]
+type = Explod
+trigger1 = Time = 0
+anim = 3352
+ID = 3352
+postype = P1
+pos = 0,0
+facing = 1
+vfacing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = -1
+ownpal = 1
+scale = 1,1
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 0
+
+
+[State 200, Corte 3]
+type = Explod
+triggerall = Numexplod(7083) = 0
+trigger1 = Time = 10
+anim = 7083
+ID = 7083
+postype = P1
+pos = 50,-25
+facing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.65,0.65
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+[State 210, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = animelem = 3
+trigger2 = animelem = 4
+attr = S, NA
+animtype  = High
+damage    = 20,10
+guardflag = MA
+pausetime = 8,10
+sparkno = -1;s6000
+guard.sparkno = s7000
+sparkxy = -8,-25
+hitsound   = S0,7
+guardsound = S0,8
+ground.type = High
+ground.slidetime = 25
+ground.hittime  = 25
+ground.velocity = -3,0
+air.velocity = -2.5,-4
+
+[State 200, Spark CVS]
+type = Explod
+triggerall = Numexplod(7041) = 0
+trigger1 = Movehit = 1
+anim = 7041
+ID = 7041
+postype = P2
+pos = 0,-30
+facing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.6,0.6
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 3330
+ctrl = 1
+
+
+;--------------------------------------------------------------
+; Kokuto Issen - Corte C
+[Statedef 3330]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+ctrl = 0
+anim = 3330
+sprpriority = 2
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time = 5
+x = 4
+
+[State 200, 2]
+type = PlaySnd
+trigger1 = Time = 1
+value = 0, 11
+volume = 10
+
+[State 200, Sword FX]
+type = Explod
+trigger1 = Time = 0
+anim = 3353
+ID = 3353
+postype = P1
+pos = 0,0
+facing = 1
+vfacing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = -1
+ownpal = 1
+scale = 1,1
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 0
+
+
+[State 200, Corte 3]
+type = Explod
+triggerall = Numexplod(7078) = 0
+trigger1 = Time = 10
+anim = 7078
+ID = 7078
+postype = P1
+pos = 60,-55
+facing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.55,0.55
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+[State 210, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = animelem = 4
+trigger2 = animelem = 5
+attr = S, NA
+animtype  = High
+damage    = 20,10
+guardflag = MA
+pausetime = 8,10
+sparkno = -1;s6000
+guard.sparkno = s7000
+sparkxy = -8,-25
+hitsound   = S0,7
+guardsound = S0,8
+ground.type = High
+ground.slidetime = 30
+ground.hittime  = 30
+ground.velocity = -2,-8.5
+air.velocity = -2,-8.5
+Fall = 1
+
+[State 200, Spark CVS]
+type = Explod
+triggerall = Numexplod(7041) = 0
+trigger1 = Movehit = 1
+anim = 7041
+ID = 7041
+postype = P2
+pos = 0,-30
+facing = -1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 0.5,0.5
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+[State 3250: Spadas]
+type		= Helper
+triggerall = Numhelper(3090)=0
+trigger1 = movehit = 1
+helpertype	= Normal
+name		= "Auxiliar de cámara lenta"
+id		= 3090
+pos		= 0,0
+postype		= p1
+facing		= 1
+stateno		= 3090
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 1
+size.yscale     = 1
+
+
+[State 200, End]
+type = ChangeState
+triggerall = Numhelper(3090)=1
+trigger1 = AnimTime = 0
+value = 3340
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;--------------------------------------------------------------
+; Kokuto Issen - Corte D
+[Statedef 3340]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+ctrl = 0
+anim = 3340
+sprpriority = 2
+
+[State 210, 2]
+type = PlaySnd
+trigger1 = Time = 0
+value = 4, 24
+volume = 10
+
+[State 210, 2]
+type = PlaySnd
+triggerall = p2name = "Zoro Roronoa" || p4name = "Zoro Roronoa"
+trigger1 = Time = 50
+value = 4, 25
+volume = 10
+
+
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = 1
+x = 0
+
+[State 200, 2]
+type = PlaySnd
+trigger1 = Time = 20
+value = 0, 15
+volume = 10
+
+[State 200, Sword FX]
+type = Explod
+trigger1 = Time = 0
+anim = 3354
+ID = 3354
+postype = P1
+pos = 0,0
+facing = 1
+vfacing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = -1
+ownpal = 1
+scale = 1,1
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 0
+
+[State 3000, VarSet]
+type = Varset
+trigger1 = time = 0
+v = 12
+value = 0
+
+[State 3000, VarSet]
+type = Varset
+trigger1 = time = 25
+v = 12
+value = 0
+
+[State 3000, VarAdd]
+type = VarAdd
+triggerall = time < 25
+trigger1 = Var(12) > -250
+v = 12
+value = -10
+
+[State 3000, BGColorFX]
+type = BGPalFX
+trigger1 = 1
+time = 1
+add = Var(12),Var(12),Var(12)
+
+[State 3000:	EnvShake]
+type			= EnvShake
+trigger1 		= time = 25
+time			= 20
+freq			= 120
+ampl			= -2
+phase			= 50
+
+[State 3250: Spadas]
+type		= Helper
+triggerall = Numhelper(3390)=0
+trigger1 = time = 25
+helpertype	= Normal
+name		= "Corte Diagonal"
+id		= 3390
+pos		= 140,-100
+postype		= p1
+facing		= 1
+stateno		= 3390
+keyctrl		= 0
+ownpal		= 1
+supermovetime	= 0
+pausemovetime	= 0
+size.xscale     = 1
+size.yscale     = 1
+
+[State 200, Corte 3]
+type = Explod
+triggerall = Numexplod(7093) = 0
+trigger1 = time = 23
+anim = 7093
+ID = 7093
+postype = P1
+pos = 80,-100
+facing = 1
+sprpriority = -2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 1,1
+removeongethit = 1
+ontop = 0
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+
+[State 210, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = animelem = 5
+trigger2 = animelem = 6
+attr = S, NA
+animtype  = High
+damage    = 200,10
+guardflag = MA
+pausetime = 8,10
+sparkno = -1;s6000
+guard.sparkno = s7000
+sparkxy = -8,-25
+hitsound   = S0,13
+guardsound = S0,8
+ground.type = High
+ground.slidetime = 30
+ground.hittime  = 30
+ground.velocity = -8,8
+air.velocity = -8,8
+Fall = 1
+
+[State 200, Spark CVS]
+type = Explod
+triggerall = Numexplod(7040) = 0
+trigger1 = Movehit = 1
+anim = 7040
+ID = 7040
+postype = P2
+pos = 0,-30
+facing = 1
+sprpriority = 2
+supermove = 1
+removetime = -2
+bindtime = 1
+ownpal = 1
+scale = 1,1
+removeongethit = 1
+ontop = 1
+supermovetime 	= 999
+ignorehitpause  = 1
+
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;------------------------------------------------------------------------
+; Kokuto Issen - p2 corte inicial
+[Statedef 3360]
+type    = S
+movetype= H
+physics = S
+;velset = 0,0
+
+[State 1290, Anim]
+type = ChangeAnim
+trigger1 = time = 0
+value = 5000
+
+[State 1291, Hit ground]
+type = SelfState
+trigger1 = time = 50
+value = 5000
+ctrl = 0
+
+;-------------------------------------------------------------------------
+;Kokuto Issen -  Portrait
+[Statedef 3370]
+type    = A
+physics = N
+velset = 0,0
+anim = 3370
+ctrl = 0
+sprpriority = -1
+
+[State 191, 2]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = -20
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = time = 12
+x = 0.04
+
+[State 0, VelMul]
+type = Velset
+trigger1 = time = 60
+x = -20
+
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = time = 80
+
+
+
+
+
+;-------------------------------------------------------------------------
+;Kokuto Issen - Auxiliar de cámara lenta
+[Statedef 3390]
+type    = A
+physics = N
+velset = 0,0
+anim = 7054
+ctrl = 0
+sprpriority = 3
+
+[State 3290, Cámara lenta]
+type = Pause
+trigger1 = time = [0, 50]
+time = 1
+movetime = 0
+
+[State 0, AngleDraw]
+type = AngleDraw
+trigger1 = 1
+value =  -145
+scale =  1,1
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = add
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = time = 50
+
+
+
+;-------------------------------------------------------------------------
+;Kokuto Issen - Auxiliar de impacto inicial
+[Statedef 3391]
+type    = A
+physics = N
+velset = 0,0
+anim = 3090
+ctrl = 0
+sprpriority = 3
+
+
+[State 3290, DestroySelf]
+type = DestroySelf
+trigger1 = time = 50

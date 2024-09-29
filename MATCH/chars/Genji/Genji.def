@@ -1,0 +1,35 @@
+[Info]
+name = "Genji"
+displayname = "Genji"
+versiondate = 08,0,201?
+author = "±×·¥½¼"
+mugenversion = 1.0
+pal.defaults = 6,3,4,2 
+
+localcoord = 320,240    
+
+[Files]
+Cmd      = 4555.cmd       
+Cns      = 4555.cns 
+st       = 4555.cns  
+st2      = 4556.cns
+st3      = 1.cns
+stcommon = common1.cns
+Sprite   = 4555.sff      
+Anim     = 4555.air        
+Sound    = 4555.snd    
+Pal1     = Genji.act
+Pal2     = 10.act
+Pal3     = 20.act
+Pal4     = 30.act
+Pal5     = 40.act
+Pal6     = 50.act
+
+
+[Palette Keymap]
+x = 4 
+y = 5
+z = 6
+a = 1
+b = 2
+c = 3

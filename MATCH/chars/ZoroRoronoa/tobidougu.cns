@@ -1,0 +1,710 @@
+
+
+;---------------------------------------------------------
+;ビームライフル
+[Statedef 1000]
+type = S
+movetype = A
+physics = S
+poweradd= 10
+anim = 1000
+ctrl = 0
+velset = 0,0
+sprpriority = 2
+
+[State 200 , 2]
+type = PlaySnd
+trigger1 = AnimElem = 6
+value = s200,0
+volume = -50
+
+[State 200 , 2]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = s300,0
+volume = 100
+
+[State 210, 4]
+type = Explod
+trigger1 = AnimElem = 6
+anim = 1002
+scale = 1.4,1.4
+postype = p1
+pos = 0,0
+sprpriority = 4
+;supermove = 1
+ownpal = 1
+bindtime = -1
+removeongethit = 1
+
+[State 210, 4]
+type = Explod
+trigger1 = animelem = 5
+anim = 1003
+scale = 1,1
+postype = p1
+pos = 0,10
+sprpriority = 1
+;supermove = 1
+ownpal = 1
+bindtime = 1
+removeongethit = 1
+
+[State 1000]
+type = Helper
+trigger1 = animelem = 6
+helpertype = normal ;ここをplayerにすると画面から出られないヘルパーになります
+name = "tobidougu";適当で良いですけど分かりやすい名前を付けましょう
+ID = 1001
+stateno = 1001;飛び道具のステートナンバーです
+pos = 60,0;射出される位置を指定します　ｘ，ｙ　の並びになってますｘは正数で前方、ｙは正数で下方向になります
+postype = p1;どこを基準にposを指定するかを決めています、この場合プレイヤー１ですね
+facing = 1
+keyctrl = 0          
+ownpal = 1
+size.xscale = 1.5
+size.yscale = 1.5
+
+[State 1000,1]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 1052, 5]
+type = ChangeState
+triggerall = AnimElemTime(5) >= 0
+triggerall = AnimElemTime(8) < 0
+trigger1 = command  = "248b+c"
+value = 3100
+ctrl = 0
+
+;ビームライフルE
+[Statedef 1001]
+type = S
+movetype = A
+physics = N
+ctrl = 0
+anim = 1001
+sprpriority = 3
+
+[State 215, 3]
+type = ScreenBound
+trigger1 = 1
+value = 0
+
+[State 215, 1]
+type = Velset
+trigger1 = AnimElem = 1
+x = 3
+y = 0
+[State 215, 1]
+type = Velset
+trigger1 = AnimElem = 3
+x = 0
+y = 0
+
+[State 215, 3]
+type = SprPriority
+trigger1 = 1
+value = 3
+
+[State 215,4]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 215, 2]
+type = HitDef
+trigger1 = time = 0
+attr = S, SP
+getpower = 20,10
+givepower = 10,5
+damage = 25,5
+guardflag = MA
+priority = 3
+pausetime = 2,2
+guard.pausetime = 2,6
+sparkno = S20002
+guard.sparkno = S20030
+sparkxy = -35,-30
+hitsound   = S200,2
+guardsound = S500,0
+ground.type = High
+ground.slidetime = 10
+ground.hittime  = 14
+ground.velocity = -5,0
+air.velocity = -2,-1
+fall = 0
+fall.recover = 0
+
+[State 1010,2]
+type = hitoverride
+trigger1 = 1
+attr = SCA,AA,AP,AT
+stateno = 242;消滅用のステートです
+time = 1
+
+[State 1010,2]
+type = changestate
+trigger1 = animtime = 0;アニメーションが終わった時、というトリガーです
+value = 242;消滅用ステートですね
+
+[Statedef 242]
+type = A
+movetype = I
+physics = N
+anim = 242
+ 
+[State 242]
+type = destroyself
+trigger1 = animtime = 0;アニメーションが終わった時、というトリガーです
+
+;---------------------------------------------------------
+;ビームキャノン
+[Statedef 1100]
+type = S
+movetype = A
+physics = S
+poweradd= 10
+anim = 1100
+ctrl = 0
+velset = 0,0
+sprpriority = 2
+
+[State 200 , 2]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = s200,0
+volume = -50
+
+[State 200 , 2]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = s300,0
+volume = 100
+
+[State 210, 4]
+type = Explod
+trigger1 = animelem = 5
+anim = 1003
+scale = 1.2,1.2
+postype = p1
+pos = 0,8
+sprpriority = 1
+;supermove = 1
+ownpal = 1
+bindtime = 1
+removeongethit = 1
+
+[State 210, 4]
+type = Explod
+trigger1 = AnimElem = 5
+anim = 1002
+scale = 1.4,1.4
+postype = p1
+pos = 5,0
+sprpriority = 4
+;supermove = 1
+ownpal = 1
+bindtime = -1
+removeongethit = 1
+
+[State 1000]
+type = Helper
+trigger1 = animelem = 5
+helpertype = normal ;ここをplayerにすると画面から出られないヘルパーになります
+name = "tobidougu";適当で良いですけど分かりやすい名前を付けましょう
+ID = 1101
+stateno = 1101;飛び道具のステートナンバーです
+pos = 60,0;射出される位置を指定します　ｘ，ｙ　の並びになってますｘは正数で前方、ｙは正数で下方向になります
+postype = p1;どこを基準にposを指定するかを決めています、この場合プレイヤー１ですね
+facing = 1
+keyctrl = 0          
+ownpal = 1
+size.xscale = 1.5
+size.yscale = 1.5
+
+[State 1000,1]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 1052, 5]
+type = ChangeState
+triggerall = AnimElemTime(5) >= 0
+triggerall = AnimElemTime(8) < 0
+trigger1 = command  = "248b+c"
+value = 3100
+ctrl = 0
+
+;;ビームキャノンE
+[Statedef 1101]
+type = S
+movetype = A
+physics = N
+ctrl = 0
+anim = 1101
+sprpriority = 3
+
+[State 215, 3]
+type = ScreenBound
+trigger1 = 1
+value = 0
+
+[State 215, 1]
+type = Velset
+trigger1 = AnimElem = 1
+x = 4
+y = 0
+[State 215, 1]
+type = Velset
+trigger1 = AnimElem = 3
+x = 0
+y = 0
+
+[State 215, 3]
+type = SprPriority
+trigger1 = 1
+value = 3
+
+[State 215,4]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 215, 2]
+type = HitDef
+trigger1 = time = 0
+attr = A, SP
+getpower = 20,10
+givepower = 10,5
+damage = 35,3
+guardflag = MA
+priority = 3
+pausetime = 2,2
+guard.pausetime = 2,10
+sparkno = S20002
+guard.sparkno = S20030
+sparkxy = -35,-30
+hitsound   = S200,2
+guardsound = S500,0
+ground.type = High
+ground.slidetime = 10
+ground.hittime  = 18
+ground.velocity = -5,0
+air.velocity = -2,-1
+fall.recover = 0
+
+[State 1010,2]
+type = hitoverride
+trigger1 = 1
+attr = SCA,AA,AP,AT
+stateno = 242;消滅用のステートです
+time = 1
+
+[State 1010,2]
+type = changestate
+trigger1 = animtime = 0;アニメーションが終わった時、というトリガーです
+value = 242;消滅用ステートですね
+
+[Statedef 242]
+type = A
+movetype = I
+physics = N
+anim = 242
+ 
+[State 242]
+type = destroyself
+trigger1 = animtime = 0;アニメーションが終わった時、というトリガーです
+
+;---------------------------------------------------------
+;ミサイル
+[Statedef 1300]
+type = S
+movetype = A
+physics = S
+poweradd= 10
+anim = 1300
+ctrl = 0
+velset = 0,0
+sprpriority = 2
+
+[State 220 , 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s400,13
+volume = -50
+
+[State 200, 1]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 400, 1 
+Volume = 100
+
+[State 0]
+type = Poweradd
+trigger1 = time = 0
+value = -500
+
+[State 50, 4];←成功したときの残像
+type = AfterImage
+trigger1 = Time = 1
+time = 20
+trans = add1
+timegap = 1
+framegap = 2
+length = 8
+palbright = 12,12,12
+palcontrast = 125,225,225
+palpostbright = 0,0,0
+paladd = 0,0,0
+palmul = 1,1,1
+
+[State 210, 4]
+type = Explod
+trigger1 = time = 0
+anim = 10000
+scale = 0.5,0.5
+postype = p1
+pos = 0,10
+sprpriority = 3
+;supermove = 1
+ownpal = 1
+bindtime = 1
+removeongethit = 1
+
+[State 210, 4]
+type = Explod
+trigger1 = animelem = 10
+anim = 1302
+scale = 0.8,0.8
+postype = p1
+pos = 0,10
+sprpriority = 3
+;supermove = 1
+ownpal = 1
+bindtime = 1
+removeongethit = 1
+
+[State 1000]
+type = Helper
+trigger1 = animelem = 10
+helpertype = normal ;ここをplayerにすると画面から出られないヘルパーになります
+name = "tobidougu";適当で良いですけど分かりやすい名前を付けましょう
+ID = 2405
+stateno = 2405;飛び道具のステートナンバーです
+pos = 0,0;射出される位置を指定します　ｘ，ｙ　の並びになってますｘは正数で前方、ｙは正数で下方向になります
+postype = p1;どこを基準にposを指定するかを決めています、この場合プレイヤー１ですね
+facing = 1
+keyctrl = 0          
+ownpal = 1
+size.xscale = 1.5
+size.yscale = 1.5
+
+[State 1000]
+type = Helper
+trigger1 = animelem = 10
+helpertype = normal ;ここをplayerにすると画面から出られないヘルパーになります
+name = "tobidougu";適当で良いですけど分かりやすい名前を付けましょう
+ID = 1301
+stateno = 1301
+pos = 10,-25;射出される位置を指定します　ｘ，ｙ　の並びになってますｘは正数で前方、ｙは正数で下方向になります
+postype = p1;どこを基準にposを指定するかを決めています、この場合プレイヤー１ですね
+facing = 1
+keyctrl = 0          
+ownpal = 1
+size.xscale = 1.5
+size.yscale = 1.5
+removetime = 100
+
+[State 1000,1]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 1052, 5]
+type = ChangeState
+triggerall = AnimElemTime(10) >= 0
+triggerall = AnimElemTime(15) < 0
+trigger1 = command  = "248b+c"
+value = 3100
+ctrl = 0
+
+;ミサイルE
+[Statedef 1301]
+type = S
+movetype = A
+physics = N
+ctrl = 0
+anim = 1301
+sprpriority = 4
+
+[State 215, 3]
+type = ScreenBound
+trigger1 = 1
+value = 0
+
+[State 215, 1]
+type = Velset
+trigger1 = AnimElem = 1
+x = 10
+y = 0
+
+[State 215, 3]
+type = SprPriority
+trigger1 = 1
+value = 4
+
+[State 215,4]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 215, 2]
+type = HitDef
+trigger1 = time = 0
+attr = A, SP
+damage = 70,7
+getpower = 0,0
+givepower = 15,5
+guardflag = MA
+priority = 3
+pausetime = 2,15
+guard.pausetime = 2,24
+sparkno = S20006
+guard.sparkno = S20030
+sparkxy = -20,-30
+hitsound   = S200,4
+guardsound = S500,0
+ground.type = High
+ground.slidetime = 5
+ground.hittime  = 20
+ground.velocity = -5,0
+air.velocity = -4.5,-4.5
+fall = 0
+fall.recover = 0
+
+[State 1010,2]
+type = hitoverride
+trigger1 = 1
+attr = SCA,AA,AP,AT
+stateno = 242;消滅用のステートです
+time = 1
+
+[State 1010,2]
+type = changestate
+trigger1 = animtime = 0;アニメーションが終わった時、というトリガーです
+value = 242;消滅用ステートですね
+
+[Statedef 242]
+type = A
+movetype = I
+physics = N
+anim = 242
+ 
+[State 242]
+type = destroyself
+trigger1 = animtime = 0;アニメーションが終わった時、というトリガーです
+
+;-----------------------
+; 立ち・通常技c
+[Statedef 2400]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+poweradd= 22
+ctrl = 0
+velset = 0,0
+anim = 2400
+sprpriority = 2
+
+[State 200 , 2]
+type = PlaySnd
+trigger1 = AnimElem = 8
+value = s400,0
+volume = 100
+
+[State 200];乗算補正
+type = Varset
+trigger1 = movehit = 1
+fv = 1
+value = fVar(1)*0.8
+persistent = 0
+ignorehitpause = 1
+
+[State 310, 3]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 210, 4]
+type = Explod
+trigger1 = animelem = 9
+anim = 1003
+scale = 1.4,1.4
+postype = p1
+pos = 3,8
+sprpriority = 1
+;supermove = 1
+ownpal = 1
+bindtime = 1
+removeongethit = 1
+
+[State 1000]
+type = Helper
+trigger1 = animelem = 9
+helpertype = normal ;ここをplayerにすると画面から出られないヘルパーになります
+name = "tobidougu";適当で良いですけど分かりやすい名前を付けましょう
+ID = 2405
+stateno = 2405;飛び道具のステートナンバーです
+pos = 0,0;射出される位置を指定します　ｘ，ｙ　の並びになってますｘは正数で前方、ｙは正数で下方向になります
+postype = p1;どこを基準にposを指定するかを決めています、この場合プレイヤー１ですね
+facing = 1
+keyctrl = 0          
+ownpal = 1
+size.xscale = 1.5
+size.yscale = 1.5
+
+[State 1000]
+type = Helper
+trigger1 = animelem = 9
+helpertype = normal ;ここをplayerにすると画面から出られないヘルパーになります
+name = "tobidougu";適当で良いですけど分かりやすい名前を付けましょう
+ID = 2406
+stateno = 2406;飛び道具のステートナンバーです
+pos = 0,0;射出される位置を指定します　ｘ，ｙ　の並びになってますｘは正数で前方、ｙは正数で下方向になります
+postype = p1;どこを基準にposを指定するかを決めています、この場合プレイヤー１ですね
+facing = 1
+keyctrl = 0          
+ownpal = 1
+size.xscale = 1.5
+size.yscale = 1.5
+
+[State 1000,1]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 1052, 5]
+type = ChangeState
+triggerall = AnimElemTime(9) >= 0
+triggerall = AnimElemTime(12) < 0
+trigger1 = command  = "248b+c"
+value = 3100
+ctrl = 0
+
+;ビームライフルE
+[Statedef 2405]
+type = S
+movetype = A
+physics = N
+ctrl = 0
+anim = 2405
+sprpriority = 3
+
+[State 215, 3]
+type = ScreenBound
+trigger1 = 1
+value = 0
+
+[State 215, 1]
+type = Velset
+trigger1 = AnimElem = 1
+x = 0
+y = 0
+
+[State 215, 3]
+type = SprPriority
+trigger1 = 1
+value = 3
+
+[State 215,4]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 215, 3]
+type = destroyself
+trigger1 = Animtime = 0
+
+;ビームライフルE
+[Statedef 2406]
+type = S
+movetype = A
+physics = N
+ctrl = 0
+anim = 2406
+sprpriority = 4
+
+[State 215, 3]
+type = ScreenBound
+trigger1 = 1
+value = 0
+
+[State 215, 1]
+type = Velset
+trigger1 = AnimElem = 1
+x = 7
+y = 0
+
+[State 215, 3]
+type = SprPriority
+trigger1 = 1
+value = 4
+
+[State 215,4]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 215, 2]
+type = HitDef
+trigger1 = time = 0
+attr = A, SP
+getpower = 20,10
+givepower = 10,5
+damage = 45,4
+guardflag = MA
+priority = 3
+pausetime = 2,7
+guard.pausetime = 2,10
+sparkno = S20002
+guard.sparkno = S20030
+sparkxy = -35,-50
+hitsound   = S200,2
+guardsound = S500,0
+ground.type = High
+ground.slidetime = 10
+ground.hittime  = 15
+ground.velocity = -5,0
+air.velocity = -2,-1
+fall = 0
+fall.recover = 0
+
+[State 1010,2]
+type = hitoverride
+trigger1 = 1
+attr = SCA,AA,AP,AT
+stateno = 242;消滅用のステートです
+time = 1
+
+[State 1010,2]
+type = changestate
+trigger1 = animtime = 0;アニメーションが終わった時、というトリガーです
+value = 242;消滅用ステートですね
+
+[Statedef 242]
+type = A
+movetype = I
+physics = N
+anim = 242
+ 
+[State 242]
+type = destroyself
+trigger1 = animtime = 0;アニメーションが終わった時、というトリガーです
