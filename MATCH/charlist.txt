@@ -1,30 +1,26 @@
-0,Kung Fu Man,chars\kfm\kfm.def
-1,Kung Fu Man,chars\kfm720\kfm720.def
-2,Bowser,chars\bowser\bowser.def
-3,Kung Fu Man,chars\kfm\kfm.def
-4,Kung Fu Man,chars\kfm720\kfm720.def
-5,Bowser,chars\bowser\bowser.def
-6,Kung Fu Man,chars\kfm\kfm.def
-7,Kung Fu Man,chars\kfm720\kfm720.def
-8,Bowser,chars\bowser\bowser.def
-9,Kung Fu Man,chars\kfm\kfm.def
-10,Kung Fu Man,chars\kfm720\kfm720.def
-11,Bowser,chars\bowser\bowser.def
-12,Kung Fu Man,chars\kfm\kfm.def
-13,Kung Fu Man,chars\kfm720\kfm720.def
-14,Bowser,chars\bowser\bowser.def
-15,Kung Fu Man,chars\kfm\kfm.def
-16,Kung Fu Man,chars\kfm720\kfm720.def
-17,Bowser,chars\bowser\bowser.def
-18,Kung Fu Man,chars\kfm\kfm.def
-19,Kung Fu Man,chars\kfm720\kfm720.def
-20,Bowser,chars\bowser\bowser.def
-21,Kung Fu Man,chars\kfm\kfm.def
-22,Kung Fu Man,chars\kfm720\kfm720.def
-23,Bowser,chars\bowser\bowser.def
-24,Kung Fu Man,chars\kfm\kfm.def
-25,Kung Fu Man,chars\kfm720\kfm720.def
-26,Bowser,chars\bowser\bowser.def
-27,Kung Fu Man,chars\kfm\kfm.def
-28,Kung Fu Man,chars\kfm720\kfm720.def
-29,Bowser,chars\bowser\bowser.def
+0,Brook,chars\cc'brook'mn\cc'brook'mn.def
+1,Bowser,chars\bowser\bowser.def
+2,Genji,chars\genji\genji.def
+3,chica,chars\toy_chica\toy_chica.def
+4,Sylvanas,chars\sylvanas\sylvanas.def
+5,Pinkie Pie,chars\pinkie pie\pinkie pie.def
+6,Lucario,chars\lucario_m\lucario_m.def
+7,Goku,chars\gokuz2\gokuz2.def
+8,Renamon,chars\renamondv2\renamondv2.def
+9,Luffy,chars\luffy\luffy.def
+10,Rainbow Dash,chars\rainbow dash\rainbow dash.def
+11,Vegeta Z2,chars\vegetaz2\vegetaz2.def
+12,Scott Pilgrim,chars\scott pilgrim\scott pilgrim.def
+13,Yoshi,chars\yoshi3revbuffed\yoshi3revbuffed.def
+14,Hanzo,chars\4550\4550.def
+15,Lucina,chars\lucina\lucina.def
+16,Freeza,chars\freezaz2\freezaz2.def
+17,Chrom,chars\chrom\chrom.def
+18,Mihawk,chars\mihawk\mihawk.def
+19,DIO,chars\dio\dio.def
+20,Foxy,chars\old_foxy\old_foxy.def
+21,ZoroRoronoa,chars\zorororonoa\zorororonoa.def
+22,Jotaro,chars\jotaro\jotaro.def
+23,Donald,chars\donald\donald.def
+24,NARUTO KUN,chars\naruto-kun\naruto-kun.def
+25,Jin,chars\jin\jin.def

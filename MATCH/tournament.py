@@ -21,6 +21,7 @@ class Tournament:
         self.running = 0
         self.tournament_state = {"Div": 0, "Round": 1, "Match": 1, "Fight": [], "Order" : []}
         self.matchsys = matchsys
+        self.winningplayer = ""
 
 
 
@@ -52,24 +53,30 @@ class Tournament:
 
 
     # Prints out the ranking of the given division
-    def rankings(self, players, division):
+    def rankings(self, players, division, twitchbot):
         if (division - 1) < 0:
             return "Error", {}
         division -= 1
         
         self.__consoleprint(f"Rankings being generated for: {division + 1}")
         score_dict = {}
-     
+
+        
+
         count = MAX_ROUNDS
+
         position = 1
         message = ("---------\n")
         message += (f"Division {division + 1} finished!\n")
         message += ("Rankings:\n---------\n")
+        #twitchbot.queue_message(f"Division {division + 1} finished!")
+        #twitchbot.queue_message("Rankings:")
         while(count):
             for player in players:
                 score_dict[player["Name"]] = player["Rank"][division]
                 if player["Rank"][division] == count:
                     message += f"{position:2}. {player['Name']:20} Tournament round {player['Rank'][division]}\n"
+                    #twitchbot.queue_message(f"{position:2}. {player['Name']:20} Tournament round {player['Rank'][division]}")
                     position += 1
             count -= 1
         return message, score_dict
@@ -99,9 +106,13 @@ class Tournament:
         count = 10 * divisions
         position = 1
         message = "FINAL STANDINGS:\n----------------\n"
+        twitchbot.queue_message("FINAL STANDINGS:")
         
+        #self.winningplayer = int(highest_scoring_player.split()[1])
         self.winningplayer = int(highest_scoring_player.split()[1])
+        
         if self.winningplayer % 2 == 0:
+            #twitchbot.queue_message('LEFT WON!')
             self.__consoleprint('even won')
             twitchbot.prediction('evenwins')
         else:
@@ -113,8 +124,10 @@ class Tournament:
                 if score[i] == count:
                     rank = [str(x) for x in player["Rank"]]
                     message += f"{position:2}. {player['Name']:20} Total score: {score[i]}\n"
+                    twitchbot.queue_message(f"{position:2}. {player['Name']:20} Total score: {score[i]}")
                     position += 1
                 count -= 1
+        twitchbot.queue_message(f'{highest_scoring_player} WON THE TOURNAMENT!')
         return message, score_dict
 
 

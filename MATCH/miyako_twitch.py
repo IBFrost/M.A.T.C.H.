@@ -153,7 +153,7 @@ class MiyakoBotTwitch(commands.Bot):
             while self.message_queue:
                 self.__consoleprint("Sending message.")
                 await self.get_channel(TWITCH_CHANNEL).send(self.message_queue.pop(0))
-                await asyncio.sleep(1.5)
+                await asyncio.sleep(1)
             delay += 1
 
 
@@ -264,6 +264,7 @@ class MiyakoBotTwitch(commands.Bot):
                     response = "Number of divisions must be positive number"
                 else:
                     if self.matchsys.get_status() == IDLE:
+                        self.queue_message(f'Starting a new tournament with {value} divisions!')
                         self.__consoleprint("Registering new tournament: " + str(value))
                         offset_change = self.matchsys.new_tournament(value)
                         i = 0
@@ -293,6 +294,7 @@ class MiyakoBotTwitch(commands.Bot):
                     else:
                         if self.matchsys.get_status() == IDLE:
                             self.matchsys.begin_loop(value)
+                            self.queue_message(f'Starting a new tournament with {value} divisions!')
                             self.__consoleprint("Registering new tournament: " + str(value))
                             offset_change = self.matchsys.new_tournament(value)
                             i = 0

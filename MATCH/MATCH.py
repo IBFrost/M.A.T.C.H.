@@ -487,13 +487,15 @@ class match_system():
                 if self.division_complete:
                     self.division_complete = False
                     
-                    results, results_dict = self.toursys.rankings(self.players, self.last_division)
+                    results, results_dict = self.toursys.rankings(self.players, self.last_division, self.twch_client)
                     self.finalresult = self.toursys.winningplayer
                     self.console_print(MSGNAME, f'CURRENT WINNER IS {self.finalresult}. Will the others catch up?')
                     text = f"Division {self.last_division}"
                     if (USE_DISCORD):
                         # Send update to Discord
                         self.ds_client.queue_message(f"{text} finished." )
+                    #if (USE_TWITCH):
+                        #self.twch_client.queue_message(f'The winner of division {self.last_division} is... {self.finalresult}!')
                     
                     # Show division results HTML
                     self.output_results(results_dict, f"{text} results.", RESULT_TIME_DIVISION)
@@ -751,7 +753,7 @@ class match_system():
                     #if (USE_DISCORD):
                         # Update Discord presence and show division results:
                         #self.ds_client.set_presence(self.tournament_update())
-                    results, results_dict = self.toursys.rankings(self.players, self.last_division)
+                    results, results_dict = self.toursys.rankings(self.players, self.last_division, self.twch_client)
                     
                     # Send update to Discord
                     #if (USE_DISCORD):
@@ -762,8 +764,8 @@ class match_system():
                     self.output_results(results_dict, title, RESULT_TIME_DIVISION)
                     
                     # Send tournament end messages
-                    if (USE_TWITCH):
-                        self.twch_client.queue_message("Tournament finished.")
+                    #if (USE_TWITCH):
+                        #self.twch_client.queue_message("Tournament finished.")
                     #if (USE_DISCORD):
                         #self.ds_client.queue_pic(PICS[random.randint(0,len(PICS) - 1)], "Ah that was nice.")
                     # Create results
